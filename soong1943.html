@@ -98,9 +98,9 @@ header .sub{font-size:12px;opacity:.6;margin-top:3px}
 /* 指环遥控 (ring remote) */
 html.remote,html.remote body{overflow:hidden;touch-action:none;overscroll-behavior:none}
 .chip.remon{background:#0f766e;color:#fff}
-#remoteExit{display:none;position:fixed;top:calc(8px + env(safe-area-inset-top));right:8px;z-index:40;border:0;border-radius:99px;padding:8px 12px;font-size:13px;font-weight:700;background:rgba(15,118,110,.92);color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+#remoteExit{display:none;position:fixed;bottom:calc(10px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:40;border:0;border-radius:99px;padding:8px 12px;font-size:13px;font-weight:700;background:rgba(15,118,110,.92);color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.25)}
 html.remote #remoteExit{display:block}
-.ezone{display:none;position:fixed;top:0;bottom:0;width:15vw;z-index:30;background:transparent;-webkit-tap-highlight-color:transparent}
+.ezone{display:none;position:fixed;top:0;bottom:0;width:15vw;z-index:30;background:transparent;pointer-events:none}   /* visual flash only: edge taps are detected by x-position so buttons/⭐ under the edge keep working */
 #ezL{left:0}#ezR{right:0}
 html.remote .ezone{display:block}
 .ezone.flash{background:rgba(15,118,110,.12)}
@@ -295,7 +295,7 @@ $("bar").onclick=e=>{const r=e.currentTarget.getBoundingClientRect();const i=Mat
 // Rings come in three flavours: keyboard/HID keys, media keys (routed to the Media Session on Android),
 // and touch/mouse emulation that injects swipes, wheel ticks or taps. All map onto act(), which debounces so one press = one action.
 let remote=localStorage.getItem("jingting.remote")==="1",diag=false,lastAct=-1e9,lastActKind="",swipeT=-1e9,wheelT=-1e9,hoverT=-1e9;   // performance.now() starts near 0 on every load
-const DEB=350,WDEB=400,INTER="button,a,input,select,textarea,label,summary,.chip,.item,.sub-box,.bar,.go,.star,#diag";
+const DEB=350,WDEB=400,INTER="button,a,input,select,textarea,label,summary,.chip,.item,.sub-box,.bar,.go,.star,.panel,#diag,#remoteExit,[onclick],[role=button]";
 let wheelActT=-1e9;
 const NEXTK=new Set(["ArrowRight","ArrowDown","PageDown","MediaTrackNext","AudioVolumeDown","VolumeDown"]);
 const PREVK=new Set(["ArrowLeft","ArrowUp","PageUp","MediaTrackPrevious","AudioVolumeUp","VolumeUp"]);
@@ -353,9 +353,9 @@ addEventListener("wheel",e=>{const n=performance.now(),gap=n-wheelT;wheelT=n;con
  if(!remote)return;e.preventDefault();if(gap<250||!d||n-wheelActT<WDEB)return;wheelActT=n;act(d>0?"next":"prev",d>0?"滚轮向下":"滚轮向上")},{passive:false,capture:true});
 addEventListener("click",e=>{
  if(performance.now()-swipeT<300){e.preventDefault();e.stopPropagation();return}   // the click that ends a swipe is not a tap
- const t=e.target,ez=t.closest&&t.closest(".ezone");
- if(ez){e.preventDefault();e.stopPropagation();if(!remote)return;const nx=ez.id==="ezR";dlog("点"+(nx?"右":"左")+"边缘");if(act(nx?"next":"prev",nx?"点右边缘":"点左边缘")){ez.classList.add("flash");setTimeout(()=>ez.classList.remove("flash"),200)}return}
- const inter=!!(t.closest&&t.closest(INTER));
+ const t=e.target,inter=!!(t.closest&&t.closest(INTER));   // buttons, ⭐, chips, links, inputs, panels: always do their own action, never switch/replay
+ if(remote&&!inter&&e.isTrusted){const w=innerWidth,x=e.clientX,edge=x<w*0.15?"ezL":x>w*0.85?"ezR":"";
+  if(edge){e.preventDefault();e.stopPropagation();const nx=edge==="ezR",ez=$(edge);dlog("点"+(nx?"右":"左")+"边缘");if(act(nx?"next":"prev",nx?"点右边缘":"点左边缘")){ez.classList.add("flash");setTimeout(()=>ez.classList.remove("flash"),200)}return}}
  if(!inter&&e.isTrusted)dlog("点空白处"+(remote?"":"（遥控没开，不动作）"));
  if(remote&&!inter&&e.isTrusted){act("replay","点空白");return}
  if(inter)setTimeout(blurAll,0)},true);   // never leave focus on a button: Space/Enter would press it instead of reaching the page
