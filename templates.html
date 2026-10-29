@@ -38,8 +38,17 @@ header .sub{font-size:12px;opacity:.6;margin-top:3px}
 .qbox.rec{border-color:#fca5a5;background:#fff5f5}
 .qbox .qinterim{display:none;margin-top:6px;font-size:14px;color:#b91c1c;background:#fef2f2;border-radius:10px;padding:5px 9px;white-space:pre-wrap}
 .qbox.rec .qinterim{display:block}
-.qbox .qmsg{display:none;margin-top:6px;font-size:13px;line-height:1.45;color:#334155;background:#f1f5f9;border-radius:10px;padding:6px 9px}
-.qbox .qmsg.bad{color:#991b1b;background:#fee2e2}
+.qbox .qmsg{display:none;margin-top:8px;font-size:16px;font-weight:600;line-height:1.5;color:#334155;background:#f1f5f9;border-radius:12px;padding:9px 12px}
+.qbox .qmsg.bad{color:#991b1b;background:#fee2e2;border:2px solid #f87171}
+.qbox .qinterim{font-size:17px!important;font-weight:700}
+#micAlert{display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;background:#fff;border-top:5px solid #dc2626;box-shadow:0 -10px 30px rgba(0,0,0,.35);padding:16px 18px calc(16px + env(safe-area-inset-bottom));max-height:75vh;overflow:auto}
+#micAlert.show{display:block}
+#micAlert .mt{font-size:22px;font-weight:900;color:#b91c1c;line-height:1.3;margin-bottom:8px}
+#micAlert .mb{font-size:18px;line-height:1.55;color:#111827;white-space:pre-wrap}
+#micAlert .md{margin-top:10px;font-size:12px;color:#64748b;font-family:ui-monospace,monospace;word-break:break-all}
+#micAlert .mbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+#micAlert .mbtns button{flex:1 1 auto;min-height:52px;font-size:17px;font-weight:800;border-radius:14px;border:2px solid #c7d2fe;background:#eef2ff;color:#3730a3;padding:8px 12px}
+#micAlert .mbtns button.pri{background:#4338ca;border-color:#4338ca;color:#fff}
 .qmic.wait{background:#fde68a;border-color:#f59e0b;color:#92400e}
 .qbox{margin-top:12px;border:1px solid #e0e7ff;border-radius:16px;padding:10px 12px;background:#fafaff}
 .qbox .qh{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#4338ca;margin-bottom:6px}
@@ -215,6 +224,7 @@ html.remote .ezone{display:block}
 <div class="ezone" id="ezL"></div><div class="ezone" id="ezR"></div>
 <button id="remoteExit">🎮 退出遥控</button>
 <div id="toast"></div>
+<div id="micAlert" role="alertdialog"><div class="mt" id="maT"></div><div class="mb" id="maB"></div><div class="mbtns"><button class="pri" id="maKb" type="button">⌨️ 改用键盘语音输入</button><button id="maRetry" type="button">🎤 再试一次</button><button id="maX" type="button">知道了</button></div><div class="md" id="maD"></div></div>
 <div id="diag" style="display:none"><div class="dh"><span>🔧 按键测试：按一下指环，看这里显示什么</span><span><button id="diagC">清空</button><button id="diagX">关闭</button></span></div><pre id="diagLog">（等待信号…）</pre></div>
 <audio id="au" preload="auto" playsinline></audio>
 <script>
@@ -390,14 +400,25 @@ const MICERR={"not-allowed":"麦克风权限被拒：点地址栏左边的🔒 �
  "network":"语音识别要连 Google 服务器，网络不通","language-not-supported":"手机的语音服务不支持这个语言",
  "bad-grammar":"识别参数出错","aborted":"识别被中断"};
 const KB="；也可以点输入框，用键盘上的🎤语音键";
-let recLog=[],recT0=0,recStarted=false,recHeard=false,recWD=0,recAlt=false;
+let recLog=[],recT0=0,recStarted=false,recHeard=false,recWD=0,recAlt=false,recRetried=false,micPerm="?";
+const MICVER="mic-v5";
+try{navigator.permissions&&navigator.permissions.query({name:"microphone"}).then(s=>{micPerm=s.state;s.onchange=()=>{micPerm=s.state}}).catch(()=>{})}catch(e){}
+// Big bottom sheet that stays until tapped: Lily missed the small status line and the 5 s toast.
+const KBHOW="点下面「⌨️ 改用键盘语音输入」→ 键盘弹出后，点键盘上的🎤（话筒）键说话，文字会直接进提问框，一样自动保存。";
+function micAlert(title,body){$("maT").textContent=title;$("maB").textContent=body+"\n\n"+KBHOW;
+ $("maD").textContent="诊断（截图发给老师）："+MICVER+" · 语言 "+(rec&&rec.lang||asrLang)+" · 麦克风权限 "+micPerm+" · "+recLog.join(" → ")+" · "+navigator.userAgent.replace(/^Mozilla\/5\.0 /,"").slice(0,120);
+ $("micAlert").classList.add("show")}
+function micAlertClose(){$("micAlert").classList.remove("show")}
+$("maX").addEventListener("click",e=>{e.stopPropagation();micAlertClose()});
+$("maKb").addEventListener("click",e=>{e.stopPropagation();micAlertClose();const q=$("qIn");q.focus();try{q.setSelectionRange(q.value.length,q.value.length)}catch(_){}q.scrollIntoView({block:"center"})});   // focus inside the tap = keyboard opens on Android
+$("maRetry").addEventListener("click",e=>{e.stopPropagation();micAlertClose();recRetried=false;startMic()});
 function rlog(s){recLog.push(s+"@"+((performance.now()-recT0)/1000).toFixed(1)+"s")}
-function startMic(){
- if(!SR){micMsg("这个浏览器没有语音识别，请用 Chrome 打开"+KB,true);toast("这个浏览器不支持语音输入"+KB,5000);$("qIn").focus();return}
- if(rec)return;
- recI=cur;$("qIn").dataset.i=cur;recBase=$("qIn").value;recFinal="";recErr="";recStarted=false;recHeard=false;recLog=[];recT0=performance.now();
+function startMic(isRetry){
+ if(!SR){micMsg("这个浏览器没有语音识别，请用 Chrome 打开"+KB,true);micAlert("❌ 这个浏览器不能语音识别","请用 Chrome 打开这个页面（OPPO 自带浏览器、微信/LINE 里打开都不行）。");return}
+ if(rec)return;micAlertClose();
+ recI=cur;$("qIn").dataset.i=cur;recBase=$("qIn").value;recFinal="";recErr="";recStarted=false;recHeard=false;if(!isRetry){recLog=[];recRetried=false}recT0=performance.now();
  const wasPlaying=playing||!au.paused;if(wasPlaying){stopPlay();renderCnt()}   // otherwise the mic hears the video
- let r;try{r=new SR()}catch(e){micMsg("识别出错：无法创建（"+(e&&e.name||e)+"）"+KB,true);return}
+ let r;try{r=new SR()}catch(e){micMsg("识别出错：无法创建（"+(e&&e.name||e)+"）"+KB,true);micAlert("❌ 语音识别没法启动","无法创建识别器（"+(e&&e.name||e)+"）。");return}
  rec=r;r.lang=recAlt&&asrLang==="zh-CN"?"cmn-Hans-CN":asrLang;r.interimResults=true;r.continuous=false;r.maxAlternatives=1;   // continuous=false: Android Chrome misbehaves with true
  r.onstart=()=>{rlog("start");if(rec!==r)return;recStarted=true;clearTimeout(recWD);micUI(2);micMsg("")};
  r.onaudiostart=()=>rlog("audio");r.onspeechstart=()=>{rlog("speech");recHeard=true};
@@ -406,20 +427,24 @@ function startMic(){
  r.onerror=e=>{const c=(e&&e.error)||"unknown";rlog("error:"+c);if(rec!==r)return;recErr=c;
   if(c==="aborted"&&recUserAbort)return;   // our own cancel: silent
   if(c==="language-not-supported"&&!recAlt&&asrLang==="zh-CN"){recAlt=true}   // next tap retries with cmn-Hans-CN
-  const m="识别出错："+c+"（"+(MICERR[c]||"未知错误")+"）";micMsg(m+(c==="no-speech"?"":KB),c!=="no-speech");toast(m,5000)};
+  const m="识别出错："+c+"（"+(MICERR[c]||"未知错误")+"）";micMsg(m+(c==="no-speech"?"":KB),true);
+  micAlert(c==="no-speech"?"🤔 没听到声音":"❌ 语音识别出错："+c,(MICERR[c]||"未知错误")+(c==="not-allowed"||c==="audio-capture"||c==="service-not-allowed"?"\n另外检查：手机 设置 → 应用 → Google → 权限 → 麦克风 → 允许（Chrome 的语音识别是借 Google App 做的）。":""))};
  r.onend=()=>{rlog("end");if(rec!==r)return;clearTimeout(recWD);rec=null;micUI(0);
   const q=$("qIn");if(+q.dataset.i===recI){saveQs();renderQs();renderFav();
    const dt=(performance.now()-recT0)/1000;
    if(recFinal.trim()){$("qState").textContent="✓ 已保存（第 "+(recI+1)+" 句）";micMsg("")}
    else if(recErr){$("qState").textContent="自动保存在本机"}
-   else if(!recHeard&&dt<1.5){$("qState").textContent="没启动成功";   // the "flashes once" case: ended at once with no error code
-    micMsg("识别马上结束了，没给错误码（"+recLog.join(" → ")+"）。多半是手机的“Google 语音服务”没装或被关掉"+KB,true);toast("识别马上结束了（无错误码）",4000)}
-   else{$("qState").textContent="没听清，再点🎤试试";micMsg("没听清（"+recLog.join(" → ")+"），再点🎤说一遍")}}};
+   else if(!recHeard&&dt<2.5&&!recRetried){recRetried=true;rlog("auto-retry");setTimeout(()=>{if(!rec)startMic(true)},500)}   // Android sometimes drops the first start right after a permission prompt / audio focus change
+   else if(!recHeard&&dt<2.5){$("qState").textContent="❌ 没启动成功";   // the "flashes once" case: ended at once with no error code
+    micMsg("❌ 识别一启动就结束了，没给原因。请改用键盘上的🎤语音键（见下方说明）",true);
+    micAlert("❌ 语音识别一启动就结束了","手机没给任何错误原因，试了两次都一样。最常见的原因：\n① 手机上没有或停用了「Google」App / Google 语音服务（国行 OPPO 常见）；\n② 「Google」App 没有麦克风权限；\n③ 别的 App 正在占用麦克风。")}
+   else{$("qState").textContent="没听清，再点🎤试试";micMsg("🤔 没听到内容，再点🎤说一遍；还不行就用键盘上的🎤语音键",true);
+    micAlert("🤔 没有识别出文字","说话前等按钮变红、出现「正在听」再开口，靠近手机说。")}}};
  micUI(1);micMsg("");recUserAbort=false;rlog(wasPlaying?"paused-video":"tap");
  // Android Chrome: starting the recognizer while our <audio> still holds audio focus makes it end at once,
  // so after pausing the video give Android ~350 ms to release focus (start() needs no user gesture in Chrome).
- const go=()=>{if(rec!==r)return;try{r.start()}catch(e){rlog("start-throw:"+(e&&e.name));rec=null;micUI(0);micMsg("识别出错：启动失败（"+(e&&e.name||e)+"）"+KB,true);toast("语音识别启动失败",4000);return}
- clearTimeout(recWD);recWD=setTimeout(()=>{if(rec===r&&!recStarted){micMsg("3 秒还没启动：点地址栏左边的🔒 → 权限 → 麦克风 → 允许，然后刷新"+KB,true);toast("麦克风还没启动，检查一下麦克风权限",5000)}},3000)};
+ const go=()=>{if(rec!==r)return;try{r.start()}catch(e){rlog("start-throw:"+(e&&e.name));rec=null;micUI(0);micMsg("识别出错：启动失败（"+(e&&e.name||e)+"）"+KB,true);micAlert("❌ 语音识别启动失败",String(e&&e.name||e));return}
+ clearTimeout(recWD);recWD=setTimeout(()=>{if(rec===r&&!recStarted){micMsg("❌ 4 秒还没启动，见下方说明",true);micAlert("⏳ 4 秒了，麦克风还没启动","可能是麦克风权限没开：点地址栏左边的🔒或⚙ → 权限 → 麦克风 → 允许，然后关掉这个标签页重新打开。")}},4000)};
  if(wasPlaying)setTimeout(go,350);else go()}
 var recUserAbort=false;
 function stopMic(abort){const r=rec;if(!r)return;recUserAbort=!!abort;try{abort?r.abort():r.stop()}catch(e){}if(abort){rec=null;clearTimeout(recWD);micUI(0)}}
@@ -433,7 +458,7 @@ $("bar").onclick=e=>{const r=e.currentTarget.getBoundingClientRect();const i=Mat
 // Rings come in three flavours: keyboard/HID keys, media keys (routed to the Media Session on Android),
 // and touch/mouse emulation that injects swipes, wheel ticks or taps. All map onto act(), which debounces so one press = one action.
 let remote=localStorage.getItem("jingting.remote")==="1",diag=false,lastAct=-1e9,lastActKind="",swipeT=-1e9,wheelT=-1e9,hoverT=-1e9;   // performance.now() starts near 0 on every load
-const DEB=350,WDEB=400,INTER="button,a,input,select,textarea,label,summary,.chip,.item,.sub-box,.bar,.go,.star,.panel,.qbox,#toast,#diag,#remoteExit,[onclick],[role=button]";
+const DEB=350,WDEB=400,INTER="button,a,input,select,textarea,label,summary,.chip,.item,.sub-box,.bar,.go,.star,.panel,.qbox,#toast,#micAlert,#diag,#remoteExit,[onclick],[role=button]";
 let wheelActT=-1e9;
 const NEXTK=new Set(["ArrowRight","ArrowDown","PageDown","MediaTrackNext","AudioVolumeDown","VolumeDown"]);
 const PREVK=new Set(["ArrowLeft","ArrowUp","PageUp","MediaTrackPrevious","AudioVolumeUp","VolumeUp"]);
