@@ -38,6 +38,9 @@ header .sub{font-size:12px;opacity:.6;margin-top:3px}
 .qbox.rec{border-color:#fca5a5;background:#fff5f5}
 .qbox .qinterim{display:none;margin-top:6px;font-size:14px;color:#b91c1c;background:#fef2f2;border-radius:10px;padding:5px 9px;white-space:pre-wrap}
 .qbox.rec .qinterim{display:block}
+.qbox .qmsg{display:none;margin-top:6px;font-size:13px;line-height:1.45;color:#334155;background:#f1f5f9;border-radius:10px;padding:6px 9px}
+.qbox .qmsg.bad{color:#991b1b;background:#fee2e2}
+.qmic.wait{background:#fde68a;border-color:#f59e0b;color:#92400e}
 .qbox{margin-top:12px;border:1px solid #e0e7ff;border-radius:16px;padding:10px 12px;background:#fafaff}
 .qbox .qh{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#4338ca;margin-bottom:6px}
 .qbox .qh small{font-weight:600;color:#94a3b8}
@@ -156,7 +159,7 @@ html.remote .ezone{display:block}
   <div class="bar" id="bar"><div id="barIn"></div></div>
   <div class="segbar"><div id="segIn"></div></div>
   <div class="sub-box" id="subbox"></div>
-  <div class="qbox" id="qBox"><div class="qh"><span>❓ 这句我想问</span><span class="qtools"><small id="qState">自动保存在本机</small><button class="qlang" id="qLang" type="button" title="语音识别语言：中文 / 英文">中</button></span></div><div class="qwrap"><textarea id="qIn" rows="2" enterkeyhint="done" placeholder="哪里没听懂、哪个词不会用，写或点🎤说（自动保存）"></textarea><button class="qmic" id="qMic" type="button" title="语音提问：点一下开始说，再点一下停止">🎤<span id="qMicT">说</span></button></div><div class="qinterim" id="qInterim"></div></div>
+  <div class="qbox" id="qBox"><div class="qh"><span>❓ 这句我想问</span><span class="qtools"><small id="qState">自动保存在本机</small><button class="qlang" id="qLang" type="button" title="语音识别语言：中文 / 英文">中</button></span></div><div class="qwrap"><textarea id="qIn" rows="2" enterkeyhint="done" placeholder="哪里没听懂、哪个词不会用，写或点🎤说（自动保存）"></textarea><button class="qmic" id="qMic" type="button" title="语音提问：点一下开始说，再点一下停止">🎤<span id="qMicT">说</span></button></div><div class="qinterim" id="qInterim"></div><div class="qmsg" id="qMsg"></div></div>
   <div class="ctrls">
     <button class="btn" id="prev">⏮<span>上一句</span></button>
     <button class="btn" id="rep">🔁<span>重听</span></button>
@@ -369,32 +372,60 @@ function renderLang(){$("qLang").textContent=asrLang==="en-US"?"EN":"中";$("qLa
 renderLang();
 $("qLang").onclick=()=>{asrLang=asrLang==="en-US"?"zh-CN":"en-US";try{localStorage.setItem("jingting.asrlang",asrLang)}catch(e){}renderLang();
  toast(asrLang==="en-US"?"🎤 语音识别：英文":"🎤 语音识别：中文（可夹英文单词）");if(rec){stopMic();setTimeout(startMic,350)}};
-function micUI(on){$("qMic").classList.toggle("rec",on);$("qBox").classList.toggle("rec",on);$("qMicT").textContent=on?"停":"说";
- if(on){$("qState").textContent="🔴 正在听…";$("qInterim").textContent="正在听…（说完再点🎤停止）"}else $("qInterim").textContent=""}
+// UI states: 0 idle, 1 启动中 (tapped, waiting for onstart), 2 正在听. A persistent status line (#qMsg) sits right under the box,
+// so errors are visible next to the button (the top toast is easy to miss) and Lily can screenshot the exact code.
+function micUI(st){const on=st>0;$("qMic").classList.toggle("rec",st===2);$("qMic").classList.toggle("wait",st===1);$("qBox").classList.toggle("rec",on);
+ $("qMicT").textContent=st===2?"停":st===1?"启动中":"说";
+ if(st===2){$("qState").textContent="🔴 正在听…";$("qInterim").textContent="正在听…（说完再点🎤停止）"}
+ else if(st===1){$("qState").textContent="⏳ 启动中…";$("qInterim").textContent="⏳ 语音识别启动中…"}
+ else $("qInterim").textContent=""}
+function micMsg(m,bad){const e=$("qMsg");e.textContent=m||"";e.style.display=m?"block":"none";e.classList.toggle("bad",!!bad)}
 function micJoin(a,b){b=b.trim();if(!b)return a;if(!a.trim())return b;return a+(/[\s\n]$/.test(a)?"":" ")+b}
 function micPut(interim){const q=$("qIn");if(+q.dataset.i!==recI){stopMic(true);return}
  q.value=micJoin(recBase,recFinal);q.dispatchEvent(new Event("input"));
  $("qInterim").textContent=interim?("…"+interim):($("qInterim").textContent||"正在听…")}
+const MICERR={"not-allowed":"麦克风权限被拒：点地址栏左边的🔒 → 权限 → 麦克风 → 允许",
+ "service-not-allowed":"手机的语音识别服务不可用（Chrome 要用“Google 语音服务”）",
+ "no-speech":"没听到声音，再点🎤说一遍","audio-capture":"麦克风被别的App占用或找不到麦克风",
+ "network":"语音识别要连 Google 服务器，网络不通","language-not-supported":"手机的语音服务不支持这个语言",
+ "bad-grammar":"识别参数出错","aborted":"识别被中断"};
+const KB="；也可以点输入框，用键盘上的🎤语音键";
+let recLog=[],recT0=0,recStarted=false,recHeard=false,recWD=0,recAlt=false;
+function rlog(s){recLog.push(s+"@"+((performance.now()-recT0)/1000).toFixed(1)+"s")}
 function startMic(){
- if(!SR){toast("这个浏览器不支持语音输入，请用 Chrome 打开；或点输入框，用键盘上的🎤语音键",5000);$("qIn").focus();return}
+ if(!SR){micMsg("这个浏览器没有语音识别，请用 Chrome 打开"+KB,true);toast("这个浏览器不支持语音输入"+KB,5000);$("qIn").focus();return}
  if(rec)return;
- recI=cur;$("qIn").dataset.i=cur;recBase=$("qIn").value;recFinal="";recErr=false;
- if(playing){stopPlay();renderCnt()}   // otherwise the mic hears the video
- const r=new SR();rec=r;r.lang=asrLang;r.interimResults=true;r.continuous=false;r.maxAlternatives=1;
+ recI=cur;$("qIn").dataset.i=cur;recBase=$("qIn").value;recFinal="";recErr="";recStarted=false;recHeard=false;recLog=[];recT0=performance.now();
+ const wasPlaying=playing||!au.paused;if(wasPlaying){stopPlay();renderCnt()}   // otherwise the mic hears the video
+ let r;try{r=new SR()}catch(e){micMsg("识别出错：无法创建（"+(e&&e.name||e)+"）"+KB,true);return}
+ rec=r;r.lang=recAlt&&asrLang==="zh-CN"?"cmn-Hans-CN":asrLang;r.interimResults=true;r.continuous=false;r.maxAlternatives=1;   // continuous=false: Android Chrome misbehaves with true
+ r.onstart=()=>{rlog("start");if(rec!==r)return;recStarted=true;clearTimeout(recWD);micUI(2);micMsg("")};
+ r.onaudiostart=()=>rlog("audio");r.onspeechstart=()=>{rlog("speech");recHeard=true};
  r.onresult=e=>{let fin="",inter="";for(let i=0;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)fin+=t;else inter+=t}
-  recFinal=fin;micPut(inter)};
- r.onerror=e=>{recErr=true;const c=e.error;
-  if(c==="not-allowed"||c==="service-not-allowed")toast("麦克风没开：点地址栏左边的🔒 → 权限 → 允许麦克风；或用键盘上的🎤语音键",6000);
-  else if(c==="no-speech")toast("没听到声音，再点🎤说一遍",2500);
-  else if(c==="audio-capture")toast("找不到麦克风；可以用键盘上的🎤语音键",4000);
-  else if(c==="network")toast("语音识别要联网，网络不通；可以用键盘上的🎤语音键",4000);
-  else if(c!=="aborted")toast("语音识别出错（"+c+"）；可以用键盘上的🎤语音键",4000)};
- r.onend=()=>{if(rec!==r)return;rec=null;micUI(false);
+  if(rec!==r)return;if(!recStarted){recStarted=true;micUI(2)}recHeard=true;recFinal=fin;micPut(inter)};
+ r.onerror=e=>{const c=(e&&e.error)||"unknown";rlog("error:"+c);if(rec!==r)return;recErr=c;
+  if(c==="aborted"&&recUserAbort)return;   // our own cancel: silent
+  if(c==="language-not-supported"&&!recAlt&&asrLang==="zh-CN"){recAlt=true}   // next tap retries with cmn-Hans-CN
+  const m="识别出错："+c+"（"+(MICERR[c]||"未知错误")+"）";micMsg(m+(c==="no-speech"?"":KB),c!=="no-speech");toast(m,5000)};
+ r.onend=()=>{rlog("end");if(rec!==r)return;clearTimeout(recWD);rec=null;micUI(0);
   const q=$("qIn");if(+q.dataset.i===recI){saveQs();renderQs();renderFav();
-   $("qState").textContent=recFinal.trim()?"✓ 已保存（第 "+(recI+1)+" 句）":(recErr?"自动保存在本机":"没听清，再点🎤试试")}};
- try{r.start();micUI(true)}catch(e){rec=null;micUI(false);toast("语音识别启动失败；可以用键盘上的🎤语音键",4000)}}
-function stopMic(abort){const r=rec;if(!r)return;try{abort?r.abort():r.stop()}catch(e){}if(abort){rec=null;micUI(false)}}
-$("qMic").onclick=()=>{$("qBox").scrollIntoView({block:"nearest",behavior:"smooth"});if(rec)stopMic();else startMic()};
+   const dt=(performance.now()-recT0)/1000;
+   if(recFinal.trim()){$("qState").textContent="✓ 已保存（第 "+(recI+1)+" 句）";micMsg("")}
+   else if(recErr){$("qState").textContent="自动保存在本机"}
+   else if(!recHeard&&dt<1.5){$("qState").textContent="没启动成功";   // the "flashes once" case: ended at once with no error code
+    micMsg("识别马上结束了，没给错误码（"+recLog.join(" → ")+"）。多半是手机的“Google 语音服务”没装或被关掉"+KB,true);toast("识别马上结束了（无错误码）",4000)}
+   else{$("qState").textContent="没听清，再点🎤试试";micMsg("没听清（"+recLog.join(" → ")+"），再点🎤说一遍")}}};
+ micUI(1);micMsg("");recUserAbort=false;rlog(wasPlaying?"paused-video":"tap");
+ // Android Chrome: starting the recognizer while our <audio> still holds audio focus makes it end at once,
+ // so after pausing the video give Android ~350 ms to release focus (start() needs no user gesture in Chrome).
+ const go=()=>{if(rec!==r)return;try{r.start()}catch(e){rlog("start-throw:"+(e&&e.name));rec=null;micUI(0);micMsg("识别出错：启动失败（"+(e&&e.name||e)+"）"+KB,true);toast("语音识别启动失败",4000);return}
+ clearTimeout(recWD);recWD=setTimeout(()=>{if(rec===r&&!recStarted){micMsg("3 秒还没启动：点地址栏左边的🔒 → 权限 → 麦克风 → 允许，然后刷新"+KB,true);toast("麦克风还没启动，检查一下麦克风权限",5000)}},3000)};
+ if(wasPlaying)setTimeout(go,350);else go()}
+var recUserAbort=false;
+function stopMic(abort){const r=rec;if(!r)return;recUserAbort=!!abort;try{abort?r.abort():r.stop()}catch(e){}if(abort){rec=null;clearTimeout(recWD);micUI(0)}}
+function micTap(e){if(e){e.preventDefault();e.stopPropagation()}if(rec)stopMic(!recStarted);else startMic();setTimeout(()=>$("qBox").scrollIntoView({block:"nearest",behavior:"smooth"}),0)}
+$("qMic").addEventListener("click",micTap);
+["pointerdown","touchstart","mousedown"].forEach(t=>$("qMic").addEventListener(t,e=>e.stopPropagation(),{passive:true}));
 $("onlyStar").onclick=()=>{if(!stars.size&&!onlyStar){alert("还没有标星的句子。听不懂时点右上角 ⭐");return}onlyStar=!onlyStar;if(onlyStar&&!stars.has(cur)){cur=order()[0]}subState=0;render()};
 $("cont").onchange=save;$("blurList").onchange=applySubMode;
 $("bar").onclick=e=>{const r=e.currentTarget.getBoundingClientRect();const i=Math.min(SEGS.length-1,Math.floor((e.clientX-r.left)/r.width*SEGS.length));subState=0;if(onlyStar&&!stars.has(i))onlyStar=false;playSeg(i)};
