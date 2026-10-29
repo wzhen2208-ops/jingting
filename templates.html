@@ -26,6 +26,18 @@ header .sub{font-size:12px;opacity:.6;margin-top:3px}
 .star.on{background:#fef3c7;border-color:var(--star);color:#b45309}
 #toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%);z-index:60;background:rgba(15,23,42,.92);color:#fff;border-radius:99px;padding:9px 16px;font-size:14px;font-weight:600;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
 #toast.show{opacity:1}
+#toast.long{white-space:normal;width:max-content;max-width:88vw;border-radius:14px;text-align:center;line-height:1.45}
+.qbox .qh .qtools{display:flex;align-items:center;gap:6px}
+.qbox .qwrap{display:flex;gap:8px;align-items:stretch}
+.qbox .qwrap textarea{flex:1;min-width:0}
+.qmic{flex:none;width:56px;min-height:58px;border:2px solid #c7d2fe;border-radius:14px;background:#eef2ff;font-size:24px;line-height:1;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px;color:#4338ca}
+.qmic span{font-size:10px;font-weight:700}
+.qmic.rec{background:#ef4444;border-color:#dc2626;color:#fff;animation:micPulse 1.1s ease-in-out infinite}
+@keyframes micPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,.55)}70%{box-shadow:0 0 0 12px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.qlang{border:1px solid #c7d2fe;background:#fff;color:#4338ca;border-radius:99px;padding:3px 9px;font-size:12px;font-weight:800;cursor:pointer}
+.qbox.rec{border-color:#fca5a5;background:#fff5f5}
+.qbox .qinterim{display:none;margin-top:6px;font-size:14px;color:#b91c1c;background:#fef2f2;border-radius:10px;padding:5px 9px;white-space:pre-wrap}
+.qbox.rec .qinterim{display:block}
 .qbox{margin-top:12px;border:1px solid #e0e7ff;border-radius:16px;padding:10px 12px;background:#fafaff}
 .qbox .qh{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#4338ca;margin-bottom:6px}
 .qbox .qh small{font-weight:600;color:#94a3b8}
@@ -144,7 +156,7 @@ html.remote .ezone{display:block}
   <div class="bar" id="bar"><div id="barIn"></div></div>
   <div class="segbar"><div id="segIn"></div></div>
   <div class="sub-box" id="subbox"></div>
-  <div class="qbox"><div class="qh"><span>❓ 这句我想问</span><small id="qState">自动保存在本机</small></div><textarea id="qIn" rows="2" enterkeyhint="done" placeholder="哪里没听懂、哪个词不会用，写在这里（自动保存）"></textarea></div>
+  <div class="qbox" id="qBox"><div class="qh"><span>❓ 这句我想问</span><span class="qtools"><small id="qState">自动保存在本机</small><button class="qlang" id="qLang" type="button" title="语音识别语言：中文 / 英文">中</button></span></div><div class="qwrap"><textarea id="qIn" rows="2" enterkeyhint="done" placeholder="哪里没听懂、哪个词不会用，写或点🎤说（自动保存）"></textarea><button class="qmic" id="qMic" type="button" title="语音提问：点一下开始说，再点一下停止">🎤<span id="qMicT">说</span></button></div><div class="qinterim" id="qInterim"></div></div>
   <div class="ctrls">
     <button class="btn" id="prev">⏮<span>上一句</span></button>
     <button class="btn" id="rep">🔁<span>重听</span></button>
@@ -217,7 +229,7 @@ let stars=new Set((lsGet(KEY+"stars",[])||[]).map(Number).filter(i=>i>=0&&i<SEGS
 let QS=lsGet(KEY+"qs",{});if(!QS||typeof QS!=="object")QS={};
 function saveStars(){try{localStorage.setItem(KEY+"stars",JSON.stringify([...stars].sort((a,b)=>a-b)))}catch(e){toast("⚠️ 浏览器不让保存（无痕模式？）")}}
 function saveQs(){try{localStorage.setItem(KEY+"qs",JSON.stringify(QS))}catch(e){toast("⚠️ 浏览器不让保存（无痕模式？）")}}
-let toastT=0;function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),1600)}
+let toastT=0;function toast(m,ms){const t=$("toast");t.textContent=m;t.classList.toggle("long",!!ms);t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),ms||1600)}
 let onlyStar=localStorage.getItem(KEY+"only")==="1";
 let rate=parseFloat(localStorage.getItem(KEY+"rate")||"1");
 const SUBS=[["hide","隐藏"],["en","英文"],["zh","中文"],["both","中英"]];
@@ -245,7 +257,7 @@ function buildSubs(){$("subs").innerHTML='<span class="lb">字幕</span>'+SUBS.m
 function chapOf(i){let k=-1;for(let j=0;j<CHAPTERS.length;j++)if(CHAPTERS[j].s<=i)k=j;return k}
 function chapEnd(k){return k+1<CHAPTERS.length?CHAPTERS[k+1].s-1:SEGS.length-1}
 let studyK=-2;
-function render(){const s=SEGS[cur],o=order(),pos=o.indexOf(cur);
+function render(){if(rec&&recI!==cur)stopMic(true);const s=SEGS[cur],o=order(),pos=o.indexOf(cur);
  const ck=chapOf(cur);$("chap").textContent=ck>=0?"第"+(ck+1)+"章 · "+CHAPTERS[ck].t+"（第"+(CHAPTERS[ck].s+1)+"–"+(chapEnd(ck)+1)+"句）":"";
  if(ck>=0){$("chapSel").value=String(ck);if(ck!==studyK)renderStudy(ck)}
  $("num").innerHTML=(cur+1)+' <small>/ '+SEGS.length+'</small>';
@@ -349,6 +361,40 @@ $("copyClose").onclick=()=>{$("copyBox").style.display="none"};
 let qT=0;$("qIn").addEventListener("input",()=>{const i=+$("qIn").dataset.i,v=$("qIn").value.trim();if(v)QS[i]=$("qIn").value;else delete QS[i];
  clearTimeout(qT);$("qState").textContent="保存中…";qT=setTimeout(()=>{saveQs();$("qState").textContent="✓ 已保存（第 "+(i+1)+" 句）";renderQs();renderFav();document.querySelectorAll('.item[data-i="'+i+'"] .s').forEach(e=>e.textContent=(stars.has(i)?"⭐":"")+(QS[i]?"❓":""))},400)});
 $("qIn").addEventListener("blur",()=>{clearTimeout(qT);saveQs();renderQs();renderFav()});
+// ---- 🎤 语音提问 (Web Speech API; Chrome on Android/desktop). Text is appended to the box and saved via the same "input" handler.
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+var rec=null,recI=-1;   // var: render() may run before this line
+let asrLang=localStorage.getItem("jingting.asrlang")==="en-US"?"en-US":"zh-CN",recBase="",recFinal="",recErr=false;
+function renderLang(){$("qLang").textContent=asrLang==="en-US"?"EN":"中";$("qLang").title="语音识别语言："+(asrLang==="en-US"?"英文（点一下换中文）":"中文（点一下换英文）")}
+renderLang();
+$("qLang").onclick=()=>{asrLang=asrLang==="en-US"?"zh-CN":"en-US";try{localStorage.setItem("jingting.asrlang",asrLang)}catch(e){}renderLang();
+ toast(asrLang==="en-US"?"🎤 语音识别：英文":"🎤 语音识别：中文（可夹英文单词）");if(rec){stopMic();setTimeout(startMic,350)}};
+function micUI(on){$("qMic").classList.toggle("rec",on);$("qBox").classList.toggle("rec",on);$("qMicT").textContent=on?"停":"说";
+ if(on){$("qState").textContent="🔴 正在听…";$("qInterim").textContent="正在听…（说完再点🎤停止）"}else $("qInterim").textContent=""}
+function micJoin(a,b){b=b.trim();if(!b)return a;if(!a.trim())return b;return a+(/[\s\n]$/.test(a)?"":" ")+b}
+function micPut(interim){const q=$("qIn");if(+q.dataset.i!==recI){stopMic(true);return}
+ q.value=micJoin(recBase,recFinal);q.dispatchEvent(new Event("input"));
+ $("qInterim").textContent=interim?("…"+interim):($("qInterim").textContent||"正在听…")}
+function startMic(){
+ if(!SR){toast("这个浏览器不支持语音输入，请用 Chrome 打开；或点输入框，用键盘上的🎤语音键",5000);$("qIn").focus();return}
+ if(rec)return;
+ recI=cur;$("qIn").dataset.i=cur;recBase=$("qIn").value;recFinal="";recErr=false;
+ if(playing){stopPlay();renderCnt()}   // otherwise the mic hears the video
+ const r=new SR();rec=r;r.lang=asrLang;r.interimResults=true;r.continuous=false;r.maxAlternatives=1;
+ r.onresult=e=>{let fin="",inter="";for(let i=0;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)fin+=t;else inter+=t}
+  recFinal=fin;micPut(inter)};
+ r.onerror=e=>{recErr=true;const c=e.error;
+  if(c==="not-allowed"||c==="service-not-allowed")toast("麦克风没开：点地址栏左边的🔒 → 权限 → 允许麦克风；或用键盘上的🎤语音键",6000);
+  else if(c==="no-speech")toast("没听到声音，再点🎤说一遍",2500);
+  else if(c==="audio-capture")toast("找不到麦克风；可以用键盘上的🎤语音键",4000);
+  else if(c==="network")toast("语音识别要联网，网络不通；可以用键盘上的🎤语音键",4000);
+  else if(c!=="aborted")toast("语音识别出错（"+c+"）；可以用键盘上的🎤语音键",4000)};
+ r.onend=()=>{if(rec!==r)return;rec=null;micUI(false);
+  const q=$("qIn");if(+q.dataset.i===recI){saveQs();renderQs();renderFav();
+   $("qState").textContent=recFinal.trim()?"✓ 已保存（第 "+(recI+1)+" 句）":(recErr?"自动保存在本机":"没听清，再点🎤试试")}};
+ try{r.start();micUI(true)}catch(e){rec=null;micUI(false);toast("语音识别启动失败；可以用键盘上的🎤语音键",4000)}}
+function stopMic(abort){const r=rec;if(!r)return;try{abort?r.abort():r.stop()}catch(e){}if(abort){rec=null;micUI(false)}}
+$("qMic").onclick=()=>{$("qBox").scrollIntoView({block:"nearest",behavior:"smooth"});if(rec)stopMic();else startMic()};
 $("onlyStar").onclick=()=>{if(!stars.size&&!onlyStar){alert("还没有标星的句子。听不懂时点右上角 ⭐");return}onlyStar=!onlyStar;if(onlyStar&&!stars.has(cur)){cur=order()[0]}subState=0;render()};
 $("cont").onchange=save;$("blurList").onchange=applySubMode;
 $("bar").onclick=e=>{const r=e.currentTarget.getBoundingClientRect();const i=Math.min(SEGS.length-1,Math.floor((e.clientX-r.left)/r.width*SEGS.length));subState=0;if(onlyStar&&!stars.has(i))onlyStar=false;playSeg(i)};
