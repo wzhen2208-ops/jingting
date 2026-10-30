@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>逐句精听 · What&#x27;s new in Grok Bot · Oct 18</title>
+<style>#yt iframe{width:100%;height:100%;display:block}.item .tx,.item .x,.item .z,.sub-box .en,.sub-box .zh{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important;max-height:none!important;overflow-wrap:anywhere}
+.pts{margin-top:12px;border:1px solid #d1fae5;border-radius:16px;background:#f0fdfa;padding:0 12px}
+.pts>summary{list-style:none;padding:10px 0;font-weight:800;color:#0f766e;cursor:pointer;font-size:14px;display:flex;justify-content:space-between}
+.pts>summary::-webkit-details-marker{display:none}
+.pt{padding:9px 0;border-top:1px dashed #a7f3d0;font-size:14px;line-height:1.6}
+.pt .pk{display:inline-block;font-size:11px;font-weight:800;border-radius:6px;padding:0 6px;margin-right:6px;background:#e0e7ff;color:#3730a3;vertical-align:1px}
+.pt .pk.k1{background:#fef3c7;color:#92400e}.pt .pk.k2{background:#e0e7ff;color:#3730a3}.pt .pk.k3{background:#fce7f3;color:#9d174d}.pt .pk.k4{background:#dcfce7;color:#166534}.pt .pk.k5{background:#f1f5f9;color:#334155}
+.pt .ph{font-weight:800;color:#111827}
+.pt .px{color:#334155;margin-top:2px}
+.pt .pe{margin-top:4px;background:#fff;border-radius:10px;padding:6px 9px;color:#1f2937;font-size:13.5px}
+.pt .pe i{font-style:normal;color:#0f766e;display:block;font-size:12.5px}
+
+:root{--bg1:#1e1b4b;--bg2:#0f766e;--card:#ffffff;--ink:#1f2937;--muted:#6b7280;--acc:#6366f1;--acc2:#14b8a6;--star:#f59e0b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{touch-action:manipulation}
+button,.chip,.btn{touch-action:manipulation;user-select:none;-webkit-user-select:none}
+html,body{margin:0;min-height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;background:linear-gradient(160deg,var(--bg1),#4338ca 45%,var(--bg2));background-attachment:fixed;color:var(--ink);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.wrap{max-width:640px;margin:0 auto;padding:14px 14px 40px}
+header{color:#fff;margin:6px 4px 12px}
+header h1{font-size:15px;font-weight:600;margin:0;opacity:.85;line-height:1.35}
+header .sub{font-size:12px;opacity:.6;margin-top:3px}
+.card{background:var(--card);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.25);padding:18px}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.num{font-size:28px;font-weight:800;color:var(--acc);letter-spacing:-.5px}
+.num small{font-size:15px;color:var(--muted);font-weight:600}
+.time{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.star{display:flex;flex-direction:column;align-items:center;min-width:64px;min-height:56px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:16px;cursor:pointer;line-height:1;padding:6px 8px;color:#94a3b8;transition:.15s}
+.star b{font-size:28px;font-weight:400}.star span{font-size:11px;font-weight:700;margin-top:3px}
+.star.on{background:#fef3c7;border-color:var(--star);color:#b45309}
+#toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%);z-index:60;background:rgba(15,23,42,.92);color:#fff;border-radius:99px;padding:9px 16px;font-size:14px;font-weight:600;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1}
+#toast.long{white-space:normal;width:max-content;max-width:88vw;border-radius:14px;text-align:center;line-height:1.45}
+.qbox .qh .qtools{display:flex;align-items:center;gap:6px}
+.qbox .qwrap{display:flex;gap:8px;align-items:stretch}
+.qbox .qwrap textarea{flex:1;min-width:0}
+.qmic{flex:none;width:56px;min-height:58px;border:2px solid #c7d2fe;border-radius:14px;background:#eef2ff;font-size:24px;line-height:1;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px;color:#4338ca}
+.qmic span{font-size:10px;font-weight:700}
+.qmic.rec{background:#ef4444;border-color:#dc2626;color:#fff;animation:micPulse 1.1s ease-in-out infinite}
+@keyframes micPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,.55)}70%{box-shadow:0 0 0 12px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.qlang{border:1px solid #c7d2fe;background:#fff;color:#4338ca;border-radius:99px;padding:3px 9px;font-size:12px;font-weight:800;cursor:pointer}
+.qbox.rec{border-color:#fca5a5;background:#fff5f5}
+.qbox .qinterim{display:none;margin-top:6px;font-size:14px;color:#b91c1c;background:#fef2f2;border-radius:10px;padding:5px 9px;white-space:pre-wrap}
+.qbox.rec .qinterim{display:block}
+.qbox .qmsg{display:none;margin-top:8px;font-size:16px;font-weight:600;line-height:1.5;color:#334155;background:#f1f5f9;border-radius:12px;padding:9px 12px}
+.qbox .qmsg.bad{color:#991b1b;background:#fee2e2;border:2px solid #f87171}
+.qbox .qinterim{font-size:17px!important;font-weight:700}
+#micAlert{display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;background:#fff;border-top:5px solid #dc2626;box-shadow:0 -10px 30px rgba(0,0,0,.35);padding:16px 18px calc(16px + env(safe-area-inset-bottom));max-height:75vh;overflow:auto}
+#micAlert.show{display:block}
+#micAlert .mt{font-size:22px;font-weight:900;color:#b91c1c;line-height:1.3;margin-bottom:8px}
+#micAlert .mb{font-size:18px;line-height:1.55;color:#111827;white-space:pre-wrap}
+#micAlert .md{margin-top:10px;font-size:12px;color:#64748b;font-family:ui-monospace,monospace;word-break:break-all}
+#micAlert .mbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+#micAlert .mbtns button{flex:1 1 auto;min-height:52px;font-size:17px;font-weight:800;border-radius:14px;border:2px solid #c7d2fe;background:#eef2ff;color:#3730a3;padding:8px 12px}
+#micAlert .mbtns button.pri{background:#4338ca;border-color:#4338ca;color:#fff}
+.qmic.wait{background:#fde68a;border-color:#f59e0b;color:#92400e}
+.qbox{margin-top:12px;border:1px solid #e0e7ff;border-radius:16px;padding:10px 12px;background:#fafaff}
+.qbox .qh{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#4338ca;margin-bottom:6px}
+.qbox .qh small{font-weight:600;color:#94a3b8}
+.qbox textarea{width:100%;min-height:58px;font-size:15px;line-height:1.5;border:1px solid #c7d2fe;border-radius:12px;padding:8px 10px;font-family:inherit;resize:vertical;color:#1f2937;background:#fff}
+.fv{padding:10px 16px;border-bottom:1px solid #f1f5f9;font-size:14px;line-height:1.5}
+.fv .fh{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.fv .fn{color:var(--acc);font-weight:800;cursor:pointer}
+.fv .fe{color:#111827;margin-top:2px}.fv .fz{color:#0f766e;font-size:13px}.fv .fq{color:#9a3412;background:#fff7ed;border-radius:10px;padding:6px 9px;margin-top:5px;white-space:pre-wrap}
+.fv .del{border:0;background:#f1f5f9;color:#64748b;border-radius:10px;padding:5px 10px;font-size:12px}
+.pbar{display:flex;gap:8px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid #eef2ff;background:#f8fafc}
+.pbar .chip{font-size:13px}
+#copyBox{display:none;padding:10px 16px}#copyBox textarea{width:100%;min-height:160px;font-size:13px;border:1px solid #c7d2fe;border-radius:10px;padding:8px}
+.item .q{color:#ea580c;font-size:12px}
+.bar{height:8px;background:#eef2ff;border-radius:99px;margin:12px 0 4px;overflow:hidden;cursor:pointer;position:relative}
+.bar i{position:absolute;top:0;bottom:0;width:2px;background:#fff;opacity:.9}
+.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:99px;transition:width .2s}
+.segbar{height:4px;background:#f1f5f9;border-radius:99px;overflow:hidden;margin-bottom:10px}
+.segbar>div{height:100%;width:0;background:var(--star)}
+.sub-box{min-height:150px;border-radius:16px;background:linear-gradient(135deg,#f5f3ff,#ecfeff);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px 14px;cursor:pointer;user-select:none;border:2px dashed #c7d2fe;transition:.2s}
+.sub-box.show{border-style:solid;border-color:transparent;background:#f8fafc}
+.hint{color:#818cf8;font-size:15px}
+.hint b{display:block;font-size:34px;margin-bottom:6px}
+.en{font-size:20px;line-height:1.5;color:#111827;font-weight:500}
+.zh{font-size:16px;line-height:1.6;color:#0f766e;margin-top:10px;padding-top:10px;border-top:1px solid #e5e7eb;width:100%}
+.zh .mt{font-size:11px;color:#9ca3af;margin-left:4px}
+.ctrls{display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr;gap:10px;margin-top:16px}
+.sep{height:1px;background:#e5e7eb;margin:20px 0 4px}
+.chap{font-size:12px;color:#4338ca;font-weight:700;margin-top:4px;min-height:16px}
+.jump{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.jump select,.jump input{font-size:14px;border:1px solid #c7d2fe;border-radius:12px;padding:7px 8px;background:#fff;color:#1f2937}
+.jump select{max-width:100%;flex:1 1 200px}
+.jump input{width:76px}
+.jump .lb{font-size:13px;color:#64748b;font-weight:600}
+.chead{padding:9px 16px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:13px;position:sticky;top:0;z-index:1}
+.study{padding:4px 18px 16px;border-top:1px solid #eef2ff;font-size:14px;line-height:1.6;color:#1f2937}
+.study h3{font-size:14px;margin:14px 0 6px;color:#312e81}
+.study ol{margin:0;padding-left:20px}
+.study details{margin-top:12px;border:1px solid #e0e7ff;border-radius:14px;padding:4px 12px}
+.study details>summary{padding:8px 0;font-weight:700;color:#0f766e;cursor:pointer;list-style:none}
+.study details>summary::-webkit-details-marker{display:none}
+.ks{padding:8px 0;border-top:1px dashed #e5e7eb}
+.ks .go{color:var(--acc);font-weight:800;cursor:pointer;margin-right:4px}
+.ks .ke{color:#111827}
+.ks .kz{color:#0f766e;font-size:13px}
+.ks .kw{color:#6b7280;font-size:13px}
+.wd{padding:6px 0;border-top:1px dashed #e5e7eb}
+.wd b{color:#111827}
+.wd .ip{color:#6b7280;font-size:12px;margin:0 4px}
+.wd .nt{color:#6b7280;font-size:12px}
+.tag{font-size:11px;background:#fef3c7;color:#92400e;border-radius:6px;padding:0 5px;margin-left:4px}
+.btn{border:0;border-radius:18px;height:66px;font-size:28px;background:#eef2ff;color:var(--acc);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .08s}
+.btn span{font-size:11px;margin-top:2px;font-weight:600;opacity:.8}
+.btn:active{transform:scale(.94)}
+.btn.play{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;box-shadow:0 6px 18px rgba(99,102,241,.45)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-top:16px}
+.speeds{display:flex;gap:6px}
+.chip{border:0;border-radius:99px;padding:9px 13px;font-size:14px;background:#f1f5f9;color:#334155;cursor:pointer;font-weight:600}
+.chip.on{background:var(--acc);color:#fff}
+.chip.staron{background:var(--star);color:#fff}
+.reps{display:flex;gap:6px;align-items:center}
+.reps .lb{font-size:13px;color:#64748b;font-weight:600;margin-right:2px}
+.cnt{font-size:12px;font-weight:700;color:#0f766e;background:#ecfeff;border-radius:99px;padding:3px 9px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cnt.gap{opacity:.55}
+.toggle{display:flex;align-items:center;gap:6px;font-size:14px;color:#334155;cursor:pointer}
+.toggle input{width:20px;height:20px;accent-color:var(--acc)}
+.panel{margin-top:14px;background:rgba(255,255,255,.96);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.2);overflow:hidden}
+.panel summary{list-style:none;padding:15px 18px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;color:#312e81}
+.panel summary::-webkit-details-marker{display:none}
+.list{max-height:55vh;overflow:auto;border-top:1px solid #eef2ff}
+.item{display:flex;gap:10px;padding:11px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer;font-size:14px;line-height:1.45;align-items:flex-start}
+.item:hover{background:#f8fafc}
+.item.cur{background:#eef2ff}
+.item .i{color:var(--acc);font-weight:700;min-width:30px;font-variant-numeric:tabular-nums}
+.item .t{color:#94a3b8;font-size:11px;min-width:38px;padding-top:2px}
+.item .x{flex:1;color:#334155}
+.item .tx{flex:1;min-width:0}
+.item .x{display:block;color:#334155}
+.item .z{display:block;color:#0f766e;font-size:13px;margin-top:2px}
+.list.blur[data-m=hide] .x{filter:blur(4px)}
+.list[data-m=hide] .z,.list[data-m=en] .z,.list[data-m=zh] .x{display:none}
+.subs .chip{padding:9px 11px}
+.item .s{color:var(--star)}
+.kbd{color:rgba(255,255,255,.65);font-size:12px;text-align:center;margin-top:14px}
+.empty{padding:16px;color:var(--muted);font-size:14px}
+#loading{color:#fff;text-align:center;padding:40px;font-size:15px}
+/* 指环遥控 (ring remote) */
+html.remote,html.remote body{overflow:hidden;touch-action:none;overscroll-behavior:none}
+.chip.remon{background:#0f766e;color:#fff}
+#remoteExit{display:none;position:fixed;bottom:calc(10px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:40;border:0;border-radius:99px;padding:8px 12px;font-size:13px;font-weight:700;background:rgba(15,118,110,.92);color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+html.remote #remoteExit{display:block}
+.ezone{display:none;position:fixed;top:0;bottom:0;width:15vw;z-index:30;background:transparent;pointer-events:none}   /* visual flash only: edge taps are detected by x-position so buttons/⭐ under the edge keep working */
+#ezL{left:0}#ezR{right:0}
+html.remote .ezone{display:block}
+.ezone.flash{background:rgba(15,118,110,.12)}
+.diaglink{font-size:12px;color:#94a3b8;text-decoration:underline;cursor:pointer}
+.rtip{font-size:12px;color:#0f766e;background:#ecfeff;border-radius:12px;padding:7px 10px;margin-top:10px;line-height:1.5}
+.btn.hit{box-shadow:0 0 0 4px #fbbf24;transform:scale(.94)}
+#diag{position:fixed;left:8px;right:8px;bottom:8px;z-index:50;background:rgba(15,23,42,.93);color:#a7f3d0;border-radius:14px;padding:8px 10px;font:12px/1.45 ui-monospace,Menlo,monospace;pointer-events:none;max-width:624px;margin:0 auto}
+#diag .dh{display:flex;justify-content:space-between;align-items:center;color:#fde68a;font-weight:700;margin-bottom:4px}
+#diag .dh{gap:8px}#diag .dh span:last-child{display:flex;gap:6px;flex-shrink:0}#diag button{white-space:nowrap}
+#diag button{pointer-events:auto;border:0;border-radius:10px;padding:8px 16px;background:#334155;color:#fff;font-size:12px}
+#diag pre{margin:0;white-space:pre-wrap;word-break:break-all;min-height:6em;font:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>🎧 逐句精听 · What&#x27;s new in Grok Bot · Oct 18</h1><div class="sub"><b style='color:#fde68a'>📅 2026-10-20</b> · Matt Palmer · 5:06 · 67 句 · 11 章 · 每句有讲解 · <a style='color:#a5f3fc' href='https://www.youtube.com/watch?v=zNgCdQt1qB8'>原视频</a></div></header><!--PV--><style id="pvcss">
+.pv{margin:0 0 14px}.pv>summary{flex-wrap:wrap;gap:4px}.pv>summary small{font-weight:500;color:#6366f1;font-size:12px}
+.pvin{padding:0 12px 14px}.pvtip{font-size:13px;color:#64748b;margin:0 4px 10px;line-height:1.55}
+.pvs{border:1px solid #e0e7ff;border-radius:16px;margin:0 0 10px;background:#f8faff;overflow:hidden}
+.pvs>summary{list-style:none;cursor:pointer;padding:12px 14px;font-weight:700;color:#3730a3;font-size:15px;display:flex;justify-content:space-between;gap:8px}
+.pvs>summary::-webkit-details-marker{display:none}.pvs>summary:after{content:"▾";color:#818cf8}.pvs[open]>summary:after{content:"▴"}
+.pvl{padding:0 10px 10px;display:flex;flex-direction:column;gap:8px}
+.pvc{background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 1px 3px rgba(49,46,129,.08);font-size:14px;line-height:1.6;color:#1e293b;overflow-wrap:anywhere}
+.pvc .t{font-weight:700;color:#1e1b4b;font-size:15px}.pvc .t span{font-weight:500;color:#0f766e;margin-left:6px}
+.pvc .o{margin-top:6px;padding:6px 8px;border-left:3px solid #a5b4fc;background:#eef2ff;border-radius:6px;font-size:13.5px;color:#334155;cursor:pointer}
+.pvc .o mark{background:#fde68a;color:inherit;padding:0 2px;border-radius:3px}.pvc .o i{font-style:normal;color:#6366f1;font-size:12px;white-space:nowrap}
+.pvc .eg{margin-top:6px;font-size:13.5px;color:#334155}.pvc .eg span{display:block;color:#0f766e;font-size:13px}
+.pvc .en{font-size:15px;color:#111827}.pvc .zh{color:#0f766e;font-size:14px;margin-top:4px}
+.pvc .why{margin-top:6px;font-size:13.5px;color:#475569;background:#fff7ed;border-radius:8px;padding:6px 8px}
+.pvc .jb{margin-top:8px;border:0;border-radius:999px;background:#4f46e5;color:#fff;padding:7px 14px;font-size:13px}
+.pvh{font-weight:800;color:#4338ca;font-size:13px;margin:6px 2px 0;padding:4px 10px;background:#e0e7ff;border-radius:999px;align-self:flex-start}
+.pvc .n{display:inline-block;background:#e0e7ff;color:#3730a3;border-radius:999px;padding:0 8px;font-size:12px;margin-right:6px}
+</style><details class="panel pv" id="pvPanel" open><summary><span>📖 预习（听之前先看）</span><small>背景 6 · 生词 18 · 难句 7 · 展开 / 收起</small></summary><div class="pvin"><div class="pvtip">先看背景、过一遍生词，再去听。疑难句点“▶ 跳到第 N 句练”直接跳到那句反复听。</div><details class="pvs" open><summary>🔧 1. 科技背景（6）</summary><div class="pvl"><div class="pvc"><div class="t">聊天卡片</div>AI 助手的回复不只是文字，还可以是“卡片”：表格、选择题、按钮。就像 ERP 里的表单比纯文字报告更好读。</div><div class="pvc"><div class="t">Bot 的电脑</div>每个 Grok Bot 都有一台云端电脑，用来开浏览器、操作网页。电脑越快，bot 干活越快。</div><div class="pvc"><div class="t">加号地址邮箱</div>很多邮箱系统支持 name+任意词@域名，邮件都会到同一个收件箱，但可以按 + 后面的词分类、过滤。比如 bot+supplier@ 专门收供应商邮件。</div><div class="pvc"><div class="t">X 私信和 @bot</div>X（原 Twitter）的私信叫 DM。在帖子下 @某个账号，会通知它；现在 @bot 就能让你的 Grok Bot 去做事，前提是装好 X 插件。</div><div class="pvc"><div class="t">连接器</div>连接器让 bot 读写别的应用：Robinhood 是美国炒股 App，Coinbase 是加密货币交易所，Trello 是看板任务工具，PostHog 是产品数据分析工具。</div><div class="pvc"><div class="t">Team Bot 和安卓助手</div>Team Bot 是团队共用的 bot，访问名单决定谁能用。安卓手机可以指定一个“默认助手”，长按电源键就能调出来。</div></div></details><details class="pvs"><summary>📝 2. 生词和词组（18）</summary><div class="pvl"><div class="pvc"><div class="t">redesign<span>重新设计</span></div><div class="o" onclick="pvJump(2)"><span class="n">#2</span>First of all, we have some <mark>redesigned</mark> chat cards in Grok Bot. <i>▶ 跳到这句</i></div><div class="eg">🏭 We redesigned the packing station.<span>我们重新设计了包装工位。</span></div></div><div class="pvc"><div class="t">get a facelift<span>焕然一新</span></div><div class="o" onclick="pvJump(6)"><span class="n">#6</span>Markdown tables got a <mark>facelift</mark> as well. <i>▶ 跳到这句</i></div><div class="eg">🏭 The office got a facelift.<span>办公室翻新了。</span></div></div><div class="pvc"><div class="t">quality of life upgrade<span>体验升级</span></div><div class="o" onclick="pvJump(12)"><span class="n">#12</span>So if Bot has to respond from the computer, you&#x27;ll notice 3x faster responses, massive <mark>quality of life upgrade</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 New chairs are a quality of life upgrade.<span>新椅子坐着舒服多了。</span></div></div><div class="pvc"><div class="t">highlight<span>高亮</span></div><div class="o" onclick="pvJump(13)"><span class="n">#13</span>What else? Well, draft edits are now <mark>highlighted</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Highlight the late orders.<span>把延期订单标出来。</span></div></div><div class="pvc"><div class="t">revise<span>修改</span></div><div class="o" onclick="pvJump(15)"><span class="n">#15</span>Now when it <mark>revises</mark> an edit, those revisions are highlighted, making it easier to see what was actually… <i>▶ 跳到这句</i></div><div class="eg">🏭 Please revise the quote.<span>请修改报价。</span></div></div><div class="pvc"><div class="t">alias<span>别名</span></div><div class="o" onclick="pvJump(18)"><span class="n">#18</span>This week, you can now use plus-addressed email <mark>aliases</mark>, which effectively gives your bots unlimited email addresses. <i>▶ 跳到这句</i></div><div class="eg">🏭 Send it to the QA alias.<span>发到品保组邮箱。</span></div></div><div class="pvc"><div class="t">effectively<span>实际上</span></div><div class="o" onclick="pvJump(18)"><span class="n">#18</span>This week, you can now use plus-addressed email aliases, which <mark>effectively</mark> gives your bots unlimited email addresses. <i>▶ 跳到这句</i></div><div class="eg">🏭 This effectively cuts the lead time.<span>这实际上缩短了交期。</span></div></div><div class="pvc"><div class="t">hook sb up<span>帮某人搞定</span></div><div class="o" onclick="pvJump(21)"><span class="n">#21</span>It&#x27;ll <mark>hook you up</mark>, easy peasy. <i>▶ 跳到这句</i></div><div class="eg">🏭 HR will hook you up with a locker.<span>人事会给你安排储物柜。</span></div></div><div class="pvc"><div class="t">pretty much<span>差不多</span></div><div class="o" onclick="pvJump(22)"><span class="n">#22</span>Now we got a couple of X upgrades for Bot, which we&#x27;ve been releasing <mark>pretty much</mark> every week. <i>▶ 跳到这句</i></div><div class="eg">🏭 Pretty much every line is running.<span>几乎每条线都在开。</span></div></div><div class="pvc"><div class="t">give it a shot<span>试试</span></div><div class="o" onclick="pvJump(26)"><span class="n">#26</span>Now, there are limits. You can&#x27;t spam people, but <mark>give that one a shot</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Give the new jig a shot.<span>试试新治具。</span></div></div><div class="pvc"><div class="t">configure<span>配置</span></div><div class="o" onclick="pvJump(31)"><span class="n">#31</span>Bot knows your X username linked to your account, so you have to install and <mark>configure</mark> the X plugin first. <i>▶ 跳到这句</i></div><div class="eg">🏭 Configure the scanner first.<span>先配置扫描枪。</span></div></div><div class="pvc"><div class="t">short-term<span>短期的</span></div><div class="o" onclick="pvJump(43)"><span class="n">#43</span>That is only live for 30 minutes, so it&#x27;s sort of <mark>short-term</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 It&#x27;s only a short-term contract.<span>这只是短期合同。</span></div></div><div class="pvc"><div class="t">power user<span>重度用户</span></div><div class="o" onclick="pvJump(46)"><span class="n">#46</span>Now we&#x27;ve also heard that our biggest <mark>power users</mark> were getting too many notifications on Bot across all their devices. <i>▶ 跳到这句</i></div><div class="eg">🏭 Our planners are power users of the ERP.<span>计划员是 ERP 重度用户。</span></div></div><div class="pvc"><div class="t">collapse<span>合并、折叠</span></div><div class="o" onclick="pvJump(49)"><span class="n">#49</span>Notifications have been <mark>collapsed</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Alerts are collapsed into one.<span>警报合并成一条。</span></div></div><div class="pvc"><div class="t">default<span>默认的</span></div><div class="o" onclick="pvJump(56)"><span class="n">#56</span>We&#x27;ve added support for the Android Assistant to Grok Bot, so you can remap Grok to your <mark>default</mark> Android Assistant. <i>▶ 跳到这句</i></div><div class="eg">🏭 Change the default printer.<span>改一下默认打印机。</span></div></div><div class="pvc"><div class="t">delegate<span>委派</span></div><div class="o" onclick="pvJump(59)"><span class="n">#59</span>So if you create Team Bots, you can now <mark>delegate</mark> who has access to those Team Bots. <i>▶ 跳到这句</i></div><div class="eg">🏭 Delegate approvals when you travel.<span>出差时把审批委派出去。</span></div></div><div class="pvc"><div class="t">or rather<span>更准确地说</span></div><div class="o" onclick="pvJump(60)"><span class="n">#60</span>We have unread messages, so now when you open Bot on mobile, there will be a list, <mark>or rather</mark> a pill, that you can tap to go down to your unread messages. <i>▶ 跳到这句</i></div><div class="eg">🏭 It&#x27;s 500, or rather 480.<span>是 500，准确说是 480。</span></div></div><div class="pvc"><div class="t">look through<span>翻看</span></div><div class="o" onclick="pvJump(65)"><span class="n">#65</span>So if you ask a bot to <mark>look through</mark> Slack and you haven&#x27;t actually signed in yet, Bot&#x27;s going to give you a better Slack… <i>▶ 跳到这句</i></div><div class="eg">🏭 Look through last month&#x27;s reports.<span>翻翻上个月的报告。</span></div></div></div></details><details class="pvs"><summary>🧩 3. 疑难句（7）</summary><div class="pvl"><div class="pvc"><div class="en"><span class="n">#4</span>Other times it sends you more stuff, and that stuff is usually in cards, whether that&#x27;s a markdown table, maybe some questions with like A, B, C multi-select options.</div><div class="zh">有时候它会发更多东西，通常放在卡片里，比如 Markdown 表格，或者一些带 A、B、C 多选项的问题。</div><div class="why">🧩 长句：Other times it sends you more stuff, and that stuff is usually in cards, whether that&#x27;s a markdown table, maybe some questions with like A, B, C multi-select options，whether that&#x27;s 引出举例，like 是口头填充词。</div><button class="jb" type="button" onclick="pvJump(4)">▶ 跳到第 4 句练</button></div><div class="pvc"><div class="en"><span class="n">#10</span>So, responses from Bot&#x27;s computer — oh, man, we need some repair out here in San Francisco.</div><div class="zh">所以，Bot 电脑的响应——哎呀，旧金山这里的路得修修了。</div><div class="why">🧩 Matt 话说一半被路面打断：So, responses from Bot&#x27;s computer — oh, man, we need some repair out here，要听出这是插话，正文在下一句继续。</div><button class="jb" type="button" onclick="pvJump(10)">▶ 跳到第 10 句练</button></div><div class="pvc"><div class="en"><span class="n">#20</span>You might be like, hey Matt, how do I do that? Just ask your bot, say, hey, can you make a plus-address email for me in the chat?</div><div class="zh">你可能会说：“嘿 Matt，这怎么弄？”在聊天里问你的 bot 就行：“嘿，能给我做个加号地址邮箱吗？”</div><div class="why">🧩 嵌套引语：You might be like, hey Matt, how do I do that? Just ask your bot, say, hey, can you make … for me? 先是观众问 Matt，再是你问 bot。</div><button class="jb" type="button" onclick="pvJump(20)">▶ 跳到第 20 句练</button></div><div class="pvc"><div class="en"><span class="n">#40</span>What you might not have known is that when you hung those calls up, Bot didn&#x27;t always have memory over the entire call.</div><div class="zh">你可能不知道的是，以前挂了电话以后，Bot 不一定记得整通电话的内容。</div><div class="why">🧩 What you might not have known is that when you hung those calls up, Bot didn&#x27;t always have memory over the entire call：What 从句作主语 + hung up 拆开用。</div><button class="jb" type="button" onclick="pvJump(40)">▶ 跳到第 40 句练</button></div><div class="pvc"><div class="en"><span class="n">#42</span>So call Bot, hang up, call Bot again, and Bot&#x27;s going to remember your previous phone call and the entire transcript, everything that came with it.</div><div class="zh">所以：给 Bot 打电话、挂掉、再打，Bot 会记得你上一通电话和完整的文字记录，以及相关的一切。</div><div class="why">🧩 So call Bot, hang up, call Bot again, and Bot&#x27;s going to remember your previous phone call and the entire transcript, everything that came with it：三个祈使动作 + 同位语。</div><button class="jb" type="button" onclick="pvJump(42)">▶ 跳到第 42 句练</button></div><div class="pvc"><div class="en"><span class="n">#60</span>We have unread messages, so now when you open Bot on mobile, there will be a list, or rather a pill, that you can tap to go down to your unread messages.</div><div class="zh">还有未读消息：在手机上打开 Bot，会有一个列表——准确说是个“胶囊”按钮——点一下就跳到未读消息。</div><div class="why">🧩 We have unread messages, so now when you open Bot on mobile, there will be a list, or rather a pill, that you can tap to go down to …：or rather 是自我更正。</div><button class="jb" type="button" onclick="pvJump(60)">▶ 跳到第 60 句练</button></div><div class="pvc"><div class="en"><span class="n">#65</span>So if you ask a bot to look through Slack and you haven&#x27;t actually signed in yet, Bot&#x27;s going to give you a better Slack sign-in experience.</div><div class="zh">所以如果你让 bot 去翻 Slack，但你还没登录，Bot 会给你更好的登录体验。</div><div class="why">🧩 if you ask a bot to look through Slack and you haven&#x27;t actually signed in yet, Bot&#x27;s going to give you a better Slack sign-in experience：条件句里两个分句。</div><button class="jb" type="button" onclick="pvJump(65)">▶ 跳到第 65 句练</button></div></div></details></div></details><script>
+function pvJump(n){try{var j=document.getElementById("jumpN");j.value=n;jumpTo();var a=document.getElementById("app");if(a&&a.style.display!=="none")a.scrollIntoView({behavior:"smooth",block:"start"});else window.scrollTo({top:0,behavior:"smooth"})}catch(e){console.log(e)}}
+(function(){var K="jt.pv."+location.pathname;document.querySelectorAll(".pv,.pv .pvs").forEach(function(d,i){try{var v=localStorage.getItem(K+i);if(v!==null)d.open=v==="1";d.addEventListener("toggle",function(){try{localStorage.setItem(K+i,d.open?"1":"0")}catch(e){}})}catch(e){}})})();
+</script><!--/PV-->
+<div id="loading" style="display:none"></div>
+<div id="ytbox" style="background:#000;border-radius:14px;overflow:hidden;margin:0 0 10px;aspect-ratio:16/9;max-height:34vh"><div id="yt" style="width:100%;height:100%"></div></div>
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px;font-size:13px;color:#e0e7ff"><button id="ccBtn" type="button" onclick="toggleCC()" style="border:0;border-radius:999px;padding:6px 12px;background:#fff;color:#3730a3;font-size:13px">🔤 视频英文字幕：关</button><span>视频由 YouTube 官方播放，按句自动跳转、重复。</span></div>
+<div class="card" id="app" style="display:none">
+  <div class="toprow">
+    <div class="num" id="num">1 <small>/ 1</small></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div class="time" id="tm">00:00</div><div class="cnt" id="cnt">第1遍</div></div>
+    <button class="star" id="star" title="收藏这句（S）"><b>☆</b><span>收藏</span></button>
+  </div>
+  <div class="chap" id="chap"></div>
+  <div class="bar" id="bar"><div id="barIn"></div></div>
+  <div class="segbar"><div id="segIn"></div></div>
+  <div class="sub-box" id="subbox"></div>
+  <details class="pts" id="ptsBox"><summary><span>💡 这句讲解（听懂了再看）</span><span id="ptsN"></span></summary><div id="ptsBody"></div></details>
+  <div class="qbox" id="qBox"><div class="qh"><span>❓ 这句我想问</span><span class="qtools"><small id="qState">自动保存在本机</small><button class="qlang" id="qLang" type="button" title="语音识别语言：中文 / 英文">中</button></span></div><div class="qwrap"><textarea id="qIn" rows="2" enterkeyhint="done" placeholder="哪里没听懂、哪个词不会用，写或点🎤说（自动保存）"></textarea><button class="qmic" id="qMic" type="button" title="语音提问：点一下开始说，再点一下停止">🎤<span id="qMicT">说</span></button></div><div class="qinterim" id="qInterim"></div><div class="qmsg" id="qMsg"></div></div>
+  <div class="ctrls">
+    <button class="btn" id="prev">⏮<span>上一句</span></button>
+    <button class="btn" id="rep">🔁<span>重听</span></button>
+    <button class="btn play" id="play">▶<span>播放</span></button>
+    <button class="btn" id="next">⏭<span>下一句</span></button>
+  </div>
+  <div class="sep"></div>
+  <div class="opts">
+    <div class="reps speeds" id="speeds"></div>
+  </div>
+  <div class="opts">
+    <div class="reps" id="reps"><span class="lb">每句</span></div>
+    <label class="toggle"><input type="checkbox" id="cont">连续播放</label>
+  </div>
+  <div class="opts">
+    <div class="reps subs" id="subs"><span class="lb">字幕</span></div>
+  </div>
+  <div class="opts">
+    <button class="chip" id="onlyStar">⭐ 只练收藏的 (<span id="starCnt">0</span>)</button>
+    <label class="toggle" id="blurLbl"><input type="checkbox" id="blurList" checked>列表遮住英文</label>
+  </div>
+  <div class="opts">
+    <button class="chip" id="remoteBtn">🎮 遥控模式：关</button>
+    <button class="chip" id="diagBtn">🔧 按键测试</button>
+  </div>
+  <div class="rtip" id="remoteTip" style="display:none">🎮 遥控模式（页面已锁定不滚动）：上滑 / 左滑 / 滚轮向下 / →↓ PageDown 键 / 点屏幕右边缘 = 下一句 · 下滑 / 右滑 / 滚轮向上 / ←↑ PageUp 键 / 点屏幕左边缘 = 上一句 · 点中间空白处 = 重听</div>
+  <div class="opts jump">
+    <select id="chapSel" style="display:none"></select>
+    <span class="lb">跳到第</span><input id="jumpN" type="number" inputmode="numeric" min="1" enterkeyhint="go"><span class="lb">句</span><button class="chip" id="jumpGo">跳</button>
+  </div>
+</div>
+<details class="panel" id="studyPanel" style="display:none">
+  <summary><span id="studyTitle">📘 本章学习</span><span>展开 / 收起</span></summary>
+  <div class="study" id="study"></div>
+</details>
+<details class="panel" id="favPanel">
+  <summary><span>⭐ 我的收藏</span><span id="favInfo">0 句</span></summary>
+  <div class="list" id="favList"></div>
+  <div class="pbar"><button class="chip" id="favCopy">📋 复制全部收藏</button><button class="chip" id="favPlay">▶ 只练收藏</button></div>
+</details>
+<details class="panel" id="qPanel">
+  <summary><span>❓ 我的提问</span><span id="qInfo">0 条</span></summary>
+  <div class="list" id="qList"></div>
+  <div class="pbar"><button class="chip" id="qCopy">📋 复制全部问题</button></div>
+</details>
+<div class="panel" id="copyBox"><div style="font-size:13px;color:#475569;margin-bottom:6px">自动复制没成功：长按下面的文字 → 全选 → 复制</div><textarea id="copyTxt" readonly></textarea><button class="chip" id="copyClose" style="margin-top:6px">关闭</button></div>
+<details class="panel" id="panel">
+  <summary><span>📜 句子列表</span><span id="listInfo"></span></summary>
+  <div class="list" id="list"></div>
+</details>
+<div class="kbd">每句默认 ∞ 无限重复，点 下一句 / 上一句 / 列表里的句子 才换句 · 倍速只有点“速度”按钮才会变<br>电脑快捷键：空格 = 重听 · ←/→ 或 ↑/↓ = 上/下一句 · P = 播放/暂停 · S = 收藏 · Enter = 显示字幕<br>蓝牙指环：→ ↓ PageDown / 下一曲 = 下一句 · ← ↑ PageUp / 上一曲 = 上一句 · 播放暂停键 = 播放/暂停 · 指环发的是滑动或滚轮的话，先点 🎮 遥控模式 打开 · 不确定指环发什么，点 🔧 按键测试 按一下看</div>
+</div>
+<div class="ezone" id="ezL"></div><div class="ezone" id="ezR"></div>
+<button id="remoteExit">🎮 退出遥控</button>
+<div id="toast"></div>
+<div id="micAlert" role="alertdialog"><div class="mt" id="maT"></div><div class="mb" id="maB"></div><div class="mbtns"><button class="pri" id="maKb" type="button">⌨️ 改用键盘语音输入</button><button id="maRetry" type="button">🎤 再试一次</button><button id="maX" type="button">知道了</button></div><div class="md" id="maD"></div></div>
+<div id="diag" style="display:none"><div class="dh"><span>🔧 按键测试：按一下指环，看这里显示什么</span><span><button id="diagC">清空</button><button id="diagX">关闭</button></span></div><pre id="diagLog">（等待信号…）</pre></div>
+
+<script>
+const SEGS=[{"s": 0.0, "e": 4.18, "en": "Hey, it's Matt. We're back with a lot of updates for you this week in Grok Bot.", "zh": "嘿，我是 Matt。这周 Grok Bot 又有一大堆更新。", "pts": [{"k": "地道表达", "h": "We're back with …", "x": "我们带着……回来了（节目开场）。", "eg": "We're back with the monthly numbers.", "egz": "月度数据又来了。"}, {"k": "词汇", "h": "update", "x": "更新。", "eg": "Any updates on the shipment?", "egz": "货运有新消息吗？"}]}, {"s": 4.18, "e": 8.4, "en": "First of all, we have some redesigned chat cards in Grok Bot.", "zh": "首先，Grok Bot 的聊天卡片重新设计了。", "pts": [{"k": "词汇", "h": "redesign", "x": "重新设计。", "eg": "We redesigned the work station.", "egz": "我们重新设计了工位。"}, {"k": "术语", "h": "chat card", "x": "聊天里显示的卡片（表格、选项等）。", "eg": "The bot showed the order as a chat card.", "egz": "bot 把订单显示成一张卡片。"}]}, {"s": 8.4, "e": 12.2, "en": "So sometimes when you message Grok Bot, it sends you just text back.", "zh": "有时候你给 Grok Bot 发消息，它只回文字。", "pts": [{"k": "词汇", "h": "message (动词)", "x": "发消息给。", "eg": "Message me when you arrive.", "egz": "到了给我发消息。"}, {"k": "语法", "h": "send sb sth back", "x": "回给某人某物。", "eg": "Send me the form back.", "egz": "把表格回给我。"}]}, {"s": 12.2, "e": 21.88, "en": "Other times it sends you more stuff, and that stuff is usually in cards, whether that's a markdown table, maybe some questions with like A, B, C multi-select options.", "zh": "有时候它会发更多东西，通常放在卡片里，比如 Markdown 表格，或者一些带 A、B、C 多选项的问题。", "pts": [{"k": "术语", "h": "markdown table", "x": "Markdown 表格：用简单符号写的表格格式。", "eg": "The bot replied with a markdown table of stock levels.", "egz": "bot 用表格回了库存。"}, {"k": "术语", "h": "multi-select", "x": "多选。", "eg": "It's a multi-select question.", "egz": "这是多选题。"}, {"k": "语法", "h": "sometimes … other times …", "x": "有时……有时……。", "eg": "Sometimes it's fast, other times it's slow.", "egz": "有时快有时慢。"}, {"k": "听力技巧", "h": "carts?", "x": "ASR 把 in cards 听成 on carts，按上下文改正。", "eg": "Cards, not carts.", "egz": "是卡片，不是推车。"}]}, {"s": 21.88, "e": 25.7, "en": "We've redesigned those cards as well as the multi-selects, and I think they look quite nice.", "zh": "我们重新设计了这些卡片和多选框，我觉得挺好看的。", "pts": [{"k": "词汇", "h": "as well as", "x": "以及、和。", "eg": "Gloves as well as goggles are required.", "egz": "手套和护目镜都要戴。"}, {"k": "词汇", "h": "quite", "x": "相当。", "eg": "It's quite good.", "egz": "相当好。"}]}, {"s": 25.7, "e": 27.9, "en": "Markdown tables got a facelift as well.", "zh": "Markdown 表格也换了新面貌。", "pts": [{"k": "地道表达", "h": "get a facelift", "x": "焕然一新、翻新。", "eg": "The canteen got a facelift.", "egz": "食堂翻新了。"}, {"k": "词汇", "h": "as well", "x": "也。", "eg": "He came as well.", "egz": "他也来了。"}]}, {"s": 27.9, "e": 33.28, "en": "Check out the redesigned chat cards in Grok Bot.", "zh": "去 Grok Bot 看看重新设计的聊天卡片吧。", "pts": [{"k": "地道表达", "h": "check out", "x": "看看、了解一下。", "eg": "Check out the new dashboard.", "egz": "看看新看板。"}, {"k": "听力技巧", "h": "rock pot", "x": "ASR 把 Grok Bot 听成 rock pot，注意辨音。", "eg": "Grok Bot, not rock pot.", "egz": "是 Grok Bot。"}]}, {"s": 33.28, "e": 35.7, "en": "Next, last week we upgraded Bot's computer.", "zh": "接下来，上周我们升级了 Bot 的电脑。", "pts": [{"k": "词汇", "h": "upgrade", "x": "升级。", "eg": "We upgraded the server last week.", "egz": "上周升级了服务器。"}, {"k": "听力技巧", "h": "Bot's", "x": "Matt 常把 Grok Bot 简称 Bot。", "eg": "Bot's on it.", "egz": "Bot 在处理。"}]}, {"s": 35.7, "e": 37.18, "en": "This week, we upgraded again.", "zh": "这周我们又升级了。", "pts": [{"k": "词汇", "h": "again", "x": "再次。", "eg": "It broke again.", "egz": "又坏了。"}, {"k": "听力技巧", "h": "说错重来", "x": "ASR 听到 This week - This week，Matt 重说了一次。", "eg": "The — the order is late.", "egz": "那个——订单晚了。"}]}, {"s": 37.18, "e": 44.8, "en": "So, responses from Bot's computer — oh, man, we need some repair out here in San Francisco.", "zh": "所以，Bot 电脑的响应——哎呀，旧金山这里的路得修修了。", "pts": [{"k": "听力技巧", "h": "现场打断", "x": "Matt 边走边说，被坑洼路面打断。", "eg": "So the next item — watch the forklift — is cost.", "egz": "下一项——小心叉车——是成本。"}, {"k": "地道表达", "h": "Oh, man", "x": "哎呀（口语感叹）。", "eg": "Oh, man, it's raining.", "egz": "哎呀，下雨了。"}]}, {"s": 44.8, "e": 46.72, "en": "Bot's computer is now three times faster.", "zh": "Bot 的电脑现在快了三倍。", "pts": [{"k": "语法", "h": "three times faster", "x": "快三倍（倍数 + 比较级）。", "eg": "The new press is two times faster.", "egz": "新冲床快一倍。"}, {"k": "词汇", "h": "now", "x": "现在。", "eg": "It's now ready.", "egz": "现在好了。"}]}, {"s": 46.72, "e": 53.32, "en": "So if Bot has to respond from the computer, you'll notice 3x faster responses, massive quality of life upgrade.", "zh": "所以如果 Bot 要用电脑来回复，你会感觉到响应快了三倍，体验大升级。", "pts": [{"k": "术语", "h": "3x", "x": "读作 three x，三倍。", "eg": "We aim for 3x output.", "egz": "目标是产量三倍。"}, {"k": "地道表达", "h": "quality of life upgrade", "x": "让使用更舒服的升级。", "eg": "Air-con on the line is a quality of life upgrade.", "egz": "产线装空调让人舒服多了。"}]}, {"s": 53.32, "e": 56.4, "en": "What else? Well, draft edits are now highlighted.", "zh": "还有呢？草稿的修改现在会被高亮显示。", "pts": [{"k": "词汇", "h": "highlight", "x": "高亮、标出。", "eg": "Highlight the changes in yellow.", "egz": "把改动标黄。"}, {"k": "术语", "h": "draft edit", "x": "草稿修改。", "eg": "Track draft edits before sending.", "egz": "发送前查看草稿改动。"}]}, {"s": 56.4, "e": 60.96, "en": "So you can ask Grok Bot to draft messages for you, which it will do, to Slack or Gmail.", "zh": "你可以让 Grok Bot 帮你起草消息，它会帮你写，发到 Slack 或 Gmail。", "pts": [{"k": "语法", "h": "which it will do", "x": "which 指代前面的动作。", "eg": "Ask him to fix it, which he will do.", "egz": "叫他修，他会修的。"}, {"k": "词汇", "h": "draft", "x": "起草。", "eg": "Draft a memo for the staff.", "egz": "给员工起草一份通知。"}]}, {"s": 60.96, "e": 67.58, "en": "Now when it revises an edit, those revisions are highlighted, making it easier to see what was actually revised.", "zh": "现在它修改草稿时，改动会高亮，更容易看出到底改了什么。", "pts": [{"k": "词汇", "h": "revise / revision", "x": "修改 / 修改处。", "eg": "Revise the drawing and mark the revisions.", "egz": "改图并标出修改处。"}, {"k": "语法", "h": "making it easier to …", "x": "现在分词表结果。", "eg": "We added labels, making it easier to find parts.", "egz": "贴了标签，找零件更容易。"}]}, {"s": 67.58, "e": 71.48, "en": "Next, we have plus-addressed emails in Bot.", "zh": "接下来，Bot 支持“加号地址”邮箱了。", "pts": [{"k": "术语", "h": "plus addressing", "x": "加号地址：name+tag@domain，同一个邮箱可以无限加后缀。", "eg": "Use lily+supplier@ to sort supplier mail.", "egz": "用 lily+supplier@ 来分类供应商邮件。"}, {"k": "听力技巧", "h": "and bought", "x": "ASR 把 in Bot 听成 and bought。", "eg": "In Bot, not and bought.", "egz": "是 in Bot。"}]}, {"s": 71.48, "e": 75.52, "en": "So last week we launched email addresses for Bot.", "zh": "上周我们给 Bot 推出了邮箱地址。", "pts": [{"k": "词汇", "h": "launch", "x": "推出、上线。", "eg": "We launched a new product line.", "egz": "我们推出了新产品线。"}, {"k": "语法", "h": "last week", "x": "一般过去时。", "eg": "We met last week.", "egz": "我们上周见过。"}]}, {"s": 75.52, "e": 82.42, "en": "This week, you can now use plus-addressed email aliases, which effectively gives your bots unlimited email addresses.", "zh": "这周你可以用加号地址邮箱别名了，相当于让你的 bot 拥有无限个邮箱地址。", "pts": [{"k": "词汇", "h": "effectively", "x": "实际上、相当于。", "eg": "This effectively doubles our space.", "egz": "这相当于空间翻倍。"}, {"k": "词汇", "h": "unlimited", "x": "无限的。", "eg": "Unlimited overtime is not allowed.", "egz": "不允许无限加班。"}, {"k": "术语", "h": "alias", "x": "别名。", "eg": "Create an alias for each customer.", "egz": "为每个客户建个别名。"}]}, {"s": 82.42, "e": 85.0, "en": "And you just have to ask, like most of these features.", "zh": "像大多数功能一样，你只要开口问就行。", "pts": [{"k": "语法", "h": "just have to", "x": "只需要。", "eg": "You just have to sign here.", "egz": "你只需要在这签字。"}, {"k": "词汇", "h": "like most of", "x": "像大多数……一样。", "eg": "Like most of our staff, she lives nearby.", "egz": "像大多数员工一样，她住附近。"}]}, {"s": 85.0, "e": 90.58, "en": "You might be like, hey Matt, how do I do that? Just ask your bot, say, hey, can you make a plus-address email for me in the chat?", "zh": "你可能会说：“嘿 Matt，这怎么弄？”在聊天里问你的 bot 就行：“嘿，能给我做个加号地址邮箱吗？”", "pts": [{"k": "地道表达", "h": "be like", "x": "（口语）说、心想。", "eg": "He was like, no way.", "egz": "他就说：不可能。"}, {"k": "听力技巧", "h": "嵌套引语", "x": "Matt 先模仿观众提问，再模仿对 bot 说话。", "eg": "You'll say, how? Just tell him, do it.", "egz": "你会问怎么弄？就跟他说：做吧。"}]}, {"s": 90.58, "e": 92.48, "en": "It'll hook you up, easy peasy.", "zh": "它就帮你搞定，超简单。", "pts": [{"k": "地道表达", "h": "hook sb up", "x": "给某人弄好、安排上。", "eg": "Can you hook me up with a new badge?", "egz": "能帮我弄张新工牌吗？"}, {"k": "地道表达", "h": "easy peasy", "x": "超简单（俏皮话）。", "eg": "Changing the filter is easy peasy.", "egz": "换滤芯超简单。"}]}, {"s": 92.48, "e": 97.94, "en": "Now we got a couple of X upgrades for Bot, which we've been releasing pretty much every week.", "zh": "还有几个 X 相关的升级，这些我们差不多每周都在发布。", "pts": [{"k": "语法", "h": "we've been releasing", "x": "现在完成进行时：一直在发布。", "eg": "We've been hiring every month.", "egz": "我们每个月都在招人。"}, {"k": "地道表达", "h": "pretty much", "x": "差不多、几乎。", "eg": "Pretty much everyone agreed.", "egz": "几乎所有人都同意。"}]}, {"s": 97.94, "e": 103.08, "en": "First, Bot can now read your X DMs and respond.", "zh": "第一，Bot 现在能读你的 X 私信并回复。", "pts": [{"k": "术语", "h": "DM", "x": "direct message，私信。", "eg": "DM me the price.", "egz": "私信我价格。"}, {"k": "词汇", "h": "respond", "x": "回复。", "eg": "Respond within 24 hours.", "egz": "24 小时内回复。"}]}, {"s": 103.08, "e": 105.96, "en": "This has been asked for like a million times.", "zh": "这个大家要求了大概一百万次。", "pts": [{"k": "语法", "h": "has been asked for", "x": "现在完成时被动语态。", "eg": "This has been requested many times.", "egz": "这个被要求过很多次。"}, {"k": "地道表达", "h": "a million times", "x": "无数次（夸张）。", "eg": "I've told you a million times.", "egz": "我跟你说过无数次了。"}]}, {"s": 105.96, "e": 110.0, "en": "Bot can read DMs, respond to DMs for you. Don't abuse that.", "zh": "Bot 能读私信，替你回私信。别滥用。", "pts": [{"k": "词汇", "h": "abuse", "x": "滥用。", "eg": "Don't abuse sick leave.", "egz": "别滥用病假。"}, {"k": "语法", "h": "respond to", "x": "回复（及物要加 to）。", "eg": "Respond to the customer quickly.", "egz": "快点回复客户。"}]}, {"s": 110.0, "e": 114.0, "en": "Now, there are limits. You can't spam people, but give that one a shot.", "zh": "当然有限制，你不能给人发垃圾消息，但可以试试。", "pts": [{"k": "词汇", "h": "spam", "x": "发垃圾信息。", "eg": "Don't spam the group chat.", "egz": "别在群里刷屏。"}, {"k": "地道表达", "h": "give it a shot", "x": "试一试。", "eg": "Give the new tool a shot.", "egz": "试试新工具。"}]}, {"s": 114.0, "e": 115.96, "en": "Much, much requested feature.", "zh": "呼声非常非常高的功能。", "pts": [{"k": "语法", "h": "much-requested", "x": "复合形容词：被大量要求的。", "eg": "A much-needed break.", "egz": "一个急需的休息。"}, {"k": "听力技巧", "h": "重复改口", "x": "Much much requested. Requested feature，Matt 重说了一遍。", "eg": "Very, very important.", "egz": "非常非常重要。"}]}, {"s": 115.96, "e": 118.64, "en": "Next, we've got @bot on X.", "zh": "接下来，在 X 上可以 @bot 了。", "pts": [{"k": "听力技巧", "h": "@ 读作 at", "x": "@bot 读 at bot。", "eg": "Email me at lily@...", "egz": "发邮件到 lily@……"}, {"k": "术语", "h": "tag", "x": "在帖子里 @ 某人。", "eg": "Tag the supplier in the post.", "egz": "在帖子里 @ 供应商。"}]}, {"s": 118.64, "e": 122.28, "en": "This one is pretty sick. People have been asking for it forever.", "zh": "这个超酷。大家已经要了好久了。", "pts": [{"k": "地道表达", "h": "sick", "x": "（俚语）超棒。", "eg": "That new robot is sick!", "egz": "那台新机器人太酷了！"}, {"k": "地道表达", "h": "forever", "x": "（夸张）很久很久。", "eg": "We've waited forever for this part.", "egz": "这个零件等了好久。"}]}, {"s": 122.28, "e": 127.72, "en": "You can just drop an @bot in an X thread and it'll do whatever you ask it to.", "zh": "你只要在 X 的帖子串里丢一个 @bot，它就会照你说的做。", "pts": [{"k": "词汇", "h": "drop", "x": "（口语）随手放上、发出。", "eg": "Drop a comment below.", "egz": "在下面留个言。"}, {"k": "术语", "h": "thread", "x": "帖子串、话题串。", "eg": "Reply in the same thread.", "egz": "在同一个话题串里回复。"}, {"k": "语法", "h": "whatever you ask it to (do)", "x": "省略 do。", "eg": "Do whatever he tells you to.", "egz": "他叫你做什么就做什么。"}]}, {"s": 127.72, "e": 134.28, "en": "Bot knows your X username linked to your account, so you have to install and configure the X plugin first.", "zh": "Bot 要知道你账户关联的 X 用户名，所以要先安装并配置 X 插件。", "pts": [{"k": "术语", "h": "plugin", "x": "插件。", "eg": "Install the plugin first.", "egz": "先装插件。"}, {"k": "词汇", "h": "configure", "x": "配置。", "eg": "Configure the printer for A4.", "egz": "把打印机配置成 A4。"}, {"k": "语法", "h": "linked to", "x": "过去分词作定语：关联到……的。", "eg": "The email linked to your account.", "egz": "你账户绑定的邮箱。"}]}, {"s": 134.28, "e": 141.9, "en": "But once you do that, you can hit Bot up on X, maybe have it save things for you — I like doing that one — or do some research.", "zh": "但设置好以后，你就能在 X 上召唤 Bot，比如让它帮你收藏东西——我喜欢这个——或者做点研究。", "pts": [{"k": "地道表达", "h": "hit sb up", "x": "（口语）找某人、联系某人。", "eg": "Hit me up if you need help.", "egz": "需要帮忙就找我。"}, {"k": "语法", "h": "have it do", "x": "让它做。", "eg": "Have the bot save the file.", "egz": "让 bot 存文件。"}, {"k": "语法", "h": "once …", "x": "一旦……。", "eg": "Once you sign, we start.", "egz": "你一签字我们就开始。"}]}, {"s": 141.9, "e": 151.06, "en": "Maybe @bot, check this out, help me understand what this is, help me, you know, build something with this new technology, all of that live in Bot.", "zh": "比如“@bot，看看这个，帮我弄懂这是什么”，“帮我用这个新技术做点东西”，这些都可以直接在 Bot 里实现。", "pts": [{"k": "语法", "h": "help me understand / build", "x": "help + 宾语 + 动词原形。", "eg": "Help me move this box.", "egz": "帮我搬这个箱子。"}, {"k": "词汇", "h": "live", "x": "（形容词）已上线、可用。", "eg": "The new system is live.", "egz": "新系统已上线。"}, {"k": "听力技巧", "h": "举例式引语", "x": "Matt 模仿发给 @bot 的几种请求。", "eg": "Like: check this, fix that.", "egz": "比如：查这个、修那个。"}]}, {"s": 151.06, "e": 154.34, "en": "Next, we got some new connectors. Who doesn't like new connectors?", "zh": "接下来，有一些新连接器。谁不喜欢新连接器呢？", "pts": [{"k": "术语", "h": "connector", "x": "连接器：让 bot 接入其他应用的插件。", "eg": "Add the Google Drive connector.", "egz": "加上 Google Drive 连接器。"}, {"k": "语法", "h": "Who doesn't like …?", "x": "反问：谁不喜欢……（大家都喜欢）。", "eg": "Who doesn't like a bonus?", "egz": "谁不喜欢奖金？"}]}, {"s": 154.34, "e": 159.4, "en": "We have Robinhood, Coinbase, Trello, PostHog, and many, many more.", "zh": "有 Robinhood、Coinbase、Trello、PostHog，还有很多很多。", "pts": [{"k": "术语", "h": "Robinhood / Coinbase", "x": "美国的股票交易 App / 加密货币交易所。", "eg": "Coinbase is a crypto exchange.", "egz": "Coinbase 是加密货币交易所。"}, {"k": "术语", "h": "Trello / PostHog", "x": "看板式任务管理工具 / 产品数据分析工具。", "eg": "We track tasks in Trello.", "egz": "我们用 Trello 管任务。"}, {"k": "听力技巧", "h": "PostHawk", "x": "ASR 听成 PostHawk，正确是 PostHog。", "eg": "PostHog, like the animal.", "egz": "PostHog。"}]}, {"s": 159.4, "e": 161.2, "en": "So check those out in Grok Bot.", "zh": "去 Grok Bot 看看吧。", "pts": [{"k": "地道表达", "h": "check out", "x": "看看。", "eg": "Check out the new menu.", "egz": "看看新菜单。"}, {"k": "语法", "h": "those", "x": "指刚才说的那些。", "eg": "Check those boxes.", "egz": "查一下那些箱子。"}]}, {"s": 161.2, "e": 168.14, "en": "A lot of love for the connectors this week. Lots of new connectors coming live to Grok Bot.", "zh": "这周连接器很受欢迎，很多新连接器在 Grok Bot 上线。", "pts": [{"k": "地道表达", "h": "a lot of love for", "x": "很受欢迎。", "eg": "A lot of love for the new canteen.", "egz": "大家很喜欢新食堂。"}, {"k": "地道表达", "h": "come live", "x": "上线。", "eg": "The new line comes live next week.", "egz": "新线下周投产。"}, {"k": "听力技巧", "h": "不确定", "x": "前半句 ASR 听成 All of us love a lot for the connectors，按意思整理，属不确定处。", "eg": "Lots of love for the team.", "egz": "大家都爱这个团队。"}]}, {"s": 168.14, "e": 170.5, "en": "Now we have some upgrades to voice as well.", "zh": "语音功能也有升级。", "pts": [{"k": "术语", "h": "voice", "x": "语音（通话）功能。", "eg": "Voice commands on the forklift.", "egz": "叉车上的语音指令。"}, {"k": "词汇", "h": "as well", "x": "也。", "eg": "Bring your ID as well.", "egz": "也带上身份证。"}]}, {"s": 170.5, "e": 175.66, "en": "So if you've seen my earlier videos, you know you can make voice calls to Bot.", "zh": "看过我之前视频的人知道，可以给 Bot 打语音电话。", "pts": [{"k": "词汇", "h": "earlier", "x": "之前的。", "eg": "See my earlier email.", "egz": "见我之前的邮件。"}, {"k": "地道表达", "h": "make a call to", "x": "给……打电话。", "eg": "Make a call to the supplier.", "egz": "给供应商打个电话。"}]}, {"s": 175.66, "e": 183.06, "en": "What you might not have known is that when you hung those calls up, Bot didn't always have memory over the entire call.", "zh": "你可能不知道的是，以前挂了电话以后，Bot 不一定记得整通电话的内容。", "pts": [{"k": "地道表达", "h": "hang up", "x": "挂电话（过去式 hung）。", "eg": "Don't hang up yet.", "egz": "先别挂。"}, {"k": "语法", "h": "might not have known", "x": "可能之前不知道。", "eg": "You might not have noticed.", "egz": "你可能没注意到。"}, {"k": "词汇", "h": "entire", "x": "整个的。", "eg": "The entire shift stopped.", "egz": "整个班都停了。"}]}, {"s": 183.06, "e": 184.12, "en": "But now it does.", "zh": "但现在记得了。", "pts": [{"k": "语法", "h": "it does", "x": "does 代替前面的动词短语 have memory。", "eg": "He didn't, but now he does.", "egz": "他以前不会，现在会了。"}, {"k": "词汇", "h": "now", "x": "现在。", "eg": "Now it works.", "egz": "现在好了。"}]}, {"s": 184.12, "e": 193.96, "en": "So call Bot, hang up, call Bot again, and Bot's going to remember your previous phone call and the entire transcript, everything that came with it.", "zh": "所以：给 Bot 打电话、挂掉、再打，Bot 会记得你上一通电话和完整的文字记录，以及相关的一切。", "pts": [{"k": "术语", "h": "transcript", "x": "文字记录、逐字稿。", "eg": "Save the meeting transcript.", "egz": "保存会议逐字稿。"}, {"k": "词汇", "h": "previous", "x": "之前的。", "eg": "The previous batch passed.", "egz": "上一批合格了。"}, {"k": "听力技巧", "h": "祈使句串", "x": "call …, hang up, call … again，三个动作。", "eg": "Stop, check, restart.", "egz": "停机、检查、重启。"}]}, {"s": 193.96, "e": 197.54, "en": "That is only live for 30 minutes, so it's sort of short-term.", "zh": "这个只在 30 分钟内有效，算是短期记忆。", "pts": [{"k": "词汇", "h": "short-term", "x": "短期的。", "eg": "It's a short-term fix.", "egz": "这是临时措施。"}, {"k": "语法", "h": "only … for 30 minutes", "x": "只持续 30 分钟。", "eg": "The offer is only valid for a week.", "egz": "优惠只有一周有效。"}]}, {"s": 197.54, "e": 204.38, "en": "But basically, if you're making frequent voice calls to Bot, Bot now has memory over those calls.", "zh": "但基本上，如果你经常给 Bot 打电话，它现在能记住这些通话。", "pts": [{"k": "词汇", "h": "frequent", "x": "频繁的。", "eg": "Frequent breakdowns cost money.", "egz": "频繁故障很费钱。"}, {"k": "词汇", "h": "memory", "x": "记忆。", "eg": "The bot has memory of past chats.", "egz": "bot 记得之前的聊天。"}]}, {"s": 204.38, "e": 207.22, "en": "Great upgrade to voice calls in Bot.", "zh": "Bot 语音通话的一大升级。", "pts": [{"k": "语法", "h": "upgrade to sth", "x": "对……的升级（介词 to）。", "eg": "An upgrade to the HVAC.", "egz": "空调系统的升级。"}, {"k": "语法", "h": "省略主语", "x": "口语总结句。", "eg": "Big win for us.", "egz": "我们的大胜利。"}]}, {"s": 207.22, "e": 212.82, "en": "Now we've also heard that our biggest power users were getting too many notifications on Bot across all their devices.", "zh": "我们还听说，最重度的用户在所有设备上收到的 Bot 通知太多了。", "pts": [{"k": "术语", "h": "power user", "x": "重度用户、高级用户。", "eg": "Our planners are Excel power users.", "egz": "计划员都是 Excel 高手。"}, {"k": "词汇", "h": "notification", "x": "通知。", "eg": "Turn off notifications at night.", "egz": "晚上关通知。"}, {"k": "词汇", "h": "across", "x": "遍及。", "eg": "Across all three plants.", "egz": "三个厂都是。"}]}, {"s": 212.82, "e": 215.44, "en": "As someone with an Apple Watch, I definitely felt this.", "zh": "作为戴 Apple Watch 的人，我深有体会。", "pts": [{"k": "语法", "h": "As someone with …", "x": "作为一个有……的人。", "eg": "As someone with two kids, I get it.", "egz": "作为两个孩子的家长，我懂。"}, {"k": "词汇", "h": "definitely", "x": "绝对、肯定。", "eg": "I'll definitely come.", "egz": "我肯定来。"}]}, {"s": 215.44, "e": 221.28, "en": "I was getting notifications on my phone, my watch, my laptop for every single chat.", "zh": "每一条聊天，我的手机、手表、笔记本都会收到通知。", "pts": [{"k": "语法", "h": "was getting", "x": "过去进行时：那时一直收到。", "eg": "I was getting calls all night.", "egz": "我整晚都在接电话。"}, {"k": "地道表达", "h": "every single", "x": "每一个（强调）。", "eg": "Check every single box.", "egz": "每个箱子都要查。"}]}, {"s": 221.28, "e": 223.08, "en": "Notifications have been collapsed.", "zh": "通知现在合并了。", "pts": [{"k": "词汇", "h": "collapse", "x": "合并、折叠。", "eg": "Collapse the rows to see the total.", "egz": "折叠行看合计。"}, {"k": "语法", "h": "have been collapsed", "x": "现在完成时被动。", "eg": "The meetings have been combined.", "egz": "会议已合并。"}]}, {"s": 223.08, "e": 226.76, "en": "Now you just get one notification on the device you're active on.", "zh": "现在只会在你正在用的那台设备上收到一条通知。", "pts": [{"k": "语法", "h": "the device you're active on", "x": "定语从句，介词 on 放在末尾。", "eg": "The line you work on.", "egz": "你所在的产线。"}, {"k": "词汇", "h": "active", "x": "活跃的、正在用的。", "eg": "The active order.", "egz": "进行中的订单。"}]}, {"s": 226.76, "e": 232.04, "en": "So if you're using Bot on your laptop, you're getting a notification on your laptop on the next chat.", "zh": "所以如果你在笔记本上用 Bot，下一条聊天的通知就只在笔记本上。", "pts": [{"k": "语法", "h": "if … you're getting", "x": "条件句里用进行时描述情境。", "eg": "If you're on night shift, you're getting the bonus.", "egz": "上夜班就有补贴。"}, {"k": "词汇", "h": "next", "x": "下一个。", "eg": "The next truck is at 3.", "egz": "下一辆车 3 点到。"}]}, {"s": 232.04, "e": 234.66, "en": "Massive, massive, massive upgrade to Bot.", "zh": "超级超级大的升级。", "pts": [{"k": "听力技巧", "h": "三连重复", "x": "重复三次强调。", "eg": "Big, big, big day.", "egz": "超重要的一天。"}, {"k": "词汇", "h": "massive", "x": "巨大的。", "eg": "A massive improvement.", "egz": "巨大的改进。"}]}, {"s": 234.66, "e": 236.54, "en": "Couple more for you, because that's not enough.", "zh": "再来几个，因为这还不够。", "pts": [{"k": "地道表达", "h": "couple more", "x": "再来几个（省略 a）。", "eg": "Couple more minutes.", "egz": "再等几分钟。"}, {"k": "语法", "h": "that's not enough", "x": "反话式幽默。", "eg": "As if that's not enough.", "egz": "好像这还不够似的。"}]}, {"s": 236.54, "e": 238.28, "en": "You can now invite your teammates to Bot.", "zh": "你现在可以邀请队友用 Bot。", "pts": [{"k": "词汇", "h": "invite", "x": "邀请。", "eg": "Invite the QA team.", "egz": "邀请品保团队。"}, {"k": "词汇", "h": "teammate", "x": "队友、同事。", "eg": "My teammates are great.", "egz": "我的队友很棒。"}]}, {"s": 238.28, "e": 245.26, "en": "So if you have a team or enterprise account and you want to invite your teammates, show them the magic, you can do that too.", "zh": "所以如果你有团队版或企业版账户，想邀请同事、给他们看看有多神奇，也可以。", "pts": [{"k": "术语", "h": "enterprise account", "x": "企业版账户。", "eg": "Our company has an enterprise account.", "egz": "我们公司有企业版账户。"}, {"k": "地道表达", "h": "show them the magic", "x": "让他们见识厉害之处。", "eg": "Show the new hires the magic of kaizen.", "egz": "让新人见识改善的威力。"}, {"k": "听力技巧", "h": "showed", "x": "ASR 听成 showed，实际是 show。", "eg": "Show them, not showed them.", "egz": "是 show。"}]}, {"s": 245.26, "e": 259.0, "en": "We've added support for the Android Assistant to Grok Bot, so you can remap Grok to your default Android Assistant.", "zh": "Grok Bot 支持安卓助手了，你可以把 Grok 设成安卓默认助手。", "pts": [{"k": "术语", "h": "Android Assistant", "x": "安卓手机的系统助手（长按电源键或说唤醒词调出）。", "eg": "Set it as your default assistant.", "egz": "设为默认助手。"}, {"k": "词汇", "h": "remap", "x": "重新指定、重新映射。", "eg": "Remap the button to start.", "egz": "把按钮改成启动键。"}, {"k": "词汇", "h": "default", "x": "默认的。", "eg": "The default setting is off.", "egz": "默认设置是关。"}]}, {"s": 259.0, "e": 261.8, "en": "Now I'm gonna hit you up with a rapid fire round.", "zh": "现在来一轮快问快答式的速览。", "pts": [{"k": "地道表达", "h": "rapid fire", "x": "快速连发。", "eg": "A rapid fire Q&A.", "egz": "快速问答。"}, {"k": "地道表达", "h": "hit sb up with", "x": "给某人来点……。", "eg": "Let me hit you up with some numbers.", "egz": "给你说几个数字。"}]}, {"s": 261.8, "e": 263.8, "en": "We have Team Bot access lists.", "zh": "Team Bot 有了访问名单。", "pts": [{"k": "术语", "h": "access list", "x": "访问名单、权限名单。", "eg": "Update the server room access list.", "egz": "更新机房进出名单。"}, {"k": "术语", "h": "Team Bot", "x": "团队共用的 bot。", "eg": "Our Team Bot answers HR questions.", "egz": "团队 bot 回答人事问题。"}]}, {"s": 263.8, "e": 268.88, "en": "So if you create Team Bots, you can now delegate who has access to those Team Bots.", "zh": "所以如果你建了 Team Bot，现在可以指定谁有权限用。", "pts": [{"k": "词汇", "h": "delegate", "x": "委派、授权（这里指指定）。", "eg": "Delegate the report to your deputy.", "egz": "把报告交给副手。"}, {"k": "语法", "h": "who has access", "x": "间接疑问句作宾语。", "eg": "Decide who has the key.", "egz": "决定谁拿钥匙。"}]}, {"s": 268.88, "e": 276.7, "en": "We have unread messages, so now when you open Bot on mobile, there will be a list, or rather a pill, that you can tap to go down to your unread messages.", "zh": "还有未读消息：在手机上打开 Bot，会有一个列表——准确说是个“胶囊”按钮——点一下就跳到未读消息。", "pts": [{"k": "术语", "h": "pill", "x": "胶囊形按钮。", "eg": "Tap the pill at the top.", "egz": "点顶部的胶囊按钮。"}, {"k": "地道表达", "h": "or rather", "x": "更准确地说。", "eg": "Monday, or rather Tuesday.", "egz": "周一，准确说是周二。"}, {"k": "词汇", "h": "tap", "x": "轻点。", "eg": "Tap to confirm.", "egz": "点一下确认。"}]}, {"s": 276.7, "e": 279.86, "en": "Super nice if you have a lot of bots like me.", "zh": "如果你像我一样有很多 bot，这超好用。", "pts": [{"k": "词汇", "h": "super", "x": "（口语）超级。", "eg": "Super easy.", "egz": "超简单。"}, {"k": "语法", "h": "like me", "x": "像我一样。", "eg": "Busy like me.", "egz": "像我一样忙。"}]}, {"s": 279.86, "e": 285.28, "en": "We made some improvements to routine times when you schedule routines with Bot.", "zh": "用 Bot 安排定时任务时，时间设置有了改进。", "pts": [{"k": "术语", "h": "routine", "x": "定时任务。", "eg": "Schedule a routine for 7 am.", "egz": "设个早上 7 点的定时任务。"}, {"k": "语法", "h": "improvements to", "x": "对……的改进。", "eg": "Improvements to the layout.", "egz": "布局的改进。"}]}, {"s": 285.28, "e": 287.92, "en": "You'll see that anytime you want to make a new routine.", "zh": "每次你建新的定时任务都会看到。", "pts": [{"k": "词汇", "h": "anytime", "x": "任何时候。", "eg": "Call me anytime.", "egz": "随时打给我。"}, {"k": "语法", "h": "you'll see that", "x": "将来时。", "eg": "You'll see the result tomorrow.", "egz": "明天就能看到结果。"}]}, {"s": 287.92, "e": 290.52, "en": "And then finally, we improved Slack sign-in links.", "zh": "最后，我们改进了 Slack 登录链接。", "pts": [{"k": "术语", "h": "sign-in link", "x": "登录链接。", "eg": "Click the sign-in link in the email.", "egz": "点邮件里的登录链接。"}, {"k": "词汇", "h": "finally", "x": "最后。", "eg": "Finally, sign here.", "egz": "最后在这签字。"}]}, {"s": 290.52, "e": 298.2, "en": "So if you ask a bot to look through Slack and you haven't actually signed in yet, Bot's going to give you a better Slack sign-in experience.", "zh": "所以如果你让 bot 去翻 Slack，但你还没登录，Bot 会给你更好的登录体验。", "pts": [{"k": "地道表达", "h": "look through", "x": "翻看、浏览。", "eg": "Look through the old records.", "egz": "翻翻旧记录。"}, {"k": "语法", "h": "haven't … yet", "x": "还没……。", "eg": "I haven't signed yet.", "egz": "我还没签。"}, {"k": "听力技巧", "h": "ASR 漏词", "x": "look through and you，ASR 漏了 Slack，按意思补。", "eg": "Look through Slack.", "egz": "翻翻 Slack。"}]}, {"s": 298.2, "e": 300.96, "en": "And that is what's new in Grok Bot this week.", "zh": "这就是本周 Grok Bot 的新功能。", "pts": [{"k": "语法", "h": "that is what's new", "x": "总结句。", "eg": "That's all for today.", "egz": "今天就到这。"}, {"k": "词汇", "h": "this week", "x": "本周。", "eg": "This week we hit target.", "egz": "这周达标了。"}]}, {"s": 300.96, "e": 306, "en": "I'm Matt with SpaceX AI. Until next time, peace.", "zh": "我是 SpaceX AI 的 Matt。下次见，拜拜。", "pts": [{"k": "地道表达", "h": "Until next time", "x": "下次见。", "eg": "Until next time, stay safe.", "egz": "下次见，注意安全。"}, {"k": "听力技巧", "h": "SpaceX SI", "x": "ASR 听成 SI，实为 SpaceX AI。", "eg": "SpaceX AI.", "egz": "SpaceX AI。"}]}];
+const KEY="jingting.Youtube_zNgCdQt1qB8.";
+
+const CHAPTERS=[{"t": "聊天卡片重新设计", "s": 0, "outline": ["Matt 在旧金山街头边走边录。", "Grok Bot 有时只回文字，有时回卡片：Markdown 表格、A/B/C 多选题。", "卡片、多选框和表格都换了新设计。"], "key": [{"n": 4, "en": "Other times it sends you more stuff, and that stuff is usually in cards, whether that's a markdown table, maybe some questions with like A, B, C multi-select options.", "zh": "有时候它会发更多东西，通常放在卡片里，比如 Markdown 表格，或者一些带 A、B、C 多选项的问题。", "why": "sometimes … other times … + whether that's …"}, {"n": 6, "en": "Markdown tables got a facelift as well.", "zh": "Markdown 表格也换了新面貌。", "why": "get a facelift"}], "words": [{"w": "redesign", "ipa": "/ˌriːdɪˈzaɪn/", "zh": "重新设计", "note": ""}, {"w": "chat card", "ipa": "/tʃæt kɑːrd/", "zh": "聊天卡片", "note": ""}, {"w": "markdown table", "ipa": "/ˈmɑːrkdaʊn ˈteɪbl/", "zh": "Markdown 表格", "note": ""}, {"w": "multi-select", "ipa": "/ˌmʌlti səˈlekt/", "zh": "多选", "note": ""}, {"w": "facelift", "ipa": "/ˈfeɪslɪft/", "zh": "翻新", "note": ""}]}, {"t": "Bot 的电脑快了 3 倍", "s": 7, "outline": ["上周升级了 Bot 的电脑，这周又升级。", "中途 Matt 吐槽旧金山的路该修了。", "用电脑回复的速度快了三倍，体验大提升。"], "key": [{"n": 11, "en": "Bot's computer is now three times faster.", "zh": "Bot 的电脑现在快了三倍。", "why": "three times faster 倍数表达"}, {"n": 12, "en": "So if Bot has to respond from the computer, you'll notice 3x faster responses, massive quality of life upgrade.", "zh": "所以如果 Bot 要用电脑来回复，你会感觉到响应快了三倍，体验大升级。", "why": "quality of life upgrade"}], "words": [{"w": "upgrade", "ipa": "/ˈʌpɡreɪd/", "zh": "升级", "note": ""}, {"w": "three times faster", "ipa": "/θriː taɪmz/", "zh": "快三倍", "note": ""}, {"w": "massive", "ipa": "/ˈmæsɪv/", "zh": "巨大的", "note": ""}, {"w": "quality of life", "ipa": "/ˈkwɑːləti əv laɪf/", "zh": "使用体验", "note": ""}]}, {"t": "草稿修改高亮", "s": 12, "outline": ["可以让 Grok Bot 起草 Slack 或 Gmail 消息。", "现在它修改草稿时，改动会高亮显示，一眼看出改了哪里。"], "key": [{"n": 14, "en": "So you can ask Grok Bot to draft messages for you, which it will do, to Slack or Gmail.", "zh": "你可以让 Grok Bot 帮你起草消息，它会帮你写，发到 Slack 或 Gmail。", "why": "which it will do"}, {"n": 15, "en": "Now when it revises an edit, those revisions are highlighted, making it easier to see what was actually revised.", "zh": "现在它修改草稿时，改动会高亮，更容易看出到底改了什么。", "why": "making it easier to see 结果状语"}], "words": [{"w": "draft", "ipa": "/dræft/", "zh": "起草；草稿", "note": ""}, {"w": "revise", "ipa": "/rɪˈvaɪz/", "zh": "修改", "note": ""}, {"w": "revision", "ipa": "/rɪˈvɪʒn/", "zh": "修改处", "note": ""}, {"w": "highlight", "ipa": "/ˈhaɪlaɪt/", "zh": "高亮", "note": ""}]}, {"t": "加号地址邮箱别名", "s": 15, "outline": ["上周 Bot 有了邮箱地址。", "这周支持加号地址别名（name+tag@），相当于无限个邮箱。", "怎么开？直接在聊天里问 bot 就行。"], "key": [{"n": 18, "en": "This week, you can now use plus-addressed email aliases, which effectively gives your bots unlimited email addresses.", "zh": "这周你可以用加号地址邮箱别名了，相当于让你的 bot 拥有无限个邮箱地址。", "why": "effectively gives … unlimited"}, {"n": 20, "en": "You might be like, hey Matt, how do I do that? Just ask your bot, say, hey, can you make a plus-address email for me in the chat?", "zh": "你可能会说：“嘿 Matt，这怎么弄？”在聊天里问你的 bot 就行：“嘿，能给我做个加号地址邮箱吗？”", "why": "be like + 嵌套引语"}, {"n": 21, "en": "It'll hook you up, easy peasy.", "zh": "它就帮你搞定，超简单。", "why": "hook you up, easy peasy"}], "words": [{"w": "plus addressing", "ipa": "/plʌs əˈdresɪŋ/", "zh": "加号地址", "note": ""}, {"w": "alias", "ipa": "/ˈeɪliəs/", "zh": "别名", "note": ""}, {"w": "effectively", "ipa": "/ɪˈfektɪvli/", "zh": "实际上", "note": ""}, {"w": "unlimited", "ipa": "/ʌnˈlɪmɪtɪd/", "zh": "无限的", "note": ""}, {"w": "easy peasy", "ipa": "/ˌiːzi ˈpiːzi/", "zh": "超简单", "note": "俏皮话"}]}, {"t": "读取并回复 X 私信", "s": 21, "outline": ["X 相关升级几乎每周都有。", "Bot 现在能读你的 X 私信并替你回复，这是呼声最高的功能之一。", "有限制：不能发垃圾消息，别滥用。"], "key": [{"n": 22, "en": "Now we got a couple of X upgrades for Bot, which we've been releasing pretty much every week.", "zh": "还有几个 X 相关的升级，这些我们差不多每周都在发布。", "why": "have been releasing 现在完成进行时"}, {"n": 24, "en": "This has been asked for like a million times.", "zh": "这个大家要求了大概一百万次。", "why": "has been asked for 被动"}, {"n": 26, "en": "Now, there are limits. You can't spam people, but give that one a shot.", "zh": "当然有限制，你不能给人发垃圾消息，但可以试试。", "why": "give that one a shot"}], "words": [{"w": "DM", "ipa": "/ˌdiː ˈem/", "zh": "私信", "note": ""}, {"w": "abuse", "ipa": "/əˈbjuːz/", "zh": "滥用", "note": ""}, {"w": "spam", "ipa": "/spæm/", "zh": "发垃圾信息", "note": ""}, {"w": "give it a shot", "ipa": "/ʃɑːt/", "zh": "试一试", "note": ""}]}, {"t": "在 X 上 @bot", "s": 27, "outline": ["在 X 的帖子串里 @bot，它就会照你说的做。", "前提：安装并配置 X 插件，让 Bot 知道你的 X 用户名。", "用法举例：让它收藏、做研究、解释新技术、帮你动手做东西。"], "key": [{"n": 30, "en": "You can just drop an @bot in an X thread and it'll do whatever you ask it to.", "zh": "你只要在 X 的帖子串里丢一个 @bot，它就会照你说的做。", "why": "drop an @bot + whatever you ask it to"}, {"n": 31, "en": "Bot knows your X username linked to your account, so you have to install and configure the X plugin first.", "zh": "Bot 要知道你账户关联的 X 用户名，所以要先安装并配置 X 插件。", "why": "linked to 过去分词定语"}, {"n": 32, "en": "But once you do that, you can hit Bot up on X, maybe have it save things for you — I like doing that one — or do some research.", "zh": "但设置好以后，你就能在 X 上召唤 Bot，比如让它帮你收藏东西——我喜欢这个——或者做点研究。", "why": "hit Bot up / have it save"}], "words": [{"w": "sick", "ipa": "/sɪk/", "zh": "超酷", "note": "俚语"}, {"w": "thread", "ipa": "/θred/", "zh": "帖子串", "note": ""}, {"w": "plugin", "ipa": "/ˈplʌɡɪn/", "zh": "插件", "note": ""}, {"w": "configure", "ipa": "/kənˈfɪɡjər/", "zh": "配置", "note": ""}, {"w": "hit sb up", "ipa": "/hɪt ʌp/", "zh": "找某人", "note": "口语"}]}, {"t": "新连接器", "s": 33, "outline": ["新增连接器：Robinhood、Coinbase、Trello、PostHog 等。", "这周很多新连接器陆续上线。"], "key": [{"n": 34, "en": "Next, we got some new connectors. Who doesn't like new connectors?", "zh": "接下来，有一些新连接器。谁不喜欢新连接器呢？", "why": "Who doesn't like …? 反问"}, {"n": 37, "en": "A lot of love for the connectors this week. Lots of new connectors coming live to Grok Bot.", "zh": "这周连接器很受欢迎，很多新连接器在 Grok Bot 上线。", "why": "come live"}], "words": [{"w": "connector", "ipa": "/kəˈnektər/", "zh": "连接器", "note": ""}, {"w": "crypto exchange", "ipa": "/ˈkrɪptoʊ ɪksˈtʃeɪndʒ/", "zh": "加密货币交易所", "note": "Coinbase"}, {"w": "analytics", "ipa": "/ˌænəˈlɪtɪks/", "zh": "数据分析", "note": "PostHog"}]}, {"t": "语音通话记得上一通电话", "s": 37, "outline": ["以前挂断电话后，Bot 不一定记得整通通话。", "现在挂了再打，Bot 会记得上一通电话和完整文字记录。", "只在 30 分钟内有效，属于短期记忆。"], "key": [{"n": 40, "en": "What you might not have known is that when you hung those calls up, Bot didn't always have memory over the entire call.", "zh": "你可能不知道的是，以前挂了电话以后，Bot 不一定记得整通电话的内容。", "why": "might not have known + hang up"}, {"n": 42, "en": "So call Bot, hang up, call Bot again, and Bot's going to remember your previous phone call and the entire transcript, everything that came with it.", "zh": "所以：给 Bot 打电话、挂掉、再打，Bot 会记得你上一通电话和完整的文字记录，以及相关的一切。", "why": "祈使句串 + transcript"}, {"n": 43, "en": "That is only live for 30 minutes, so it's sort of short-term.", "zh": "这个只在 30 分钟内有效，算是短期记忆。", "why": "short-term"}], "words": [{"w": "hang up", "ipa": "/hæŋ ʌp/", "zh": "挂电话", "note": "过去式 hung"}, {"w": "transcript", "ipa": "/ˈtrænskrɪpt/", "zh": "文字记录", "note": ""}, {"w": "previous", "ipa": "/ˈpriːviəs/", "zh": "之前的", "note": ""}, {"w": "short-term", "ipa": "/ˌʃɔːrt ˈtɜːrm/", "zh": "短期的", "note": ""}, {"w": "frequent", "ipa": "/ˈfriːkwənt/", "zh": "频繁的", "note": ""}]}, {"t": "通知只发到正在用的设备", "s": 45, "outline": ["重度用户抱怨每条聊天在手机、手表、电脑上都弹通知。", "现在通知合并，只发到你正在用的那台设备。"], "key": [{"n": 46, "en": "Now we've also heard that our biggest power users were getting too many notifications on Bot across all their devices.", "zh": "我们还听说，最重度的用户在所有设备上收到的 Bot 通知太多了。", "why": "power users + across all their devices"}, {"n": 50, "en": "Now you just get one notification on the device you're active on.", "zh": "现在只会在你正在用的那台设备上收到一条通知。", "why": "the device you're active on 介词后置"}], "words": [{"w": "power user", "ipa": "/ˈpaʊər ˈjuːzər/", "zh": "重度用户", "note": ""}, {"w": "notification", "ipa": "/ˌnoʊtɪfɪˈkeɪʃn/", "zh": "通知", "note": ""}, {"w": "collapse", "ipa": "/kəˈlæps/", "zh": "合并", "note": ""}, {"w": "device", "ipa": "/dɪˈvaɪs/", "zh": "设备", "note": ""}, {"w": "active", "ipa": "/ˈæktɪv/", "zh": "正在用的", "note": ""}]}, {"t": "邀请队友和安卓助手", "s": 52, "outline": ["团队版、企业版可以邀请同事加入 Bot。", "支持安卓助手：可以把 Grok 设为安卓默认助手。"], "key": [{"n": 55, "en": "So if you have a team or enterprise account and you want to invite your teammates, show them the magic, you can do that too.", "zh": "所以如果你有团队版或企业版账户，想邀请同事、给他们看看有多神奇，也可以。", "why": "show them the magic"}, {"n": 56, "en": "We've added support for the Android Assistant to Grok Bot, so you can remap Grok to your default Android Assistant.", "zh": "Grok Bot 支持安卓助手了，你可以把 Grok 设成安卓默认助手。", "why": "remap … to your default …"}], "words": [{"w": "teammate", "ipa": "/ˈtiːmmeɪt/", "zh": "队友", "note": ""}, {"w": "enterprise", "ipa": "/ˈentərpraɪz/", "zh": "企业", "note": ""}, {"w": "remap", "ipa": "/ˌriːˈmæp/", "zh": "重新指定", "note": ""}, {"w": "default", "ipa": "/dɪˈfɔːlt/", "zh": "默认的", "note": ""}]}, {"t": "快速速览：权限名单、未读、定时任务、Slack 登录", "s": 56, "outline": ["Team Bot 访问名单：指定谁能用你建的团队 bot。", "手机上有“未读”胶囊按钮，点一下跳到未读消息。", "定时任务的时间设置改进了。", "Slack 登录链接更好用。", "结尾：我是 SpaceX AI 的 Matt，下次见。"], "key": [{"n": 59, "en": "So if you create Team Bots, you can now delegate who has access to those Team Bots.", "zh": "所以如果你建了 Team Bot，现在可以指定谁有权限用。", "why": "delegate who has access"}, {"n": 60, "en": "We have unread messages, so now when you open Bot on mobile, there will be a list, or rather a pill, that you can tap to go down to your unread messages.", "zh": "还有未读消息：在手机上打开 Bot，会有一个列表——准确说是个“胶囊”按钮——点一下就跳到未读消息。", "why": "or rather + pill"}, {"n": 65, "en": "So if you ask a bot to look through Slack and you haven't actually signed in yet, Bot's going to give you a better Slack sign-in experience.", "zh": "所以如果你让 bot 去翻 Slack，但你还没登录，Bot 会给你更好的登录体验。", "why": "look through + haven't … yet"}], "words": [{"w": "rapid fire", "ipa": "/ˈræpɪd faɪər/", "zh": "快速连发", "note": ""}, {"w": "access list", "ipa": "/ˈækses lɪst/", "zh": "访问名单", "note": ""}, {"w": "delegate", "ipa": "/ˈdelɪɡeɪt/", "zh": "委派", "note": ""}, {"w": "unread", "ipa": "/ʌnˈred/", "zh": "未读的", "note": ""}, {"w": "sign-in", "ipa": "/ˈsaɪn ɪn/", "zh": "登录", "note": ""}]}];   // [{t:title, s:first sentence index, outline:[], key:[{n,en,zh,why}], words:[{w,ipa,zh,note,old}]}]
+const ZH_LABEL="人工校对";
+const $=id=>document.getElementById(id);
+
+const YTID="zNgCdQt1qB8";
+const au=(function(){
+ const L={};let P=null,ready=false,st=-1,base=0,baseAt=performance.now(),seekLock=0,lastRaw=-1,r=1,pendSeek=null,pendPlay=false,startT=0;
+ const fire=n=>(L[n]||[]).forEach(f=>{try{f()}catch(e){console.warn(e)}});
+ const now=()=>st===1?base+(performance.now()-baseAt)/1000*r:base;
+ const o={paused:true,seeking:false,ended:false,defaultPlaybackRate:1,
+  addEventListener(n,f){(L[n]=L[n]||[]).push(f)},
+  get currentTime(){return now()},
+  set currentTime(v){base=v;baseAt=performance.now();seekLock=performance.now()+2500;if(ready)P.seekTo(v,true);else pendSeek=v},
+  get playbackRate(){return r},
+  set playbackRate(v){r=v;base=now();baseAt=performance.now();if(ready)try{P.setPlaybackRate(v)}catch(e){}},
+  get duration(){return ready?P.getDuration():0},
+  play(){o.paused=false;startT=performance.now();if(ready)P.playVideo();else pendPlay=true;
+   setTimeout(()=>{if(!o.paused&&st!==1&&st!==3&&performance.now()-startT>=2900&&window.toast)toast("没开始播放？请直接点一下上面视频画面里的 ▶")},3000);return Promise.resolve()},
+  pause(){o.paused=true;pendPlay=false;base=now();baseAt=performance.now();if(ready)P.pauseVideo()},
+  get player(){return P}};
+ window.onYouTubeIframeAPIReady=function(){
+  P=new YT.Player("yt",{videoId:YTID,playerVars:{playsinline:1,rel:0,modestbranding:1,cc_load_policy:0,iv_load_policy:3,start:Math.floor(SEGS[0].s)},
+   events:{onReady(){ready=true;try{P.unloadModule("captions")}catch(e){}if(r!==1)try{P.setPlaybackRate(r)}catch(e){}
+     if(pendSeek!==null){P.seekTo(pendSeek,true);pendSeek=null}else P.cueVideoById({videoId:YTID,startSeconds:SEGS[cur].s});if(pendPlay){pendPlay=false;P.playVideo()}
+     $("loading").style.display="none"},
+    onStateChange(e){const s=e.data;base=now();baseAt=performance.now();st=s;
+     if(s===1){if(o.paused){o.paused=false;if(typeof playSeg==="function"){playSeg(cur);return}}fire("playing")}   // started from the video's own ▶: play the current sentence
+     else if(s===2){if(!o.paused&&!gapT&&playing){o.paused=true}fire("pause")}
+     else if(s===0){o.paused=true;o.ended=true;fire("ended");o.ended=false}},
+    onPlaybackRateChange(e){r=e.data;fire("ratechange")}}})};
+ setInterval(()=>{if(!ready)return;let t;try{t=P.getCurrentTime()}catch(e){return}
+  if(performance.now()<seekLock){if(Math.abs(t-now())<0.6){seekLock=0}else return}
+  if(t!==lastRaw){lastRaw=t;if(st!==1||Math.abs(t-now())>0.35){base=t;baseAt=performance.now()}}
+  if(st===1&&!o.paused)fire("timeupdate")},50);
+ const s=document.createElement("script");s.src="https://www.youtube.com/iframe_api";document.head.appendChild(s);
+ return o})();
+let ccOn=false;function toggleCC(){const P=au.player;if(!P)return;ccOn=!ccOn;
+ try{if(ccOn){P.loadModule("captions");P.setOption("captions","track",{languageCode:"en"})}else P.unloadModule("captions")}catch(e){}
+ $("ccBtn").textContent=ccOn?"🔤 视频英文字幕：开":"🔤 视频英文字幕：关"}
+
+let cur=0,subState=0,playing=false,raf=0,stopAt=null,plays=1,gapT=0,tok=0,lastCtrl=0;
+const GAP=600,REPS=[["1","1遍"],["2","2遍"],["3","3遍"],["inf","∞"]];
+function lsGet(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
+let stars=new Set((lsGet(KEY+"stars",[])||[]).map(Number).filter(i=>i>=0&&i<SEGS.length));
+let QS=lsGet(KEY+"qs",{});if(!QS||typeof QS!=="object")QS={};
+function saveStars(){try{localStorage.setItem(KEY+"stars",JSON.stringify([...stars].sort((a,b)=>a-b)))}catch(e){toast("⚠️ 浏览器不让保存（无痕模式？）")}}
+function saveQs(){try{localStorage.setItem(KEY+"qs",JSON.stringify(QS))}catch(e){toast("⚠️ 浏览器不让保存（无痕模式？）")}}
+let toastT=0;function toast(m,ms){const t=$("toast");t.textContent=m;t.classList.toggle("long",!!ms);t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),ms||1600)}
+let onlyStar=localStorage.getItem(KEY+"only")==="1";
+let rate=parseFloat(localStorage.getItem(KEY+"rate")||"1");
+const SUBS=[["hide","隐藏"],["en","英文"],["zh","中文"],["both","中英"]];
+let subMode=localStorage.getItem("jingting.submode")||"hide";if(!SUBS.some(r=>r[0]===subMode))subMode="hide";
+let rep=localStorage.getItem("jingting.repeat")||"inf";if(!REPS.some(r=>r[0]===rep))rep="inf";
+$("cont").checked=localStorage.getItem(KEY+"cont")==="1";
+const fmt=t=>{t=Math.max(0,t|0);return String(t/60|0).padStart(2,"0")+":"+String(t%60).padStart(2,"0")};
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function order(){if(onlyStar&&stars.size){return SEGS.map((s,i)=>i).filter(i=>stars.has(i))}return SEGS.map((s,i)=>i)}
+function save(){localStorage.setItem(KEY+"pos",cur);saveStars();localStorage.setItem(KEY+"only",onlyStar?"1":"0");localStorage.setItem(KEY+"rate",rate);localStorage.setItem(KEY+"cont",$("cont").checked?"1":"0");localStorage.setItem("jingting.repeat",rep);localStorage.setItem("jingting.submode",subMode)}
+// subState = extra taps on this sentence; 0 = what the 字幕 mode shows by default (reset on every sentence change)
+const SUBCYCLE={hide:3,en:2,zh:2,both:1};
+function subShow(){const k=subState%SUBCYCLE[subMode];
+ if(subMode==="hide")return{en:k>=1,zh:k===2};if(subMode==="en")return{en:true,zh:k===1};if(subMode==="zh")return{en:k===1,zh:true};return{en:true,zh:true}}
+function renderSub(){const s=SEGS[cur],b=$("subbox"),v=subShow();
+ const zh='<div class="zh"'+(v.en?'':' style="border:0;margin:0;padding:0;font-size:19px"')+'>'+(s.zh?esc(s.zh)+(ZH_LABEL?'<span class="mt">'+esc(ZH_LABEL)+'</span>':''):'（无中文）')+'</div>';
+ const hint=x=>'<div class="hint" style="margin-top:10px;font-size:13px">'+x+'</div>';
+ if(!v.en&&!v.zh){b.className="sub-box";b.innerHTML='<div class="hint"><b>👀</b>点这里看英文字幕</div>';return}
+ b.className="sub-box show";
+ b.innerHTML=(v.en?'<div class="en">'+esc(s.en)+'</div>':'')+(v.zh?zh:'')+
+   (subMode==="hide"&&!v.zh?hint("再点一下看中文"):subMode==="en"&&!v.zh?hint("点一下看中文"):subMode==="zh"&&!v.en?hint("点一下看英文"):"")}
+function applySubMode(){const L=$("list");L.dataset.m=subMode;L.classList.toggle("blur",$("blurList").checked);$("blurLbl").style.display=subMode==="hide"?"":"none"}
+function buildSubs(){$("subs").innerHTML='<span class="lb">字幕</span>'+SUBS.map(r=>'<button class="chip'+(r[0]===subMode?' on':'')+'" data-m="'+r[0]+'">'+r[1]+'</button>').join("");
+ $("subs").onclick=e=>{const c=e.target.closest(".chip");if(!c)return;subMode=c.dataset.m;subState=0;buildSubs();applySubMode();renderSub();save()}}
+function chapOf(i){let k=-1;for(let j=0;j<CHAPTERS.length;j++)if(CHAPTERS[j].s<=i)k=j;return k}
+function chapEnd(k){return k+1<CHAPTERS.length?CHAPTERS[k+1].s-1:SEGS.length-1}
+let studyK=-2;
+function render(){if(rec&&recI!==cur)stopMic(true);const s=SEGS[cur],o=order(),pos=o.indexOf(cur);
+ const ck=chapOf(cur);$("chap").textContent=ck>=0?"第"+(ck+1)+"章 · "+CHAPTERS[ck].t+"（第"+(CHAPTERS[ck].s+1)+"–"+(chapEnd(ck)+1)+"句）":"";
+ if(ck>=0){$("chapSel").value=String(ck);if(ck!==studyK)renderStudy(ck)}
+ $("num").innerHTML=(cur+1)+' <small>/ '+SEGS.length+'</small>';
+ $("tm").textContent=fmt(s.s)+" – "+fmt(s.e)+(onlyStar&&stars.size?"  · ⭐ "+(pos+1)+"/"+o.length:"");
+ $("barIn").style.width=((cur+1)/SEGS.length*100)+"%";
+ const st=stars.has(cur);$("star").classList.toggle("on",st);$("star").innerHTML=st?"<b>⭐</b><span>已收藏</span>":"<b>☆</b><span>收藏</span>";
+ if(document.activeElement!==$("qIn")||+$("qIn").dataset.i!==cur){$("qIn").value=QS[cur]||"";$("qIn").dataset.i=cur}
+ renderFav();renderQs();
+ $("starCnt").textContent=stars.size;$("onlyStar").classList.toggle("staron",onlyStar);
+ renderSub();renderCnt();renderPts();
+ document.querySelectorAll(".item").forEach(e=>e.classList.toggle("cur",+e.dataset.i===cur));
+ document.querySelectorAll(".item .s").forEach(e=>{const i=+e.parentNode.dataset.i;e.textContent=(stars.has(i)?"⭐":"")+(QS[i]?"❓":"")});
+ $("listInfo").textContent=(cur+1)+"/"+SEGS.length+(stars.size?" · ⭐"+stars.size:"");
+ save()}
+
+function renderPts(){const s=SEGS[cur],P=s.pts||[],B=$("ptsBox");if(!P.length){B.style.display="none";return}B.style.display="";
+ const K={"地道表达":"k1","语法":"k2","连读弱读":"k3","发音":"k3","术语":"k4","背景":"k5"};
+ $("ptsBody").innerHTML=P.map(p=>'<div class="pt"><span class="pk '+(K[p.k]||"k5")+'">'+esc(p.k)+'</span><span class="ph">'+esc(p.h)+'</span><div class="px">'+esc(p.x)+'</div>'+(p.eg?'<div class="pe">🏭 '+esc(p.eg)+(p.egz?'<i>'+esc(p.egz)+'</i>':'')+'</div>':'')+'</div>').join("");
+ $("ptsN").textContent=P.length+" 点"}
+function setPlayUI(p){playing=p;$("play").innerHTML=p?'⏸<span>暂停</span>':'▶<span>播放</span>'}
+function repN(){const n=rep==="inf"?Infinity:+rep;return ($("cont").checked&&n===Infinity)?1:n}
+function renderCnt(){const c=$("cnt");c.textContent="🔁 第"+plays+"遍"+(rep==="inf"?" · ∞":" / "+rep);c.classList.toggle("gap",!!gapT)}
+function clearGap(){if(gapT){clearTimeout(gapT);gapT=0}}
+// Playback engine. `playing` is the user's intent; the media element is made to follow it.
+// Every play() gets a token: a late rejection/resolution of an older play() (e.g. AbortError after rapid taps) is ignored,
+// so it can no longer flip the UI to ▶ while audio keeps running (that stopped the loop and let audio run past the sentence).
+function applyRate(){if(au.defaultPlaybackRate!==rate)au.defaultPlaybackRate=rate;if(au.playbackRate!==rate)au.playbackRate=rate}
+function startPlay(){applyRate();const my=++tok;setPlayUI(true);let p;try{p=au.play()}catch(e){p=null}
+ if(p&&p.catch)p.catch(e=>{if(my!==tok||!playing)return;if(e&&e.name==="AbortError")return;setPlayUI(false);console.warn(e)});
+ loop()}
+function stopPlay(){tok++;clearGap();setPlayUI(false);if(!au.paused)au.pause();cancelAnimationFrame(raf);raf=0}
+function loop(){cancelAnimationFrame(raf);raf=requestAnimationFrame(tick)}   // exactly one frame loop at a time
+function again(){clearGap();plays++;const s=SEGS[cur];au.currentTime=s.s;stopAt=s.e;renderCnt();startPlay()}
+function segEnd(){cancelAnimationFrame(raf);raf=0;$("segIn").style.width="100%";
+ if(plays<repN()){tok++;au.pause();clearGap();gapT=setTimeout(()=>{gapT=0;if(playing)again()},GAP);renderCnt();return}
+ if($("cont").checked){const o=order(),p=o.indexOf(cur);if(p>=0&&p<o.length-1){const n=o[p+1];cur=n;subState=0;plays=1;render();
+    if(Math.abs(SEGS[n].s-au.currentTime)>0.3)au.currentTime=SEGS[n].s;stopAt=SEGS[n].e;loop();return}}
+ stopAt=null;stopPlay()}
+function check(){if(!playing||gapT||stopAt===null)return false;if(au.currentTime>=stopAt-0.02){segEnd();return true}return false}
+function tick(){raf=0;const s=SEGS[cur];const t=au.currentTime;
+ $("segIn").style.width=Math.min(100,Math.max(0,(t-s.s)/(s.e-s.s)*100))+"%";
+ if(check())return;
+ if(playing&&!gapT)raf=requestAnimationFrame(tick)}
+function playSeg(i){clearGap();cur=i;plays=1;const s=SEGS[i];render();au.currentTime=s.s;stopAt=s.e;startPlay()}
+function go(d){if(onlyStar&&!stars.has(cur)){onlyStar=false}const o=order();let p=o.indexOf(cur);if(p<0){p=0;for(let k=0;k<o.length;k++)if(o[k]>cur){p=k-(d>0?1:0);break}}
+ const n=Math.min(o.length-1,Math.max(0,p+d));subState=0;playSeg(o[n])}
+function toggle(){if(playing){stopPlay();renderCnt();return}
+ const s=SEGS[cur];if(stopAt===null||au.currentTime<s.s-0.05){playSeg(cur);return}
+ if(au.currentTime>=s.e-0.05){again();return}   // paused in the gap between repeats: carry on with the next play
+ startPlay()}
+function buildReps(){$("reps").innerHTML='<span class="lb">每句</span>'+REPS.map(r=>'<button class="chip'+(r[0]===rep?' on':'')+'" data-k="'+r[0]+'">'+r[1]+'</button>').join("");
+ $("reps").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;rep=b.dataset.k;buildReps();renderCnt();save()}}
+function buildList(){const L=$("list");L.innerHTML=SEGS.map((s,i)=>(CHAPTERS.findIndex(c=>c.s===i)>=0?'<div class="chead">第'+(CHAPTERS.findIndex(c=>c.s===i)+1)+'章 · '+esc(CHAPTERS[CHAPTERS.findIndex(c=>c.s===i)].t)+'</div>':'')+'<div class="item" data-i="'+i+'"><span class="i">'+(i+1)+'</span><span class="t">'+fmt(s.s)+'</span><span class="tx"><span class="x">'+esc(s.en)+'</span><span class="z">'+(s.zh?esc(s.zh):'')+'</span></span><span class="s"></span></div>').join("");
+ L.onclick=e=>{const it=e.target.closest(".item");if(it){subState=0;if(onlyStar&&!stars.has(+it.dataset.i))onlyStar=false;playSeg(+it.dataset.i)}}}
+const RATES=[0.75,0.9,1,1.25];if(!RATES.includes(rate))rate=1;
+function markSpeeds(){document.querySelectorAll("#speeds .chip").forEach(c=>c.classList.toggle("on",+c.dataset.r===rate))}
+function buildSpeeds(){$("speeds").innerHTML='<span class="lb">速度</span>'+RATES.map(r=>'<button class="chip" data-r="'+r+'">'+r+'×</button>').join("");markSpeeds();
+ $("speeds").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;
+  if(performance.now()-lastCtrl<450)return;   // tap landed here right after a play-row tap: a slipped finger, not a speed choice
+  rate=+b.dataset.r;applyRate();markSpeeds();save()}}
+// the rate only ever changes from a speed chip: undo anything else that touches it
+au.addEventListener("ratechange",()=>{if(au.playbackRate!==rate||au.defaultPlaybackRate!==rate)applyRate()});
+document.querySelector(".ctrls").addEventListener("pointerdown",()=>{lastCtrl=performance.now()},true);
+document.querySelector(".ctrls").addEventListener("click",()=>{lastCtrl=performance.now()},true);
+function buildChapters(){if(!CHAPTERS.length)return;const S=$("chapSel");S.style.display="";
+ S.innerHTML=CHAPTERS.map((c,k)=>'<option value="'+k+'">第'+(k+1)+'章 '+esc(c.t)+'（'+(c.s+1)+'–'+(chapEnd(k)+1)+'）</option>').join("");
+ S.onchange=()=>{const k=+S.value;subState=0;if(onlyStar)onlyStar=false;playSeg(CHAPTERS[k].s);$("chapSel").blur()};
+ $("studyPanel").style.display="";
+ $("bar").insertAdjacentHTML("beforeend",CHAPTERS.slice(1).map(c=>'<i style="left:'+(c.s/SEGS.length*100)+'%"></i>').join(""))}
+function renderStudy(k){studyK=k;const c=CHAPTERS[k];$("studyTitle").textContent="📘 第"+(k+1)+"章学习 · "+c.t;
+ const ks=(c.key||[]).map(x=>'<div class="ks"><span class="go" data-n="'+x.n+'">▶ #'+x.n+'</span><span class="ke">'+esc(x.en)+'</span><div class="kz">'+esc(x.zh)+'</div><div class="kw">💡 '+esc(x.why)+'</div></div>').join("");
+ const ws=(c.words||[]).map(w=>'<div class="wd"><b>'+esc(w.w)+'</b><span class="ip">'+esc(w.ipa||"")+'</span>'+(w.old?'<span class="tag">'+esc(w.old)+'</span>':'')+' '+esc(w.zh)+(w.note?'<div class="nt">'+esc(w.note)+'</div>':'')+'</div>').join("");
+ $("study").innerHTML='<h3>🎯 听前大纲（先看这个再听）</h3><ol>'+(c.outline||[]).map(x=>'<li>'+esc(x)+'</li>').join("")+'</ol>'+
+  '<details id="kd"><summary>⭐ 听后重点句（听完再看）</summary>'+ks+'</details>'+
+  '<details id="wdd"><summary>📝 生词（'+(c.words||[]).length+'）</summary>'+ws+'</details>';
+ $("study").querySelectorAll(".go").forEach(g=>g.onclick=()=>{subState=0;if(onlyStar)onlyStar=false;playSeg(+g.dataset.n-1)})}
+function jumpTo(){const n=parseInt($("jumpN").value,10);if(!(n>=1&&n<=SEGS.length)){$("jumpN").value="";$("jumpN").placeholder="1–"+SEGS.length;return}
+ subState=0;if(onlyStar&&!stars.has(n-1))onlyStar=false;$("jumpN").blur();playSeg(n-1)}
+$("jumpGo").onclick=jumpTo;$("jumpN").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();jumpTo()}});
+$("jumpN").placeholder="1–"+SEGS.length;
+$("prev").onclick=()=>go(-1);$("next").onclick=()=>go(1);$("rep").onclick=()=>playSeg(cur);$("play").onclick=toggle;
+$("subbox").onclick=()=>{subState=(subState+1)%SUBCYCLE[subMode];renderSub()};
+function setStar(i,on){on?stars.add(i):stars.delete(i);if(!stars.size)onlyStar=false;saveStars();render();toast(on?"⭐ 已收藏第 "+(i+1)+" 句（共 "+stars.size+" 句）":"已取消收藏第 "+(i+1)+" 句")}
+$("star").onclick=e=>{e.preventDefault();e.stopPropagation();setStar(cur,!stars.has(cur))};
+// ---- 收藏夹 + 提问 ----
+const line=i=>"#"+(i+1)+" ["+fmt(SEGS[i].s)+"] "+SEGS[i].en+(SEGS[i].zh?"（"+SEGS[i].zh+"）":"");
+function renderFav(){const a=[...stars].sort((x,y)=>x-y);$("favInfo").textContent=a.length+" 句";
+ $("favList").innerHTML=a.length?a.map(i=>'<div class="fv"><div class="fh"><span class="fn" data-n="'+i+'">▶ #'+(i+1)+'</span><button class="del" data-del="'+i+'">取消收藏</button></div><div class="fe">'+esc(SEGS[i].en)+'</div><div class="fz">'+esc(SEGS[i].zh||"")+'</div>'+(QS[i]?'<div class="fq">❓ '+esc(QS[i])+'</div>':'')+'</div>').join(""):'<div class="empty">还没有收藏。听不懂或想复习的句子，点右上角 ☆ 收藏。</div>'}
+function renderQs(){const a=Object.keys(QS).map(Number).filter(i=>QS[i]&&i>=0&&i<SEGS.length).sort((x,y)=>x-y);$("qInfo").textContent=a.length+" 条";
+ $("qList").innerHTML=a.length?a.map(i=>'<div class="fv"><div class="fh"><span class="fn" data-n="'+i+'">▶ #'+(i+1)+'</span><button class="del" data-dq="'+i+'">删除</button></div><div class="fe">'+esc(SEGS[i].en)+'</div><div class="fq">❓ '+esc(QS[i])+'</div></div>').join(""):'<div class="empty">还没有提问。在句子卡片下面的“❓ 这句我想问”里写，自动保存。</div>'}
+function listClick(e){const n=e.target.closest(".fn"),d=e.target.closest("[data-del]"),q=e.target.closest("[data-dq]");
+ if(d){setStar(+d.dataset.del,false);return}
+ if(q){if(confirm("删除第 "+(+q.dataset.dq+1)+" 句的提问？")){delete QS[+q.dataset.dq];saveQs();render()}return}
+ if(n){const i=+n.dataset.n;subState=0;if(onlyStar&&!stars.has(i))onlyStar=false;playSeg(i);$("app").scrollIntoView({block:"start",behavior:"smooth"})}}
+$("favList").onclick=listClick;$("qList").onclick=listClick;
+const TITLE=document.title.replace(/^逐句精听 · /,"");
+function copyText(txt,what){const ok=()=>toast("📋 已复制"+what+"，去聊天里粘贴"),fail=()=>{$("copyTxt").value=txt;$("copyBox").style.display="block";$("copyBox").scrollIntoView({block:"center"})};
+ const legacy=()=>{try{const t=document.createElement("textarea");t.value=txt;t.setAttribute("readonly","");t.style.cssText="position:fixed;top:0;left:0;opacity:0";document.body.appendChild(t);t.select();t.setSelectionRange(0,txt.length);const r=document.execCommand("copy");t.remove();r?ok():fail()}catch(e){fail()}};
+ if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok,legacy);else legacy()}
+$("favCopy").onclick=()=>{const a=[...stars].sort((x,y)=>x-y);if(!a.length){toast("还没有收藏");return}
+ copyText("【逐句精听 · "+TITLE+"】我的收藏（"+a.length+" 句）\n\n"+a.map(i=>line(i)+"\n"+(SEGS[i].zh||"")+(QS[i]?"\n问："+QS[i]:"")).join("\n\n"),"收藏 "+a.length+" 句")};
+$("qCopy").onclick=()=>{const a=Object.keys(QS).map(Number).filter(i=>QS[i]).sort((x,y)=>x-y);if(!a.length){toast("还没有提问");return}
+ copyText("【逐句精听 · "+TITLE+"】我的提问（"+a.length+" 条）\n\n"+a.map(i=>line(i)+"\n问："+QS[i]).join("\n\n"),"提问 "+a.length+" 条")};
+$("favPlay").onclick=()=>{if(!stars.size){toast("还没有收藏");return}onlyStar=true;subState=0;playSeg([...stars].sort((x,y)=>x-y)[0]);$("app").scrollIntoView({block:"start",behavior:"smooth"})};
+$("copyClose").onclick=()=>{$("copyBox").style.display="none"};
+let qT=0;$("qIn").addEventListener("input",()=>{const i=+$("qIn").dataset.i,v=$("qIn").value.trim();if(v)QS[i]=$("qIn").value;else delete QS[i];
+ clearTimeout(qT);$("qState").textContent="保存中…";qT=setTimeout(()=>{saveQs();$("qState").textContent="✓ 已保存（第 "+(i+1)+" 句）";renderQs();renderFav();document.querySelectorAll('.item[data-i="'+i+'"] .s').forEach(e=>e.textContent=(stars.has(i)?"⭐":"")+(QS[i]?"❓":""))},400)});
+$("qIn").addEventListener("blur",()=>{clearTimeout(qT);saveQs();renderQs();renderFav()});
+// ---- 🎤 语音提问 (Web Speech API; Chrome on Android/desktop). Text is appended to the box and saved via the same "input" handler.
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+var rec=null,recI=-1;   // var: render() may run before this line
+let asrLang=localStorage.getItem("jingting.asrlang")==="en-US"?"en-US":"zh-CN",recBase="",recFinal="",recErr=false;
+function renderLang(){$("qLang").textContent=asrLang==="en-US"?"EN":"中";$("qLang").title="语音识别语言："+(asrLang==="en-US"?"英文（点一下换中文）":"中文（点一下换英文）")}
+renderLang();
+$("qLang").onclick=()=>{asrLang=asrLang==="en-US"?"zh-CN":"en-US";try{localStorage.setItem("jingting.asrlang",asrLang)}catch(e){}renderLang();
+ toast(asrLang==="en-US"?"🎤 语音识别：英文":"🎤 语音识别：中文（可夹英文单词）");if(rec){stopMic();setTimeout(startMic,350)}};
+// UI states: 0 idle, 1 启动中 (tapped, waiting for onstart), 2 正在听. A persistent status line (#qMsg) sits right under the box,
+// so errors are visible next to the button (the top toast is easy to miss) and Lily can screenshot the exact code.
+function micUI(st){const on=st>0;$("qMic").classList.toggle("rec",st===2);$("qMic").classList.toggle("wait",st===1);$("qBox").classList.toggle("rec",on);
+ $("qMicT").textContent=st===2?"停":st===1?"启动中":"说";
+ if(st===2){$("qState").textContent="🔴 正在听…";$("qInterim").textContent="正在听…（说完再点🎤停止）"}
+ else if(st===1){$("qState").textContent="⏳ 启动中…";$("qInterim").textContent="⏳ 语音识别启动中…"}
+ else $("qInterim").textContent=""}
+function micMsg(m,bad){const e=$("qMsg");e.textContent=m||"";e.style.display=m?"block":"none";e.classList.toggle("bad",!!bad)}
+function micJoin(a,b){b=b.trim();if(!b)return a;if(!a.trim())return b;return a+(/[\s\n]$/.test(a)?"":" ")+b}
+function micPut(interim){const q=$("qIn");if(+q.dataset.i!==recI){stopMic(true);return}
+ q.value=micJoin(recBase,recFinal);q.dispatchEvent(new Event("input"));
+ $("qInterim").textContent=interim?("…"+interim):($("qInterim").textContent||"正在听…")}
+const MICERR={"not-allowed":"麦克风权限被拒：点地址栏左边的🔒 → 权限 → 麦克风 → 允许",
+ "service-not-allowed":"手机的语音识别服务不可用（Chrome 要用“Google 语音服务”）",
+ "no-speech":"没听到声音，再点🎤说一遍","audio-capture":"麦克风被别的App占用或找不到麦克风",
+ "network":"语音识别要连 Google 服务器，网络不通","language-not-supported":"手机的语音服务不支持这个语言",
+ "bad-grammar":"识别参数出错","aborted":"识别被中断"};
+const KB="；也可以点输入框，用键盘上的🎤语音键";
+let recLog=[],recT0=0,recStarted=false,recHeard=false,recWD=0,recAlt=false,recRetried=false,micPerm="?";
+const MICVER="mic-v5";
+try{navigator.permissions&&navigator.permissions.query({name:"microphone"}).then(s=>{micPerm=s.state;s.onchange=()=>{micPerm=s.state}}).catch(()=>{})}catch(e){}
+// Big bottom sheet that stays until tapped: Lily missed the small status line and the 5 s toast.
+const KBHOW="点下面「⌨️ 改用键盘语音输入」→ 键盘弹出后，点键盘上的🎤（话筒）键说话，文字会直接进提问框，一样自动保存。";
+function micAlert(title,body){$("maT").textContent=title;$("maB").textContent=body+"\n\n"+KBHOW;
+ $("maD").textContent="诊断（截图发给老师）："+MICVER+" · 语言 "+(rec&&rec.lang||asrLang)+" · 麦克风权限 "+micPerm+" · "+recLog.join(" → ")+" · "+navigator.userAgent.replace(/^Mozilla\/5\.0 /,"").slice(0,120);
+ $("micAlert").classList.add("show")}
+function micAlertClose(){$("micAlert").classList.remove("show")}
+$("maX").addEventListener("click",e=>{e.stopPropagation();micAlertClose()});
+$("maKb").addEventListener("click",e=>{e.stopPropagation();micAlertClose();const q=$("qIn");q.focus();try{q.setSelectionRange(q.value.length,q.value.length)}catch(_){}q.scrollIntoView({block:"center"})});   // focus inside the tap = keyboard opens on Android
+$("maRetry").addEventListener("click",e=>{e.stopPropagation();micAlertClose();recRetried=false;startMic()});
+function rlog(s){recLog.push(s+"@"+((performance.now()-recT0)/1000).toFixed(1)+"s")}
+function startMic(isRetry){
+ if(!SR){micMsg("这个浏览器没有语音识别，请用 Chrome 打开"+KB,true);micAlert("❌ 这个浏览器不能语音识别","请用 Chrome 打开这个页面（OPPO 自带浏览器、微信/LINE 里打开都不行）。");return}
+ if(rec)return;micAlertClose();
+ recI=cur;$("qIn").dataset.i=cur;recBase=$("qIn").value;recFinal="";recErr="";recStarted=false;recHeard=false;if(!isRetry){recLog=[];recRetried=false}recT0=performance.now();
+ const wasPlaying=playing||!au.paused;if(wasPlaying){stopPlay();renderCnt()}   // otherwise the mic hears the video
+ let r;try{r=new SR()}catch(e){micMsg("识别出错：无法创建（"+(e&&e.name||e)+"）"+KB,true);micAlert("❌ 语音识别没法启动","无法创建识别器（"+(e&&e.name||e)+"）。");return}
+ rec=r;r.lang=recAlt&&asrLang==="zh-CN"?"cmn-Hans-CN":asrLang;r.interimResults=true;r.continuous=false;r.maxAlternatives=1;   // continuous=false: Android Chrome misbehaves with true
+ r.onstart=()=>{rlog("start");if(rec!==r)return;recStarted=true;clearTimeout(recWD);micUI(2);micMsg("")};
+ r.onaudiostart=()=>rlog("audio");r.onspeechstart=()=>{rlog("speech");recHeard=true};
+ r.onresult=e=>{let fin="",inter="";for(let i=0;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)fin+=t;else inter+=t}
+  if(rec!==r)return;if(!recStarted){recStarted=true;micUI(2)}recHeard=true;recFinal=fin;micPut(inter)};
+ r.onerror=e=>{const c=(e&&e.error)||"unknown";rlog("error:"+c);if(rec!==r)return;recErr=c;
+  if(c==="aborted"&&recUserAbort)return;   // our own cancel: silent
+  if(c==="language-not-supported"&&!recAlt&&asrLang==="zh-CN"){recAlt=true}   // next tap retries with cmn-Hans-CN
+  const m="识别出错："+c+"（"+(MICERR[c]||"未知错误")+"）";micMsg(m+(c==="no-speech"?"":KB),true);
+  micAlert(c==="no-speech"?"🤔 没听到声音":"❌ 语音识别出错："+c,(MICERR[c]||"未知错误")+(c==="not-allowed"||c==="audio-capture"||c==="service-not-allowed"?"\n另外检查：手机 设置 → 应用 → Google → 权限 → 麦克风 → 允许（Chrome 的语音识别是借 Google App 做的）。":""))};
+ r.onend=()=>{rlog("end");if(rec!==r)return;clearTimeout(recWD);rec=null;micUI(0);
+  const q=$("qIn");if(+q.dataset.i===recI){saveQs();renderQs();renderFav();
+   const dt=(performance.now()-recT0)/1000;
+   if(recFinal.trim()){$("qState").textContent="✓ 已保存（第 "+(recI+1)+" 句）";micMsg("")}
+   else if(recErr){$("qState").textContent="自动保存在本机"}
+   else if(!recHeard&&dt<2.5&&!recRetried){recRetried=true;rlog("auto-retry");setTimeout(()=>{if(!rec)startMic(true)},500)}   // Android sometimes drops the first start right after a permission prompt / audio focus change
+   else if(!recHeard&&dt<2.5){$("qState").textContent="❌ 没启动成功";   // the "flashes once" case: ended at once with no error code
+    micMsg("❌ 识别一启动就结束了，没给原因。请改用键盘上的🎤语音键（见下方说明）",true);
+    micAlert("❌ 语音识别一启动就结束了","手机没给任何错误原因，试了两次都一样。最常见的原因：\n① 手机上没有或停用了「Google」App / Google 语音服务（国行 OPPO 常见）；\n② 「Google」App 没有麦克风权限；\n③ 别的 App 正在占用麦克风。")}
+   else{$("qState").textContent="没听清，再点🎤试试";micMsg("🤔 没听到内容，再点🎤说一遍；还不行就用键盘上的🎤语音键",true);
+    micAlert("🤔 没有识别出文字","说话前等按钮变红、出现「正在听」再开口，靠近手机说。")}}};
+ micUI(1);micMsg("");recUserAbort=false;rlog(wasPlaying?"paused-video":"tap");
+ // Android Chrome: starting the recognizer while our <audio> still holds audio focus makes it end at once,
+ // so after pausing the video give Android ~350 ms to release focus (start() needs no user gesture in Chrome).
+ const go=()=>{if(rec!==r)return;try{r.start()}catch(e){rlog("start-throw:"+(e&&e.name));rec=null;micUI(0);micMsg("识别出错：启动失败（"+(e&&e.name||e)+"）"+KB,true);micAlert("❌ 语音识别启动失败",String(e&&e.name||e));return}
+ clearTimeout(recWD);recWD=setTimeout(()=>{if(rec===r&&!recStarted){micMsg("❌ 4 秒还没启动，见下方说明",true);micAlert("⏳ 4 秒了，麦克风还没启动","可能是麦克风权限没开：点地址栏左边的🔒或⚙ → 权限 → 麦克风 → 允许，然后关掉这个标签页重新打开。")}},4000)};
+ if(wasPlaying)setTimeout(go,350);else go()}
+var recUserAbort=false;
+function stopMic(abort){const r=rec;if(!r)return;recUserAbort=!!abort;try{abort?r.abort():r.stop()}catch(e){}if(abort){rec=null;clearTimeout(recWD);micUI(0)}}
+function micTap(e){if(e){e.preventDefault();e.stopPropagation()}if(rec)stopMic(!recStarted);else startMic();setTimeout(()=>$("qBox").scrollIntoView({block:"nearest",behavior:"smooth"}),0)}
+$("qMic").addEventListener("click",micTap);
+["pointerdown","touchstart","mousedown"].forEach(t=>$("qMic").addEventListener(t,e=>e.stopPropagation(),{passive:true}));
+$("onlyStar").onclick=()=>{if(!stars.size&&!onlyStar){alert("还没有标星的句子。听不懂时点右上角 ⭐");return}onlyStar=!onlyStar;if(onlyStar&&!stars.has(cur)){cur=order()[0]}subState=0;render()};
+$("ptsBox").open=localStorage.getItem(KEY+"ptsopen")==="1";$("ptsBox").addEventListener("toggle",()=>{try{localStorage.setItem(KEY+"ptsopen",$("ptsBox").open?"1":"0")}catch(e){}});
+$("cont").onchange=save;$("blurList").onchange=applySubMode;
+$("bar").onclick=e=>{const r=e.currentTarget.getBoundingClientRect();const i=Math.min(SEGS.length-1,Math.floor((e.clientX-r.left)/r.width*SEGS.length));subState=0;if(onlyStar&&!stars.has(i))onlyStar=false;playSeg(i)};
+// ---- 指环遥控 (Bluetooth ring / clicker) + keyboard ----
+// Rings come in three flavours: keyboard/HID keys, media keys (routed to the Media Session on Android),
+// and touch/mouse emulation that injects swipes, wheel ticks or taps. All map onto act(), which debounces so one press = one action.
+let remote=localStorage.getItem("jingting.remote")==="1",diag=false,lastAct=-1e9,lastActKind="",swipeT=-1e9,wheelT=-1e9,hoverT=-1e9;   // performance.now() starts near 0 on every load
+const DEB=350,WDEB=400,INTER="button,a,input,select,textarea,label,summary,.chip,.item,.sub-box,.bar,.go,.star,.panel,.qbox,#toast,#micAlert,#diag,#remoteExit,[onclick],[role=button]";
+let wheelActT=-1e9;
+const NEXTK=new Set(["ArrowRight","ArrowDown","PageDown","MediaTrackNext","AudioVolumeDown","VolumeDown"]);
+const PREVK=new Set(["ArrowLeft","ArrowUp","PageUp","MediaTrackPrevious","AudioVolumeUp","VolumeUp"]);
+const ACTZH={next:"下一句",prev:"上一句",replay:"重听",toggle:"播放/暂停"},ACTBTN={next:"next",prev:"prev",replay:"rep",toggle:"play"};
+const dlines=[];
+function dlog(s){if(!diag)return;const d=new Date();dlines.unshift(String(d.getMinutes()).padStart(2,"0")+":"+String(d.getSeconds()).padStart(2,"0")+" "+s);dlines.length=Math.min(dlines.length,10);$("diagLog").textContent=dlines.join("\n")}
+function act(kind,src){const now=performance.now();
+ if(now-lastAct<DEB){dlog("   ↳ 忽略（防连按）"+ACTZH[kind]);return false}
+ lastAct=now;lastActKind=kind;dlog("   ↳ 动作："+ACTZH[kind]+"（"+src+"）");
+ if(kind==="next")go(1);else if(kind==="prev")go(-1);else if(kind==="replay")playSeg(cur);else if(kind==="toggle")toggle();
+ const b=$(ACTBTN[kind]);if(b){b.classList.add("hit");setTimeout(()=>b.classList.remove("hit"),220)}
+ return true}
+function blurAll(){const a=document.activeElement;if(a&&a!==document.body&&!(a.matches&&a.matches("input[type=number],input[type=text],select,textarea")))a.blur()}
+function setRemote(on,quiet){remote=on;if(!quiet)localStorage.setItem("jingting.remote",on?"1":"0");document.documentElement.classList.toggle("remote",on);
+ const b=$("remoteBtn");b.textContent="🎮 遥控模式："+(on?"开":"关");b.classList.toggle("remon",on);$("remoteTip").style.display=on?"":"none";
+ if(on){blurAll();if(!quiet||window.scrollY>0)$("app").scrollIntoView({block:"start"})}}
+function setDiag(on){diag=on;$("diag").style.display=on?"":"none";if(on){dlines.length=0;$("diagLog").textContent="（等待信号… 遥控模式："+(remote?"开":"关")+"）"}}
+$("remoteBtn").onclick=()=>setRemote(!remote);$("remoteExit").onclick=()=>setRemote(false);
+$("diagBtn").onclick=e=>{e.preventDefault();setDiag(!diag)};$("diagX").onclick=()=>setDiag(false);$("diagC").onclick=()=>{dlines.length=0;$("diagLog").textContent="（已清空，等待信号…）"};
+document.addEventListener("visibilitychange",()=>dlog("页面"+(document.hidden?"切到后台 (hidden)":"回到前台 (visible)")));
+// keys
+document.addEventListener("keydown",e=>{const t=e.target,typing=!!(t&&t.matches&&t.matches("input[type=number],input[type=text],input:not([type]),textarea,select"));
+ dlog("键 key="+JSON.stringify(e.key)+" code="+(e.code||"-")+" keyCode="+e.keyCode+(e.repeat?" (按住重复)":"")+(typing?" [在输入框里]":""));
+ if(typing||e.ctrlKey||e.metaKey||e.altKey)return;
+ const k=e.key;
+ if(k===" "||e.code==="Space"||k==="Enter"){e.preventDefault();if(e.repeat)return;
+  if(k==="Enter")$("subbox").click();else act("replay","空格");return}
+ if(NEXTK.has(k)){e.preventDefault();if(!e.repeat)act("next",k);return}
+ if(PREVK.has(k)){e.preventDefault();if(!e.repeat)act("prev",k);return}
+ if(k==="MediaPlayPause"||(k==="MediaPlay"&&!playing)||((k==="MediaPause"||k==="MediaStop")&&playing)){e.preventDefault();if(!e.repeat)act("toggle",k);return}
+ if(k==="p"||k==="P"){toggle()}else if(k==="s"||k==="S"){$("star").click()}});
+document.addEventListener("keyup",e=>{if(e.key===" "||e.key==="Enter"){const t=e.target;if(!(t&&t.matches&&t.matches("input,textarea,select")))e.preventDefault()}},true);
+// media keys (Bluetooth next/prev/play) reach Android Chrome through the Media Session, not as key events
+if("mediaSession" in navigator){const ms=navigator.mediaSession,H=(a,f)=>{try{ms.setActionHandler(a,f)}catch(e){}};
+ H("nexttrack",()=>{dlog("媒体键 nexttrack");act("next","媒体键 下一曲")});
+ H("previoustrack",()=>{dlog("媒体键 previoustrack");act("prev","媒体键 上一曲")});
+ H("play",()=>{dlog("媒体键 play");if(!playing)act("toggle","媒体键 播放");else if(au.paused)startPlay()});
+ H("pause",()=>{dlog("媒体键 pause");if(playing){lastAct=performance.now();stopPlay();renderCnt()}else if(!au.paused)au.pause()});
+ try{ms.metadata=new MediaMetadata({title:document.title,artist:"逐句精听"})}catch(e){}}
+// swipes / drags / taps injected by touch- or mouse-emulating rings
+const ptr=new Map();
+addEventListener("pointerdown",e=>{ptr.set(e.pointerId,{x:e.clientX,y:e.clientY,t:performance.now(),type:e.pointerType,field:!!(e.target.closest&&e.target.closest("textarea,input,select,.qbox,#copyBox,.list"))})},true);
+addEventListener("pointermove",e=>{if(!diag||ptr.has(e.pointerId)||e.pointerType==="touch")return;const n=performance.now();if(n-hoverT>1200){hoverT=n;dlog("指针移动(没按下) "+e.pointerType+" @"+(e.clientX|0)+","+(e.clientY|0))}},true);
+addEventListener("pointercancel",e=>{const p=ptr.get(e.pointerId);ptr.delete(e.pointerId);if(p)dlog("滑动被页面滚动吃掉 "+p.type+"（请打开 🎮 指环遥控）")},true);
+addEventListener("pointerup",e=>{const p=ptr.get(e.pointerId);ptr.delete(e.pointerId);if(!p)return;
+ const dx=e.clientX-p.x,dy=e.clientY-p.y,dt=performance.now()-p.t,ax=Math.abs(dx),ay=Math.abs(dy);
+ const dir=ax<10&&ay<10?"":ay>=ax?(dy<0?" ↑上滑":" ↓下滑"):(dx<0?" ←左滑":" →右滑");
+ dlog((dir?"滑动":"点击")+dir+" "+p.type+" dx="+(dx|0)+" dy="+(dy|0)+" "+(dt|0)+"ms 起点@"+(p.x|0)+","+(p.y|0)+" 终点@"+(e.clientX|0)+","+(e.clientY|0));
+ if(!remote||p.field||Math.max(ax,ay)<30||dt>1500)return;
+ swipeT=performance.now();
+ if(ay>=ax)act(dy<0?"next":"prev",dy<0?"上滑":"下滑");else act(dx<0?"next":"prev",dx<0?"左滑":"右滑")},true);
+addEventListener("touchmove",e=>{if(remote&&e.cancelable&&!(e.target.closest&&e.target.closest("textarea,.list")))e.preventDefault()},{passive:false,capture:true});
+addEventListener("wheel",e=>{const n=performance.now(),gap=n-wheelT;wheelT=n;const d=Math.abs(e.deltaY)>=Math.abs(e.deltaX)?e.deltaY:e.deltaX;
+ if(gap>=250)dlog("滚轮 deltaY="+Math.round(e.deltaY)+" deltaX="+Math.round(e.deltaX)+" mode="+e.deltaMode);
+ if(!remote)return;e.preventDefault();if(gap<250||!d||n-wheelActT<WDEB)return;wheelActT=n;act(d>0?"next":"prev",d>0?"滚轮向下":"滚轮向上")},{passive:false,capture:true});
+addEventListener("click",e=>{
+ if(performance.now()-swipeT<300){e.preventDefault();e.stopPropagation();return}   // the click that ends a swipe is not a tap
+ const t=e.target,inter=!!(t.closest&&t.closest(INTER));   // buttons, ⭐, chips, links, inputs, panels: always do their own action, never switch/replay
+ if(remote&&!inter&&e.isTrusted){const w=innerWidth,x=e.clientX,edge=x<w*0.15?"ezL":x>w*0.85?"ezR":"";
+  if(edge){e.preventDefault();e.stopPropagation();const nx=edge==="ezR",ez=$(edge);dlog("点"+(nx?"右":"左")+"边缘");if(act(nx?"next":"prev",nx?"点右边缘":"点左边缘")){ez.classList.add("flash");setTimeout(()=>ez.classList.remove("flash"),200)}return}}
+ if(!inter&&e.isTrusted)dlog("点空白处"+(remote?"":"（遥控没开，不动作）"));
+ if(remote&&!inter&&e.isTrusted){act("replay","点空白");return}
+ if(inter)setTimeout(blurAll,0)},true);   // never leave focus on a button: Space/Enter would press it instead of reaching the page
+$("cont").addEventListener("change",()=>setTimeout(blurAll,0));$("blurList").addEventListener("change",()=>setTimeout(blurAll,0));
+// keep the element and the intent in sync: a play() that resolves after the user already paused is undone,
+// a system pause (call, other app) shows ▶, and timeupdate backs up the frame loop
+au.addEventListener("playing",()=>{if(!playing){au.pause();return}applyRate();if(!raf)loop()});
+au.addEventListener("pause",()=>{if(playing&&!gapT&&!au.seeking&&au.currentTime<(stopAt===null?1e9:stopAt-0.05)&&!au.ended){setTimeout(()=>{if(au.paused&&playing&&!gapT)setPlayUI(false)},250)}});
+au.addEventListener("timeupdate",()=>{if(playing&&!au.paused)check()});
+au.addEventListener("ended",()=>{if(playing&&stopAt!==null&&!gapT){segEnd();return}if(!gapT){stopAt=null;stopPlay()}});
+// decode embedded audio into a Blob URL (more reliable seeking on iOS Safari than a data: URI)
+function init(){
+ const p=parseInt(localStorage.getItem(KEY+"pos")||"0",10);cur=(p>=0&&p<SEGS.length)?p:0;
+ buildChapters();buildList();buildSpeeds();buildReps();buildSubs();applySubMode();render();$("loading").style.display="none";$("app").style.display="block";setRemote(remote,true)}
+setTimeout(init,30);
+window.__jt={SEGS,au,playSeg,go,toggle,get cur(){return cur},get playing(){return playing},get plays(){return plays},get rep(){return rep},get inGap(){return !!gapT},get rate(){return rate},get raf(){return raf},CHAPTERS,get subMode(){return subMode},get subState(){return subState},get remote(){return remote},setRemote,get lastAction(){return lastActKind}};
+</script>
+</body>
+</html>
