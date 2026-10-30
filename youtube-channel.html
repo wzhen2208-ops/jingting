@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>逐句精听 · Grok Bot is managing my YouTube channel</title>
+<style>#yt iframe{width:100%;height:100%;display:block}.item .tx,.item .x,.item .z,.sub-box .en,.sub-box .zh{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important;max-height:none!important;overflow-wrap:anywhere}
+.pts{margin-top:12px;border:1px solid #d1fae5;border-radius:16px;background:#f0fdfa;padding:0 12px}
+.pts>summary{list-style:none;padding:10px 0;font-weight:800;color:#0f766e;cursor:pointer;font-size:14px;display:flex;justify-content:space-between}
+.pts>summary::-webkit-details-marker{display:none}
+.pt{padding:9px 0;border-top:1px dashed #a7f3d0;font-size:14px;line-height:1.6}
+.pt .pk{display:inline-block;font-size:11px;font-weight:800;border-radius:6px;padding:0 6px;margin-right:6px;background:#e0e7ff;color:#3730a3;vertical-align:1px}
+.pt .pk.k1{background:#fef3c7;color:#92400e}.pt .pk.k2{background:#e0e7ff;color:#3730a3}.pt .pk.k3{background:#fce7f3;color:#9d174d}.pt .pk.k4{background:#dcfce7;color:#166534}.pt .pk.k5{background:#f1f5f9;color:#334155}
+.pt .ph{font-weight:800;color:#111827}
+.pt .px{color:#334155;margin-top:2px}
+.pt .pe{margin-top:4px;background:#fff;border-radius:10px;padding:6px 9px;color:#1f2937;font-size:13.5px}
+.pt .pe i{font-style:normal;color:#0f766e;display:block;font-size:12.5px}
+
+:root{--bg1:#1e1b4b;--bg2:#0f766e;--card:#ffffff;--ink:#1f2937;--muted:#6b7280;--acc:#6366f1;--acc2:#14b8a6;--star:#f59e0b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{touch-action:manipulation}
+button,.chip,.btn{touch-action:manipulation;user-select:none;-webkit-user-select:none}
+html,body{margin:0;min-height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;background:linear-gradient(160deg,var(--bg1),#4338ca 45%,var(--bg2));background-attachment:fixed;color:var(--ink);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.wrap{max-width:640px;margin:0 auto;padding:14px 14px 40px}
+header{color:#fff;margin:6px 4px 12px}
+header h1{font-size:15px;font-weight:600;margin:0;opacity:.85;line-height:1.35}
+header .sub{font-size:12px;opacity:.6;margin-top:3px}
+.card{background:var(--card);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.25);padding:18px}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.num{font-size:28px;font-weight:800;color:var(--acc);letter-spacing:-.5px}
+.num small{font-size:15px;color:var(--muted);font-weight:600}
+.time{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.star{display:flex;flex-direction:column;align-items:center;min-width:64px;min-height:56px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:16px;cursor:pointer;line-height:1;padding:6px 8px;color:#94a3b8;transition:.15s}
+.star b{font-size:28px;font-weight:400}.star span{font-size:11px;font-weight:700;margin-top:3px}
+.star.on{background:#fef3c7;border-color:var(--star);color:#b45309}
+#toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%);z-index:60;background:rgba(15,23,42,.92);color:#fff;border-radius:99px;padding:9px 16px;font-size:14px;font-weight:600;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1}
+#toast.long{white-space:normal;width:max-content;max-width:88vw;border-radius:14px;text-align:center;line-height:1.45}
+.qbox .qh .qtools{display:flex;align-items:center;gap:6px}
+.qbox .qwrap{display:flex;gap:8px;align-items:stretch}
+.qbox .qwrap textarea{flex:1;min-width:0}
+.qmic{flex:none;width:56px;min-height:58px;border:2px solid #c7d2fe;border-radius:14px;background:#eef2ff;font-size:24px;line-height:1;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px;color:#4338ca}
+.qmic span{font-size:10px;font-weight:700}
+.qmic.rec{background:#ef4444;border-color:#dc2626;color:#fff;animation:micPulse 1.1s ease-in-out infinite}
+@keyframes micPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,.55)}70%{box-shadow:0 0 0 12px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.qlang{border:1px solid #c7d2fe;background:#fff;color:#4338ca;border-radius:99px;padding:3px 9px;font-size:12px;font-weight:800;cursor:pointer}
+.qbox.rec{border-color:#fca5a5;background:#fff5f5}
+.qbox .qinterim{display:none;margin-top:6px;font-size:14px;color:#b91c1c;background:#fef2f2;border-radius:10px;padding:5px 9px;white-space:pre-wrap}
+.qbox.rec .qinterim{display:block}
+.qbox .qmsg{display:none;margin-top:8px;font-size:16px;font-weight:600;line-height:1.5;color:#334155;background:#f1f5f9;border-radius:12px;padding:9px 12px}
+.qbox .qmsg.bad{color:#991b1b;background:#fee2e2;border:2px solid #f87171}
+.qbox .qinterim{font-size:17px!important;font-weight:700}
+#micAlert{display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;background:#fff;border-top:5px solid #dc2626;box-shadow:0 -10px 30px rgba(0,0,0,.35);padding:16px 18px calc(16px + env(safe-area-inset-bottom));max-height:75vh;overflow:auto}
+#micAlert.show{display:block}
+#micAlert .mt{font-size:22px;font-weight:900;color:#b91c1c;line-height:1.3;margin-bottom:8px}
+#micAlert .mb{font-size:18px;line-height:1.55;color:#111827;white-space:pre-wrap}
+#micAlert .md{margin-top:10px;font-size:12px;color:#64748b;font-family:ui-monospace,monospace;word-break:break-all}
+#micAlert .mbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+#micAlert .mbtns button{flex:1 1 auto;min-height:52px;font-size:17px;font-weight:800;border-radius:14px;border:2px solid #c7d2fe;background:#eef2ff;color:#3730a3;padding:8px 12px}
+#micAlert .mbtns button.pri{background:#4338ca;border-color:#4338ca;color:#fff}
+.qmic.wait{background:#fde68a;border-color:#f59e0b;color:#92400e}
+.qbox{margin-top:12px;border:1px solid #e0e7ff;border-radius:16px;padding:10px 12px;background:#fafaff}
+.qbox .qh{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#4338ca;margin-bottom:6px}
+.qbox .qh small{font-weight:600;color:#94a3b8}
+.qbox textarea{width:100%;min-height:58px;font-size:15px;line-height:1.5;border:1px solid #c7d2fe;border-radius:12px;padding:8px 10px;font-family:inherit;resize:vertical;color:#1f2937;background:#fff}
+.fv{padding:10px 16px;border-bottom:1px solid #f1f5f9;font-size:14px;line-height:1.5}
+.fv .fh{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.fv .fn{color:var(--acc);font-weight:800;cursor:pointer}
+.fv .fe{color:#111827;margin-top:2px}.fv .fz{color:#0f766e;font-size:13px}.fv .fq{color:#9a3412;background:#fff7ed;border-radius:10px;padding:6px 9px;margin-top:5px;white-space:pre-wrap}
+.fv .del{border:0;background:#f1f5f9;color:#64748b;border-radius:10px;padding:5px 10px;font-size:12px}
+.pbar{display:flex;gap:8px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid #eef2ff;background:#f8fafc}
+.pbar .chip{font-size:13px}
+#copyBox{display:none;padding:10px 16px}#copyBox textarea{width:100%;min-height:160px;font-size:13px;border:1px solid #c7d2fe;border-radius:10px;padding:8px}
+.item .q{color:#ea580c;font-size:12px}
+.bar{height:8px;background:#eef2ff;border-radius:99px;margin:12px 0 4px;overflow:hidden;cursor:pointer;position:relative}
+.bar i{position:absolute;top:0;bottom:0;width:2px;background:#fff;opacity:.9}
+.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:99px;transition:width .2s}
+.segbar{height:4px;background:#f1f5f9;border-radius:99px;overflow:hidden;margin-bottom:10px}
+.segbar>div{height:100%;width:0;background:var(--star)}
+.sub-box{min-height:150px;border-radius:16px;background:linear-gradient(135deg,#f5f3ff,#ecfeff);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px 14px;cursor:pointer;user-select:none;border:2px dashed #c7d2fe;transition:.2s}
+.sub-box.show{border-style:solid;border-color:transparent;background:#f8fafc}
+.hint{color:#818cf8;font-size:15px}
+.hint b{display:block;font-size:34px;margin-bottom:6px}
+.en{font-size:20px;line-height:1.5;color:#111827;font-weight:500}
+.zh{font-size:16px;line-height:1.6;color:#0f766e;margin-top:10px;padding-top:10px;border-top:1px solid #e5e7eb;width:100%}
+.zh .mt{font-size:11px;color:#9ca3af;margin-left:4px}
+.ctrls{display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr;gap:10px;margin-top:16px}
+.sep{height:1px;background:#e5e7eb;margin:20px 0 4px}
+.chap{font-size:12px;color:#4338ca;font-weight:700;margin-top:4px;min-height:16px}
+.jump{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.jump select,.jump input{font-size:14px;border:1px solid #c7d2fe;border-radius:12px;padding:7px 8px;background:#fff;color:#1f2937}
+.jump select{max-width:100%;flex:1 1 200px}
+.jump input{width:76px}
+.jump .lb{font-size:13px;color:#64748b;font-weight:600}
+.chead{padding:9px 16px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:13px;position:sticky;top:0;z-index:1}
+.study{padding:4px 18px 16px;border-top:1px solid #eef2ff;font-size:14px;line-height:1.6;color:#1f2937}
+.study h3{font-size:14px;margin:14px 0 6px;color:#312e81}
+.study ol{margin:0;padding-left:20px}
+.study details{margin-top:12px;border:1px solid #e0e7ff;border-radius:14px;padding:4px 12px}
+.study details>summary{padding:8px 0;font-weight:700;color:#0f766e;cursor:pointer;list-style:none}
+.study details>summary::-webkit-details-marker{display:none}
+.ks{padding:8px 0;border-top:1px dashed #e5e7eb}
+.ks .go{color:var(--acc);font-weight:800;cursor:pointer;margin-right:4px}
+.ks .ke{color:#111827}
+.ks .kz{color:#0f766e;font-size:13px}
+.ks .kw{color:#6b7280;font-size:13px}
+.wd{padding:6px 0;border-top:1px dashed #e5e7eb}
+.wd b{color:#111827}
+.wd .ip{color:#6b7280;font-size:12px;margin:0 4px}
+.wd .nt{color:#6b7280;font-size:12px}
+.tag{font-size:11px;background:#fef3c7;color:#92400e;border-radius:6px;padding:0 5px;margin-left:4px}
+.btn{border:0;border-radius:18px;height:66px;font-size:28px;background:#eef2ff;color:var(--acc);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .08s}
+.btn span{font-size:11px;margin-top:2px;font-weight:600;opacity:.8}
+.btn:active{transform:scale(.94)}
+.btn.play{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;box-shadow:0 6px 18px rgba(99,102,241,.45)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-top:16px}
+.speeds{display:flex;gap:6px}
+.chip{border:0;border-radius:99px;padding:9px 13px;font-size:14px;background:#f1f5f9;color:#334155;cursor:pointer;font-weight:600}
+.chip.on{background:var(--acc);color:#fff}
+.chip.staron{background:var(--star);color:#fff}
+.reps{display:flex;gap:6px;align-items:center}
+.reps .lb{font-size:13px;color:#64748b;font-weight:600;margin-right:2px}
+.cnt{font-size:12px;font-weight:700;color:#0f766e;background:#ecfeff;border-radius:99px;padding:3px 9px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cnt.gap{opacity:.55}
+.toggle{display:flex;align-items:center;gap:6px;font-size:14px;color:#334155;cursor:pointer}
+.toggle input{width:20px;height:20px;accent-color:var(--acc)}
+.panel{margin-top:14px;background:rgba(255,255,255,.96);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.2);overflow:hidden}
+.panel summary{list-style:none;padding:15px 18px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;color:#312e81}
+.panel summary::-webkit-details-marker{display:none}
+.list{max-height:55vh;overflow:auto;border-top:1px solid #eef2ff}
+.item{display:flex;gap:10px;padding:11px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer;font-size:14px;line-height:1.45;align-items:flex-start}
+.item:hover{background:#f8fafc}
+.item.cur{background:#eef2ff}
+.item .i{color:var(--acc);font-weight:700;min-width:30px;font-variant-numeric:tabular-nums}
+.item .t{color:#94a3b8;font-size:11px;min-width:38px;padding-top:2px}
+.item .x{flex:1;color:#334155}
+.item .tx{flex:1;min-width:0}
+.item .x{display:block;color:#334155}
+.item .z{display:block;color:#0f766e;font-size:13px;margin-top:2px}
+.list.blur[data-m=hide] .x{filter:blur(4px)}
+.list[data-m=hide] .z,.list[data-m=en] .z,.list[data-m=zh] .x{display:none}
+.subs .chip{padding:9px 11px}
+.item .s{color:var(--star)}
+.kbd{color:rgba(255,255,255,.65);font-size:12px;text-align:center;margin-top:14px}
+.empty{padding:16px;color:var(--muted);font-size:14px}
+#loading{color:#fff;text-align:center;padding:40px;font-size:15px}
+/* 指环遥控 (ring remote) */
+html.remote,html.remote body{overflow:hidden;touch-action:none;overscroll-behavior:none}
+.chip.remon{background:#0f766e;color:#fff}
+#remoteExit{display:none;position:fixed;bottom:calc(10px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:40;border:0;border-radius:99px;padding:8px 12px;font-size:13px;font-weight:700;background:rgba(15,118,110,.92);color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+html.remote #remoteExit{display:block}
+.ezone{display:none;position:fixed;top:0;bottom:0;width:15vw;z-index:30;background:transparent;pointer-events:none}   /* visual flash only: edge taps are detected by x-position so buttons/⭐ under the edge keep working */
+#ezL{left:0}#ezR{right:0}
+html.remote .ezone{display:block}
+.ezone.flash{background:rgba(15,118,110,.12)}
+.diaglink{font-size:12px;color:#94a3b8;text-decoration:underline;cursor:pointer}
+.rtip{font-size:12px;color:#0f766e;background:#ecfeff;border-radius:12px;padding:7px 10px;margin-top:10px;line-height:1.5}
+.btn.hit{box-shadow:0 0 0 4px #fbbf24;transform:scale(.94)}
+#diag{position:fixed;left:8px;right:8px;bottom:8px;z-index:50;background:rgba(15,23,42,.93);color:#a7f3d0;border-radius:14px;padding:8px 10px;font:12px/1.45 ui-monospace,Menlo,monospace;pointer-events:none;max-width:624px;margin:0 auto}
+#diag .dh{display:flex;justify-content:space-between;align-items:center;color:#fde68a;font-weight:700;margin-bottom:4px}
+#diag .dh{gap:8px}#diag .dh span:last-child{display:flex;gap:6px;flex-shrink:0}#diag button{white-space:nowrap}
+#diag button{pointer-events:auto;border:0;border-radius:10px;padding:8px 16px;background:#334155;color:#fff;font-size:12px}
+#diag pre{margin:0;white-space:pre-wrap;word-break:break-all;min-height:6em;font:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>🎧 逐句精听 · Grok Bot is managing my YouTube channel</h1><div class="sub">Matt Palmer · 2026-09-18 · 4:53 · 55 句 · 7 章 · 每句有讲解 · <a style='color:#a5f3fc' href='https://www.youtube.com/watch?v=oEzK7W6r1Dk'>原视频</a></div></header><!--PV--><style id="pvcss">
+.pv{margin:0 0 14px}.pv>summary{flex-wrap:wrap;gap:4px}.pv>summary small{font-weight:500;color:#6366f1;font-size:12px}
+.pvin{padding:0 12px 14px}.pvtip{font-size:13px;color:#64748b;margin:0 4px 10px;line-height:1.55}
+.pvs{border:1px solid #e0e7ff;border-radius:16px;margin:0 0 10px;background:#f8faff;overflow:hidden}
+.pvs>summary{list-style:none;cursor:pointer;padding:12px 14px;font-weight:700;color:#3730a3;font-size:15px;display:flex;justify-content:space-between;gap:8px}
+.pvs>summary::-webkit-details-marker{display:none}.pvs>summary:after{content:"▾";color:#818cf8}.pvs[open]>summary:after{content:"▴"}
+.pvl{padding:0 10px 10px;display:flex;flex-direction:column;gap:8px}
+.pvc{background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 1px 3px rgba(49,46,129,.08);font-size:14px;line-height:1.6;color:#1e293b;overflow-wrap:anywhere}
+.pvc .t{font-weight:700;color:#1e1b4b;font-size:15px}.pvc .t span{font-weight:500;color:#0f766e;margin-left:6px}
+.pvc .o{margin-top:6px;padding:6px 8px;border-left:3px solid #a5b4fc;background:#eef2ff;border-radius:6px;font-size:13.5px;color:#334155;cursor:pointer}
+.pvc .o mark{background:#fde68a;color:inherit;padding:0 2px;border-radius:3px}.pvc .o i{font-style:normal;color:#6366f1;font-size:12px;white-space:nowrap}
+.pvc .eg{margin-top:6px;font-size:13.5px;color:#334155}.pvc .eg span{display:block;color:#0f766e;font-size:13px}
+.pvc .en{font-size:15px;color:#111827}.pvc .zh{color:#0f766e;font-size:14px;margin-top:4px}
+.pvc .why{margin-top:6px;font-size:13.5px;color:#475569;background:#fff7ed;border-radius:8px;padding:6px 8px}
+.pvc .jb{margin-top:8px;border:0;border-radius:999px;background:#4f46e5;color:#fff;padding:7px 14px;font-size:13px}
+.pvh{font-weight:800;color:#4338ca;font-size:13px;margin:6px 2px 0;padding:4px 10px;background:#e0e7ff;border-radius:999px;align-self:flex-start}
+.pvc .n{display:inline-block;background:#e0e7ff;color:#3730a3;border-radius:999px;padding:0 8px;font-size:12px;margin-right:6px}
+</style><details class="panel pv" id="pvPanel" open><summary><span>📖 预习（听之前先看）</span><small>背景 8 · 生词 46 · 难句 9 · 展开 / 收起</small></summary><div class="pvin"><div class="pvtip">先看背景、过一遍生词，再去听。疑难句点“▶ 跳到第 N 句练”直接跳到那句反复听。</div><details class="pvs" open><summary>🔧 1. 科技背景（8）</summary><div class="pvl"><div class="pvc"><div class="t">YouTube 视频的“信息”：标题、简介、缩略图、时间戳</div>上传 YouTube 视频后要填：title（标题）、description（简介，标题下面的文字）、thumbnail（封面小图）、timestamps（简介里的“0:00 开场、1:20 第一步…”目录）。Matt 把这些叫 tagging。</div><div class="pvc"><div class="t">草稿状态（draft）</div>视频先上传但不公开，等信息填好再发布。bot 就是从草稿里把视频下载下来处理的。</div><div class="pvc"><div class="t">语音转文字（transcription）与 AssemblyAI</div>AssemblyAI 是一家按用量收费的语音转文字服务；给 bot 一个 API 密钥，它就能把视频里的话变成文字稿，再根据文字稿写标题和简介。</div><div class="pvc"><div class="t">技能（skill）与品牌语气（brand voice）</div>skill＝写给 bot 的一份做法说明；Matt 写了一个“怎么写简介”的技能，让每期简介都像他本人的风格（brand voice）。</div><div class="pvc"><div class="t">Figma</div>在线设计工具，Matt 的缩略图都在里面做。他把 Figma 链接发给 bot，bot 就能取图、加到视频上。</div><div class="pvc"><div class="t">Google Cloud 项目和 YouTube Data API（GCP）</div>想让程序自动改 YouTube 视频，就要在谷歌云平台（GCP）开一个项目、启用 YouTube Data API，再授权。不会弄可以直接让 bot 一步步教你。</div><div class="pvc"><div class="t">API 和浏览器两种方式</div>用 API＝程序直接对接，稳定、安全；用浏览器＝AI 像人一样点网页，简单但容易出错，所以 Matt 说要小心、更推荐 API。</div><div class="pvc"><div class="t">模板（template）与端到端自动化（end to end）</div>模板＝把这个 bot 的配置打包，别人一键安装；端到端＝从上传到发布全程不用人手。</div></div></details><details class="pvs"><summary>📝 2. 生词和词组（46）</summary><div class="pvl"><div class="pvc"><div class="t">transcribe<span>转写</span></div><div class="o" onclick="pvJump(1)"><span class="n">#1</span>It takes videos from YouTube, <mark>transcribes</mark> them, gets the timestamps, uh, gets the description based on my brand voice, and then it… <i>▶ 跳到这句</i></div><div class="eg">🏭 The system transcribes the shift-handover voice notes.<span>系统会把交班语音转成文字。</span></div></div><div class="pvc"><div class="t">timestamps<span>时间戳</span></div><div class="o" onclick="pvJump(1)"><span class="n">#1</span>It takes videos from YouTube, transcribes them, gets the <mark>timestamps</mark>, uh, gets the description based on my brand voice, and then it can also upload, um, and… <i>▶ 跳到这句</i></div><div class="eg">🏭 Add timestamps to each step in the video SOP.<span>在视频版 SOP 里给每一步加时间点。</span></div></div><div class="pvc"><div class="t">brand voice<span>品牌语气</span></div><div class="o" onclick="pvJump(1)"><span class="n">#1</span>…YouTube, transcribes them, gets the timestamps, uh, gets the description based on my <mark>brand voice</mark>, and then it can also upload, um, and manage the thumbnails. <i>▶ 跳到这句</i></div><div class="eg">🏭 All customer letters should keep our brand voice.<span>所有给客户的信都要保持我们的统一语气。</span></div></div><div class="pvc"><div class="t">thumbnail<span>缩略图</span></div><div class="o" onclick="pvJump(1)"><span class="n">#1</span>…the description based on my brand voice, and then it can also upload, um, and manage the <mark>thumbnails</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Pick a clear thumbnail for the training video.<span>给培训视频选一张清楚的封面。</span></div></div><div class="pvc"><div class="t">raw<span>原始的</span></div><div class="o" onclick="pvJump(3)"><span class="n">#3</span>It took the <mark>raw video</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Send me the raw data from the CMM.<span>把三坐标的原始数据发我。</span></div></div><div class="pvc"><div class="t">draft state<span>草稿状态</span></div><div class="o" onclick="pvJump(4)"><span class="n">#4</span>Basically what I did was I had my video uploaded here in a <mark>draft state</mark>, and so it pulled the video MP4 down. <i>▶ 跳到这句</i></div><div class="eg">🏭 Keep the new policy in draft state until HR approves.<span>人事批准前新制度先保持草稿状态。</span></div></div><div class="pvc"><div class="t">pull … down<span>下载下来</span></div><div class="o" onclick="pvJump(4)"><span class="n">#4</span>Basically what I did was I had my video uploaded here in a draft state, and so it <mark>pulled the video MP4 down</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Pull down the latest drawing before you start.<span>开工前先下载最新图纸。</span></div></div><div class="pvc"><div class="t">appropriate<span>合适的</span></div><div class="o" onclick="pvJump(7)"><span class="n">#7</span>It added an <mark>appropriate</mark> title based on the transcription, and then it populated the description with timestamps… <i>▶ 跳到这句</i></div><div class="eg">🏭 Use the appropriate gloves for chemicals.<span>接触化学品要戴合适的手套。</span></div></div><div class="pvc"><div class="t">based on<span>根据</span></div><div class="o" onclick="pvJump(7)"><span class="n">#7</span>It added an appropriate title <mark>based on</mark> the transcription, and then it populated the description with timestamps and a template… <i>▶ 跳到这句</i></div><div class="eg">🏭 Orders are planned based on the forecast.<span>订单根据预测来排。</span></div></div><div class="pvc"><div class="t">populate<span>填入（数据）</span></div><div class="o" onclick="pvJump(7)"><span class="n">#7</span>It added an appropriate title based on the transcription, and then it <mark>populated</mark> the description with timestamps and a template that I use for all my descriptions. <i>▶ 跳到这句</i></div><div class="eg">🏭 The ERP populates the price automatically.<span>ERP 会自动填价格。</span></div></div><div class="pvc"><div class="t">automate<span>自动化</span></div><div class="o" onclick="pvJump(9)"><span class="n">#9</span>Okay, so today I&#x27;m excited to show you how I&#x27;m using Grok Bot to <mark>automate</mark> all of my YouTube video tagging. <i>▶ 跳到这句</i></div><div class="eg">🏭 We want to automate the daily report.<span>我们想把日报自动化。</span></div></div><div class="pvc"><div class="t">typically<span>通常</span></div><div class="o" onclick="pvJump(10)"><span class="n">#10</span>So <mark>typically</mark> when I finish a video, um, there&#x27;s still some work to do. <i>▶ 跳到这句</i></div><div class="eg">🏭 Typically the audit takes two days.<span>审核一般要两天。</span></div></div><div class="pvc"><div class="t">polished<span>精致的、打磨好的</span></div><div class="o" onclick="pvJump(11)"><span class="n">#11</span>So in front of me, I have a <mark>polished</mark> YouTube video. <i>▶ 跳到这句</i></div><div class="eg">🏭 We need a polished slide deck for the customer.<span>给客户要准备一份精致的 PPT。</span></div></div><div class="pvc"><div class="t">by the time<span>到……的时候</span></div><div class="o" onclick="pvJump(12)"><span class="n">#12</span>…it has a description, um, it has a thumbnail, but typically all this stuff&#x27;s blank <mark>by the time I finish</mark> the video. <i>▶ 跳到这句</i></div><div class="eg">🏭 By the time the truck came, we were packed.<span>卡车来时我们已经包好了。</span></div></div><div class="pvc"><div class="t">build up<span>逐步建立</span></div><div class="o" onclick="pvJump(14)"><span class="n">#14</span>Now I&#x27;ve <mark>built up</mark> some flows in the past for dropping a video in, getting a transcript from that video. <i>▶ 跳到这句</i></div><div class="eg">🏭 She built up a strong supplier network.<span>她建起了很强的供应商网络。</span></div></div><div class="pvc"><div class="t">be familiar with<span>熟悉</span></div><div class="o" onclick="pvJump(15)"><span class="n">#15</span>Maybe you&#x27;re <mark>familiar with</mark> transcription services, then you have to take that transcript, you have to put it in AI,… <i>▶ 跳到这句</i></div><div class="eg">🏭 Are you familiar with the lockout procedure?<span>你熟悉上锁挂牌程序吗？</span></div></div><div class="pvc"><div class="t">from the get-go<span>从一开始</span></div><div class="o" onclick="pvJump(16)"><span class="n">#16</span>What I&#x27;ve built out in Grok Bot is a flow that just populates all of this <mark>from the get-go</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Involve QA from the get-go.<span>一开始就让品管参与。</span></div></div><div class="pvc"><div class="t">in one click<span>一键</span></div><div class="o" onclick="pvJump(17)"><span class="n">#17</span>…and then I&#x27;m going to show you a template that I built so you can add this to your bots <mark>in one click</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Print all labels in one click.<span>一键打印所有标签。</span></div></div><div class="pvc"><div class="t">keep … in<span>存放在</span></div><div class="o" onclick="pvJump(27)"><span class="n">#27</span>From there, I actually <mark>keep all my thumbnails in Figma</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 We keep the gauges in the QA room.<span>量具放在品管室。</span></div></div><div class="pvc"><div class="t">send over<span>发过去</span></div><div class="o" onclick="pvJump(28)"><span class="n">#28</span>So I <mark>sent over</mark> the Figma links in my original message. <i>▶ 跳到这句</i></div><div class="eg">🏭 I&#x27;ll send over the quote this afternoon.<span>我下午把报价发过去。</span></div></div><div class="pvc"><div class="t">staged<span>就位的、备好的</span></div><div class="o" onclick="pvJump(30)"><span class="n">#30</span>There are two videos <mark>staged</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Materials are staged for tomorrow&#x27;s run.<span>明天生产的料已经备好了。</span></div></div><div class="pvc"><div class="t">for an idea of<span>以便了解</span></div><div class="o" onclick="pvJump(31)"><span class="n">#31</span>Look at a few of the recent Grok Bot videos <mark>for an idea of</mark> how descriptions should work. <i>▶ 跳到这句</i></div><div class="eg">🏭 Check last year&#x27;s plan for an idea of the budget.<span>看看去年的计划了解预算。</span></div></div><div class="pvc"><div class="t">tone<span>语气</span></div><div class="o" onclick="pvJump(32)"><span class="n">#32</span>Rewrite it and update their <mark>tone</mark> with my skill. <i>▶ 跳到这句</i></div><div class="eg">🏭 Watch your tone with the customer.<span>跟客户说话注意语气。</span></div></div><div class="pvc"><div class="t">come up with<span>想出</span></div><div class="o" onclick="pvJump(33)"><span class="n">#33</span>Then <mark>come up with</mark> titles, update all details, and add these thumbnails. <i>▶ 跳到这句</i></div><div class="eg">🏭 Come up with a name for the new line.<span>给新产线想个名字。</span></div></div><div class="pvc"><div class="t">would normally<span>平时会</span></div><div class="o" onclick="pvJump(35)"><span class="n">#35</span>It did everything that I <mark>would normally do</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 This is what I would normally check first.<span>这是我平时先查的。</span></div></div><div class="pvc"><div class="t">now that<span>既然</span></div><div class="o" onclick="pvJump(36)"><span class="n">#36</span>And <mark>now that</mark> I&#x27;ve taught this bot how to manage my social media, I can just upload videos to YouTube,… <i>▶ 跳到这句</i></div><div class="eg">🏭 Now that we have more staff, we can run three shifts.<span>既然人多了，我们能开三班。</span></div></div><div class="pvc"><div class="t">eventually<span>最终</span></div><div class="o" onclick="pvJump(37)"><span class="n">#37</span><mark>Eventually</mark>, I think I can just tell it to update the thumbnails in Figma, <i>▶ 跳到这句</i></div><div class="eg">🏭 Eventually, we&#x27;ll go paperless.<span>最终我们会实现无纸化。</span></div></div><div class="pvc"><div class="t">duplicate<span>复制</span></div><div class="o" onclick="pvJump(38)"><span class="n">#38</span>because all I&#x27;m really doing in Figma is maybe <mark>duplicating</mark> this image, changing the bottom title, and then adjusting the background with some other… <i>▶ 跳到这句</i></div><div class="eg">🏭 Duplicate the template for each line.<span>每条线复制一份模板。</span></div></div><div class="pvc"><div class="t">adjust<span>调整</span></div><div class="o" onclick="pvJump(38)"><span class="n">#38</span>…doing in Figma is maybe duplicating this image, changing the bottom title, and then <mark>adjusting</mark> the background with some other templates that I have. <i>▶ 跳到这句</i></div><div class="eg">🏭 Adjust the fixture for the new part.<span>为新零件调一下夹具。</span></div></div><div class="pvc"><div class="t">theoretically<span>理论上</span></div><div class="o" onclick="pvJump(39)"><span class="n">#39</span>So <mark>theoretically</mark>, I could also have it make the title cards, because it&#x27;s really good at manipulating… <i>▶ 跳到这句</i></div><div class="eg">🏭 Theoretically, one robot can replace two stations.<span>理论上一台机器人能顶两个工位。</span></div></div><div class="pvc"><div class="t">manipulate<span>操作、处理</span></div><div class="o" onclick="pvJump(39)"><span class="n">#39</span>So theoretically, I could also have it make the title cards, because it&#x27;s really good at <mark>manipulating</mark> Figma, as you&#x27;ll see in some of the other content that I&#x27;m sharing out. <i>▶ 跳到这句</i></div><div class="eg">🏭 The arm can manipulate heavy parts safely.<span>机械臂能安全地搬运重件。</span></div></div><div class="pvc"><div class="t">end to end<span>从头到尾</span></div><div class="o" onclick="pvJump(40)"><span class="n">#40</span>And so really, just like that, I built something that could automate this <mark>end to end</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 We own the process end to end.<span>整个流程从头到尾由我们负责。</span></div></div><div class="pvc"><div class="t">be unable to<span>没能</span></div><div class="o" onclick="pvJump(41)"><span class="n">#41</span>And just a year ago — just a few months ago — I tried to do exactly this flow, and I was <mark>unable to</mark> do it. <i>▶ 跳到这句</i></div><div class="eg">🏭 We were unable to finish the test.<span>我们没能做完测试。</span></div></div><div class="pvc"><div class="t">one thing to note<span>要注意的一点</span></div><div class="o" onclick="pvJump(43)"><span class="n">#43</span><mark>One thing to note</mark>, a few things for the template. <i>▶ 跳到这句</i></div><div class="eg">🏭 One thing to note: the gate closes at six.<span>要注意：大门六点关。</span></div></div><div class="pvc"><div class="t">enabled<span>已开通的</span></div><div class="o" onclick="pvJump(44)"><span class="n">#44</span>You need to have, um, Google Cloud Project <mark>enabled</mark> because this template uses, um, some YouTube Data APIs. <i>▶ 跳到这句</i></div><div class="eg">🏭 Make sure two-factor login is enabled.<span>确保开启了双重验证登录。</span></div></div><div class="pvc"><div class="t">complicated<span>复杂的</span></div><div class="o" onclick="pvJump(45)"><span class="n">#45</span>If that&#x27;s a little <mark>complicated</mark> for you, you can configure this to work all through the browser. <i>▶ 跳到这句</i></div><div class="eg">🏭 The customs process is complicated.<span>清关流程很复杂。</span></div></div><div class="pvc"><div class="t">configure<span>配置</span></div><div class="o" onclick="pvJump(45)"><span class="n">#45</span>If that&#x27;s a little complicated for you, you can <mark>configure</mark> this to work all through the browser. <i>▶ 跳到这句</i></div><div class="eg">🏭 Configure the scanner for the new barcode.<span>把扫描枪配置成新条码。</span></div></div><div class="pvc"><div class="t">I&#x27;d prefer<span>我更希望</span></div><div class="o" onclick="pvJump(47)"><span class="n">#47</span><mark>I&#x27;d prefer</mark> the agent use the YouTube Data API. <i>▶ 跳到这句</i></div><div class="eg">🏭 I&#x27;d prefer you call me first.<span>我更希望你先打给我。</span></div></div><div class="pvc"><div class="t">access<span>权限</span></div><div class="o" onclick="pvJump(48)"><span class="n">#48</span>Again, you&#x27;ll need Google Cloud Project <mark>access</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Ask IT for access to the shared drive.<span>找 IT 开共享盘的权限。</span></div></div><div class="pvc"><div class="t">What you can do is<span>你可以……</span></div><div class="o" onclick="pvJump(49)"><span class="n">#49</span><mark>What you can do is</mark> just ask the bot, say, you know, &quot;Help me configure GCP access for this project.&quot; <i>▶ 跳到这句</i></div><div class="eg">🏭 What you can do is ask the leader first.<span>你可以先问组长。</span></div></div><div class="pvc"><div class="t">get … done<span>把……做完</span></div><div class="o" onclick="pvJump(50)"><span class="n">#50</span>And it&#x27;ll tell you everything you need to <mark>get done</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Let&#x27;s get the 5S audit done today.<span>今天把 5S 检查做完。</span></div></div><div class="pvc"><div class="t">be willing to<span>愿意</span></div><div class="o" onclick="pvJump(51)"><span class="n">#51</span>But if you&#x27;re <mark>willing to</mark> cut an Assembly API key, if you&#x27;re willing to set up a Google Cloud Project, you can… <i>▶ 跳到这句</i></div><div class="eg">🏭 Are you willing to work the night shift?<span>你愿意上夜班吗？</span></div></div><div class="pvc"><div class="t">set up<span>开通、建立</span></div><div class="o" onclick="pvJump(51)"><span class="n">#51</span>But if you&#x27;re willing to cut an Assembly API key, if you&#x27;re willing to <mark>set up</mark> a Google Cloud Project, you can have exactly the same workflow. <i>▶ 跳到这句</i></div><div class="eg">🏭 Set up the new line by Friday.<span>周五前把新线搭好。</span></div></div><div class="pvc"><div class="t">All you have to do is<span>你只需要……</span></div><div class="o" onclick="pvJump(52)"><span class="n">#52</span>And <mark>all you have to do is</mark> click the template to install this into your Grok Bot and get started. <i>▶ 跳到这句</i></div><div class="eg">🏭 All you have to do is scan the badge.<span>你只要刷一下工卡。</span></div></div><div class="pvc"><div class="t">so far<span>到目前为止</span></div><div class="o" onclick="pvJump(53)"><span class="n">#53</span>…media work that I do, some of the marketing work that I do, and I&#x27;ve been loving it <mark>so far</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 So far, no defects this week.<span>这周到目前没有不良。</span></div></div><div class="pvc"><div class="t">Until next time<span>下次见</span></div><div class="o" onclick="pvJump(55)"><span class="n">#55</span><mark>Until next time</mark>, peace. <i>▶ 跳到这句</i></div><div class="eg">🏭 That&#x27;s it — until next time.<span>就到这里，下次见。</span></div></div></div></details><details class="pvs"><summary>🧩 3. 疑难句（9）</summary><div class="pvl"><div class="pvc"><div class="en"><span class="n">#1</span>It takes videos from YouTube, transcribes them, gets the timestamps, uh, gets the description based on my brand voice, and then it can also upload, um, and manage the thumbnails.</div><div class="zh">它从 YouTube 拿视频、转成文字、生成时间戳，呃，按我的品牌语气写简介，然后还能上传、呃，管理缩略图。</div><div class="why">🧩 开头就是一个 13 秒的长句：一个主语 It 后面连着 takes、transcribes、gets、gets、upload and manage 五六个动作，中间还夹着 uh、um。按动词切成步骤来听。</div><button class="jb" type="button" onclick="pvJump(1)">▶ 跳到第 1 句练</button></div><div class="pvc"><div class="en"><span class="n">#4</span>Basically what I did was I had my video uploaded here in a draft state, and so it pulled the video MP4 down.</div><div class="zh">基本上，我的做法是先把视频以草稿状态上传到这里，然后它把 MP4 视频文件拉了下来。</div><div class="why">🧩 what I did was I had my video uploaded …：was 后面直接接完整句子，再加 had + 宾语 + 过去分词；and so it pulled the video MP4 down 的 pull … down 被 MP4 隔开。</div><button class="jb" type="button" onclick="pvJump(4)">▶ 跳到第 4 句练</button></div><div class="pvc"><div class="en"><span class="n">#15</span>Maybe you&#x27;re familiar with transcription services, then you have to take that transcript, you have to put it in AI, you have to get timestamps, you have to make sure it sounds like you.</div><div class="zh">也许你用过转写服务：然后你得拿着文字稿，扔进 AI，再弄时间戳，还要确保读起来像你自己写的。</div><div class="why">🧩 Maybe you&#x27;re familiar … then you have to …：一口气连说四个 you have to，语速越来越快；最后 sounds like you 是“像你本人写的”。</div><button class="jb" type="button" onclick="pvJump(15)">▶ 跳到第 15 句练</button></div><div class="pvc"><div class="en"><span class="n">#18</span>So what my Media Manager bot does is it takes videos from YouTube, transcribes them, gets the timestamps, uh, gets the description based on my brand voice.</div><div class="zh">我的“媒体管家”bot 做的事是：从 YouTube 拿视频、转文字、生成时间戳，呃，按我的品牌语气写简介。</div><div class="why">🧩 what my Media Manager bot does is it takes …：主语从句后又加了 it，口语不规范但很常见；后面又是一串动词。</div><button class="jb" type="button" onclick="pvJump(18)">▶ 跳到第 18 句练</button></div><div class="pvc"><div class="en"><span class="n">#38</span>because all I&#x27;m really doing in Figma is maybe duplicating this image, changing the bottom title, and then adjusting the background with some other templates that I have.</div><div class="zh">因为我在 Figma 里做的其实就是：复制这张图、改下面的标题，然后用我其他的一些模板调一下背景。</div><div class="why">🧩 because all I&#x27;m really doing in Figma is …：all 从句做主语，is 后面三个 -ing（duplicating, changing, adjusting）并列，最后还挂着 that I have。</div><button class="jb" type="button" onclick="pvJump(38)">▶ 跳到第 38 句练</button></div><div class="pvc"><div class="en"><span class="n">#39</span>So theoretically, I could also have it make the title cards, because it&#x27;s really good at manipulating Figma, as you&#x27;ll see in some of the other content that I&#x27;m sharing out.</div><div class="zh">所以理论上，我也可以让它做标题卡，因为它很会操作 Figma——你们在我分享的其他内容里会看到。</div><div class="why">🧩 theoretically 难读；as you&#x27;ll see in some of the other content that I&#x27;m sharing out 是尾巴上的补充，sharing out＝分享出去。</div><button class="jb" type="button" onclick="pvJump(39)">▶ 跳到第 39 句练</button></div><div class="pvc"><div class="en"><span class="n">#41</span>And just a year ago — just a few months ago — I tried to do exactly this flow, and I was unable to do it.</div><div class="zh">而就在一年前——不，就在几个月前——我试着做完全一样的流程，结果没做成。</div><div class="why">🧩 改口：just a year ago — just a few months ago，以后者为准；I tried to do exactly this flow and I was unable to do it。</div><button class="jb" type="button" onclick="pvJump(41)">▶ 跳到第 41 句练</button></div><div class="pvc"><div class="en"><span class="n">#47</span>I&#x27;d prefer the agent use the YouTube Data API.</div><div class="zh">我更希望代理用 YouTube Data API。</div><div class="why">🧩 I&#x27;d prefer the agent use …：prefer 后面的从句用动词原形 use，不是 uses，听的时候别被“语法不对”卡住。</div><button class="jb" type="button" onclick="pvJump(47)">▶ 跳到第 47 句练</button></div><div class="pvc"><div class="en"><span class="n">#51</span>But if you&#x27;re willing to cut an Assembly API key, if you&#x27;re willing to set up a Google Cloud Project, you can have exactly the same workflow.</div><div class="zh">只要你愿意去申请一个 Assembly 的 API 密钥、愿意开一个 Google Cloud 项目，你就能拥有一模一样的工作流。</div><div class="why">🧩 两个 if you&#x27;re willing to 并列；cut an Assembly API key 的 cut 是口语“生成（密钥）”，Assembly 指 AssemblyAI。</div><button class="jb" type="button" onclick="pvJump(51)">▶ 跳到第 51 句练</button></div></div></details></div></details><script>
+function pvJump(n){try{var j=document.getElementById("jumpN");j.value=n;jumpTo();var a=document.getElementById("app");if(a&&a.style.display!=="none")a.scrollIntoView({behavior:"smooth",block:"start"});else window.scrollTo({top:0,behavior:"smooth"})}catch(e){console.log(e)}}
+(function(){var K="jt.pv."+location.pathname;document.querySelectorAll(".pv,.pv .pvs").forEach(function(d,i){try{var v=localStorage.getItem(K+i);if(v!==null)d.open=v==="1";d.addEventListener("toggle",function(){try{localStorage.setItem(K+i,d.open?"1":"0")}catch(e){}})}catch(e){}})})();
+</script><!--/PV-->
+<div id="loading" style="display:none"></div>
+<div id="ytbox" style="background:#000;border-radius:14px;overflow:hidden;margin:0 0 10px;aspect-ratio:16/9;max-height:34vh"><div id="yt" style="width:100%;height:100%"></div></div>
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px;font-size:13px;color:#e0e7ff"><button id="ccBtn" type="button" onclick="toggleCC()" style="border:0;border-radius:999px;padding:6px 12px;background:#fff;color:#3730a3;font-size:13px">🔤 视频英文字幕：关</button><span>视频由 YouTube 官方播放，按句自动跳转、重复。</span></div>
+<div class="card" id="app" style="display:none">
+  <div class="toprow">
+    <div class="num" id="num">1 <small>/ 1</small></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div class="time" id="tm">00:00</div><div class="cnt" id="cnt">第1遍</div></div>
+    <button class="star" id="star" title="收藏这句（S）"><b>☆</b><span>收藏</span></button>
+  </div>
+  <div class="chap" id="chap"></div>
+  <div class="bar" id="bar"><div id="barIn"></div></div>
+  <div class="segbar"><div id="segIn"></div></div>
+  <div class="sub-box" id="subbox"></div>
+  <details class="pts" id="ptsBox"><summary><span>💡 这句讲解（听懂了再看）</span><span id="ptsN"></span></summary><div id="ptsBody"></div></details>
+  <div class="qbox" id="qBox"><div class="qh"><span>❓ 这句我想问</span><span class="qtools"><small id="qState">自动保存在本机</small><button class="qlang" id="qLang" type="button" title="语音识别语言：中文 / 英文">中</button></span></div><div class="qwrap"><textarea id="qIn" rows="2" enterkeyhint="done" placeholder="哪里没听懂、哪个词不会用，写或点🎤说（自动保存）"></textarea><button class="qmic" id="qMic" type="button" title="语音提问：点一下开始说，再点一下停止">🎤<span id="qMicT">说</span></button></div><div class="qinterim" id="qInterim"></div><div class="qmsg" id="qMsg"></div></div>
+  <div class="ctrls">
+    <button class="btn" id="prev">⏮<span>上一句</span></button>
+    <button class="btn" id="rep">🔁<span>重听</span></button>
+    <button class="btn play" id="play">▶<span>播放</span></button>
+    <button class="btn" id="next">⏭<span>下一句</span></button>
+  </div>
+  <div class="sep"></div>
+  <div class="opts">
+    <div class="reps speeds" id="speeds"></div>
+  </div>
+  <div class="opts">
+    <div class="reps" id="reps"><span class="lb">每句</span></div>
+    <label class="toggle"><input type="checkbox" id="cont">连续播放</label>
+  </div>
+  <div class="opts">
+    <div class="reps subs" id="subs"><span class="lb">字幕</span></div>
+  </div>
+  <div class="opts">
+    <button class="chip" id="onlyStar">⭐ 只练收藏的 (<span id="starCnt">0</span>)</button>
+    <label class="toggle" id="blurLbl"><input type="checkbox" id="blurList" checked>列表遮住英文</label>
+  </div>
+  <div class="opts">
+    <button class="chip" id="remoteBtn">🎮 遥控模式：关</button>
+    <button class="chip" id="diagBtn">🔧 按键测试</button>
+  </div>
+  <div class="rtip" id="remoteTip" style="display:none">🎮 遥控模式（页面已锁定不滚动）：上滑 / 左滑 / 滚轮向下 / →↓ PageDown 键 / 点屏幕右边缘 = 下一句 · 下滑 / 右滑 / 滚轮向上 / ←↑ PageUp 键 / 点屏幕左边缘 = 上一句 · 点中间空白处 = 重听</div>
+  <div class="opts jump">
+    <select id="chapSel" style="display:none"></select>
+    <span class="lb">跳到第</span><input id="jumpN" type="number" inputmode="numeric" min="1" enterkeyhint="go"><span class="lb">句</span><button class="chip" id="jumpGo">跳</button>
+  </div>
+</div>
+<details class="panel" id="studyPanel" style="display:none">
+  <summary><span id="studyTitle">📘 本章学习</span><span>展开 / 收起</span></summary>
+  <div class="study" id="study"></div>
+</details>
+<details class="panel" id="favPanel">
+  <summary><span>⭐ 我的收藏</span><span id="favInfo">0 句</span></summary>
+  <div class="list" id="favList"></div>
+  <div class="pbar"><button class="chip" id="favCopy">📋 复制全部收藏</button><button class="chip" id="favPlay">▶ 只练收藏</button></div>
+</details>
+<details class="panel" id="qPanel">
+  <summary><span>❓ 我的提问</span><span id="qInfo">0 条</span></summary>
+  <div class="list" id="qList"></div>
+  <div class="pbar"><button class="chip" id="qCopy">📋 复制全部问题</button></div>
+</details>
+<div class="panel" id="copyBox"><div style="font-size:13px;color:#475569;margin-bottom:6px">自动复制没成功：长按下面的文字 → 全选 → 复制</div><textarea id="copyTxt" readonly></textarea><button class="chip" id="copyClose" style="margin-top:6px">关闭</button></div>
+<details class="panel" id="panel">
+  <summary><span>📜 句子列表</span><span id="listInfo"></span></summary>
+  <div class="list" id="list"></div>
+</details>
+<div class="kbd">每句默认 ∞ 无限重复，点 下一句 / 上一句 / 列表里的句子 才换句 · 倍速只有点“速度”按钮才会变<br>电脑快捷键：空格 = 重听 · ←/→ 或 ↑/↓ = 上/下一句 · P = 播放/暂停 · S = 收藏 · Enter = 显示字幕<br>蓝牙指环：→ ↓ PageDown / 下一曲 = 下一句 · ← ↑ PageUp / 上一曲 = 上一句 · 播放暂停键 = 播放/暂停 · 指环发的是滑动或滚轮的话，先点 🎮 遥控模式 打开 · 不确定指环发什么，点 🔧 按键测试 按一下看</div>
+</div>
+<div class="ezone" id="ezL"></div><div class="ezone" id="ezR"></div>
+<button id="remoteExit">🎮 退出遥控</button>
+<div id="toast"></div>
+<div id="micAlert" role="alertdialog"><div class="mt" id="maT"></div><div class="mb" id="maB"></div><div class="mbtns"><button class="pri" id="maKb" type="button">⌨️ 改用键盘语音输入</button><button id="maRetry" type="button">🎤 再试一次</button><button id="maX" type="button">知道了</button></div><div class="md" id="maD"></div></div>
+<div id="diag" style="display:none"><div class="dh"><span>🔧 按键测试：按一下指环，看这里显示什么</span><span><button id="diagC">清空</button><button id="diagX">关闭</button></span></div><pre id="diagLog">（等待信号…）</pre></div>
+
+<script>
+const SEGS=[{"s": 0.34, "e": 13.6, "en": "It takes videos from YouTube, transcribes them, gets the timestamps, uh, gets the description based on my brand voice, and then it can also upload, um, and manage the thumbnails.", "zh": "它从 YouTube 拿视频、转成文字、生成时间戳，呃，按我的品牌语气写简介，然后还能上传、呃，管理缩略图。", "pts": [{"k": "语法", "h": "takes …, transcribes …, gets …, gets …", "x": "一个主语 It 带一连串动词，按工作步骤排列。听的时候抓每个动词就是每一步。", "eg": "It checks the parts, prints a label, and moves them to the rack.", "egz": "它检查零件、打印标签、再放到货架上。"}, {"k": "术语", "h": "transcribe / timestamps", "x": "transcribe＝把语音转成文字；timestamps＝时间戳，标出每段内容在视频里的几分几秒。", "eg": "Add timestamps to the CCTV report.", "egz": "在监控报告里加上时间点。"}, {"k": "术语", "h": "brand voice", "x": "品牌语气：一个公司/个人固定的说话风格。", "eg": "Our emails should match the company's brand voice.", "egz": "我们的邮件要符合公司统一的语气。"}, {"k": "术语", "h": "thumbnail", "x": "缩略图：视频封面那张小图。", "eg": "Use a clear photo as the thumbnail.", "egz": "用一张清楚的照片做封面。"}]}, {"s": 14.1, "e": 17.55, "en": "So that video I just showed you was one of two that I recently made.", "zh": "刚才给你们看的那个视频，是我最近做的两个之一。", "pts": [{"k": "语法", "h": "that video (that) I just showed you", "x": "省略 that 的定语从句。", "eg": "The sample I sent you was from batch 12.", "egz": "我发给你的样品是第 12 批的。"}, {"k": "语法", "h": "one of two", "x": "两个中的一个；one of + 复数。", "eg": "This is one of three lines that run at night.", "egz": "这是夜里开的三条线之一。"}]}, {"s": 18.37, "e": 20.2, "en": "It took the raw video.", "zh": "它拿到的是原始视频。", "pts": [{"k": "词汇", "h": "raw", "x": "原始的、未加工的。raw material＝原材料。", "eg": "Raw material prices went up again.", "egz": "原材料又涨价了。"}, {"k": "语法", "h": "took（take 的过去式）", "x": "这里 take＝“拿来、接收”。", "eg": "The machine took the wrong part.", "egz": "机器抓错了零件。"}]}, {"s": 20.55, "e": 27.4, "en": "Basically what I did was I had my video uploaded here in a draft state, and so it pulled the video MP4 down.", "zh": "基本上，我的做法是先把视频以草稿状态上传到这里，然后它把 MP4 视频文件拉了下来。", "pts": [{"k": "语法", "h": "what I did was …", "x": "强调句：“我的做法是……”，口语里 was 后面直接跟一个完整句子。", "eg": "What I did was call the supplier directly.", "egz": "我的做法是直接打给供应商。"}, {"k": "语法", "h": "had my video uploaded", "x": "have + 宾语 + 过去分词：让某物处于“已……”状态。", "eg": "I had the drawings printed for the meeting.", "egz": "我把会议用的图纸打印好了。"}, {"k": "术语", "h": "draft state", "x": "草稿状态：还没公开发布。", "eg": "The new SOP is still in draft state.", "egz": "新 SOP 还是草稿状态。"}, {"k": "词汇", "h": "pull … down", "x": "把（文件）下载下来。", "eg": "Pull down the latest file from the server.", "egz": "从服务器下载最新文件。"}]}, {"s": 27.4, "e": 32.11, "en": "Then it transcribed the video using AssemblyAI.", "zh": "然后它用 AssemblyAI 把视频转成了文字。", "pts": [{"k": "术语", "h": "AssemblyAI", "x": "一家做语音转文字（speech-to-text）的 AI 公司，按用量收费。", "eg": "We could use speech-to-text for shift handover notes.", "egz": "交接班记录可以用语音转文字。"}, {"k": "语法", "h": "using …", "x": "现在分词作方式状语：“用……来做”。", "eg": "We cleaned the mold using dry ice.", "egz": "我们用干冰清洗了模具。"}]}, {"s": 32.4, "e": 36.9, "en": "I gave it my AssemblyAI API key, and I just said, \"Hey, build a system for transcribing video.\"", "zh": "我把 AssemblyAI 的 API 密钥给了它，然后只说了一句：“嘿，搭一个转写视频的系统。”", "pts": [{"k": "地道表达", "h": "I just said, \"Hey, …\"", "x": "讲故事时直接引用自己说的话，Hey 开头显得随意。", "eg": "I just said, \"Hey, can you check this by noon?\"", "egz": "我就说：“嘿，中午前能查一下吗？”"}, {"k": "语法", "h": "a system for transcribing", "x": "for + 动名词：表示用途。", "eg": "We need a system for tracking returns.", "egz": "我们需要一套跟踪退货的系统。"}]}, {"s": 37.21, "e": 47.75, "en": "It added an appropriate title based on the transcription, and then it populated the description with timestamps and a template that I use for all my descriptions.", "zh": "它根据转写内容加了一个合适的标题，然后在简介里填上了时间戳，以及我所有简介都用的一个模板。", "pts": [{"k": "词汇", "h": "appropriate", "x": "合适的、恰当的。", "eg": "Wear appropriate PPE in the paint room.", "egz": "在喷漆房要穿合适的防护用品。"}, {"k": "词汇", "h": "based on", "x": "根据、基于。", "eg": "The bonus is based on output and quality.", "egz": "奖金根据产量和质量来定。"}, {"k": "词汇", "h": "populate … with", "x": "（软件）往表格/栏位里填入……。", "eg": "Populate the form with last month's numbers.", "egz": "把上个月的数字填进表格。"}]}, {"s": 47.75, "e": 53.5, "en": "So I was able to populate a skill that taught this bot how to populate the description.", "zh": "所以我做了一个技能（skill），教这个 bot 怎么填写简介。", "pts": [{"k": "术语", "h": "skill", "x": "Grok Bot 里的“技能”：一份写好的做法说明，教 bot 怎么做某件事。", "eg": "We wrote a skill for answering supplier emails.", "egz": "我们写了一个回复供应商邮件的技能。"}, {"k": "语法", "h": "taught … how to", "x": "teach + 人 + how to do：教某人怎么做。", "eg": "She taught the new hire how to use the crane.", "egz": "她教新人怎么用行车。"}]}, {"s": 53.98, "e": 59.0, "en": "Okay, so today I'm excited to show you how I'm using Grok Bot to automate all of my YouTube video tagging.", "zh": "好，今天我很高兴给你们看看，我是怎么用 Grok Bot 把 YouTube 视频的标注工作全部自动化的。", "pts": [{"k": "语法", "h": "I'm excited to show you", "x": "be excited to do：很高兴/很期待做……。", "eg": "I'm excited to show you the new line.", "egz": "很高兴带大家看新产线。"}, {"k": "词汇", "h": "automate", "x": "使……自动化。", "eg": "We automated the packing step last year.", "egz": "我们去年把包装这一步自动化了。"}, {"k": "术语", "h": "tagging", "x": "这里指给视频填标题、简介、标签等信息。", "eg": "Correct tagging helps people find the video.", "egz": "信息填对了，别人才找得到视频。"}]}, {"s": 59.27, "e": 62.7, "en": "So typically when I finish a video, um, there's still some work to do.", "zh": "通常我做完一个视频后，呃，还有一些活要干。", "pts": [{"k": "词汇", "h": "typically", "x": "通常、一般来说。", "eg": "Typically we ship on Thursdays.", "egz": "我们一般周四发货。"}, {"k": "语法", "h": "there's still some work to do", "x": "there be + 名词 + to do：还有……要做。", "eg": "There's still a lot to clean after the shift.", "egz": "下班后还有很多要打扫。"}]}, {"s": 62.74, "e": 65.7, "en": "So in front of me, I have a polished YouTube video.", "zh": "我面前是一个做好的、很精致的 YouTube 视频。", "pts": [{"k": "词汇", "h": "polished", "x": "精致的、打磨好的（成品感强）。", "eg": "She gave a polished presentation to the customer.", "egz": "她给客户做了一场很专业的汇报。"}, {"k": "语法", "h": "in front of me, I have …", "x": "介词短语放句首，介绍画面。", "eg": "In front of you, you have the new safety checklist.", "egz": "你们面前是新的安全检查表。"}]}, {"s": 65.7, "e": 73.24, "en": "It has a title, it has a description, um, it has a thumbnail, but typically all this stuff's blank by the time I finish the video.", "zh": "它有标题、有简介、有缩略图，但通常我做完视频时，这些东西全是空的。", "pts": [{"k": "语法", "h": "it has …, it has …, it has …, but …", "x": "排比列出三项，再用 but 转折。", "eg": "It has power, it has air, but it has no material.", "egz": "有电、有气，就是没料。"}, {"k": "连读弱读", "h": "stuff's blank", "x": "stuff is 缩成 stuff's，和 blank 连读。", "eg": "The form's blank.", "egz": "表格是空的。"}, {"k": "语法", "h": "by the time I finish", "x": "“到我做完的时候”。", "eg": "By the time I arrive, the meeting's over.", "egz": "等我到了，会已经开完了。"}]}, {"s": 73.24, "e": 75.48, "en": "And then I have to populate this information.", "zh": "然后我还得把这些信息填上。", "pts": [{"k": "词汇", "h": "populate", "x": "填入（数据）。", "eg": "The system can populate the address automatically.", "egz": "系统能自动填地址。"}, {"k": "语法", "h": "have to", "x": "必须（不得不）。", "eg": "We have to finish the audit report today.", "egz": "我们今天必须完成审核报告。"}]}, {"s": 75.48, "e": 81.75, "en": "Now I've built up some flows in the past for dropping a video in, getting a transcript from that video.", "zh": "以前我也搭过一些流程：把视频丢进去，拿到这个视频的文字稿。", "pts": [{"k": "词汇", "h": "build up", "x": "逐步建立起来。", "eg": "We built up a good team over three years.", "egz": "我们三年里建起了一支好团队。"}, {"k": "术语", "h": "flow", "x": "流程（workflow 的简称）。", "eg": "The approval flow has three steps.", "egz": "审批流程有三步。"}, {"k": "词汇", "h": "drop … in", "x": "把……丢进去（拖进去）。", "eg": "Drop the file in the shared folder.", "egz": "把文件丢进共享文件夹。"}]}, {"s": 81.75, "e": 88.86, "en": "Maybe you're familiar with transcription services, then you have to take that transcript, you have to put it in AI, you have to get timestamps, you have to make sure it sounds like you.", "zh": "也许你用过转写服务：然后你得拿着文字稿，扔进 AI，再弄时间戳，还要确保读起来像你自己写的。", "pts": [{"k": "词汇", "h": "be familiar with", "x": "熟悉、用过……。", "eg": "Are you familiar with 5S?", "egz": "你了解 5S 吗？"}, {"k": "语法", "h": "you have to …, you have to …", "x": "连说四个 you have to，表现步骤繁琐、很累。", "eg": "You have to sign, you have to scan, you have to file it.", "egz": "要签字、要扫描、还要归档。"}, {"k": "地道表达", "h": "sounds like you", "x": "听起来像你（的风格）。", "eg": "The reply should sound like us, not a robot.", "egz": "回复要像我们说的话，不要像机器人。"}]}, {"s": 88.86, "e": 93.37, "en": "What I've built out in Grok Bot is a flow that just populates all of this from the get-go.", "zh": "我在 Grok Bot 里搭好的，是一个一开始就把这些全部填好的流程。", "pts": [{"k": "地道表达", "h": "from the get-go", "x": "从一开始。", "eg": "Do it right from the get-go.", "egz": "一开始就把它做对。"}, {"k": "词汇", "h": "build out", "x": "把……完整搭建出来。", "eg": "We built out a new warehouse area.", "egz": "我们扩建了一块新仓库区。"}]}, {"s": 93.37, "e": 100.04, "en": "So I want to show it to you, and then I'm going to show you a template that I built so you can add this to your bots in one click.", "zh": "我想先给你们看看，然后再给你们看我做的一个模板，你一键就能把它加到自己的 bot 里。", "pts": [{"k": "语法", "h": "so (that) you can …", "x": "so 表目的：“以便你能……”。", "eg": "I made a checklist so you can check faster.", "egz": "我做了检查表，方便你检查更快。"}, {"k": "地道表达", "h": "in one click", "x": "一键（完成）。", "eg": "You can export the report in one click.", "egz": "一键就能导出报告。"}]}, {"s": 100.04, "e": 112.6, "en": "So what my Media Manager bot does is it takes videos from YouTube, transcribes them, gets the timestamps, uh, gets the description based on my brand voice.", "zh": "我的“媒体管家”bot 做的事是：从 YouTube 拿视频、转文字、生成时间戳，呃，按我的品牌语气写简介。", "pts": [{"k": "语法", "h": "what my bot does is it …", "x": "主语从句 what … does 做主语，is 后面接一个完整句子（口语常见）。", "eg": "What this machine does is it cuts and bends.", "egz": "这台机器做的是切和折弯。"}, {"k": "术语", "h": "Media Manager", "x": "他给这个 bot 起的名字：媒体管家。", "eg": "Our HR bot handles leave requests.", "egz": "我们的人事 bot 处理请假。"}]}, {"s": 112.6, "e": 118.19, "en": "And then it can also upload and manage the thumbnails.", "zh": "然后它还能上传和管理缩略图。", "pts": [{"k": "词汇", "h": "upload", "x": "上传；download＝下载。", "eg": "Upload the photos to the defect log.", "egz": "把照片上传到缺陷记录里。"}, {"k": "词汇", "h": "manage", "x": "管理、处理。", "eg": "She manages the spare parts store.", "egz": "她管备件仓。"}]}, {"s": 118.19, "e": 122.4, "en": "So that video I just showed you was one of two that I recently made.", "zh": "刚才给你们看的那个视频，是我最近做的两个之一。", "pts": [{"k": "听力技巧", "h": "重复片段", "x": "这里开始和开头那段几乎一样——视频开头是把这段剪出来做了预告。再听一遍，检验自己是否都能听懂。", "eg": "Let's go over the key points again.", "egz": "我们把重点再过一遍。"}, {"k": "词汇", "h": "recently", "x": "最近。", "eg": "We recently changed suppliers.", "egz": "我们最近换了供应商。"}]}, {"s": 122.4, "e": 124.58, "en": "It took the raw video.", "zh": "它拿到的是原始视频。", "pts": [{"k": "词汇", "h": "raw video", "x": "原始视频（未剪辑）。", "eg": "Send me the raw data, not the summary.", "egz": "把原始数据发我，不要总结。"}, {"k": "连读弱读", "h": "It took the", "x": "took the 中 k 不爆破，直接接 the。", "eg": "He took the last box.", "egz": "他拿走了最后一箱。"}]}, {"s": 124.58, "e": 132.17, "en": "Basically what I did was I had my video uploaded here in a draft state, and so it pulled the video MP4 down.", "zh": "基本上，我的做法是先把视频以草稿状态上传到这里，然后它把 MP4 视频文件拉了下来。", "pts": [{"k": "术语", "h": "MP4", "x": "最常见的视频文件格式。", "eg": "Save the training video as an MP4.", "egz": "培训视频存成 MP4。"}, {"k": "词汇", "h": "basically", "x": "基本上、简单说。", "eg": "Basically, we need two more operators.", "egz": "简单说，我们还需要两个操作工。"}]}, {"s": 132.17, "e": 136.44, "en": "Then it transcribed the video using AssemblyAI.", "zh": "然后它用 AssemblyAI 把视频转成了文字。", "pts": [{"k": "发音", "h": "transcribed", "x": "/trænˈskraɪbd/，重音在第二音节，-ed 读 /d/。", "eg": "The meeting was transcribed automatically.", "egz": "会议被自动转成了文字。"}, {"k": "词汇", "h": "then", "x": "然后（按步骤讲）。", "eg": "Then press the green button.", "egz": "然后按绿色按钮。"}]}, {"s": 136.44, "e": 141.24, "en": "I gave it my AssemblyAI API key, and I just said, \"Hey, build a system for transcribing video.\"", "zh": "我把 AssemblyAI 的 API 密钥给了它，然后只说了一句：“嘿，搭一个转写视频的系统。”", "pts": [{"k": "术语", "h": "API key", "x": "API 密钥：让程序使用某个服务的“钥匙”，要保密。", "eg": "Never post the API key in the group chat.", "egz": "千万别把 API 密钥发到群里。"}, {"k": "语法", "h": "build a system", "x": "这里 build 是祈使句：直接给 bot 下命令。", "eg": "Make a list of all open orders.", "egz": "列一份所有未完成订单的清单。"}]}, {"s": 141.24, "e": 151.82, "en": "It added an appropriate title based on the transcription, and then it populated the description, um, with timestamps and a template that I use for all my descriptions.", "zh": "它根据转写内容加了一个合适的标题，然后在简介里，呃，填上了时间戳，以及我所有简介都用的一个模板。", "pts": [{"k": "词汇", "h": "transcription", "x": "转写（的结果）；transcript 指文字稿本身。", "eg": "The transcription had a few errors.", "egz": "转写结果有几个错误。"}, {"k": "术语", "h": "template", "x": "模板：固定格式。", "eg": "Use the standard template for the 8D report.", "egz": "8D 报告用标准模板。"}]}, {"s": 151.82, "e": 158.16, "en": "So I was able to populate a skill that taught this bot how to, um, populate the description.", "zh": "所以我做了一个技能，教这个 bot 怎么，呃，填写简介。", "pts": [{"k": "词汇", "h": "populate a skill", "x": "Matt 口误式用法：这里的 populate 其实是“做出、填好”一个技能。听懂意思即可。", "eg": "Fill in a checklist for the new task.", "egz": "给新任务填一份检查表。"}, {"k": "语法", "h": "was able to", "x": "过去成功做到了。", "eg": "We were able to fix it in an hour.", "egz": "我们一小时就修好了。"}]}, {"s": 158.16, "e": 162.0, "en": "From there, I actually keep all my thumbnails in Figma.", "zh": "另外，我所有的缩略图其实都放在 Figma 里。", "pts": [{"k": "术语", "h": "Figma", "x": "一款在线设计工具，常用来做界面、海报和封面图。", "eg": "The designer shares the label layout in Figma.", "egz": "设计师在 Figma 里共享标签排版。"}, {"k": "词汇", "h": "keep … in", "x": "把……存放在……。", "eg": "We keep the spare fuses in the blue cabinet.", "egz": "备用保险丝放在蓝色柜子里。"}]}, {"s": 162.0, "e": 165.1, "en": "So I sent over the Figma links in my original message.", "zh": "所以我在最开始的那条消息里把 Figma 链接发了过去。", "pts": [{"k": "词汇", "h": "send over", "x": "发过去、送过去。", "eg": "Can you send over the test report?", "egz": "能把测试报告发过来吗？"}, {"k": "词汇", "h": "original", "x": "最初的、原来的。", "eg": "Keep the original invoice.", "egz": "保留原始发票。"}]}, {"s": 165.1, "e": 168.9, "en": "I said, \"Hey, here are, um, the Figma links,\" and you can see the prompt.", "zh": "我说：“嘿，这是 Figma 链接”，你们可以看到我写的提示词。", "pts": [{"k": "地道表达", "h": "Here are …", "x": "递交多样东西时说“这些是……”；单个用 Here's。", "eg": "Here are the samples you asked for.", "egz": "这是你要的样品。"}, {"k": "术语", "h": "prompt", "x": "给 AI 的指令。", "eg": "Write the prompt in simple English.", "egz": "用简单英语写提示词。"}]}, {"s": 168.9, "e": 170.5, "en": "There are two videos staged.", "zh": "有两个视频已经准备就绪。", "pts": [{"k": "词汇", "h": "staged", "x": "准备好的、就位待发的。", "eg": "The parts are staged next to line 2.", "egz": "零件已经备在 2 号线旁边了。"}, {"k": "语法", "h": "There are + 名词 + 过去分词", "x": "过去分词作后置定语：被准备好的两个视频。", "eg": "There are three orders delayed.", "egz": "有三张订单延误了。"}]}, {"s": 170.5, "e": 174.24, "en": "Look at a few of the recent Grok Bot videos for an idea of how descriptions should work.", "zh": "（提示词：）看几个最近的 Grok Bot 视频，了解简介应该怎么写。", "pts": [{"k": "地道表达", "h": "for an idea of …", "x": "以便了解……的样子。", "eg": "Look at last year's plan for an idea of the format.", "egz": "参考去年的计划了解格式。"}, {"k": "语法", "h": "how descriptions should work", "x": "间接疑问句，语序是陈述句。", "eg": "Ask her how the new form should work.", "egz": "问她新表该怎么用。"}]}, {"s": 174.24, "e": 177.8, "en": "Rewrite it and update their tone with my skill.", "zh": "重写一下，再用我的技能把语气改过来。", "pts": [{"k": "词汇", "h": "rewrite", "x": "重写。", "eg": "Please rewrite the email more politely.", "egz": "请把邮件改写得礼貌一些。"}, {"k": "词汇", "h": "tone", "x": "语气、口吻。", "eg": "Keep a friendly tone with customers.", "egz": "对客户保持友好的语气。"}]}, {"s": 177.8, "e": 181.83, "en": "Then come up with titles, update all details, and add these thumbnails.", "zh": "然后想好标题、更新所有信息，并加上这些缩略图。", "pts": [{"k": "词汇", "h": "come up with", "x": "想出（主意、名字）。", "eg": "Come up with three ideas to cut waste.", "egz": "想三个减少浪费的点子。"}, {"k": "语法", "h": "祈使句并列", "x": "come up with …, update …, and add …：给 AI 下命令就像给员工布置任务。", "eg": "Check the seal, tighten the bolts, and test it.", "egz": "检查密封、拧紧螺栓、再测试。"}]}, {"s": 181.83, "e": 183.8, "en": "So it just did it.", "zh": "然后它就做完了。", "pts": [{"k": "语法", "h": "just did it", "x": "just 强调“就这么、直接”。", "eg": "He just fixed it — no manual needed.", "egz": "他直接就修好了，不用看说明书。"}, {"k": "连读弱读", "h": "did it", "x": "连读成 /dɪdɪt/。", "eg": "Who did it?", "egz": "谁干的？"}]}, {"s": 183.8, "e": 185.68, "en": "It did everything that I would normally do.", "zh": "我平时要做的事，它全做了。", "pts": [{"k": "语法", "h": "would normally do", "x": "would 表示过去/平常的习惯动作。", "eg": "This is what I would normally check first.", "egz": "这是我平时先查的地方。"}, {"k": "词汇", "h": "normally", "x": "通常。", "eg": "Normally the truck comes at nine.", "egz": "卡车通常九点来。"}]}, {"s": 185.68, "e": 192.98, "en": "And now that I've taught this bot how to manage my social media, I can just upload videos to YouTube, paste in Figma links.", "zh": "既然我已经教会这个 bot 管理我的社交媒体，我只要把视频传到 YouTube、贴上 Figma 链接就行。", "pts": [{"k": "语法", "h": "now that …", "x": "既然、由于现在……。", "eg": "Now that we have the new crane, loading is faster.", "egz": "既然有了新行车，装货快多了。"}, {"k": "术语", "h": "social media", "x": "社交媒体。", "eg": "HR posts job ads on social media.", "egz": "人事在社交媒体上发招聘。"}, {"k": "词汇", "h": "paste in", "x": "粘贴进去。", "eg": "Paste in the order number here.", "egz": "把订单号粘贴到这里。"}]}, {"s": 192.98, "e": 197.4, "en": "Eventually, I think I can just tell it to update the thumbnails in Figma,", "zh": "以后我觉得我只要叫它直接在 Figma 里更新缩略图就行，", "pts": [{"k": "词汇", "h": "eventually", "x": "最终、以后（总有一天）。", "eg": "Eventually, all lines will use barcode tracking.", "egz": "最终所有产线都会用条码追踪。"}, {"k": "语法", "h": "tell it to …", "x": "tell + 宾语 + to do。", "eg": "Tell them to wait at gate 2.", "egz": "叫他们在 2 号门等。"}]}, {"s": 197.4, "e": 208.93, "en": "because all I'm really doing in Figma is maybe duplicating this image, changing the bottom title, and then adjusting the background with some other templates that I have.", "zh": "因为我在 Figma 里做的其实就是：复制这张图、改下面的标题，然后用我其他的一些模板调一下背景。", "pts": [{"k": "语法", "h": "all I'm really doing is …", "x": "“我其实只是在做……”；all 引导的主语从句，后面接一串 -ing。", "eg": "All we're doing is moving the rack two meters.", "egz": "我们只是把货架挪两米。"}, {"k": "词汇", "h": "duplicate", "x": "复制（出一份一样的）。", "eg": "Duplicate last month's sheet and change the dates.", "egz": "复制上个月的表，把日期改掉。"}, {"k": "词汇", "h": "adjust", "x": "调整。", "eg": "Adjust the guide rail for the bigger box.", "egz": "为大箱子调一下导轨。"}]}, {"s": 208.93, "e": 217.59, "en": "So theoretically, I could also have it make the title cards, because it's really good at manipulating Figma, as you'll see in some of the other content that I'm sharing out.", "zh": "所以理论上，我也可以让它做标题卡，因为它很会操作 Figma——你们在我分享的其他内容里会看到。", "pts": [{"k": "词汇", "h": "theoretically", "x": "理论上（实际还没做）。", "eg": "Theoretically, the line can make 900 an hour.", "egz": "理论上这条线每小时能做 900 个。"}, {"k": "词汇", "h": "manipulate", "x": "操作、处理（软件或数据）；也可指“操纵”。", "eg": "The robot manipulates parts with two arms.", "egz": "机器人用两只手臂操作零件。"}, {"k": "语法", "h": "as you'll see …", "x": "as 引导的非限定从句：“正如你会看到的”。", "eg": "As you'll see in the report, scrap went down.", "egz": "你在报告里会看到，废品下降了。"}]}, {"s": 217.59, "e": 221.6, "en": "And so really, just like that, I built something that could automate this end to end.", "zh": "就这样，我做出了一个能把整件事从头到尾自动化的东西。", "pts": [{"k": "地道表达", "h": "end to end", "x": "从头到尾、全流程。", "eg": "We track the order end to end.", "egz": "我们全流程跟踪订单。"}, {"k": "地道表达", "h": "just like that", "x": "就这样（很轻松）。", "eg": "Just like that, the alarm stopped.", "egz": "就这样，报警停了。"}]}, {"s": 221.6, "e": 227.29, "en": "And just a year ago — just a few months ago — I tried to do exactly this flow, and I was unable to do it.", "zh": "而就在一年前——不，就在几个月前——我试着做完全一样的流程，结果没做成。", "pts": [{"k": "听力技巧", "h": "改口", "x": "just a year ago — just a few months ago：先说一年前，马上改成几个月前，以后面为准。", "eg": "Last week — no, two days ago — the pump failed.", "egz": "上周——不对，两天前——泵坏了。"}, {"k": "词汇", "h": "be unable to", "x": "不能、没能做到（较正式）。", "eg": "We were unable to reach the customer.", "egz": "我们没能联系上客户。"}, {"k": "词汇", "h": "exactly", "x": "正好、完全（一样）。", "eg": "That's exactly the part we need.", "egz": "那正是我们需要的零件。"}]}, {"s": 227.29, "e": 230.64, "en": "So I'll have this as a template in the video description.", "zh": "我会把它做成模板，放在视频简介里。", "pts": [{"k": "语法", "h": "have this as a template", "x": "have + 宾语 + as：把……作为……提供。", "eg": "We'll have this as the standard for all lines.", "egz": "我们会把这个作为所有产线的标准。"}, {"k": "术语", "h": "video description", "x": "视频简介（标题下面的说明文字）。", "eg": "The link is in the video description.", "egz": "链接在视频简介里。"}]}, {"s": 230.64, "e": 232.57, "en": "One thing to note, a few things for the template.", "zh": "有一点要注意——是关于这个模板的几点。", "pts": [{"k": "地道表达", "h": "One thing to note", "x": "需要注意的一点；随即改口成 a few things（几点）。", "eg": "One thing to note: the floor is wet.", "egz": "要注意一点：地面是湿的。"}, {"k": "语法", "h": "名词 + to do", "x": "thing to note＝要注意的事。", "eg": "I have a few things to check.", "egz": "我有几件事要查。"}]}, {"s": 232.57, "e": 240.5, "en": "You need to have, um, Google Cloud Project enabled because this template uses, um, some YouTube Data APIs.", "zh": "你需要开通 Google Cloud 项目，因为这个模板要用到一些 YouTube Data API。", "pts": [{"k": "术语", "h": "Google Cloud Project", "x": "谷歌云项目：在谷歌云平台上开的一个“项目空间”，开通后才能调用谷歌的各种 API。", "eg": "IT set up a cloud project for our dashboards.", "egz": "IT 为看板开了一个云项目。"}, {"k": "语法", "h": "have … enabled", "x": "have + 宾语 + 过去分词：把……开通/启用好。", "eg": "Have the alarm enabled before you leave.", "egz": "离开前把报警打开。"}, {"k": "术语", "h": "YouTube Data API", "x": "YouTube 官方接口，程序可以用它上传视频、改标题和简介。", "eg": "The API lets the system read order data.", "egz": "这个接口让系统能读订单数据。"}]}, {"s": 240.5, "e": 245.15, "en": "If that's a little complicated for you, you can configure this to work all through the browser.", "zh": "如果你觉得那有点复杂，也可以把它设置成全部通过浏览器来完成。", "pts": [{"k": "词汇", "h": "complicated", "x": "复杂的。", "eg": "The new tax form is complicated.", "egz": "新的税表很复杂。"}, {"k": "词汇", "h": "configure", "x": "配置、设置。", "eg": "Configure the printer for A4 paper.", "egz": "把打印机设成 A4 纸。"}, {"k": "词汇", "h": "all through", "x": "全程都通过……。", "eg": "We did it all through email.", "egz": "我们全程用邮件搞定的。"}]}, {"s": 245.15, "e": 248.6, "en": "Just be careful there, um, because the agent will be using the browser.", "zh": "不过要小心，因为那样代理会直接操作浏览器。", "pts": [{"k": "地道表达", "h": "Just be careful there", "x": "提醒：“那里要小心”。", "eg": "Just be careful there — the edge is sharp.", "egz": "那里小心，边很锋利。"}, {"k": "语法", "h": "will be using", "x": "将来进行时：到时候会一直在用。", "eg": "The night shift will be using line 4.", "egz": "夜班会用 4 号线。"}]}, {"s": 248.6, "e": 251.49, "en": "I'd prefer the agent use the YouTube Data API.", "zh": "我更希望代理用 YouTube Data API。", "pts": [{"k": "语法", "h": "I'd prefer (that) sb do", "x": "虚拟语气：prefer 后从句用动词原形 use（不是 uses）。", "eg": "I'd prefer the driver arrive before eight.", "egz": "我更希望司机八点前到。"}, {"k": "词汇", "h": "prefer", "x": "更喜欢、宁愿。", "eg": "I prefer email to phone calls.", "egz": "比起电话我更喜欢邮件。"}]}, {"s": 251.49, "e": 254.55, "en": "Again, you'll need Google Cloud Project access.", "zh": "再说一遍，你需要有 Google Cloud 项目的权限。", "pts": [{"k": "词汇", "h": "again", "x": "这里表示“再强调一遍”。", "eg": "Again, wear your glasses on the floor.", "egz": "再说一遍，车间里要戴眼镜。"}, {"k": "词汇", "h": "access", "x": "权限、使用权（名词）。", "eg": "New staff don't have system access yet.", "egz": "新员工还没有系统权限。"}]}, {"s": 254.55, "e": 262.9, "en": "What you can do is just ask the bot, say, you know, \"Help me configure GCP access for this project.\"", "zh": "你可以直接问 bot，比如说：“帮我给这个项目配置 GCP 权限。”", "pts": [{"k": "语法", "h": "What you can do is …", "x": "给建议的常用句型：“你可以做的是……”。", "eg": "What you can do is ask the supplier for a sample.", "egz": "你可以先找供应商要样品。"}, {"k": "术语", "h": "GCP", "x": "Google Cloud Platform（谷歌云平台）的缩写。", "eg": "Our backups are stored on GCP.", "egz": "我们的备份存在谷歌云上。"}, {"k": "地道表达", "h": "say, …", "x": "插入 say 表示“比如说”。", "eg": "Pick a day, say, Tuesday.", "egz": "挑一天，比如周二。"}]}, {"s": 262.9, "e": 266.92, "en": "And it'll tell you everything you need to get done.", "zh": "它会告诉你需要完成的所有事情。", "pts": [{"k": "语法", "h": "everything (that) you need to get done", "x": "省略 that 的定语从句；get + 宾语 + done＝把……做完。", "eg": "Here's everything you need to get done today.", "egz": "这是你今天要做完的所有事。"}, {"k": "连读弱读", "h": "it'll", "x": "it will 缩写，读 /ˈɪtl/。", "eg": "It'll be ready soon.", "egz": "马上就好。"}]}, {"s": 266.92, "e": 274.37, "en": "But if you're willing to cut an Assembly API key, if you're willing to set up a Google Cloud Project, you can have exactly the same workflow.", "zh": "只要你愿意去申请一个 Assembly 的 API 密钥、愿意开一个 Google Cloud 项目，你就能拥有一模一样的工作流。", "pts": [{"k": "语法", "h": "if you're willing to …, if you're willing to …", "x": "两个 if 并列，表示条件；be willing to＝愿意。", "eg": "If you're willing to work Saturday, you get double pay.", "egz": "愿意周六上班就拿双倍工资。"}, {"k": "地道表达", "h": "cut a key", "x": "口语：生成/申请一个密钥（像配钥匙）。", "eg": "IT can cut you a new badge.", "egz": "IT 可以给你重新做一张工卡。"}, {"k": "词汇", "h": "set up", "x": "建立、开通。", "eg": "Set up a new account for the supplier.", "egz": "给供应商开个新账户。"}]}, {"s": 274.37, "e": 279.29, "en": "And all you have to do is click the template to install this into your Grok Bot and get started.", "zh": "你只要点一下模板，把它装进你的 Grok Bot，就可以开始了。", "pts": [{"k": "语法", "h": "all you have to do is (to) …", "x": "“你只需要……”，is 后接动词原形。", "eg": "All you have to do is sign here.", "egz": "你只需在这里签字。"}, {"k": "词汇", "h": "get started", "x": "开始。", "eg": "Let's get started with the safety talk.", "egz": "我们开始安全讲话吧。"}]}, {"s": 279.29, "e": 286.04, "en": "This is another way that I'm using Grok Bot to automate some of the social media work that I do, some of the marketing work that I do, and I've been loving it so far.", "zh": "这是我用 Grok Bot 自动化一部分社交媒体工作、一部分营销工作的另一种方式，到目前为止我非常喜欢。", "pts": [{"k": "语法", "h": "another way that I'm using … to …", "x": "way + that 从句，说明用途。", "eg": "This is another way we're using robots to save time.", "egz": "这是我们用机器人省时间的另一种方式。"}, {"k": "语法", "h": "I've been loving it so far", "x": "现在完成进行时：从开始到现在一直很喜欢。", "eg": "We've been using the new glue for a month.", "egz": "我们用新胶水一个月了。"}, {"k": "术语", "h": "marketing", "x": "营销、市场推广。", "eg": "Marketing needs photos of the new product.", "egz": "市场部要新产品的照片。"}]}, {"s": 286.04, "e": 291.26, "en": "But I'm Matt with SpaceX AI, and this has been how I'm using Grok Bot to tag my videos on YouTube.", "zh": "我是 SpaceX AI 的 Matt，以上就是我怎么用 Grok Bot 给 YouTube 视频做标注的。", "pts": [{"k": "地道表达", "h": "this has been …", "x": "结尾总结常用：“以上就是……”。", "eg": "This has been our monthly safety update.", "egz": "以上就是本月的安全通报。"}, {"k": "词汇", "h": "tag", "x": "给……加标签、标注。", "eg": "Tag every failed part with a red label.", "egz": "每个不良品都贴红标签。"}]}, {"s": 291.26, "e": 292.9, "en": "Until next time, peace.", "zh": "下次见，拜拜。", "pts": [{"k": "地道表达", "h": "Until next time", "x": "下次再见。", "eg": "That's all for today — until next time.", "egz": "今天就到这里，下次见。"}, {"k": "地道表达", "h": "peace", "x": "随意的道别：“拜拜、回见”。", "eg": "Okay, peace — see you Monday.", "egz": "好，回见，周一见。"}]}];
+const KEY="jingting.Youtube_oEzK7W6r1Dk.";
+
+const CHAPTERS=[{"t": "预告：媒体管家 bot 做了什么", "s": 0, "outline": ["开头先放一段预告（后面第 18–26 句会再完整出现一次）。", "bot 从 YouTube 拿视频、转文字、生成时间戳，按品牌语气写简介，还管缩略图。", "步骤：草稿上传 → 下载 MP4 → AssemblyAI 转写 → 写标题和简介 → 用技能统一格式。"], "key": [{"n": 1, "en": "It takes videos from YouTube, transcribes them, gets the timestamps, uh, gets the description based on my brand voice, and then it can also upload, um, and manage the thumbnails.", "zh": "它从 YouTube 拿视频、转成文字、生成时间戳，呃，按我的品牌语气写简介，然后还能上传、呃，管理缩略图。", "why": "一个主语带一串动词：按步骤听"}, {"n": 4, "en": "Basically what I did was I had my video uploaded here in a draft state, and so it pulled the video MP4 down.", "zh": "基本上，我的做法是先把视频以草稿状态上传到这里，然后它把 MP4 视频文件拉了下来。", "why": "what I did was … + had my video uploaded"}], "words": [{"w": "transcribe", "ipa": "/trænˈskraɪb/", "zh": "转写", "note": ""}, {"w": "timestamp", "ipa": "/ˈtaɪmstæmp/", "zh": "时间戳", "note": ""}, {"w": "brand voice", "ipa": "/brænd vɔɪs/", "zh": "品牌语气", "note": ""}, {"w": "thumbnail", "ipa": "/ˈθʌmneɪl/", "zh": "缩略图", "note": ""}, {"w": "draft", "ipa": "/dræft/", "zh": "草稿", "note": ""}]}, {"t": "问题：视频做完还有一堆活", "s": 8, "outline": ["今天讲怎么用 Grok Bot 把 YouTube 视频的标注自动化。", "视频做完时，标题、简介、缩略图通常都是空的，要手动填。", "以前的流程很繁琐：转写 → 丢进 AI → 弄时间戳 → 改成自己的语气。", "现在在 Grok Bot 里一步到位，还做成了模板，一键安装。"], "key": [{"n": 12, "en": "It has a title, it has a description, um, it has a thumbnail, but typically all this stuff's blank by the time I finish the video.", "zh": "它有标题、有简介、有缩略图，但通常我做完视频时，这些东西全是空的。", "why": "排比 it has …, it has …, but …"}, {"n": 15, "en": "Maybe you're familiar with transcription services, then you have to take that transcript, you have to put it in AI, you have to get timestamps, you have to make sure it sounds like you.", "zh": "也许你用过转写服务：然后你得拿着文字稿，扔进 AI，再弄时间戳，还要确保读起来像你自己写的。", "why": "连说四个 you have to，表现繁琐"}], "words": [{"w": "automate", "ipa": "/ˈɔːtəmeɪt/", "zh": "自动化", "note": ""}, {"w": "polished", "ipa": "/ˈpɑːlɪʃt/", "zh": "精致的", "note": ""}, {"w": "populate", "ipa": "/ˈpɑːpjuleɪt/", "zh": "填入", "note": ""}, {"w": "from the get-go", "ipa": "/frəm ðə ˈɡet ɡoʊ/", "zh": "从一开始", "note": "口语"}]}, {"t": "媒体管家 bot 的完整流程", "s": 17, "outline": ["完整再讲一遍：拿视频、转写、时间戳、按品牌语气写简介，再上传和管理缩略图。", "视频先以草稿状态上传，bot 下载 MP4，用 AssemblyAI 转写。", "根据转写加标题，用固定模板写简介；这套写法存成了一个技能。"], "key": [{"n": 18, "en": "So what my Media Manager bot does is it takes videos from YouTube, transcribes them, gets the timestamps, uh, gets the description based on my brand voice.", "zh": "我的“媒体管家”bot 做的事是：从 YouTube 拿视频、转文字、生成时间戳，呃，按我的品牌语气写简介。", "why": "what my bot does is it …"}, {"n": 25, "en": "It added an appropriate title based on the transcription, and then it populated the description, um, with timestamps and a template that I use for all my descriptions.", "zh": "它根据转写内容加了一个合适的标题，然后在简介里，呃，填上了时间戳，以及我所有简介都用的一个模板。", "why": "based on + populate … with"}], "words": [{"w": "Media Manager", "ipa": "/ˈmiːdiə ˈmænɪdʒər/", "zh": "媒体管家", "note": "bot 名"}, {"w": "raw", "ipa": "/rɔː/", "zh": "原始的", "note": ""}, {"w": "appropriate", "ipa": "/əˈproʊpriət/", "zh": "合适的", "note": ""}, {"w": "skill", "ipa": "/skɪl/", "zh": "技能", "note": "bot 的做法说明"}]}, {"t": "缩略图放在 Figma：看提示词", "s": 26, "outline": ["缩略图都放在 Figma，Matt 在第一条消息里就把链接发给 bot。", "提示词：参考最近的视频简介、用技能改语气、想标题、更新信息、加缩略图。", "bot 全做完了；以后只要上传视频、贴 Figma 链接。"], "key": [{"n": 31, "en": "Look at a few of the recent Grok Bot videos for an idea of how descriptions should work.", "zh": "（提示词：）看几个最近的 Grok Bot 视频，了解简介应该怎么写。", "why": "for an idea of … + 间接疑问句"}, {"n": 36, "en": "And now that I've taught this bot how to manage my social media, I can just upload videos to YouTube, paste in Figma links.", "zh": "既然我已经教会这个 bot 管理我的社交媒体，我只要把视频传到 YouTube、贴上 Figma 链接就行。", "why": "now that … 既然"}], "words": [{"w": "Figma", "ipa": "/ˈfɪɡmə/", "zh": "设计工具", "note": ""}, {"w": "send over", "ipa": "/send ˈoʊvər/", "zh": "发过去", "note": ""}, {"w": "staged", "ipa": "/steɪdʒd/", "zh": "就位的", "note": ""}, {"w": "come up with", "ipa": "/kʌm ʌp wɪð/", "zh": "想出", "note": ""}, {"w": "tone", "ipa": "/toʊn/", "zh": "语气", "note": ""}]}, {"t": "下一步：从头到尾全自动", "s": 36, "outline": ["以后可以让 bot 直接在 Figma 里改缩略图：复制图片、改标题、换背景。", "理论上它还能做标题卡，因为它很会操作 Figma。", "几个月前 Matt 还做不到这个流程，现在已经能端到端自动化。"], "key": [{"n": 38, "en": "because all I'm really doing in Figma is maybe duplicating this image, changing the bottom title, and then adjusting the background with some other templates that I have.", "zh": "因为我在 Figma 里做的其实就是：复制这张图、改下面的标题，然后用我其他的一些模板调一下背景。", "why": "all I'm really doing is + 一串 -ing"}, {"n": 41, "en": "And just a year ago — just a few months ago — I tried to do exactly this flow, and I was unable to do it.", "zh": "而就在一年前——不，就在几个月前——我试着做完全一样的流程，结果没做成。", "why": "改口：a year ago — a few months ago"}], "words": [{"w": "eventually", "ipa": "/ɪˈventʃuəli/", "zh": "最终", "note": ""}, {"w": "duplicate", "ipa": "/ˈduːplɪkeɪt/", "zh": "复制", "note": ""}, {"w": "theoretically", "ipa": "/ˌθiːəˈretɪkli/", "zh": "理论上", "note": ""}, {"w": "manipulate", "ipa": "/məˈnɪpjuleɪt/", "zh": "操作", "note": ""}, {"w": "end to end", "ipa": "/end tə end/", "zh": "全流程", "note": ""}]}, {"t": "模板的使用条件", "s": 41, "outline": ["模板放在视频简介里。", "需要开通 Google Cloud 项目，因为要用 YouTube Data API。", "嫌复杂可以改成全程用浏览器，但要小心；Matt 更推荐用 API。", "不会配置就直接问 bot：帮我配置 GCP 权限。"], "key": [{"n": 44, "en": "You need to have, um, Google Cloud Project enabled because this template uses, um, some YouTube Data APIs.", "zh": "你需要开通 Google Cloud 项目，因为这个模板要用到一些 YouTube Data API。", "why": "have … enabled + 术语"}, {"n": 47, "en": "I'd prefer the agent use the YouTube Data API.", "zh": "我更希望代理用 YouTube Data API。", "why": "I'd prefer the agent use：虚拟语气用原形"}], "words": [{"w": "enable", "ipa": "/ɪˈneɪbl/", "zh": "开通、启用", "note": ""}, {"w": "configure", "ipa": "/kənˈfɪɡjər/", "zh": "配置", "note": ""}, {"w": "browser", "ipa": "/ˈbraʊzər/", "zh": "浏览器", "note": ""}, {"w": "access", "ipa": "/ˈækses/", "zh": "权限", "note": ""}, {"w": "GCP", "ipa": "/ˌdʒiː siː ˈpiː/", "zh": "谷歌云平台", "note": ""}]}, {"t": "总结与道别", "s": 50, "outline": ["只要愿意申请 Assembly API 密钥、开 Google Cloud 项目，就能有同样的流程。", "点模板一键安装就能开始。", "这是 Matt 用 Grok Bot 自动化社交媒体和营销工作的又一个例子。"], "key": [{"n": 51, "en": "But if you're willing to cut an Assembly API key, if you're willing to set up a Google Cloud Project, you can have exactly the same workflow.", "zh": "只要你愿意去申请一个 Assembly 的 API 密钥、愿意开一个 Google Cloud 项目，你就能拥有一模一样的工作流。", "why": "两个 if you're willing to 并列 + cut a key"}, {"n": 53, "en": "This is another way that I'm using Grok Bot to automate some of the social media work that I do, some of the marketing work that I do, and I've been loving it so far.", "zh": "这是我用 Grok Bot 自动化一部分社交媒体工作、一部分营销工作的另一种方式，到目前为止我非常喜欢。", "why": "I've been loving it so far"}], "words": [{"w": "be willing to", "ipa": "/bi ˈwɪlɪŋ tə/", "zh": "愿意", "note": ""}, {"w": "set up", "ipa": "/set ʌp/", "zh": "开通、建立", "note": ""}, {"w": "get started", "ipa": "/ɡet ˈstɑːrtɪd/", "zh": "开始", "note": ""}, {"w": "marketing", "ipa": "/ˈmɑːrkɪtɪŋ/", "zh": "营销", "note": ""}]}];   // [{t:title, s:first sentence index, outline:[], key:[{n,en,zh,why}], words:[{w,ipa,zh,note,old}]}]
+const ZH_LABEL="人工校对";
+const $=id=>document.getElementById(id);
+
+const YTID="oEzK7W6r1Dk";
+const au=(function(){
+ const L={};let P=null,ready=false,st=-1,base=0,baseAt=performance.now(),seekLock=0,lastRaw=-1,r=1,pendSeek=null,pendPlay=false,startT=0;
+ const fire=n=>(L[n]||[]).forEach(f=>{try{f()}catch(e){console.warn(e)}});
+ const now=()=>st===1?base+(performance.now()-baseAt)/1000*r:base;
+ const o={paused:true,seeking:false,ended:false,defaultPlaybackRate:1,
+  addEventListener(n,f){(L[n]=L[n]||[]).push(f)},
+  get currentTime(){return now()},
+  set currentTime(v){base=v;baseAt=performance.now();seekLock=performance.now()+2500;if(ready)P.seekTo(v,true);else pendSeek=v},
+  get playbackRate(){return r},
+  set playbackRate(v){r=v;base=now();baseAt=performance.now();if(ready)try{P.setPlaybackRate(v)}catch(e){}},
+  get duration(){return ready?P.getDuration():0},
+  play(){o.paused=false;startT=performance.now();if(ready)P.playVideo();else pendPlay=true;
+   setTimeout(()=>{if(!o.paused&&st!==1&&st!==3&&performance.now()-startT>=2900&&window.toast)toast("没开始播放？请直接点一下上面视频画面里的 ▶")},3000);return Promise.resolve()},
+  pause(){o.paused=true;pendPlay=false;base=now();baseAt=performance.now();if(ready)P.pauseVideo()},
+  get player(){return P}};
+ window.onYouTubeIframeAPIReady=function(){
+  P=new YT.Player("yt",{videoId:YTID,playerVars:{playsinline:1,rel:0,modestbranding:1,cc_load_policy:0,iv_load_policy:3,start:Math.floor(SEGS[0].s)},
+   events:{onReady(){ready=true;try{P.unloadModule("captions")}catch(e){}if(r!==1)try{P.setPlaybackRate(r)}catch(e){}
+     if(pendSeek!==null){P.seekTo(pendSeek,true);pendSeek=null}else P.cueVideoById({videoId:YTID,startSeconds:SEGS[cur].s});if(pendPlay){pendPlay=false;P.playVideo()}
+     $("loading").style.display="none"},
+    onStateChange(e){const s=e.data;base=now();baseAt=performance.now();st=s;
+     if(s===1){if(o.paused){o.paused=false;if(typeof playSeg==="function"){playSeg(cur);return}}fire("playing")}   // started from the video's own ▶: play the current sentence
+     else if(s===2){if(!o.paused&&!gapT&&playing){o.paused=true}fire("pause")}
+     else if(s===0){o.paused=true;o.ended=true;fire("ended");o.ended=false}},
+    onPlaybackRateChange(e){r=e.data;fire("ratechange")}}})};
+ setInterval(()=>{if(!ready)return;let t;try{t=P.getCurrentTime()}catch(e){return}
+  if(performance.now()<seekLock){if(Math.abs(t-now())<0.6){seekLock=0}else return}
+  if(t!==lastRaw){lastRaw=t;if(st!==1||Math.abs(t-now())>0.35){base=t;baseAt=performance.now()}}
+  if(st===1&&!o.paused)fire("timeupdate")},50);
+ const s=document.createElement("script");s.src="https://www.youtube.com/iframe_api";document.head.appendChild(s);
+ return o})();
+let ccOn=false;function toggleCC(){const P=au.player;if(!P)return;ccOn=!ccOn;
+ try{if(ccOn){P.loadModule("captions");P.setOption("captions","track",{languageCode:"en"})}else P.unloadModule("captions")}catch(e){}
+ $("ccBtn").textContent=ccOn?"🔤 视频英文字幕：开":"🔤 视频英文字幕：关"}
+
+let cur=0,subState=0,playing=false,raf=0,stopAt=null,plays=1,gapT=0,tok=0,lastCtrl=0;
+const GAP=600,REPS=[["1","1遍"],["2","2遍"],["3","3遍"],["inf","∞"]];
+function lsGet(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
+let stars=new Set((lsGet(KEY+"stars",[])||[]).map(Number).filter(i=>i>=0&&i<SEGS.length));
+let QS=lsGet(KEY+"qs",{});if(!QS||typeof QS!=="object")QS={};
+function saveStars(){try{localStorage.setItem(KEY+"stars",JSON.stringify([...stars].sort((a,b)=>a-b)))}catch(e){toast("⚠️ 浏览器不让保存（无痕模式？）")}}
+function saveQs(){try{localStorage.setItem(KEY+"qs",JSON.stringify(QS))}catch(e){toast("⚠️ 浏览器不让保存（无痕模式？）")}}
+let toastT=0;function toast(m,ms){const t=$("toast");t.textContent=m;t.classList.toggle("long",!!ms);t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),ms||1600)}
+let onlyStar=localStorage.getItem(KEY+"only")==="1";
+let rate=parseFloat(localStorage.getItem(KEY+"rate")||"1");
+const SUBS=[["hide","隐藏"],["en","英文"],["zh","中文"],["both","中英"]];
+let subMode=localStorage.getItem("jingting.submode")||"hide";if(!SUBS.some(r=>r[0]===subMode))subMode="hide";
+let rep=localStorage.getItem("jingting.repeat")||"inf";if(!REPS.some(r=>r[0]===rep))rep="inf";
+$("cont").checked=localStorage.getItem(KEY+"cont")==="1";
+const fmt=t=>{t=Math.max(0,t|0);return String(t/60|0).padStart(2,"0")+":"+String(t%60).padStart(2,"0")};
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function order(){if(onlyStar&&stars.size){return SEGS.map((s,i)=>i).filter(i=>stars.has(i))}return SEGS.map((s,i)=>i)}
+function save(){localStorage.setItem(KEY+"pos",cur);saveStars();localStorage.setItem(KEY+"only",onlyStar?"1":"0");localStorage.setItem(KEY+"rate",rate);localStorage.setItem(KEY+"cont",$("cont").checked?"1":"0");localStorage.setItem("jingting.repeat",rep);localStorage.setItem("jingting.submode",subMode)}
+// subState = extra taps on this sentence; 0 = what the 字幕 mode shows by default (reset on every sentence change)
+const SUBCYCLE={hide:3,en:2,zh:2,both:1};
+function subShow(){const k=subState%SUBCYCLE[subMode];
+ if(subMode==="hide")return{en:k>=1,zh:k===2};if(subMode==="en")return{en:true,zh:k===1};if(subMode==="zh")return{en:k===1,zh:true};return{en:true,zh:true}}
+function renderSub(){const s=SEGS[cur],b=$("subbox"),v=subShow();
+ const zh='<div class="zh"'+(v.en?'':' style="border:0;margin:0;padding:0;font-size:19px"')+'>'+(s.zh?esc(s.zh)+(ZH_LABEL?'<span class="mt">'+esc(ZH_LABEL)+'</span>':''):'（无中文）')+'</div>';
+ const hint=x=>'<div class="hint" style="margin-top:10px;font-size:13px">'+x+'</div>';
+ if(!v.en&&!v.zh){b.className="sub-box";b.innerHTML='<div class="hint"><b>👀</b>点这里看英文字幕</div>';return}
+ b.className="sub-box show";
+ b.innerHTML=(v.en?'<div class="en">'+esc(s.en)+'</div>':'')+(v.zh?zh:'')+
+   (subMode==="hide"&&!v.zh?hint("再点一下看中文"):subMode==="en"&&!v.zh?hint("点一下看中文"):subMode==="zh"&&!v.en?hint("点一下看英文"):"")}
+function applySubMode(){const L=$("list");L.dataset.m=subMode;L.classList.toggle("blur",$("blurList").checked);$("blurLbl").style.display=subMode==="hide"?"":"none"}
+function buildSubs(){$("subs").innerHTML='<span class="lb">字幕</span>'+SUBS.map(r=>'<button class="chip'+(r[0]===subMode?' on':'')+'" data-m="'+r[0]+'">'+r[1]+'</button>').join("");
+ $("subs").onclick=e=>{const c=e.target.closest(".chip");if(!c)return;subMode=c.dataset.m;subState=0;buildSubs();applySubMode();renderSub();save()}}
+function chapOf(i){let k=-1;for(let j=0;j<CHAPTERS.length;j++)if(CHAPTERS[j].s<=i)k=j;return k}
+function chapEnd(k){return k+1<CHAPTERS.length?CHAPTERS[k+1].s-1:SEGS.length-1}
+let studyK=-2;
+function render(){if(rec&&recI!==cur)stopMic(true);const s=SEGS[cur],o=order(),pos=o.indexOf(cur);
+ const ck=chapOf(cur);$("chap").textContent=ck>=0?"第"+(ck+1)+"章 · "+CHAPTERS[ck].t+"（第"+(CHAPTERS[ck].s+1)+"–"+(chapEnd(ck)+1)+"句）":"";
+ if(ck>=0){$("chapSel").value=String(ck);if(ck!==studyK)renderStudy(ck)}
+ $("num").innerHTML=(cur+1)+' <small>/ '+SEGS.length+'</small>';
+ $("tm").textContent=fmt(s.s)+" – "+fmt(s.e)+(onlyStar&&stars.size?"  · ⭐ "+(pos+1)+"/"+o.length:"");
+ $("barIn").style.width=((cur+1)/SEGS.length*100)+"%";
+ const st=stars.has(cur);$("star").classList.toggle("on",st);$("star").innerHTML=st?"<b>⭐</b><span>已收藏</span>":"<b>☆</b><span>收藏</span>";
+ if(document.activeElement!==$("qIn")||+$("qIn").dataset.i!==cur){$("qIn").value=QS[cur]||"";$("qIn").dataset.i=cur}
+ renderFav();renderQs();
+ $("starCnt").textContent=stars.size;$("onlyStar").classList.toggle("staron",onlyStar);
+ renderSub();renderCnt();renderPts();
+ document.querySelectorAll(".item").forEach(e=>e.classList.toggle("cur",+e.dataset.i===cur));
+ document.querySelectorAll(".item .s").forEach(e=>{const i=+e.parentNode.dataset.i;e.textContent=(stars.has(i)?"⭐":"")+(QS[i]?"❓":"")});
+ $("listInfo").textContent=(cur+1)+"/"+SEGS.length+(stars.size?" · ⭐"+stars.size:"");
+ save()}
+
+function renderPts(){const s=SEGS[cur],P=s.pts||[],B=$("ptsBox");if(!P.length){B.style.display="none";return}B.style.display="";
+ const K={"地道表达":"k1","语法":"k2","连读弱读":"k3","发音":"k3","术语":"k4","背景":"k5"};
+ $("ptsBody").innerHTML=P.map(p=>'<div class="pt"><span class="pk '+(K[p.k]||"k5")+'">'+esc(p.k)+'</span><span class="ph">'+esc(p.h)+'</span><div class="px">'+esc(p.x)+'</div>'+(p.eg?'<div class="pe">🏭 '+esc(p.eg)+(p.egz?'<i>'+esc(p.egz)+'</i>':'')+'</div>':'')+'</div>').join("");
+ $("ptsN").textContent=P.length+" 点"}
+function setPlayUI(p){playing=p;$("play").innerHTML=p?'⏸<span>暂停</span>':'▶<span>播放</span>'}
+function repN(){const n=rep==="inf"?Infinity:+rep;return ($("cont").checked&&n===Infinity)?1:n}
+function renderCnt(){const c=$("cnt");c.textContent="🔁 第"+plays+"遍"+(rep==="inf"?" · ∞":" / "+rep);c.classList.toggle("gap",!!gapT)}
+function clearGap(){if(gapT){clearTimeout(gapT);gapT=0}}
+// Playback engine. `playing` is the user's intent; the media element is made to follow it.
+// Every play() gets a token: a late rejection/resolution of an older play() (e.g. AbortError after rapid taps) is ignored,
+// so it can no longer flip the UI to ▶ while audio keeps running (that stopped the loop and let audio run past the sentence).
+function applyRate(){if(au.defaultPlaybackRate!==rate)au.defaultPlaybackRate=rate;if(au.playbackRate!==rate)au.playbackRate=rate}
+function startPlay(){applyRate();const my=++tok;setPlayUI(true);let p;try{p=au.play()}catch(e){p=null}
+ if(p&&p.catch)p.catch(e=>{if(my!==tok||!playing)return;if(e&&e.name==="AbortError")return;setPlayUI(false);console.warn(e)});
+ loop()}
+function stopPlay(){tok++;clearGap();setPlayUI(false);if(!au.paused)au.pause();cancelAnimationFrame(raf);raf=0}
+function loop(){cancelAnimationFrame(raf);raf=requestAnimationFrame(tick)}   // exactly one frame loop at a time
+function again(){clearGap();plays++;const s=SEGS[cur];au.currentTime=s.s;stopAt=s.e;renderCnt();startPlay()}
+function segEnd(){cancelAnimationFrame(raf);raf=0;$("segIn").style.width="100%";
+ if(plays<repN()){tok++;au.pause();clearGap();gapT=setTimeout(()=>{gapT=0;if(playing)again()},GAP);renderCnt();return}
+ if($("cont").checked){const o=order(),p=o.indexOf(cur);if(p>=0&&p<o.length-1){const n=o[p+1];cur=n;subState=0;plays=1;render();
+    if(Math.abs(SEGS[n].s-au.currentTime)>0.3)au.currentTime=SEGS[n].s;stopAt=SEGS[n].e;loop();return}}
+ stopAt=null;stopPlay()}
+function check(){if(!playing||gapT||stopAt===null)return false;if(au.currentTime>=stopAt-0.02){segEnd();return true}return false}
+function tick(){raf=0;const s=SEGS[cur];const t=au.currentTime;
+ $("segIn").style.width=Math.min(100,Math.max(0,(t-s.s)/(s.e-s.s)*100))+"%";
+ if(check())return;
+ if(playing&&!gapT)raf=requestAnimationFrame(tick)}
+function playSeg(i){clearGap();cur=i;plays=1;const s=SEGS[i];render();au.currentTime=s.s;stopAt=s.e;startPlay()}
+function go(d){if(onlyStar&&!stars.has(cur)){onlyStar=false}const o=order();let p=o.indexOf(cur);if(p<0){p=0;for(let k=0;k<o.length;k++)if(o[k]>cur){p=k-(d>0?1:0);break}}
+ const n=Math.min(o.length-1,Math.max(0,p+d));subState=0;playSeg(o[n])}
+function toggle(){if(playing){stopPlay();renderCnt();return}
+ const s=SEGS[cur];if(stopAt===null||au.currentTime<s.s-0.05){playSeg(cur);return}
+ if(au.currentTime>=s.e-0.05){again();return}   // paused in the gap between repeats: carry on with the next play
+ startPlay()}
+function buildReps(){$("reps").innerHTML='<span class="lb">每句</span>'+REPS.map(r=>'<button class="chip'+(r[0]===rep?' on':'')+'" data-k="'+r[0]+'">'+r[1]+'</button>').join("");
+ $("reps").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;rep=b.dataset.k;buildReps();renderCnt();save()}}
+function buildList(){const L=$("list");L.innerHTML=SEGS.map((s,i)=>(CHAPTERS.findIndex(c=>c.s===i)>=0?'<div class="chead">第'+(CHAPTERS.findIndex(c=>c.s===i)+1)+'章 · '+esc(CHAPTERS[CHAPTERS.findIndex(c=>c.s===i)].t)+'</div>':'')+'<div class="item" data-i="'+i+'"><span class="i">'+(i+1)+'</span><span class="t">'+fmt(s.s)+'</span><span class="tx"><span class="x">'+esc(s.en)+'</span><span class="z">'+(s.zh?esc(s.zh):'')+'</span></span><span class="s"></span></div>').join("");
+ L.onclick=e=>{const it=e.target.closest(".item");if(it){subState=0;if(onlyStar&&!stars.has(+it.dataset.i))onlyStar=false;playSeg(+it.dataset.i)}}}
+const RATES=[0.75,0.9,1,1.25];if(!RATES.includes(rate))rate=1;
+function markSpeeds(){document.querySelectorAll("#speeds .chip").forEach(c=>c.classList.toggle("on",+c.dataset.r===rate))}
+function buildSpeeds(){$("speeds").innerHTML='<span class="lb">速度</span>'+RATES.map(r=>'<button class="chip" data-r="'+r+'">'+r+'×</button>').join("");markSpeeds();
+ $("speeds").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;
+  if(performance.now()-lastCtrl<450)return;   // tap landed here right after a play-row tap: a slipped finger, not a speed choice
+  rate=+b.dataset.r;applyRate();markSpeeds();save()}}
+// the rate only ever changes from a speed chip: undo anything else that touches it
+au.addEventListener("ratechange",()=>{if(au.playbackRate!==rate||au.defaultPlaybackRate!==rate)applyRate()});
+document.querySelector(".ctrls").addEventListener("pointerdown",()=>{lastCtrl=performance.now()},true);
+document.querySelector(".ctrls").addEventListener("click",()=>{lastCtrl=performance.now()},true);
+function buildChapters(){if(!CHAPTERS.length)return;const S=$("chapSel");S.style.display="";
+ S.innerHTML=CHAPTERS.map((c,k)=>'<option value="'+k+'">第'+(k+1)+'章 '+esc(c.t)+'（'+(c.s+1)+'–'+(chapEnd(k)+1)+'）</option>').join("");
+ S.onchange=()=>{const k=+S.value;subState=0;if(onlyStar)onlyStar=false;playSeg(CHAPTERS[k].s);$("chapSel").blur()};
+ $("studyPanel").style.display="";
+ $("bar").insertAdjacentHTML("beforeend",CHAPTERS.slice(1).map(c=>'<i style="left:'+(c.s/SEGS.length*100)+'%"></i>').join(""))}
+function renderStudy(k){studyK=k;const c=CHAPTERS[k];$("studyTitle").textContent="📘 第"+(k+1)+"章学习 · "+c.t;
+ const ks=(c.key||[]).map(x=>'<div class="ks"><span class="go" data-n="'+x.n+'">▶ #'+x.n+'</span><span class="ke">'+esc(x.en)+'</span><div class="kz">'+esc(x.zh)+'</div><div class="kw">💡 '+esc(x.why)+'</div></div>').join("");
+ const ws=(c.words||[]).map(w=>'<div class="wd"><b>'+esc(w.w)+'</b><span class="ip">'+esc(w.ipa||"")+'</span>'+(w.old?'<span class="tag">'+esc(w.old)+'</span>':'')+' '+esc(w.zh)+(w.note?'<div class="nt">'+esc(w.note)+'</div>':'')+'</div>').join("");
+ $("study").innerHTML='<h3>🎯 听前大纲（先看这个再听）</h3><ol>'+(c.outline||[]).map(x=>'<li>'+esc(x)+'</li>').join("")+'</ol>'+
+  '<details id="kd"><summary>⭐ 听后重点句（听完再看）</summary>'+ks+'</details>'+
+  '<details id="wdd"><summary>📝 生词（'+(c.words||[]).length+'）</summary>'+ws+'</details>';
+ $("study").querySelectorAll(".go").forEach(g=>g.onclick=()=>{subState=0;if(onlyStar)onlyStar=false;playSeg(+g.dataset.n-1)})}
+function jumpTo(){const n=parseInt($("jumpN").value,10);if(!(n>=1&&n<=SEGS.length)){$("jumpN").value="";$("jumpN").placeholder="1–"+SEGS.length;return}
+ subState=0;if(onlyStar&&!stars.has(n-1))onlyStar=false;$("jumpN").blur();playSeg(n-1)}
+$("jumpGo").onclick=jumpTo;$("jumpN").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();jumpTo()}});
+$("jumpN").placeholder="1–"+SEGS.length;
+$("prev").onclick=()=>go(-1);$("next").onclick=()=>go(1);$("rep").onclick=()=>playSeg(cur);$("play").onclick=toggle;
+$("subbox").onclick=()=>{subState=(subState+1)%SUBCYCLE[subMode];renderSub()};
+function setStar(i,on){on?stars.add(i):stars.delete(i);if(!stars.size)onlyStar=false;saveStars();render();toast(on?"⭐ 已收藏第 "+(i+1)+" 句（共 "+stars.size+" 句）":"已取消收藏第 "+(i+1)+" 句")}
+$("star").onclick=e=>{e.preventDefault();e.stopPropagation();setStar(cur,!stars.has(cur))};
+// ---- 收藏夹 + 提问 ----
+const line=i=>"#"+(i+1)+" ["+fmt(SEGS[i].s)+"] "+SEGS[i].en+(SEGS[i].zh?"（"+SEGS[i].zh+"）":"");
+function renderFav(){const a=[...stars].sort((x,y)=>x-y);$("favInfo").textContent=a.length+" 句";
+ $("favList").innerHTML=a.length?a.map(i=>'<div class="fv"><div class="fh"><span class="fn" data-n="'+i+'">▶ #'+(i+1)+'</span><button class="del" data-del="'+i+'">取消收藏</button></div><div class="fe">'+esc(SEGS[i].en)+'</div><div class="fz">'+esc(SEGS[i].zh||"")+'</div>'+(QS[i]?'<div class="fq">❓ '+esc(QS[i])+'</div>':'')+'</div>').join(""):'<div class="empty">还没有收藏。听不懂或想复习的句子，点右上角 ☆ 收藏。</div>'}
+function renderQs(){const a=Object.keys(QS).map(Number).filter(i=>QS[i]&&i>=0&&i<SEGS.length).sort((x,y)=>x-y);$("qInfo").textContent=a.length+" 条";
+ $("qList").innerHTML=a.length?a.map(i=>'<div class="fv"><div class="fh"><span class="fn" data-n="'+i+'">▶ #'+(i+1)+'</span><button class="del" data-dq="'+i+'">删除</button></div><div class="fe">'+esc(SEGS[i].en)+'</div><div class="fq">❓ '+esc(QS[i])+'</div></div>').join(""):'<div class="empty">还没有提问。在句子卡片下面的“❓ 这句我想问”里写，自动保存。</div>'}
+function listClick(e){const n=e.target.closest(".fn"),d=e.target.closest("[data-del]"),q=e.target.closest("[data-dq]");
+ if(d){setStar(+d.dataset.del,false);return}
+ if(q){if(confirm("删除第 "+(+q.dataset.dq+1)+" 句的提问？")){delete QS[+q.dataset.dq];saveQs();render()}return}
+ if(n){const i=+n.dataset.n;subState=0;if(onlyStar&&!stars.has(i))onlyStar=false;playSeg(i);$("app").scrollIntoView({block:"start",behavior:"smooth"})}}
+$("favList").onclick=listClick;$("qList").onclick=listClick;
+const TITLE=document.title.replace(/^逐句精听 · /,"");
+function copyText(txt,what){const ok=()=>toast("📋 已复制"+what+"，去聊天里粘贴"),fail=()=>{$("copyTxt").value=txt;$("copyBox").style.display="block";$("copyBox").scrollIntoView({block:"center"})};
+ const legacy=()=>{try{const t=document.createElement("textarea");t.value=txt;t.setAttribute("readonly","");t.style.cssText="position:fixed;top:0;left:0;opacity:0";document.body.appendChild(t);t.select();t.setSelectionRange(0,txt.length);const r=document.execCommand("copy");t.remove();r?ok():fail()}catch(e){fail()}};
+ if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok,legacy);else legacy()}
+$("favCopy").onclick=()=>{const a=[...stars].sort((x,y)=>x-y);if(!a.length){toast("还没有收藏");return}
+ copyText("【逐句精听 · "+TITLE+"】我的收藏（"+a.length+" 句）\n\n"+a.map(i=>line(i)+"\n"+(SEGS[i].zh||"")+(QS[i]?"\n问："+QS[i]:"")).join("\n\n"),"收藏 "+a.length+" 句")};
+$("qCopy").onclick=()=>{const a=Object.keys(QS).map(Number).filter(i=>QS[i]).sort((x,y)=>x-y);if(!a.length){toast("还没有提问");return}
+ copyText("【逐句精听 · "+TITLE+"】我的提问（"+a.length+" 条）\n\n"+a.map(i=>line(i)+"\n问："+QS[i]).join("\n\n"),"提问 "+a.length+" 条")};
+$("favPlay").onclick=()=>{if(!stars.size){toast("还没有收藏");return}onlyStar=true;subState=0;playSeg([...stars].sort((x,y)=>x-y)[0]);$("app").scrollIntoView({block:"start",behavior:"smooth"})};
+$("copyClose").onclick=()=>{$("copyBox").style.display="none"};
+let qT=0;$("qIn").addEventListener("input",()=>{const i=+$("qIn").dataset.i,v=$("qIn").value.trim();if(v)QS[i]=$("qIn").value;else delete QS[i];
+ clearTimeout(qT);$("qState").textContent="保存中…";qT=setTimeout(()=>{saveQs();$("qState").textContent="✓ 已保存（第 "+(i+1)+" 句）";renderQs();renderFav();document.querySelectorAll('.item[data-i="'+i+'"] .s').forEach(e=>e.textContent=(stars.has(i)?"⭐":"")+(QS[i]?"❓":""))},400)});
+$("qIn").addEventListener("blur",()=>{clearTimeout(qT);saveQs();renderQs();renderFav()});
+// ---- 🎤 语音提问 (Web Speech API; Chrome on Android/desktop). Text is appended to the box and saved via the same "input" handler.
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+var rec=null,recI=-1;   // var: render() may run before this line
+let asrLang=localStorage.getItem("jingting.asrlang")==="en-US"?"en-US":"zh-CN",recBase="",recFinal="",recErr=false;
+function renderLang(){$("qLang").textContent=asrLang==="en-US"?"EN":"中";$("qLang").title="语音识别语言："+(asrLang==="en-US"?"英文（点一下换中文）":"中文（点一下换英文）")}
+renderLang();
+$("qLang").onclick=()=>{asrLang=asrLang==="en-US"?"zh-CN":"en-US";try{localStorage.setItem("jingting.asrlang",asrLang)}catch(e){}renderLang();
+ toast(asrLang==="en-US"?"🎤 语音识别：英文":"🎤 语音识别：中文（可夹英文单词）");if(rec){stopMic();setTimeout(startMic,350)}};
+// UI states: 0 idle, 1 启动中 (tapped, waiting for onstart), 2 正在听. A persistent status line (#qMsg) sits right under the box,
+// so errors are visible next to the button (the top toast is easy to miss) and Lily can screenshot the exact code.
+function micUI(st){const on=st>0;$("qMic").classList.toggle("rec",st===2);$("qMic").classList.toggle("wait",st===1);$("qBox").classList.toggle("rec",on);
+ $("qMicT").textContent=st===2?"停":st===1?"启动中":"说";
+ if(st===2){$("qState").textContent="🔴 正在听…";$("qInterim").textContent="正在听…（说完再点🎤停止）"}
+ else if(st===1){$("qState").textContent="⏳ 启动中…";$("qInterim").textContent="⏳ 语音识别启动中…"}
+ else $("qInterim").textContent=""}
+function micMsg(m,bad){const e=$("qMsg");e.textContent=m||"";e.style.display=m?"block":"none";e.classList.toggle("bad",!!bad)}
+function micJoin(a,b){b=b.trim();if(!b)return a;if(!a.trim())return b;return a+(/[\s\n]$/.test(a)?"":" ")+b}
+function micPut(interim){const q=$("qIn");if(+q.dataset.i!==recI){stopMic(true);return}
+ q.value=micJoin(recBase,recFinal);q.dispatchEvent(new Event("input"));
+ $("qInterim").textContent=interim?("…"+interim):($("qInterim").textContent||"正在听…")}
+const MICERR={"not-allowed":"麦克风权限被拒：点地址栏左边的🔒 → 权限 → 麦克风 → 允许",
+ "service-not-allowed":"手机的语音识别服务不可用（Chrome 要用“Google 语音服务”）",
+ "no-speech":"没听到声音，再点🎤说一遍","audio-capture":"麦克风被别的App占用或找不到麦克风",
+ "network":"语音识别要连 Google 服务器，网络不通","language-not-supported":"手机的语音服务不支持这个语言",
+ "bad-grammar":"识别参数出错","aborted":"识别被中断"};
+const KB="；也可以点输入框，用键盘上的🎤语音键";
+let recLog=[],recT0=0,recStarted=false,recHeard=false,recWD=0,recAlt=false,recRetried=false,micPerm="?";
+const MICVER="mic-v5";
+try{navigator.permissions&&navigator.permissions.query({name:"microphone"}).then(s=>{micPerm=s.state;s.onchange=()=>{micPerm=s.state}}).catch(()=>{})}catch(e){}
+// Big bottom sheet that stays until tapped: Lily missed the small status line and the 5 s toast.
+const KBHOW="点下面「⌨️ 改用键盘语音输入」→ 键盘弹出后，点键盘上的🎤（话筒）键说话，文字会直接进提问框，一样自动保存。";
+function micAlert(title,body){$("maT").textContent=title;$("maB").textContent=body+"\n\n"+KBHOW;
+ $("maD").textContent="诊断（截图发给老师）："+MICVER+" · 语言 "+(rec&&rec.lang||asrLang)+" · 麦克风权限 "+micPerm+" · "+recLog.join(" → ")+" · "+navigator.userAgent.replace(/^Mozilla\/5\.0 /,"").slice(0,120);
+ $("micAlert").classList.add("show")}
+function micAlertClose(){$("micAlert").classList.remove("show")}
+$("maX").addEventListener("click",e=>{e.stopPropagation();micAlertClose()});
+$("maKb").addEventListener("click",e=>{e.stopPropagation();micAlertClose();const q=$("qIn");q.focus();try{q.setSelectionRange(q.value.length,q.value.length)}catch(_){}q.scrollIntoView({block:"center"})});   // focus inside the tap = keyboard opens on Android
+$("maRetry").addEventListener("click",e=>{e.stopPropagation();micAlertClose();recRetried=false;startMic()});
+function rlog(s){recLog.push(s+"@"+((performance.now()-recT0)/1000).toFixed(1)+"s")}
+function startMic(isRetry){
+ if(!SR){micMsg("这个浏览器没有语音识别，请用 Chrome 打开"+KB,true);micAlert("❌ 这个浏览器不能语音识别","请用 Chrome 打开这个页面（OPPO 自带浏览器、微信/LINE 里打开都不行）。");return}
+ if(rec)return;micAlertClose();
+ recI=cur;$("qIn").dataset.i=cur;recBase=$("qIn").value;recFinal="";recErr="";recStarted=false;recHeard=false;if(!isRetry){recLog=[];recRetried=false}recT0=performance.now();
+ const wasPlaying=playing||!au.paused;if(wasPlaying){stopPlay();renderCnt()}   // otherwise the mic hears the video
+ let r;try{r=new SR()}catch(e){micMsg("识别出错：无法创建（"+(e&&e.name||e)+"）"+KB,true);micAlert("❌ 语音识别没法启动","无法创建识别器（"+(e&&e.name||e)+"）。");return}
+ rec=r;r.lang=recAlt&&asrLang==="zh-CN"?"cmn-Hans-CN":asrLang;r.interimResults=true;r.continuous=false;r.maxAlternatives=1;   // continuous=false: Android Chrome misbehaves with true
+ r.onstart=()=>{rlog("start");if(rec!==r)return;recStarted=true;clearTimeout(recWD);micUI(2);micMsg("")};
+ r.onaudiostart=()=>rlog("audio");r.onspeechstart=()=>{rlog("speech");recHeard=true};
+ r.onresult=e=>{let fin="",inter="";for(let i=0;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)fin+=t;else inter+=t}
+  if(rec!==r)return;if(!recStarted){recStarted=true;micUI(2)}recHeard=true;recFinal=fin;micPut(inter)};
+ r.onerror=e=>{const c=(e&&e.error)||"unknown";rlog("error:"+c);if(rec!==r)return;recErr=c;
+  if(c==="aborted"&&recUserAbort)return;   // our own cancel: silent
+  if(c==="language-not-supported"&&!recAlt&&asrLang==="zh-CN"){recAlt=true}   // next tap retries with cmn-Hans-CN
+  const m="识别出错："+c+"（"+(MICERR[c]||"未知错误")+"）";micMsg(m+(c==="no-speech"?"":KB),true);
+  micAlert(c==="no-speech"?"🤔 没听到声音":"❌ 语音识别出错："+c,(MICERR[c]||"未知错误")+(c==="not-allowed"||c==="audio-capture"||c==="service-not-allowed"?"\n另外检查：手机 设置 → 应用 → Google → 权限 → 麦克风 → 允许（Chrome 的语音识别是借 Google App 做的）。":""))};
+ r.onend=()=>{rlog("end");if(rec!==r)return;clearTimeout(recWD);rec=null;micUI(0);
+  const q=$("qIn");if(+q.dataset.i===recI){saveQs();renderQs();renderFav();
+   const dt=(performance.now()-recT0)/1000;
+   if(recFinal.trim()){$("qState").textContent="✓ 已保存（第 "+(recI+1)+" 句）";micMsg("")}
+   else if(recErr){$("qState").textContent="自动保存在本机"}
+   else if(!recHeard&&dt<2.5&&!recRetried){recRetried=true;rlog("auto-retry");setTimeout(()=>{if(!rec)startMic(true)},500)}   // Android sometimes drops the first start right after a permission prompt / audio focus change
+   else if(!recHeard&&dt<2.5){$("qState").textContent="❌ 没启动成功";   // the "flashes once" case: ended at once with no error code
+    micMsg("❌ 识别一启动就结束了，没给原因。请改用键盘上的🎤语音键（见下方说明）",true);
+    micAlert("❌ 语音识别一启动就结束了","手机没给任何错误原因，试了两次都一样。最常见的原因：\n① 手机上没有或停用了「Google」App / Google 语音服务（国行 OPPO 常见）；\n② 「Google」App 没有麦克风权限；\n③ 别的 App 正在占用麦克风。")}
+   else{$("qState").textContent="没听清，再点🎤试试";micMsg("🤔 没听到内容，再点🎤说一遍；还不行就用键盘上的🎤语音键",true);
+    micAlert("🤔 没有识别出文字","说话前等按钮变红、出现「正在听」再开口，靠近手机说。")}}};
+ micUI(1);micMsg("");recUserAbort=false;rlog(wasPlaying?"paused-video":"tap");
+ // Android Chrome: starting the recognizer while our <audio> still holds audio focus makes it end at once,
+ // so after pausing the video give Android ~350 ms to release focus (start() needs no user gesture in Chrome).
+ const go=()=>{if(rec!==r)return;try{r.start()}catch(e){rlog("start-throw:"+(e&&e.name));rec=null;micUI(0);micMsg("识别出错：启动失败（"+(e&&e.name||e)+"）"+KB,true);micAlert("❌ 语音识别启动失败",String(e&&e.name||e));return}
+ clearTimeout(recWD);recWD=setTimeout(()=>{if(rec===r&&!recStarted){micMsg("❌ 4 秒还没启动，见下方说明",true);micAlert("⏳ 4 秒了，麦克风还没启动","可能是麦克风权限没开：点地址栏左边的🔒或⚙ → 权限 → 麦克风 → 允许，然后关掉这个标签页重新打开。")}},4000)};
+ if(wasPlaying)setTimeout(go,350);else go()}
+var recUserAbort=false;
+function stopMic(abort){const r=rec;if(!r)return;recUserAbort=!!abort;try{abort?r.abort():r.stop()}catch(e){}if(abort){rec=null;clearTimeout(recWD);micUI(0)}}
+function micTap(e){if(e){e.preventDefault();e.stopPropagation()}if(rec)stopMic(!recStarted);else startMic();setTimeout(()=>$("qBox").scrollIntoView({block:"nearest",behavior:"smooth"}),0)}
+$("qMic").addEventListener("click",micTap);
+["pointerdown","touchstart","mousedown"].forEach(t=>$("qMic").addEventListener(t,e=>e.stopPropagation(),{passive:true}));
+$("onlyStar").onclick=()=>{if(!stars.size&&!onlyStar){alert("还没有标星的句子。听不懂时点右上角 ⭐");return}onlyStar=!onlyStar;if(onlyStar&&!stars.has(cur)){cur=order()[0]}subState=0;render()};
+$("ptsBox").open=localStorage.getItem(KEY+"ptsopen")==="1";$("ptsBox").addEventListener("toggle",()=>{try{localStorage.setItem(KEY+"ptsopen",$("ptsBox").open?"1":"0")}catch(e){}});
+$("cont").onchange=save;$("blurList").onchange=applySubMode;
+$("bar").onclick=e=>{const r=e.currentTarget.getBoundingClientRect();const i=Math.min(SEGS.length-1,Math.floor((e.clientX-r.left)/r.width*SEGS.length));subState=0;if(onlyStar&&!stars.has(i))onlyStar=false;playSeg(i)};
+// ---- 指环遥控 (Bluetooth ring / clicker) + keyboard ----
+// Rings come in three flavours: keyboard/HID keys, media keys (routed to the Media Session on Android),
+// and touch/mouse emulation that injects swipes, wheel ticks or taps. All map onto act(), which debounces so one press = one action.
+let remote=localStorage.getItem("jingting.remote")==="1",diag=false,lastAct=-1e9,lastActKind="",swipeT=-1e9,wheelT=-1e9,hoverT=-1e9;   // performance.now() starts near 0 on every load
+const DEB=350,WDEB=400,INTER="button,a,input,select,textarea,label,summary,.chip,.item,.sub-box,.bar,.go,.star,.panel,.qbox,#toast,#micAlert,#diag,#remoteExit,[onclick],[role=button]";
+let wheelActT=-1e9;
+const NEXTK=new Set(["ArrowRight","ArrowDown","PageDown","MediaTrackNext","AudioVolumeDown","VolumeDown"]);
+const PREVK=new Set(["ArrowLeft","ArrowUp","PageUp","MediaTrackPrevious","AudioVolumeUp","VolumeUp"]);
+const ACTZH={next:"下一句",prev:"上一句",replay:"重听",toggle:"播放/暂停"},ACTBTN={next:"next",prev:"prev",replay:"rep",toggle:"play"};
+const dlines=[];
+function dlog(s){if(!diag)return;const d=new Date();dlines.unshift(String(d.getMinutes()).padStart(2,"0")+":"+String(d.getSeconds()).padStart(2,"0")+" "+s);dlines.length=Math.min(dlines.length,10);$("diagLog").textContent=dlines.join("\n")}
+function act(kind,src){const now=performance.now();
+ if(now-lastAct<DEB){dlog("   ↳ 忽略（防连按）"+ACTZH[kind]);return false}
+ lastAct=now;lastActKind=kind;dlog("   ↳ 动作："+ACTZH[kind]+"（"+src+"）");
+ if(kind==="next")go(1);else if(kind==="prev")go(-1);else if(kind==="replay")playSeg(cur);else if(kind==="toggle")toggle();
+ const b=$(ACTBTN[kind]);if(b){b.classList.add("hit");setTimeout(()=>b.classList.remove("hit"),220)}
+ return true}
+function blurAll(){const a=document.activeElement;if(a&&a!==document.body&&!(a.matches&&a.matches("input[type=number],input[type=text],select,textarea")))a.blur()}
+function setRemote(on,quiet){remote=on;if(!quiet)localStorage.setItem("jingting.remote",on?"1":"0");document.documentElement.classList.toggle("remote",on);
+ const b=$("remoteBtn");b.textContent="🎮 遥控模式："+(on?"开":"关");b.classList.toggle("remon",on);$("remoteTip").style.display=on?"":"none";
+ if(on){blurAll();if(!quiet||window.scrollY>0)$("app").scrollIntoView({block:"start"})}}
+function setDiag(on){diag=on;$("diag").style.display=on?"":"none";if(on){dlines.length=0;$("diagLog").textContent="（等待信号… 遥控模式："+(remote?"开":"关")+"）"}}
+$("remoteBtn").onclick=()=>setRemote(!remote);$("remoteExit").onclick=()=>setRemote(false);
+$("diagBtn").onclick=e=>{e.preventDefault();setDiag(!diag)};$("diagX").onclick=()=>setDiag(false);$("diagC").onclick=()=>{dlines.length=0;$("diagLog").textContent="（已清空，等待信号…）"};
+document.addEventListener("visibilitychange",()=>dlog("页面"+(document.hidden?"切到后台 (hidden)":"回到前台 (visible)")));
+// keys
+document.addEventListener("keydown",e=>{const t=e.target,typing=!!(t&&t.matches&&t.matches("input[type=number],input[type=text],input:not([type]),textarea,select"));
+ dlog("键 key="+JSON.stringify(e.key)+" code="+(e.code||"-")+" keyCode="+e.keyCode+(e.repeat?" (按住重复)":"")+(typing?" [在输入框里]":""));
+ if(typing||e.ctrlKey||e.metaKey||e.altKey)return;
+ const k=e.key;
+ if(k===" "||e.code==="Space"||k==="Enter"){e.preventDefault();if(e.repeat)return;
+  if(k==="Enter")$("subbox").click();else act("replay","空格");return}
+ if(NEXTK.has(k)){e.preventDefault();if(!e.repeat)act("next",k);return}
+ if(PREVK.has(k)){e.preventDefault();if(!e.repeat)act("prev",k);return}
+ if(k==="MediaPlayPause"||(k==="MediaPlay"&&!playing)||((k==="MediaPause"||k==="MediaStop")&&playing)){e.preventDefault();if(!e.repeat)act("toggle",k);return}
+ if(k==="p"||k==="P"){toggle()}else if(k==="s"||k==="S"){$("star").click()}});
+document.addEventListener("keyup",e=>{if(e.key===" "||e.key==="Enter"){const t=e.target;if(!(t&&t.matches&&t.matches("input,textarea,select")))e.preventDefault()}},true);
+// media keys (Bluetooth next/prev/play) reach Android Chrome through the Media Session, not as key events
+if("mediaSession" in navigator){const ms=navigator.mediaSession,H=(a,f)=>{try{ms.setActionHandler(a,f)}catch(e){}};
+ H("nexttrack",()=>{dlog("媒体键 nexttrack");act("next","媒体键 下一曲")});
+ H("previoustrack",()=>{dlog("媒体键 previoustrack");act("prev","媒体键 上一曲")});
+ H("play",()=>{dlog("媒体键 play");if(!playing)act("toggle","媒体键 播放");else if(au.paused)startPlay()});
+ H("pause",()=>{dlog("媒体键 pause");if(playing){lastAct=performance.now();stopPlay();renderCnt()}else if(!au.paused)au.pause()});
+ try{ms.metadata=new MediaMetadata({title:document.title,artist:"逐句精听"})}catch(e){}}
+// swipes / drags / taps injected by touch- or mouse-emulating rings
+const ptr=new Map();
+addEventListener("pointerdown",e=>{ptr.set(e.pointerId,{x:e.clientX,y:e.clientY,t:performance.now(),type:e.pointerType,field:!!(e.target.closest&&e.target.closest("textarea,input,select,.qbox,#copyBox,.list"))})},true);
+addEventListener("pointermove",e=>{if(!diag||ptr.has(e.pointerId)||e.pointerType==="touch")return;const n=performance.now();if(n-hoverT>1200){hoverT=n;dlog("指针移动(没按下) "+e.pointerType+" @"+(e.clientX|0)+","+(e.clientY|0))}},true);
+addEventListener("pointercancel",e=>{const p=ptr.get(e.pointerId);ptr.delete(e.pointerId);if(p)dlog("滑动被页面滚动吃掉 "+p.type+"（请打开 🎮 指环遥控）")},true);
+addEventListener("pointerup",e=>{const p=ptr.get(e.pointerId);ptr.delete(e.pointerId);if(!p)return;
+ const dx=e.clientX-p.x,dy=e.clientY-p.y,dt=performance.now()-p.t,ax=Math.abs(dx),ay=Math.abs(dy);
+ const dir=ax<10&&ay<10?"":ay>=ax?(dy<0?" ↑上滑":" ↓下滑"):(dx<0?" ←左滑":" →右滑");
+ dlog((dir?"滑动":"点击")+dir+" "+p.type+" dx="+(dx|0)+" dy="+(dy|0)+" "+(dt|0)+"ms 起点@"+(p.x|0)+","+(p.y|0)+" 终点@"+(e.clientX|0)+","+(e.clientY|0));
+ if(!remote||p.field||Math.max(ax,ay)<30||dt>1500)return;
+ swipeT=performance.now();
+ if(ay>=ax)act(dy<0?"next":"prev",dy<0?"上滑":"下滑");else act(dx<0?"next":"prev",dx<0?"左滑":"右滑")},true);
+addEventListener("touchmove",e=>{if(remote&&e.cancelable&&!(e.target.closest&&e.target.closest("textarea,.list")))e.preventDefault()},{passive:false,capture:true});
+addEventListener("wheel",e=>{const n=performance.now(),gap=n-wheelT;wheelT=n;const d=Math.abs(e.deltaY)>=Math.abs(e.deltaX)?e.deltaY:e.deltaX;
+ if(gap>=250)dlog("滚轮 deltaY="+Math.round(e.deltaY)+" deltaX="+Math.round(e.deltaX)+" mode="+e.deltaMode);
+ if(!remote)return;e.preventDefault();if(gap<250||!d||n-wheelActT<WDEB)return;wheelActT=n;act(d>0?"next":"prev",d>0?"滚轮向下":"滚轮向上")},{passive:false,capture:true});
+addEventListener("click",e=>{
+ if(performance.now()-swipeT<300){e.preventDefault();e.stopPropagation();return}   // the click that ends a swipe is not a tap
+ const t=e.target,inter=!!(t.closest&&t.closest(INTER));   // buttons, ⭐, chips, links, inputs, panels: always do their own action, never switch/replay
+ if(remote&&!inter&&e.isTrusted){const w=innerWidth,x=e.clientX,edge=x<w*0.15?"ezL":x>w*0.85?"ezR":"";
+  if(edge){e.preventDefault();e.stopPropagation();const nx=edge==="ezR",ez=$(edge);dlog("点"+(nx?"右":"左")+"边缘");if(act(nx?"next":"prev",nx?"点右边缘":"点左边缘")){ez.classList.add("flash");setTimeout(()=>ez.classList.remove("flash"),200)}return}}
+ if(!inter&&e.isTrusted)dlog("点空白处"+(remote?"":"（遥控没开，不动作）"));
+ if(remote&&!inter&&e.isTrusted){act("replay","点空白");return}
+ if(inter)setTimeout(blurAll,0)},true);   // never leave focus on a button: Space/Enter would press it instead of reaching the page
+$("cont").addEventListener("change",()=>setTimeout(blurAll,0));$("blurList").addEventListener("change",()=>setTimeout(blurAll,0));
+// keep the element and the intent in sync: a play() that resolves after the user already paused is undone,
+// a system pause (call, other app) shows ▶, and timeupdate backs up the frame loop
+au.addEventListener("playing",()=>{if(!playing){au.pause();return}applyRate();if(!raf)loop()});
+au.addEventListener("pause",()=>{if(playing&&!gapT&&!au.seeking&&au.currentTime<(stopAt===null?1e9:stopAt-0.05)&&!au.ended){setTimeout(()=>{if(au.paused&&playing&&!gapT)setPlayUI(false)},250)}});
+au.addEventListener("timeupdate",()=>{if(playing&&!au.paused)check()});
+au.addEventListener("ended",()=>{if(playing&&stopAt!==null&&!gapT){segEnd();return}if(!gapT){stopAt=null;stopPlay()}});
+// decode embedded audio into a Blob URL (more reliable seeking on iOS Safari than a data: URI)
+function init(){
+ const p=parseInt(localStorage.getItem(KEY+"pos")||"0",10);cur=(p>=0&&p<SEGS.length)?p:0;
+ buildChapters();buildList();buildSpeeds();buildReps();buildSubs();applySubMode();render();$("loading").style.display="none";$("app").style.display="block";setRemote(remote,true)}
+setTimeout(init,30);
+window.__jt={SEGS,au,playSeg,go,toggle,get cur(){return cur},get playing(){return playing},get plays(){return plays},get rep(){return rep},get inGap(){return !!gapT},get rate(){return rate},get raf(){return raf},CHAPTERS,get subMode(){return subMode},get subState(){return subState},get remote(){return remote},setRemote,get lastAction(){return lastActKind}};
+</script>
+</body>
+</html>
