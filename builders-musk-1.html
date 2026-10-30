@@ -254,7 +254,7 @@ const au=(function(){
   pause(){o.paused=true;pendPlay=false;base=now();baseAt=performance.now();if(ready)P.pauseVideo()},
   get player(){return P}};
  window.onYouTubeIframeAPIReady=function(){
-  P=new YT.Player("yt",{videoId:YTID,playerVars:{playsinline:1,rel:0,modestbranding:1,cc_load_policy:0,start:Math.floor(SEGS[0].s)},
+  P=new YT.Player("yt",{videoId:YTID,playerVars:{playsinline:1,rel:0,modestbranding:1,cc_load_policy:0,iv_load_policy:3,start:Math.floor(SEGS[0].s)},
    events:{onReady(){ready=true;try{P.unloadModule("captions")}catch(e){}if(r!==1)try{P.setPlaybackRate(r)}catch(e){}
      if(pendSeek!==null){P.seekTo(pendSeek,true);pendSeek=null}else P.cueVideoById({videoId:YTID,startSeconds:SEGS[cur].s});if(pendPlay){pendPlay=false;P.playVideo()}
      $("loading").style.display="none"},
