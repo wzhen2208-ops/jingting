@@ -1,4 +1,616 @@
-<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>What's new in Grok Bot</title>
-<meta http-equiv="refresh" content="0; url=whatsnew.html"><link rel="canonical" href="whatsnew.html">
-<script>location.replace("whatsnew.html"+location.search+location.hash)</script></head>
-<body style="font-family:sans-serif;padding:24px">这节课已合并到 <a href="whatsnew.html">What's new in Grok Bot（全部周更合集）</a>，正在跳转…</body></html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>逐句精听 · What&#x27;s new in Grok Bot · Sept 8</title>
+<style>#yt iframe{width:100%;height:100%;display:block}.item .tx,.item .x,.item .z,.sub-box .en,.sub-box .zh{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important;max-height:none!important;overflow-wrap:anywhere}
+.pts{margin-top:12px;border:1px solid #d1fae5;border-radius:16px;background:#f0fdfa;padding:0 12px}
+.pts>summary{list-style:none;padding:10px 0;font-weight:800;color:#0f766e;cursor:pointer;font-size:14px;display:flex;justify-content:space-between}
+.pts>summary::-webkit-details-marker{display:none}
+.pt{padding:9px 0;border-top:1px dashed #a7f3d0;font-size:14px;line-height:1.6}
+.pt .pk{display:inline-block;font-size:11px;font-weight:800;border-radius:6px;padding:0 6px;margin-right:6px;background:#e0e7ff;color:#3730a3;vertical-align:1px}
+.pt .pk.k1{background:#fef3c7;color:#92400e}.pt .pk.k2{background:#e0e7ff;color:#3730a3}.pt .pk.k3{background:#fce7f3;color:#9d174d}.pt .pk.k4{background:#dcfce7;color:#166534}.pt .pk.k5{background:#f1f5f9;color:#334155}
+.pt .ph{font-weight:800;color:#111827}
+.pt .px{color:#334155;margin-top:2px}
+.pt .pe{margin-top:4px;background:#fff;border-radius:10px;padding:6px 9px;color:#1f2937;font-size:13.5px}
+.pt .pe i{font-style:normal;color:#0f766e;display:block;font-size:12.5px}
+
+:root{--bg1:#1e1b4b;--bg2:#0f766e;--card:#ffffff;--ink:#1f2937;--muted:#6b7280;--acc:#6366f1;--acc2:#14b8a6;--star:#f59e0b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{touch-action:manipulation}
+button,.chip,.btn{touch-action:manipulation;user-select:none;-webkit-user-select:none}
+html,body{margin:0;min-height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;background:linear-gradient(160deg,var(--bg1),#4338ca 45%,var(--bg2));background-attachment:fixed;color:var(--ink);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.wrap{max-width:640px;margin:0 auto;padding:14px 14px 40px}
+header{color:#fff;margin:6px 4px 12px}
+header h1{font-size:15px;font-weight:600;margin:0;opacity:.85;line-height:1.35}
+header .sub{font-size:12px;opacity:.6;margin-top:3px}
+.card{background:var(--card);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.25);padding:18px}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.num{font-size:28px;font-weight:800;color:var(--acc);letter-spacing:-.5px}
+.num small{font-size:15px;color:var(--muted);font-weight:600}
+.time{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.star{display:flex;flex-direction:column;align-items:center;min-width:64px;min-height:56px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:16px;cursor:pointer;line-height:1;padding:6px 8px;color:#94a3b8;transition:.15s}
+.star b{font-size:28px;font-weight:400}.star span{font-size:11px;font-weight:700;margin-top:3px}
+.star.on{background:#fef3c7;border-color:var(--star);color:#b45309}
+#toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%);z-index:60;background:rgba(15,23,42,.92);color:#fff;border-radius:99px;padding:9px 16px;font-size:14px;font-weight:600;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1}
+#toast.long{white-space:normal;width:max-content;max-width:88vw;border-radius:14px;text-align:center;line-height:1.45}
+.qbox .qh .qtools{display:flex;align-items:center;gap:6px}
+.qbox .qwrap{display:flex;gap:8px;align-items:stretch}
+.qbox .qwrap textarea{flex:1;min-width:0}
+.qmic{flex:none;width:56px;min-height:58px;border:2px solid #c7d2fe;border-radius:14px;background:#eef2ff;font-size:24px;line-height:1;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px;color:#4338ca}
+.qmic span{font-size:10px;font-weight:700}
+.qmic.rec{background:#ef4444;border-color:#dc2626;color:#fff;animation:micPulse 1.1s ease-in-out infinite}
+@keyframes micPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,.55)}70%{box-shadow:0 0 0 12px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.qlang{border:1px solid #c7d2fe;background:#fff;color:#4338ca;border-radius:99px;padding:3px 9px;font-size:12px;font-weight:800;cursor:pointer}
+.qbox.rec{border-color:#fca5a5;background:#fff5f5}
+.qbox .qinterim{display:none;margin-top:6px;font-size:14px;color:#b91c1c;background:#fef2f2;border-radius:10px;padding:5px 9px;white-space:pre-wrap}
+.qbox.rec .qinterim{display:block}
+.qbox .qmsg{display:none;margin-top:8px;font-size:16px;font-weight:600;line-height:1.5;color:#334155;background:#f1f5f9;border-radius:12px;padding:9px 12px}
+.qbox .qmsg.bad{color:#991b1b;background:#fee2e2;border:2px solid #f87171}
+.qbox .qinterim{font-size:17px!important;font-weight:700}
+#micAlert{display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;background:#fff;border-top:5px solid #dc2626;box-shadow:0 -10px 30px rgba(0,0,0,.35);padding:16px 18px calc(16px + env(safe-area-inset-bottom));max-height:75vh;overflow:auto}
+#micAlert.show{display:block}
+#micAlert .mt{font-size:22px;font-weight:900;color:#b91c1c;line-height:1.3;margin-bottom:8px}
+#micAlert .mb{font-size:18px;line-height:1.55;color:#111827;white-space:pre-wrap}
+#micAlert .md{margin-top:10px;font-size:12px;color:#64748b;font-family:ui-monospace,monospace;word-break:break-all}
+#micAlert .mbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+#micAlert .mbtns button{flex:1 1 auto;min-height:52px;font-size:17px;font-weight:800;border-radius:14px;border:2px solid #c7d2fe;background:#eef2ff;color:#3730a3;padding:8px 12px}
+#micAlert .mbtns button.pri{background:#4338ca;border-color:#4338ca;color:#fff}
+.qmic.wait{background:#fde68a;border-color:#f59e0b;color:#92400e}
+.qbox{margin-top:12px;border:1px solid #e0e7ff;border-radius:16px;padding:10px 12px;background:#fafaff}
+.qbox .qh{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#4338ca;margin-bottom:6px}
+.qbox .qh small{font-weight:600;color:#94a3b8}
+.qbox textarea{width:100%;min-height:58px;font-size:15px;line-height:1.5;border:1px solid #c7d2fe;border-radius:12px;padding:8px 10px;font-family:inherit;resize:vertical;color:#1f2937;background:#fff}
+.fv{padding:10px 16px;border-bottom:1px solid #f1f5f9;font-size:14px;line-height:1.5}
+.fv .fh{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.fv .fn{color:var(--acc);font-weight:800;cursor:pointer}
+.fv .fe{color:#111827;margin-top:2px}.fv .fz{color:#0f766e;font-size:13px}.fv .fq{color:#9a3412;background:#fff7ed;border-radius:10px;padding:6px 9px;margin-top:5px;white-space:pre-wrap}
+.fv .del{border:0;background:#f1f5f9;color:#64748b;border-radius:10px;padding:5px 10px;font-size:12px}
+.pbar{display:flex;gap:8px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid #eef2ff;background:#f8fafc}
+.pbar .chip{font-size:13px}
+#copyBox{display:none;padding:10px 16px}#copyBox textarea{width:100%;min-height:160px;font-size:13px;border:1px solid #c7d2fe;border-radius:10px;padding:8px}
+.item .q{color:#ea580c;font-size:12px}
+.bar{height:8px;background:#eef2ff;border-radius:99px;margin:12px 0 4px;overflow:hidden;cursor:pointer;position:relative}
+.bar i{position:absolute;top:0;bottom:0;width:2px;background:#fff;opacity:.9}
+.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:99px;transition:width .2s}
+.segbar{height:4px;background:#f1f5f9;border-radius:99px;overflow:hidden;margin-bottom:10px}
+.segbar>div{height:100%;width:0;background:var(--star)}
+.sub-box{min-height:150px;border-radius:16px;background:linear-gradient(135deg,#f5f3ff,#ecfeff);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px 14px;cursor:pointer;user-select:none;border:2px dashed #c7d2fe;transition:.2s}
+.sub-box.show{border-style:solid;border-color:transparent;background:#f8fafc}
+.hint{color:#818cf8;font-size:15px}
+.hint b{display:block;font-size:34px;margin-bottom:6px}
+.en{font-size:20px;line-height:1.5;color:#111827;font-weight:500}
+.zh{font-size:16px;line-height:1.6;color:#0f766e;margin-top:10px;padding-top:10px;border-top:1px solid #e5e7eb;width:100%}
+.zh .mt{font-size:11px;color:#9ca3af;margin-left:4px}
+.ctrls{display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr;gap:10px;margin-top:16px}
+.sep{height:1px;background:#e5e7eb;margin:20px 0 4px}
+.chap{font-size:12px;color:#4338ca;font-weight:700;margin-top:4px;min-height:16px}
+.jump{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.jump select,.jump input{font-size:14px;border:1px solid #c7d2fe;border-radius:12px;padding:7px 8px;background:#fff;color:#1f2937}
+.jump select{max-width:100%;flex:1 1 200px}
+.jump input{width:76px}
+.jump .lb{font-size:13px;color:#64748b;font-weight:600}
+.chead{padding:9px 16px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:13px;position:sticky;top:0;z-index:1}
+.study{padding:4px 18px 16px;border-top:1px solid #eef2ff;font-size:14px;line-height:1.6;color:#1f2937}
+.study h3{font-size:14px;margin:14px 0 6px;color:#312e81}
+.study ol{margin:0;padding-left:20px}
+.study details{margin-top:12px;border:1px solid #e0e7ff;border-radius:14px;padding:4px 12px}
+.study details>summary{padding:8px 0;font-weight:700;color:#0f766e;cursor:pointer;list-style:none}
+.study details>summary::-webkit-details-marker{display:none}
+.ks{padding:8px 0;border-top:1px dashed #e5e7eb}
+.ks .go{color:var(--acc);font-weight:800;cursor:pointer;margin-right:4px}
+.ks .ke{color:#111827}
+.ks .kz{color:#0f766e;font-size:13px}
+.ks .kw{color:#6b7280;font-size:13px}
+.wd{padding:6px 0;border-top:1px dashed #e5e7eb}
+.wd b{color:#111827}
+.wd .ip{color:#6b7280;font-size:12px;margin:0 4px}
+.wd .nt{color:#6b7280;font-size:12px}
+.tag{font-size:11px;background:#fef3c7;color:#92400e;border-radius:6px;padding:0 5px;margin-left:4px}
+.btn{border:0;border-radius:18px;height:66px;font-size:28px;background:#eef2ff;color:var(--acc);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .08s}
+.btn span{font-size:11px;margin-top:2px;font-weight:600;opacity:.8}
+.btn:active{transform:scale(.94)}
+.btn.play{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;box-shadow:0 6px 18px rgba(99,102,241,.45)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-top:16px}
+.speeds{display:flex;gap:6px}
+.chip{border:0;border-radius:99px;padding:9px 13px;font-size:14px;background:#f1f5f9;color:#334155;cursor:pointer;font-weight:600}
+.chip.on{background:var(--acc);color:#fff}
+.chip.staron{background:var(--star);color:#fff}
+.reps{display:flex;gap:6px;align-items:center}
+.reps .lb{font-size:13px;color:#64748b;font-weight:600;margin-right:2px}
+.cnt{font-size:12px;font-weight:700;color:#0f766e;background:#ecfeff;border-radius:99px;padding:3px 9px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cnt.gap{opacity:.55}
+.toggle{display:flex;align-items:center;gap:6px;font-size:14px;color:#334155;cursor:pointer}
+.toggle input{width:20px;height:20px;accent-color:var(--acc)}
+.panel{margin-top:14px;background:rgba(255,255,255,.96);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.2);overflow:hidden}
+.panel summary{list-style:none;padding:15px 18px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;color:#312e81}
+.panel summary::-webkit-details-marker{display:none}
+.list{max-height:55vh;overflow:auto;border-top:1px solid #eef2ff}
+.item{display:flex;gap:10px;padding:11px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer;font-size:14px;line-height:1.45;align-items:flex-start}
+.item:hover{background:#f8fafc}
+.item.cur{background:#eef2ff}
+.item .i{color:var(--acc);font-weight:700;min-width:30px;font-variant-numeric:tabular-nums}
+.item .t{color:#94a3b8;font-size:11px;min-width:38px;padding-top:2px}
+.item .x{flex:1;color:#334155}
+.item .tx{flex:1;min-width:0}
+.item .x{display:block;color:#334155}
+.item .z{display:block;color:#0f766e;font-size:13px;margin-top:2px}
+.list.blur[data-m=hide] .x{filter:blur(4px)}
+.list[data-m=hide] .z,.list[data-m=en] .z,.list[data-m=zh] .x{display:none}
+.subs .chip{padding:9px 11px}
+.item .s{color:var(--star)}
+.kbd{color:rgba(255,255,255,.65);font-size:12px;text-align:center;margin-top:14px}
+.empty{padding:16px;color:var(--muted);font-size:14px}
+#loading{color:#fff;text-align:center;padding:40px;font-size:15px}
+/* 指环遥控 (ring remote) */
+html.remote,html.remote body{overflow:hidden;touch-action:none;overscroll-behavior:none}
+.chip.remon{background:#0f766e;color:#fff}
+#remoteExit{display:none;position:fixed;bottom:calc(10px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:40;border:0;border-radius:99px;padding:8px 12px;font-size:13px;font-weight:700;background:rgba(15,118,110,.92);color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+html.remote #remoteExit{display:block}
+.ezone{display:none;position:fixed;top:0;bottom:0;width:15vw;z-index:30;background:transparent;pointer-events:none}   /* visual flash only: edge taps are detected by x-position so buttons/⭐ under the edge keep working */
+#ezL{left:0}#ezR{right:0}
+html.remote .ezone{display:block}
+.ezone.flash{background:rgba(15,118,110,.12)}
+.diaglink{font-size:12px;color:#94a3b8;text-decoration:underline;cursor:pointer}
+.rtip{font-size:12px;color:#0f766e;background:#ecfeff;border-radius:12px;padding:7px 10px;margin-top:10px;line-height:1.5}
+.btn.hit{box-shadow:0 0 0 4px #fbbf24;transform:scale(.94)}
+#diag{position:fixed;left:8px;right:8px;bottom:8px;z-index:50;background:rgba(15,23,42,.93);color:#a7f3d0;border-radius:14px;padding:8px 10px;font:12px/1.45 ui-monospace,Menlo,monospace;pointer-events:none;max-width:624px;margin:0 auto}
+#diag .dh{display:flex;justify-content:space-between;align-items:center;color:#fde68a;font-weight:700;margin-bottom:4px}
+#diag .dh{gap:8px}#diag .dh span:last-child{display:flex;gap:6px;flex-shrink:0}#diag button{white-space:nowrap}
+#diag button{pointer-events:auto;border:0;border-radius:10px;padding:8px 16px;background:#334155;color:#fff;font-size:12px}
+#diag pre{margin:0;white-space:pre-wrap;word-break:break-all;min-height:6em;font:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>🎧 逐句精听 · What&#x27;s new in Grok Bot · Sept 8</h1><div class="sub"><b style='color:#fde68a'>📅 2026-09-08</b> · Matt Palmer · 1:15 · 20 句 · 4 章 · 每句有讲解 · <a style='color:#a5f3fc' href='https://www.youtube.com/watch?v=_C7HafHTuug'>原视频</a></div></header><!--PV--><style id="pvcss">
+.pv{margin:0 0 14px}.pv>summary{flex-wrap:wrap;gap:4px}.pv>summary small{font-weight:500;color:#6366f1;font-size:12px}
+.pvin{padding:0 12px 14px}.pvtip{font-size:13px;color:#64748b;margin:0 4px 10px;line-height:1.55}
+.pvs{border:1px solid #e0e7ff;border-radius:16px;margin:0 0 10px;background:#f8faff;overflow:hidden}
+.pvs>summary{list-style:none;cursor:pointer;padding:12px 14px;font-weight:700;color:#3730a3;font-size:15px;display:flex;justify-content:space-between;gap:8px}
+.pvs>summary::-webkit-details-marker{display:none}.pvs>summary:after{content:"▾";color:#818cf8}.pvs[open]>summary:after{content:"▴"}
+.pvl{padding:0 10px 10px;display:flex;flex-direction:column;gap:8px}
+.pvc{background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 1px 3px rgba(49,46,129,.08);font-size:14px;line-height:1.6;color:#1e293b;overflow-wrap:anywhere}
+.pvc .t{font-weight:700;color:#1e1b4b;font-size:15px}.pvc .t span{font-weight:500;color:#0f766e;margin-left:6px}
+.pvc .o{margin-top:6px;padding:6px 8px;border-left:3px solid #a5b4fc;background:#eef2ff;border-radius:6px;font-size:13.5px;color:#334155;cursor:pointer}
+.pvc .o mark{background:#fde68a;color:inherit;padding:0 2px;border-radius:3px}.pvc .o i{font-style:normal;color:#6366f1;font-size:12px;white-space:nowrap}
+.pvc .eg{margin-top:6px;font-size:13.5px;color:#334155}.pvc .eg span{display:block;color:#0f766e;font-size:13px}
+.pvc .en{font-size:15px;color:#111827}.pvc .zh{color:#0f766e;font-size:14px;margin-top:4px}
+.pvc .why{margin-top:6px;font-size:13.5px;color:#475569;background:#fff7ed;border-radius:8px;padding:6px 8px}
+.pvc .jb{margin-top:8px;border:0;border-radius:999px;background:#4f46e5;color:#fff;padding:7px 14px;font-size:13px}
+.pvh{font-weight:800;color:#4338ca;font-size:13px;margin:6px 2px 0;padding:4px 10px;background:#e0e7ff;border-radius:999px;align-self:flex-start}
+.pvc .n{display:inline-block;background:#e0e7ff;color:#3730a3;border-radius:999px;padding:0 8px;font-size:12px;margin-right:6px}
+</style><details class="panel pv" id="pvPanel" open><summary><span>📖 预习（听之前先看）</span><small>背景 6 · 生词 25 · 难句 6 · 展开 / 收起</small></summary><div class="pvin"><div class="pvtip">先看背景、过一遍生词，再去听。疑难句点“▶ 跳到第 N 句练”直接跳到那句反复听。</div><details class="pvs" open><summary>🔧 1. 科技背景（6）</summary><div class="pvl"><div class="pvc"><div class="t">平台（platform）：iPad / Android / iOS / desktop</div>Grok Bot 能在哪些设备上用：iOS＝苹果手机系统，iPad＝苹果平板，Android＝安卓手机和平板，desktop＝电脑桌面版。这周新增了 iPad 和安卓。</div><div class="pvc"><div class="t">企业版（enterprise）</div>给公司和团队用的版本，通常带成员管理、共享、统一计费等功能。视频说它尤其适合在团队内分享模板。</div><div class="pvc"><div class="t">模板与应用市场（templates / Marketplace）</div>模板＝把一个 bot 的做法打包分享；Marketplace＝官方精选模板的“商店”，一键安装。详见《Templates》和《Marketplace》两课。</div><div class="pvc"><div class="t">Harness（运行框架）</div>AI 产品里包在模型外面的那层“框架”：负责给模型喂上下文、调用工具、执行任务。harness 更高效＝同样的任务用更少的资源和时间。</div><div class="pvc"><div class="t">性能、内存占用（performance / memory usage）</div>性能提升＝更快、更流畅；内存占用少＝手机或电脑更不容易卡。</div><div class="pvc"><div class="t">限时优惠（limited-time deal）</div>在一段时间内才有的优惠，这里指团队可以免费用企业版一段时间。</div></div></details><details class="pvs"><summary>📝 2. 生词和词组（25）</summary><div class="pvl"><div class="pvc"><div class="t">platform<span>平台</span></div><div class="o" onclick="pvJump(3)"><span class="n">#3</span>First, two new <mark>platforms</mark> are now supported. <i>▶ 跳到这句</i></div><div class="eg">🏭 The new app works on every platform we use.<span>新 App 在我们用的所有平台上都能用。</span></div></div><div class="pvc"><div class="t">be supported<span>被支持</span></div><div class="o" onclick="pvJump(3)"><span class="n">#3</span>First, two new platforms are now <mark>supported</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Thai language is now supported on the scanner.<span>扫描枪现在支持泰语了。</span></div></div><div class="pvc"><div class="t">available for<span>可用于</span></div><div class="o" onclick="pvJump(4)"><span class="n">#4</span>Grok Bot&#x27;s <mark>available for iPad</mark> and Android. <i>▶ 跳到这句</i></div><div class="eg">🏭 The training video is available for all staff.<span>培训视频全体员工都能看。</span></div></div><div class="pvc"><div class="t">highly requested<span>呼声很高的</span></div><div class="o" onclick="pvJump(5)"><span class="n">#5</span>Both <mark>highly requested</mark> platforms, and candidly, I think the iPad version looks awesome. <i>▶ 跳到这句</i></div><div class="eg">🏭 A shuttle bus was highly requested by workers.<span>工人们强烈要求开通班车。</span></div></div><div class="pvc"><div class="t">candidly<span>坦白说</span></div><div class="o" onclick="pvJump(5)"><span class="n">#5</span>Both highly requested platforms, and <mark>candidly</mark>, I think the iPad version looks awesome. <i>▶ 跳到这句</i></div><div class="eg">🏭 Candidly, the old layout wastes space.<span>说实话，旧布局浪费空间。</span></div></div><div class="pvc"><div class="t">enterprise<span>企业（版）</span></div><div class="o" onclick="pvJump(6)"><span class="n">#6</span>Second, Grok Bot&#x27;s now available for <mark>enterprise</mark>, <i>▶ 跳到这句</i></div><div class="eg">🏭 We need the enterprise license for 200 users.<span>我们 200 个用户需要企业版授权。</span></div></div><div class="pvc"><div class="t">which means<span>这意味着</span></div><div class="o" onclick="pvJump(7)"><span class="n">#7</span><mark>which means</mark> if you have a business, if you&#x27;re on a team, you should check out the enterprise version. <i>▶ 跳到这句</i></div><div class="eg">🏭 The part is late, which means line 3 will stop.<span>零件晚到，这意味着 3 号线要停。</span></div></div><div class="pvc"><div class="t">check out<span>看看、了解</span></div><div class="o" onclick="pvJump(7)"><span class="n">#7</span>which means if you have a business, if you&#x27;re on a team, you should <mark>check out</mark> the enterprise version. <i>▶ 跳到这句</i></div><div class="eg">🏭 Check out the new break room on the second floor.<span>去看看二楼新的休息室。</span></div></div><div class="pvc"><div class="t">especially<span>尤其</span></div><div class="o" onclick="pvJump(8)"><span class="n">#8</span>It&#x27;s <mark>especially</mark> great for sharing templates. <i>▶ 跳到这句</i></div><div class="eg">🏭 This is especially important on night shift.<span>这在夜班尤其重要。</span></div></div><div class="pvc"><div class="t">limited-time deal<span>限时优惠</span></div><div class="o" onclick="pvJump(9)"><span class="n">#9</span>Now, you also—there&#x27;s a <mark>limited-time deal</mark> where you can get the enterprise version free for your team for a limited time. <i>▶ 跳到这句</i></div><div class="eg">🏭 The forklift dealer has a limited-time deal this month.<span>叉车经销商这个月有限时优惠。</span></div></div><div class="pvc"><div class="t">You&#x27;ll want to …<span>你最好……</span></div><div class="o" onclick="pvJump(10)"><span class="n">#10</span><mark>You&#x27;ll want to take a look</mark> at that. <i>▶ 跳到这句</i></div><div class="eg">🏭 You&#x27;ll want to double-check the weight before shipping.<span>发货前你最好再核一下重量。</span></div></div><div class="pvc"><div class="t">Speaking of …<span>说到……</span></div><div class="o" onclick="pvJump(11)"><span class="n">#11</span><mark>Speaking of templates</mark>, the Grok Bot Marketplace is now also live. <i>▶ 跳到这句</i></div><div class="eg">🏭 Speaking of quality, the audit is next week.<span>说到质量，审核就在下周。</span></div></div><div class="pvc"><div class="t">live<span>已上线的</span></div><div class="o" onclick="pvJump(11)"><span class="n">#11</span>Speaking of templates, the Grok Bot Marketplace is now also <mark>live</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 The new ordering system goes live on Monday.<span>新订货系统周一上线。</span></div></div><div class="pvc"><div class="t">curated<span>精选的</span></div><div class="o" onclick="pvJump(12)"><span class="n">#12</span>So there&#x27;s a <mark>curated</mark> marketplace for templates. <i>▶ 跳到这句</i></div><div class="eg">🏭 We share a curated list of best practices.<span>我们分享一份精选的最佳做法清单。</span></div></div><div class="pvc"><div class="t">keep adding to<span>不断往里加</span></div><div class="o" onclick="pvJump(13)"><span class="n">#13</span>We&#x27;re gonna <mark>keep adding to that</mark>: templates the team loves, templates our favorite creators love. <i>▶ 跳到这句</i></div><div class="eg">🏭 We&#x27;ll keep adding to the FAQ.<span>我们会不断补充常见问题清单。</span></div></div><div class="pvc"><div class="t">give … a look<span>看一看</span></div><div class="o" onclick="pvJump(14)"><span class="n">#14</span><mark>Give the Grok Bot template marketplace a look</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Give this proposal a look when you have time.<span>有空看一下这份方案。</span></div></div><div class="pvc"><div class="t">performance improvements<span>性能提升</span></div><div class="o" onclick="pvJump(15)"><span class="n">#15</span>And finally, <mark>performance improvements</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 The upgrade brought major performance improvements.<span>这次升级带来了很大的性能提升。</span></div></div><div class="pvc"><div class="t">harness<span>运行框架（AI）；安全带</span></div><div class="o" onclick="pvJump(16)"><span class="n">#16</span>So, first, the <mark>harness</mark> is now 10 to 30 percent more efficient for most people, and you&#x27;ll notice this across… <i>▶ 跳到这句</i></div><div class="eg">🏭 Always wear a harness above two meters.<span>两米以上作业必须系安全带。</span></div></div><div class="pvc"><div class="t">efficient<span>高效的</span></div><div class="o" onclick="pvJump(16)"><span class="n">#16</span>So, first, the harness is now 10 to 30 percent more <mark>efficient</mark> for most people, and you&#x27;ll notice this across every single version. <i>▶ 跳到这句</i></div><div class="eg">🏭 The new layout is 15 percent more efficient.<span>新布局效率提高了 15%。</span></div></div><div class="pvc"><div class="t">every single<span>每一个都</span></div><div class="o" onclick="pvJump(16)"><span class="n">#16</span>…is now 10 to 30 percent more efficient for most people, and you&#x27;ll notice this across <mark>every single version</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Every single worker must attend the drill.<span>每一位员工都必须参加演习。</span></div></div><div class="pvc"><div class="t">a bunch of<span>一大堆</span></div><div class="o" onclick="pvJump(17)"><span class="n">#17</span>And second, there&#x27;s just <mark>a bunch of performance improvements</mark> to the desktop version, to the Android version, the iOS versions. <i>▶ 跳到这句</i></div><div class="eg">🏭 We fixed a bunch of small issues.<span>我们修了一大堆小问题。</span></div></div><div class="pvc"><div class="t">smoother<span>更顺畅的</span></div><div class="o" onclick="pvJump(18)"><span class="n">#18</span>So you should notice a <mark>smoother experience</mark>, less memory usage, overall better Grok Bot experience. <i>▶ 跳到这句</i></div><div class="eg">🏭 Better planning means a smoother month-end.<span>计划做得好，月底就更顺。</span></div></div><div class="pvc"><div class="t">memory usage<span>内存占用</span></div><div class="o" onclick="pvJump(18)"><span class="n">#18</span>So you should notice a smoother experience, less <mark>memory usage</mark>, overall better Grok Bot experience. <i>▶ 跳到这句</i></div><div class="eg">🏭 High memory usage makes the old PC slow.<span>内存占用高让旧电脑很卡。</span></div></div><div class="pvc"><div class="t">overall<span>总体的</span></div><div class="o" onclick="pvJump(18)"><span class="n">#18</span>So you should notice a smoother experience, less memory usage, <mark>overall better</mark> Grok Bot experience. <i>▶ 跳到这句</i></div><div class="eg">🏭 Overall output rose by 8 percent.<span>总产量增长了 8%。</span></div></div><div class="pvc"><div class="t">Catch you next time.<span>下次见。</span></div><div class="o" onclick="pvJump(20)"><span class="n">#20</span>I&#x27;m Matt with SpaceX AI. I&#x27;ll <mark>catch you next time</mark>. Peace. <i>▶ 跳到这句</i></div><div class="eg">🏭 That&#x27;s it for today — catch you next time.<span>今天就到这里，下次见。</span></div></div></div></details><details class="pvs"><summary>🧩 3. 疑难句（6）</summary><div class="pvl"><div class="pvc"><div class="en"><span class="n">#5</span>Both highly requested platforms, and candidly, I think the iPad version looks awesome.</div><div class="zh">这两个平台呼声都很高；说实话，我觉得 iPad 版看起来特别棒。</div><div class="why">🧩 语速快 + 重复：Matt 把 highly requested 连说了好几遍，然后用 candidly 插入自己的评价。抓住 Both … platforms（两个平台都……）和 I think the iPad version looks awesome 两块就行。</div><button class="jb" type="button" onclick="pvJump(5)">▶ 跳到第 5 句练</button></div><div class="pvc"><div class="en"><span class="n">#7</span>which means if you have a business, if you&#x27;re on a team, you should check out the enterprise version.</div><div class="zh">也就是说，如果你在经营企业，或者你在一个团队里，就应该看看企业版。</div><div class="why">🧩 which means 后面接了两个 if 从句（if you have a business, if you&#x27;re on a team），主句 you should check out … 在最后才出现。</div><button class="jb" type="button" onclick="pvJump(7)">▶ 跳到第 7 句练</button></div><div class="pvc"><div class="en"><span class="n">#9</span>Now, you also—there&#x27;s a limited-time deal where you can get the enterprise version free for your team for a limited time.</div><div class="zh">另外，现在还有一个限时优惠：你的团队可以在限定时间内免费使用企业版。</div><div class="why">🧩 说到一半改口：Now, you also— 突然停住，又从 there&#x27;s a limited-time deal 重新开始；后面 for your team for a limited time 两个 for 连着说。</div><button class="jb" type="button" onclick="pvJump(9)">▶ 跳到第 9 句练</button></div><div class="pvc"><div class="en"><span class="n">#13</span>We&#x27;re gonna keep adding to that: templates the team loves, templates our favorite creators love.</div><div class="zh">我们会不断往里加：团队喜欢的模板、我们最喜欢的创作者喜欢的模板。</div><div class="why">🧩 冒号后是两个省略 that 的定语从句：templates (that) the team loves, templates (that) our favorite creators love。</div><button class="jb" type="button" onclick="pvJump(13)">▶ 跳到第 13 句练</button></div><div class="pvc"><div class="en"><span class="n">#16</span>So, first, the harness is now 10 to 30 percent more efficient for most people, and you&#x27;ll notice this across every single version.</div><div class="zh">首先，对大多数人来说，底层运行框架（harness）现在效率提高了 10% 到 30%，而且每个版本上你都能感觉到。</div><div class="why">🧩 长句 + 术语：the harness is now 10 to 30 percent more efficient for most people——harness 是 AI 术语，数字 10 to 30 percent 要快速反应。</div><button class="jb" type="button" onclick="pvJump(16)">▶ 跳到第 16 句练</button></div><div class="pvc"><div class="en"><span class="n">#17</span>And second, there&#x27;s just a bunch of performance improvements to the desktop version, to the Android version, the iOS versions.</div><div class="zh">其次，桌面版、安卓版和 iOS 版都有一大堆性能优化。</div><div class="why">🧩 列举三个版本：to the desktop version, to the Android version, the iOS versions——第三个省略了 to，iOS 读成三个字母。</div><button class="jb" type="button" onclick="pvJump(17)">▶ 跳到第 17 句练</button></div></div></details></div></details><script>
+function pvJump(n){try{var j=document.getElementById("jumpN");j.value=n;jumpTo();var a=document.getElementById("app");if(a&&a.style.display!=="none")a.scrollIntoView({behavior:"smooth",block:"start"});else window.scrollTo({top:0,behavior:"smooth"})}catch(e){console.log(e)}}
+(function(){var K="jt.pv."+location.pathname;document.querySelectorAll(".pv,.pv .pvs").forEach(function(d,i){try{var v=localStorage.getItem(K+i);if(v!==null)d.open=v==="1";d.addEventListener("toggle",function(){try{localStorage.setItem(K+i,d.open?"1":"0")}catch(e){}})}catch(e){}})})();
+</script><!--/PV-->
+<div id="loading" style="display:none"></div>
+<div id="ytbox" style="background:#000;border-radius:14px;overflow:hidden;margin:0 0 10px;aspect-ratio:16/9;max-height:34vh"><div id="yt" style="width:100%;height:100%"></div></div>
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px;font-size:13px;color:#e0e7ff"><button id="ccBtn" type="button" onclick="toggleCC()" style="border:0;border-radius:999px;padding:6px 12px;background:#fff;color:#3730a3;font-size:13px">🔤 视频英文字幕：关</button><span>视频由 YouTube 官方播放，按句自动跳转、重复。</span></div>
+<div class="card" id="app" style="display:none">
+  <div class="toprow">
+    <div class="num" id="num">1 <small>/ 1</small></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div class="time" id="tm">00:00</div><div class="cnt" id="cnt">第1遍</div></div>
+    <button class="star" id="star" title="收藏这句（S）"><b>☆</b><span>收藏</span></button>
+  </div>
+  <div class="chap" id="chap"></div>
+  <div class="bar" id="bar"><div id="barIn"></div></div>
+  <div class="segbar"><div id="segIn"></div></div>
+  <div class="sub-box" id="subbox"></div>
+  <details class="pts" id="ptsBox"><summary><span>💡 这句讲解（听懂了再看）</span><span id="ptsN"></span></summary><div id="ptsBody"></div></details>
+  <div class="qbox" id="qBox"><div class="qh"><span>❓ 这句我想问</span><span class="qtools"><small id="qState">自动保存在本机</small><button class="qlang" id="qLang" type="button" title="语音识别语言：中文 / 英文">中</button></span></div><div class="qwrap"><textarea id="qIn" rows="2" enterkeyhint="done" placeholder="哪里没听懂、哪个词不会用，写或点🎤说（自动保存）"></textarea><button class="qmic" id="qMic" type="button" title="语音提问：点一下开始说，再点一下停止">🎤<span id="qMicT">说</span></button></div><div class="qinterim" id="qInterim"></div><div class="qmsg" id="qMsg"></div></div>
+  <div class="ctrls">
+    <button class="btn" id="prev">⏮<span>上一句</span></button>
+    <button class="btn" id="rep">🔁<span>重听</span></button>
+    <button class="btn play" id="play">▶<span>播放</span></button>
+    <button class="btn" id="next">⏭<span>下一句</span></button>
+  </div>
+  <div class="sep"></div>
+  <div class="opts">
+    <div class="reps speeds" id="speeds"></div>
+  </div>
+  <div class="opts">
+    <div class="reps" id="reps"><span class="lb">每句</span></div>
+    <label class="toggle"><input type="checkbox" id="cont">连续播放</label>
+  </div>
+  <div class="opts">
+    <div class="reps subs" id="subs"><span class="lb">字幕</span></div>
+  </div>
+  <div class="opts">
+    <button class="chip" id="onlyStar">⭐ 只练收藏的 (<span id="starCnt">0</span>)</button>
+    <label class="toggle" id="blurLbl"><input type="checkbox" id="blurList" checked>列表遮住英文</label>
+  </div>
+  <div class="opts">
+    <button class="chip" id="remoteBtn">🎮 遥控模式：关</button>
+    <button class="chip" id="diagBtn">🔧 按键测试</button>
+  </div>
+  <div class="rtip" id="remoteTip" style="display:none">🎮 遥控模式（页面已锁定不滚动）：上滑 / 左滑 / 滚轮向下 / →↓ PageDown 键 / 点屏幕右边缘 = 下一句 · 下滑 / 右滑 / 滚轮向上 / ←↑ PageUp 键 / 点屏幕左边缘 = 上一句 · 点中间空白处 = 重听</div>
+  <div class="opts jump">
+    <select id="chapSel" style="display:none"></select>
+    <span class="lb">跳到第</span><input id="jumpN" type="number" inputmode="numeric" min="1" enterkeyhint="go"><span class="lb">句</span><button class="chip" id="jumpGo">跳</button>
+  </div>
+</div>
+<details class="panel" id="studyPanel" style="display:none">
+  <summary><span id="studyTitle">📘 本章学习</span><span>展开 / 收起</span></summary>
+  <div class="study" id="study"></div>
+</details>
+<details class="panel" id="favPanel">
+  <summary><span>⭐ 我的收藏</span><span id="favInfo">0 句</span></summary>
+  <div class="list" id="favList"></div>
+  <div class="pbar"><button class="chip" id="favCopy">📋 复制全部收藏</button><button class="chip" id="favPlay">▶ 只练收藏</button></div>
+</details>
+<details class="panel" id="qPanel">
+  <summary><span>❓ 我的提问</span><span id="qInfo">0 条</span></summary>
+  <div class="list" id="qList"></div>
+  <div class="pbar"><button class="chip" id="qCopy">📋 复制全部问题</button></div>
+</details>
+<div class="panel" id="copyBox"><div style="font-size:13px;color:#475569;margin-bottom:6px">自动复制没成功：长按下面的文字 → 全选 → 复制</div><textarea id="copyTxt" readonly></textarea><button class="chip" id="copyClose" style="margin-top:6px">关闭</button></div>
+<details class="panel" id="panel">
+  <summary><span>📜 句子列表</span><span id="listInfo"></span></summary>
+  <div class="list" id="list"></div>
+</details>
+<div class="kbd">每句默认 ∞ 无限重复，点 下一句 / 上一句 / 列表里的句子 才换句 · 倍速只有点“速度”按钮才会变<br>电脑快捷键：空格 = 重听 · ←/→ 或 ↑/↓ = 上/下一句 · P = 播放/暂停 · S = 收藏 · Enter = 显示字幕<br>蓝牙指环：→ ↓ PageDown / 下一曲 = 下一句 · ← ↑ PageUp / 上一曲 = 上一句 · 播放暂停键 = 播放/暂停 · 指环发的是滑动或滚轮的话，先点 🎮 遥控模式 打开 · 不确定指环发什么，点 🔧 按键测试 按一下看</div>
+</div>
+<div class="ezone" id="ezL"></div><div class="ezone" id="ezR"></div>
+<button id="remoteExit">🎮 退出遥控</button>
+<div id="toast"></div>
+<div id="micAlert" role="alertdialog"><div class="mt" id="maT"></div><div class="mb" id="maB"></div><div class="mbtns"><button class="pri" id="maKb" type="button">⌨️ 改用键盘语音输入</button><button id="maRetry" type="button">🎤 再试一次</button><button id="maX" type="button">知道了</button></div><div class="md" id="maD"></div></div>
+<div id="diag" style="display:none"><div class="dh"><span>🔧 按键测试：按一下指环，看这里显示什么</span><span><button id="diagC">清空</button><button id="diagX">关闭</button></span></div><pre id="diagLog">（等待信号…）</pre></div>
+
+<script>
+const SEGS=[{"s": 0.0, "e": 2.45, "en": "Hey, it's Matt. Today, we're talking about what's new in Grok Bot.", "zh": "嘿，我是 Matt。今天我们来聊聊 Grok Bot 有什么新东西。", "pts": [{"k": "地道表达", "h": "Hey, it's Matt.", "x": "视频/电话开场自报家门用 it's + 名字，不说 I am Matt。", "eg": "Hi, it's Lily from the plant — do you have a minute?", "egz": "你好，我是工厂的 Lily，你现在方便吗？"}, {"k": "语法", "h": "we're talking about …", "x": "现在进行时表示“今天要讲的话题”，比 we will talk about 更口语。", "eg": "Today we're talking about the new shift schedule.", "egz": "今天我们来说说新的排班表。"}, {"k": "连读弱读", "h": "what's new in", "x": "what's new 连读成 /wʌtsˈnuː/，in 弱读几乎只剩 /ɪn/。", "eg": "What's new in the safety rules?", "egz": "安全规定有什么新变化？"}]}, {"s": 2.45, "e": 4.2, "en": "So this week, a few exciting things.", "zh": "这周有几件让人兴奋的事。", "pts": [{"k": "语法", "h": "a few exciting things", "x": "省略句：完整是 there are a few exciting things。口语介绍要点时经常只说名词短语。", "eg": "This month, a few big changes.", "egz": "这个月有几项大变化。"}, {"k": "词汇", "h": "exciting vs. excited", "x": "exciting 形容“事情令人兴奋”，excited 形容“人感到兴奋”。", "eg": "The new robot is exciting; the team is excited.", "egz": "新机器人很让人期待，团队也很兴奋。"}]}, {"s": 4.2, "e": 7.1, "en": "First, two new platforms are now supported.", "zh": "第一，现在新增支持两个平台。", "pts": [{"k": "术语", "h": "platform", "x": "在软件里指“运行的系统或设备类型”，比如 iPhone、iPad、安卓、电脑。", "eg": "Our MES runs on both Windows and Android platforms.", "egz": "我们的 MES 能在 Windows 和安卓平台上运行。"}, {"k": "语法", "h": "are now supported", "x": "被动语态：be + supported，“被支持”。产品更新里很常用。", "eg": "Thai and English are now supported on the HMI screen.", "egz": "操作屏现在支持泰语和英语。"}, {"k": "地道表达", "h": "First, …", "x": "First / Second / Finally 是列要点的骨架，听到它们就知道讲到第几点了。", "eg": "First, check the oil level.", "egz": "第一，检查油位。"}]}, {"s": 7.1, "e": 10.5, "en": "Grok Bot's available for iPad and Android.", "zh": "Grok Bot 现在可以在 iPad 和安卓上用了。", "pts": [{"k": "连读弱读", "h": "Grok Bot's available", "x": "Bot's = Bot is，和 available 连读：/bɑːtsəˈveɪləbl/，is 被吞掉。", "eg": "The report's available on the shared drive.", "egz": "报告已经放在共享盘上了。"}, {"k": "词汇", "h": "available for", "x": "“可用于……、可在……上用”。available 也常表示“有空”。", "eg": "The new forklift is available for night shift too.", "egz": "新叉车夜班也能用。"}]}, {"s": 10.5, "e": 17.0, "en": "Both highly requested platforms, and candidly, I think the iPad version looks awesome.", "zh": "这两个平台呼声都很高；说实话，我觉得 iPad 版看起来特别棒。", "pts": [{"k": "地道表达", "h": "highly requested", "x": "“呼声很高、很多人要求的”。highly 修饰 requested，表示程度。", "eg": "A second canteen was highly requested by the workers.", "egz": "工人们强烈要求开第二个食堂。"}, {"k": "词汇", "h": "candidly", "x": "“坦白说、说实话”，比 honestly 稍正式。放在句首当插入语。", "eg": "Candidly, our delivery time is too long.", "egz": "坦白讲，我们的交期太长了。"}, {"k": "听力提示", "h": "重复与改口", "x": "这里 Matt 好像把 highly requested 重复说了几次（自动识别不太稳，大意不受影响）。听到重复别慌，抓住第一次就够了。", "eg": "It was a big — a really big — order.", "egz": "那是一笔大——非常大的——订单。"}]}, {"s": 17.0, "e": 20.3, "en": "Second, Grok Bot's now available for enterprise,", "zh": "第二，Grok Bot 现在推出了企业版，", "pts": [{"k": "术语", "h": "enterprise", "x": "“企业”；软件里的 enterprise version 指给公司用的版本，带团队管理、权限、计费等功能。", "eg": "We bought the enterprise version of the ERP.", "egz": "我们买的是 ERP 的企业版。"}, {"k": "连读弱读", "h": "Grok Bot's now", "x": "Bot's now 连读，is 弱化成 /s/。", "eg": "The line's now running again.", "egz": "产线现在又开起来了。"}]}, {"s": 20.3, "e": 24.0, "en": "which means if you have a business, if you're on a team, you should check out the enterprise version.", "zh": "也就是说，如果你在经营企业，或者你在一个团队里，就应该看看企业版。", "pts": [{"k": "语法", "h": "which means …", "x": "“这意味着……”，which 指前面整句话。解释一件事的影响时非常好用。", "eg": "The machine is down, which means we'll miss the shipment.", "egz": "机器坏了，这意味着我们赶不上这批货了。"}, {"k": "地道表达", "h": "be on a team", "x": "“在某个团队里”，注意介词用 on（美式）。", "eg": "She's on the quality team.", "egz": "她在品质组。"}, {"k": "地道表达", "h": "check out", "x": "“去看看、了解一下”，推荐别人时常用。", "eg": "Check out the new layout on line 2.", "egz": "去看看 2 号线的新布局。"}]}, {"s": 24.0, "e": 26.5, "en": "It's especially great for sharing templates.", "zh": "它特别适合用来分享模板。", "pts": [{"k": "语法", "h": "great for + doing", "x": "“很适合做……”，for 后面接动名词。", "eg": "This cart is great for moving heavy molds.", "egz": "这辆车特别适合搬重模具。"}, {"k": "发音", "h": "especially", "x": "重音在第二音节 /ɪˈspeʃəli/，开头的 e 很轻，容易听成 'specially。", "eg": "This is especially important for new workers.", "egz": "这一点对新员工尤其重要。"}]}, {"s": 26.5, "e": 32.55, "en": "Now, you also—there's a limited-time deal where you can get the enterprise version free for your team for a limited time.", "zh": "另外，现在还有一个限时优惠：你的团队可以在限定时间内免费使用企业版。", "pts": [{"k": "听力提示", "h": "Now, you also— there's …", "x": "Matt 说到一半改口重新开头。口语里很常见，听到 there's 再重新抓主干。", "eg": "Now, we also— there's a new rule about visitors.", "egz": "另外——有一条关于访客的新规定。"}, {"k": "地道表达", "h": "limited-time deal", "x": "“限时优惠”。deal 在这里是“优惠、划算的交易”。", "eg": "The supplier has a limited-time deal on gloves.", "egz": "供应商的手套有限时优惠。"}, {"k": "语法", "h": "where you can …", "x": "where 引导定语从句修饰 deal，相当于 in which。", "eg": "We have a program where workers can suggest improvements.", "egz": "我们有一个让工人提改善建议的项目。"}]}, {"s": 32.55, "e": 34.3, "en": "You'll want to take a look at that.", "zh": "你会想去看看的。", "pts": [{"k": "地道表达", "h": "You'll want to …", "x": "委婉的建议：“你最好……、你会想要……”，比 you should 更柔和。", "eg": "You'll want to wear ear protection in that area.", "egz": "在那片区域你最好戴上耳塞。"}, {"k": "连读弱读", "h": "take a look at that", "x": "take a 连成 /teɪkə/，look at 连成 /lʊkæt/，最后 that 的 t 不爆破。", "eg": "Can you take a look at this drawing?", "egz": "你能看一下这张图纸吗？"}]}, {"s": 34.3, "e": 37.6, "en": "Speaking of templates, the Grok Bot Marketplace is now also live.", "zh": "说到模板，Grok Bot 应用市场现在也上线了。", "pts": [{"k": "地道表达", "h": "Speaking of …", "x": "“说到……”，用来顺着刚才的话题转到相关的新话题。", "eg": "Speaking of overtime, the new policy starts next month.", "egz": "说到加班，新政策下个月开始实行。"}, {"k": "词汇", "h": "live", "x": "读 /laɪv/，形容词“已上线、正在运行的”，不是动词 live /lɪv/（居住）。", "eg": "The new website is live.", "egz": "新网站已经上线了。"}]}, {"s": 37.6, "e": 40.95, "en": "So there's a curated marketplace for templates.", "zh": "现在有一个精选模板的应用市场。", "pts": [{"k": "词汇", "h": "curated", "x": "“经过精心挑选的”，原本形容博物馆策展。", "eg": "HR prepared a curated list of training courses.", "egz": "人事整理了一份精选培训课程清单。"}, {"k": "连读弱读", "h": "there's a", "x": "there's a 连读成 /ðerzə/，听起来像一个词。", "eg": "There's a problem with the conveyor.", "egz": "输送带出问题了。"}]}, {"s": 40.95, "e": 46.0, "en": "We're gonna keep adding to that: templates the team loves, templates our favorite creators love.", "zh": "我们会不断往里加：团队喜欢的模板、我们最喜欢的创作者喜欢的模板。", "pts": [{"k": "语法", "h": "keep + doing", "x": "“持续做……”。keep adding to = 不断往里添加。", "eg": "We keep adding new parts to the catalog.", "egz": "我们不断往目录里加新零件。"}, {"k": "语法", "h": "templates the team loves", "x": "省略了关系代词 that：templates (that) the team loves。听的时候名词后面直接跟主谓，就是定语从句。", "eg": "the machine the operators like best", "egz": "操作员最喜欢的那台机器"}, {"k": "连读弱读", "h": "gonna", "x": "going to 的口语形式，读 /ˈɡʌnə/。", "eg": "We're gonna start the audit at nine.", "egz": "我们九点开始审核。"}]}, {"s": 46.0, "e": 48.4, "en": "Give the Grok Bot template marketplace a look.", "zh": "去 Grok Bot 模板市场看看吧。", "pts": [{"k": "地道表达", "h": "give … a look", "x": "“看一看”，= take a look at。give + 东西 + a look/a try 都是常见句型。", "eg": "Give the new SOP a look before Monday.", "egz": "周一前看一下新的作业指导书。"}, {"k": "语法", "h": "长名词短语", "x": "Grok Bot template marketplace 是四个词叠在一起的名词短语，核心是最后的 marketplace。", "eg": "the plant safety training schedule", "egz": "工厂安全培训时间表"}]}, {"s": 48.4, "e": 50.3, "en": "And finally, performance improvements.", "zh": "最后是性能提升。", "pts": [{"k": "术语", "h": "performance improvements", "x": "软件里指“运行更快、更省资源”的优化。", "eg": "The new motor brought big performance improvements.", "egz": "新电机让性能大幅提升。"}, {"k": "地道表达", "h": "And finally, …", "x": "“最后……”，听到它就知道是最后一点了。", "eg": "And finally, please clean your station.", "egz": "最后，请清理好自己的工位。"}]}, {"s": 50.3, "e": 57.5, "en": "So, first, the harness is now 10 to 30 percent more efficient for most people, and you'll notice this across every single version.", "zh": "首先，对大多数人来说，底层运行框架（harness）现在效率提高了 10% 到 30%，而且每个版本上你都能感觉到。", "pts": [{"k": "术语", "h": "harness", "x": "原义“马具、安全带”；在 AI 产品里指包住模型、让它调用工具和运行任务的那套底层框架。", "eg": "The safety harness must be checked before work at height.", "egz": "高处作业前必须检查安全带。"}, {"k": "语法", "h": "10 to 30 percent more efficient", "x": "比较级前加数量表示“高出多少”：X percent more + 形容词。", "eg": "The new line is 20 percent faster.", "egz": "新产线快了 20%。"}, {"k": "地道表达", "h": "every single …", "x": "single 用来强调“每一个都”。", "eg": "Check every single box before loading.", "egz": "装车前每一箱都要检查。"}]}, {"s": 57.5, "e": 63.2, "en": "And second, there's just a bunch of performance improvements to the desktop version, to the Android version, the iOS versions.", "zh": "其次，桌面版、安卓版和 iOS 版都有一大堆性能优化。", "pts": [{"k": "地道表达", "h": "a bunch of", "x": "“一大堆”，口语里的 a lot of。", "eg": "We got a bunch of new orders this week.", "egz": "这周来了一大堆新订单。"}, {"k": "语法", "h": "improvements to …", "x": "improvement 后面接 to 表示“对……的改进”。", "eg": "We made improvements to the packing process.", "egz": "我们改进了包装流程。"}, {"k": "发音", "h": "desktop / Android / iOS", "x": "三个平台名排着说：desktop /ˈdesktɑːp/，Android /ˈændrɔɪd/，iOS 读 /ˌaɪoʊˈes/（三个字母）。", "eg": "The app runs on desktop, Android and iOS.", "egz": "这个 App 能在电脑、安卓和 iOS 上用。"}]}, {"s": 63.2, "e": 69.5, "en": "So you should notice a smoother experience, less memory usage, overall better Grok Bot experience.", "zh": "所以你应该会感觉到用起来更流畅，内存占用更少，整体的 Grok Bot 体验更好。", "pts": [{"k": "语法", "h": "less memory usage", "x": "less 修饰不可数名词（usage），fewer 修饰可数名词。", "eg": "less waste, fewer defects", "egz": "更少的浪费、更少的缺陷"}, {"k": "词汇", "h": "smoother", "x": "smooth 的比较级，“更顺畅”，形容运行、操作、流程都可以。", "eg": "The new schedule gives us a smoother changeover.", "egz": "新排班让换线更顺。"}, {"k": "词汇", "h": "overall", "x": "“总体上的”，放在形容词前面。", "eg": "Overall quality improved this quarter.", "egz": "这个季度整体质量提高了。"}]}, {"s": 69.5, "e": 71.6, "en": "And that is what's new in Grok Bot this week.", "zh": "这就是本周 Grok Bot 的新内容。", "pts": [{"k": "地道表达", "h": "And that is …", "x": "收尾总结句，“以上就是……”。", "eg": "And that is our plan for next quarter.", "egz": "以上就是我们下季度的计划。"}, {"k": "语法", "h": "what's new", "x": "what 引导名词性从句，作 is 的表语。", "eg": "That's what we need.", "egz": "这就是我们需要的。"}]}, {"s": 71.6, "e": 75.0, "en": "I'm Matt with SpaceX AI. I'll catch you next time. Peace.", "zh": "我是 SpaceX AI 的 Matt，下次见，拜拜。", "pts": [{"k": "地道表达", "h": "I'm Matt with SpaceX AI.", "x": "with + 公司 = “在某公司工作的”。介绍自己单位很常用。", "eg": "I'm Lily with Siam Packaging.", "egz": "我是暹罗包装的 Lily。"}, {"k": "地道表达", "h": "catch you next time / Peace.", "x": "都是很随意的道别；Peace 是美式口语“拜啦”。正式场合别用 Peace。", "eg": "Thanks everyone, catch you next week.", "egz": "谢谢大家，下周见。"}]}];
+const KEY="jingting.Youtube__C7HafHTuug.";
+
+const CHAPTERS=[{"t": "两个新平台：iPad 和安卓", "s": 0, "outline": ["开场：Matt 介绍本周 Grok Bot 的新内容。", "第一件：Grok Bot 现在支持 iPad 和安卓两个新平台。", "这两个平台呼声都很高；Matt 觉得 iPad 版特别好看。"], "key": [{"n": 3, "en": "First, two new platforms are now supported.", "zh": "第一，现在新增支持两个平台。", "why": "First 开头 + 被动语态 are now supported"}, {"n": 5, "en": "Both highly requested platforms, and candidly, I think the iPad version looks awesome.", "zh": "这两个平台呼声都很高；说实话，我觉得 iPad 版看起来特别棒。", "why": "highly requested、candidly 两个好用的词"}], "words": [{"w": "platform", "ipa": "/ˈplætfɔːrm/", "zh": "平台", "note": "设备或系统类型"}, {"w": "supported", "ipa": "/səˈpɔːrtɪd/", "zh": "被支持的", "note": "be now supported"}, {"w": "highly requested", "ipa": "/ˈhaɪli rɪˈkwestɪd/", "zh": "呼声很高的", "note": ""}, {"w": "candidly", "ipa": "/ˈkændɪdli/", "zh": "坦白说", "note": "句首插入语"}]}, {"t": "企业版与限时优惠", "s": 5, "outline": ["第二件：Grok Bot 推出企业版（enterprise）。", "有公司、在团队里的人都应该看看，它尤其适合分享模板。", "现在有限时优惠：团队可以免费用一段时间。"], "key": [{"n": 7, "en": "which means if you have a business, if you're on a team, you should check out the enterprise version.", "zh": "也就是说，如果你在经营企业，或者你在一个团队里，就应该看看企业版。", "why": "which means … 解释影响"}, {"n": 9, "en": "Now, you also—there's a limited-time deal where you can get the enterprise version free for your team for a limited time.", "zh": "另外，现在还有一个限时优惠：你的团队可以在限定时间内免费使用企业版。", "why": "边说边改口的句子 + limited-time deal"}], "words": [{"w": "enterprise", "ipa": "/ˈentərpraɪz/", "zh": "企业（版）", "note": ""}, {"w": "check out", "ipa": "/tʃek aʊt/", "zh": "去看看", "note": ""}, {"w": "especially", "ipa": "/ɪˈspeʃəli/", "zh": "尤其", "note": ""}, {"w": "limited-time deal", "ipa": "/ˈlɪmɪtɪd taɪm diːl/", "zh": "限时优惠", "note": ""}]}, {"t": "应用市场上线", "s": 10, "outline": ["顺着“模板”说到 Grok Bot 应用市场（Marketplace）也上线了。", "这是一个精选模板市场，会不断加入团队和创作者喜欢的模板。", "Matt 邀请大家去看看。"], "key": [{"n": 11, "en": "Speaking of templates, the Grok Bot Marketplace is now also live.", "zh": "说到模板，Grok Bot 应用市场现在也上线了。", "why": "Speaking of … 转话题；live 的读音"}, {"n": 13, "en": "We're gonna keep adding to that: templates the team loves, templates our favorite creators love.", "zh": "我们会不断往里加：团队喜欢的模板、我们最喜欢的创作者喜欢的模板。", "why": "省略 that 的定语从句"}], "words": [{"w": "speaking of", "ipa": "/ˈspiːkɪŋ əv/", "zh": "说到……", "note": ""}, {"w": "live", "ipa": "/laɪv/", "zh": "已上线的", "note": "形容词读 /laɪv/"}, {"w": "curated", "ipa": "/ˈkjʊreɪtɪd/", "zh": "精选的", "note": ""}, {"w": "give … a look", "ipa": "/ɡɪv ə lʊk/", "zh": "看一看", "note": ""}]}, {"t": "性能提升与结尾", "s": 14, "outline": ["最后：性能提升。", "底层运行框架（harness）对大多数人来说效率提高 10%–30%。", "桌面、安卓、iOS 各版本都更流畅、更省内存。", "结尾道别。"], "key": [{"n": 16, "en": "So, first, the harness is now 10 to 30 percent more efficient for most people, and you'll notice this across every single version.", "zh": "首先，对大多数人来说，底层运行框架（harness）现在效率提高了 10% 到 30%，而且每个版本上你都能感觉到。", "why": "harness 术语 + 百分比比较"}, {"n": 18, "en": "So you should notice a smoother experience, less memory usage, overall better Grok Bot experience.", "zh": "所以你应该会感觉到用起来更流畅，内存占用更少，整体的 Grok Bot 体验更好。", "why": "less + 不可数名词、overall"}], "words": [{"w": "harness", "ipa": "/ˈhɑːrnɪs/", "zh": "运行框架；安全带", "note": "AI 里指包住模型的那套框架"}, {"w": "efficient", "ipa": "/ɪˈfɪʃnt/", "zh": "高效的", "note": ""}, {"w": "a bunch of", "ipa": "/ə bʌntʃ əv/", "zh": "一大堆", "note": ""}, {"w": "memory usage", "ipa": "/ˈmeməri ˈjuːsɪdʒ/", "zh": "内存占用", "note": ""}, {"w": "smooth", "ipa": "/smuːð/", "zh": "顺畅的", "note": ""}]}];   // [{t:title, s:first sentence index, outline:[], key:[{n,en,zh,why}], words:[{w,ipa,zh,note,old}]}]
+const ZH_LABEL="人工校对";
+const $=id=>document.getElementById(id);
+
+const YTID="_C7HafHTuug";
+const au=(function(){
+ const L={};let P=null,ready=false,st=-1,base=0,baseAt=performance.now(),seekLock=0,lastRaw=-1,r=1,pendSeek=null,pendPlay=false,startT=0;
+ const fire=n=>(L[n]||[]).forEach(f=>{try{f()}catch(e){console.warn(e)}});
+ const now=()=>st===1?base+(performance.now()-baseAt)/1000*r:base;
+ const o={paused:true,seeking:false,ended:false,defaultPlaybackRate:1,
+  addEventListener(n,f){(L[n]=L[n]||[]).push(f)},
+  get currentTime(){return now()},
+  set currentTime(v){base=v;baseAt=performance.now();seekLock=performance.now()+2500;if(ready)P.seekTo(v,true);else pendSeek=v},
+  get playbackRate(){return r},
+  set playbackRate(v){r=v;base=now();baseAt=performance.now();if(ready)try{P.setPlaybackRate(v)}catch(e){}},
+  get duration(){return ready?P.getDuration():0},
+  play(){o.paused=false;startT=performance.now();if(ready)P.playVideo();else pendPlay=true;
+   setTimeout(()=>{if(!o.paused&&st!==1&&st!==3&&performance.now()-startT>=2900&&window.toast)toast("没开始播放？请直接点一下上面视频画面里的 ▶")},3000);return Promise.resolve()},
+  pause(){o.paused=true;pendPlay=false;base=now();baseAt=performance.now();if(ready)P.pauseVideo()},
+  get player(){return P}};
+ window.onYouTubeIframeAPIReady=function(){
+  P=new YT.Player("yt",{videoId:YTID,playerVars:{playsinline:1,rel:0,modestbranding:1,cc_load_policy:0,iv_load_policy:3,start:Math.floor(SEGS[0].s)},
+   events:{onReady(){ready=true;try{P.unloadModule("captions")}catch(e){}if(r!==1)try{P.setPlaybackRate(r)}catch(e){}
+     if(pendSeek!==null){P.seekTo(pendSeek,true);pendSeek=null}else P.cueVideoById({videoId:YTID,startSeconds:SEGS[cur].s});if(pendPlay){pendPlay=false;P.playVideo()}
+     $("loading").style.display="none"},
+    onStateChange(e){const s=e.data;base=now();baseAt=performance.now();st=s;
+     if(s===1){if(o.paused){o.paused=false;if(typeof playSeg==="function"){playSeg(cur);return}}fire("playing")}   // started from the video's own ▶: play the current sentence
+     else if(s===2){if(!o.paused&&!gapT&&playing){o.paused=true}fire("pause")}
+     else if(s===0){o.paused=true;o.ended=true;fire("ended");o.ended=false}},
+    onPlaybackRateChange(e){r=e.data;fire("ratechange")}}})};
+ setInterval(()=>{if(!ready)return;let t;try{t=P.getCurrentTime()}catch(e){return}
+  if(performance.now()<seekLock){if(Math.abs(t-now())<0.6){seekLock=0}else return}
+  if(t!==lastRaw){lastRaw=t;if(st!==1||Math.abs(t-now())>0.35){base=t;baseAt=performance.now()}}
+  if(st===1&&!o.paused)fire("timeupdate")},50);
+ const s=document.createElement("script");s.src="https://www.youtube.com/iframe_api";document.head.appendChild(s);
+ return o})();
+let ccOn=false;function toggleCC(){const P=au.player;if(!P)return;ccOn=!ccOn;
+ try{if(ccOn){P.loadModule("captions");P.setOption("captions","track",{languageCode:"en"})}else P.unloadModule("captions")}catch(e){}
+ $("ccBtn").textContent=ccOn?"🔤 视频英文字幕：开":"🔤 视频英文字幕：关"}
+
+let cur=0,subState=0,playing=false,raf=0,stopAt=null,plays=1,gapT=0,tok=0,lastCtrl=0;
+const GAP=600,REPS=[["1","1遍"],["2","2遍"],["3","3遍"],["inf","∞"]];
+function lsGet(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
+let stars=new Set((lsGet(KEY+"stars",[])||[]).map(Number).filter(i=>i>=0&&i<SEGS.length));
+let QS=lsGet(KEY+"qs",{});if(!QS||typeof QS!=="object")QS={};
+function saveStars(){try{localStorage.setItem(KEY+"stars",JSON.stringify([...stars].sort((a,b)=>a-b)))}catch(e){toast("⚠️ 浏览器不让保存（无痕模式？）")}}
+function saveQs(){try{localStorage.setItem(KEY+"qs",JSON.stringify(QS))}catch(e){toast("⚠️ 浏览器不让保存（无痕模式？）")}}
+let toastT=0;function toast(m,ms){const t=$("toast");t.textContent=m;t.classList.toggle("long",!!ms);t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),ms||1600)}
+let onlyStar=localStorage.getItem(KEY+"only")==="1";
+let rate=parseFloat(localStorage.getItem(KEY+"rate")||"1");
+const SUBS=[["hide","隐藏"],["en","英文"],["zh","中文"],["both","中英"]];
+let subMode=localStorage.getItem("jingting.submode")||"hide";if(!SUBS.some(r=>r[0]===subMode))subMode="hide";
+let rep=localStorage.getItem("jingting.repeat")||"inf";if(!REPS.some(r=>r[0]===rep))rep="inf";
+$("cont").checked=localStorage.getItem(KEY+"cont")==="1";
+const fmt=t=>{t=Math.max(0,t|0);return String(t/60|0).padStart(2,"0")+":"+String(t%60).padStart(2,"0")};
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function order(){if(onlyStar&&stars.size){return SEGS.map((s,i)=>i).filter(i=>stars.has(i))}return SEGS.map((s,i)=>i)}
+function save(){localStorage.setItem(KEY+"pos",cur);saveStars();localStorage.setItem(KEY+"only",onlyStar?"1":"0");localStorage.setItem(KEY+"rate",rate);localStorage.setItem(KEY+"cont",$("cont").checked?"1":"0");localStorage.setItem("jingting.repeat",rep);localStorage.setItem("jingting.submode",subMode)}
+// subState = extra taps on this sentence; 0 = what the 字幕 mode shows by default (reset on every sentence change)
+const SUBCYCLE={hide:3,en:2,zh:2,both:1};
+function subShow(){const k=subState%SUBCYCLE[subMode];
+ if(subMode==="hide")return{en:k>=1,zh:k===2};if(subMode==="en")return{en:true,zh:k===1};if(subMode==="zh")return{en:k===1,zh:true};return{en:true,zh:true}}
+function renderSub(){const s=SEGS[cur],b=$("subbox"),v=subShow();
+ const zh='<div class="zh"'+(v.en?'':' style="border:0;margin:0;padding:0;font-size:19px"')+'>'+(s.zh?esc(s.zh)+(ZH_LABEL?'<span class="mt">'+esc(ZH_LABEL)+'</span>':''):'（无中文）')+'</div>';
+ const hint=x=>'<div class="hint" style="margin-top:10px;font-size:13px">'+x+'</div>';
+ if(!v.en&&!v.zh){b.className="sub-box";b.innerHTML='<div class="hint"><b>👀</b>点这里看英文字幕</div>';return}
+ b.className="sub-box show";
+ b.innerHTML=(v.en?'<div class="en">'+esc(s.en)+'</div>':'')+(v.zh?zh:'')+
+   (subMode==="hide"&&!v.zh?hint("再点一下看中文"):subMode==="en"&&!v.zh?hint("点一下看中文"):subMode==="zh"&&!v.en?hint("点一下看英文"):"")}
+function applySubMode(){const L=$("list");L.dataset.m=subMode;L.classList.toggle("blur",$("blurList").checked);$("blurLbl").style.display=subMode==="hide"?"":"none"}
+function buildSubs(){$("subs").innerHTML='<span class="lb">字幕</span>'+SUBS.map(r=>'<button class="chip'+(r[0]===subMode?' on':'')+'" data-m="'+r[0]+'">'+r[1]+'</button>').join("");
+ $("subs").onclick=e=>{const c=e.target.closest(".chip");if(!c)return;subMode=c.dataset.m;subState=0;buildSubs();applySubMode();renderSub();save()}}
+function chapOf(i){let k=-1;for(let j=0;j<CHAPTERS.length;j++)if(CHAPTERS[j].s<=i)k=j;return k}
+function chapEnd(k){return k+1<CHAPTERS.length?CHAPTERS[k+1].s-1:SEGS.length-1}
+let studyK=-2;
+function render(){if(rec&&recI!==cur)stopMic(true);const s=SEGS[cur],o=order(),pos=o.indexOf(cur);
+ const ck=chapOf(cur);$("chap").textContent=ck>=0?"第"+(ck+1)+"章 · "+CHAPTERS[ck].t+"（第"+(CHAPTERS[ck].s+1)+"–"+(chapEnd(ck)+1)+"句）":"";
+ if(ck>=0){$("chapSel").value=String(ck);if(ck!==studyK)renderStudy(ck)}
+ $("num").innerHTML=(cur+1)+' <small>/ '+SEGS.length+'</small>';
+ $("tm").textContent=fmt(s.s)+" – "+fmt(s.e)+(onlyStar&&stars.size?"  · ⭐ "+(pos+1)+"/"+o.length:"");
+ $("barIn").style.width=((cur+1)/SEGS.length*100)+"%";
+ const st=stars.has(cur);$("star").classList.toggle("on",st);$("star").innerHTML=st?"<b>⭐</b><span>已收藏</span>":"<b>☆</b><span>收藏</span>";
+ if(document.activeElement!==$("qIn")||+$("qIn").dataset.i!==cur){$("qIn").value=QS[cur]||"";$("qIn").dataset.i=cur}
+ renderFav();renderQs();
+ $("starCnt").textContent=stars.size;$("onlyStar").classList.toggle("staron",onlyStar);
+ renderSub();renderCnt();renderPts();
+ document.querySelectorAll(".item").forEach(e=>e.classList.toggle("cur",+e.dataset.i===cur));
+ document.querySelectorAll(".item .s").forEach(e=>{const i=+e.parentNode.dataset.i;e.textContent=(stars.has(i)?"⭐":"")+(QS[i]?"❓":"")});
+ $("listInfo").textContent=(cur+1)+"/"+SEGS.length+(stars.size?" · ⭐"+stars.size:"");
+ save()}
+
+function renderPts(){const s=SEGS[cur],P=s.pts||[],B=$("ptsBox");if(!P.length){B.style.display="none";return}B.style.display="";
+ const K={"地道表达":"k1","语法":"k2","连读弱读":"k3","发音":"k3","术语":"k4","背景":"k5"};
+ $("ptsBody").innerHTML=P.map(p=>'<div class="pt"><span class="pk '+(K[p.k]||"k5")+'">'+esc(p.k)+'</span><span class="ph">'+esc(p.h)+'</span><div class="px">'+esc(p.x)+'</div>'+(p.eg?'<div class="pe">🏭 '+esc(p.eg)+(p.egz?'<i>'+esc(p.egz)+'</i>':'')+'</div>':'')+'</div>').join("");
+ $("ptsN").textContent=P.length+" 点"}
+function setPlayUI(p){playing=p;$("play").innerHTML=p?'⏸<span>暂停</span>':'▶<span>播放</span>'}
+function repN(){const n=rep==="inf"?Infinity:+rep;return ($("cont").checked&&n===Infinity)?1:n}
+function renderCnt(){const c=$("cnt");c.textContent="🔁 第"+plays+"遍"+(rep==="inf"?" · ∞":" / "+rep);c.classList.toggle("gap",!!gapT)}
+function clearGap(){if(gapT){clearTimeout(gapT);gapT=0}}
+// Playback engine. `playing` is the user's intent; the media element is made to follow it.
+// Every play() gets a token: a late rejection/resolution of an older play() (e.g. AbortError after rapid taps) is ignored,
+// so it can no longer flip the UI to ▶ while audio keeps running (that stopped the loop and let audio run past the sentence).
+function applyRate(){if(au.defaultPlaybackRate!==rate)au.defaultPlaybackRate=rate;if(au.playbackRate!==rate)au.playbackRate=rate}
+function startPlay(){applyRate();const my=++tok;setPlayUI(true);let p;try{p=au.play()}catch(e){p=null}
+ if(p&&p.catch)p.catch(e=>{if(my!==tok||!playing)return;if(e&&e.name==="AbortError")return;setPlayUI(false);console.warn(e)});
+ loop()}
+function stopPlay(){tok++;clearGap();setPlayUI(false);if(!au.paused)au.pause();cancelAnimationFrame(raf);raf=0}
+function loop(){cancelAnimationFrame(raf);raf=requestAnimationFrame(tick)}   // exactly one frame loop at a time
+function again(){clearGap();plays++;const s=SEGS[cur];au.currentTime=s.s;stopAt=s.e;renderCnt();startPlay()}
+function segEnd(){cancelAnimationFrame(raf);raf=0;$("segIn").style.width="100%";
+ if(plays<repN()){tok++;au.pause();clearGap();gapT=setTimeout(()=>{gapT=0;if(playing)again()},GAP);renderCnt();return}
+ if($("cont").checked){const o=order(),p=o.indexOf(cur);if(p>=0&&p<o.length-1){const n=o[p+1];cur=n;subState=0;plays=1;render();
+    if(Math.abs(SEGS[n].s-au.currentTime)>0.3)au.currentTime=SEGS[n].s;stopAt=SEGS[n].e;loop();return}}
+ stopAt=null;stopPlay()}
+function check(){if(!playing||gapT||stopAt===null)return false;if(au.currentTime>=stopAt-0.02){segEnd();return true}return false}
+function tick(){raf=0;const s=SEGS[cur];const t=au.currentTime;
+ $("segIn").style.width=Math.min(100,Math.max(0,(t-s.s)/(s.e-s.s)*100))+"%";
+ if(check())return;
+ if(playing&&!gapT)raf=requestAnimationFrame(tick)}
+function playSeg(i){clearGap();cur=i;plays=1;const s=SEGS[i];render();au.currentTime=s.s;stopAt=s.e;startPlay()}
+function go(d){if(onlyStar&&!stars.has(cur)){onlyStar=false}const o=order();let p=o.indexOf(cur);if(p<0){p=0;for(let k=0;k<o.length;k++)if(o[k]>cur){p=k-(d>0?1:0);break}}
+ const n=Math.min(o.length-1,Math.max(0,p+d));subState=0;playSeg(o[n])}
+function toggle(){if(playing){stopPlay();renderCnt();return}
+ const s=SEGS[cur];if(stopAt===null||au.currentTime<s.s-0.05){playSeg(cur);return}
+ if(au.currentTime>=s.e-0.05){again();return}   // paused in the gap between repeats: carry on with the next play
+ startPlay()}
+function buildReps(){$("reps").innerHTML='<span class="lb">每句</span>'+REPS.map(r=>'<button class="chip'+(r[0]===rep?' on':'')+'" data-k="'+r[0]+'">'+r[1]+'</button>').join("");
+ $("reps").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;rep=b.dataset.k;buildReps();renderCnt();save()}}
+function buildList(){const L=$("list");L.innerHTML=SEGS.map((s,i)=>(CHAPTERS.findIndex(c=>c.s===i)>=0?'<div class="chead">第'+(CHAPTERS.findIndex(c=>c.s===i)+1)+'章 · '+esc(CHAPTERS[CHAPTERS.findIndex(c=>c.s===i)].t)+'</div>':'')+'<div class="item" data-i="'+i+'"><span class="i">'+(i+1)+'</span><span class="t">'+fmt(s.s)+'</span><span class="tx"><span class="x">'+esc(s.en)+'</span><span class="z">'+(s.zh?esc(s.zh):'')+'</span></span><span class="s"></span></div>').join("");
+ L.onclick=e=>{const it=e.target.closest(".item");if(it){subState=0;if(onlyStar&&!stars.has(+it.dataset.i))onlyStar=false;playSeg(+it.dataset.i)}}}
+const RATES=[0.75,0.9,1,1.25];if(!RATES.includes(rate))rate=1;
+function markSpeeds(){document.querySelectorAll("#speeds .chip").forEach(c=>c.classList.toggle("on",+c.dataset.r===rate))}
+function buildSpeeds(){$("speeds").innerHTML='<span class="lb">速度</span>'+RATES.map(r=>'<button class="chip" data-r="'+r+'">'+r+'×</button>').join("");markSpeeds();
+ $("speeds").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;
+  if(performance.now()-lastCtrl<450)return;   // tap landed here right after a play-row tap: a slipped finger, not a speed choice
+  rate=+b.dataset.r;applyRate();markSpeeds();save()}}
+// the rate only ever changes from a speed chip: undo anything else that touches it
+au.addEventListener("ratechange",()=>{if(au.playbackRate!==rate||au.defaultPlaybackRate!==rate)applyRate()});
+document.querySelector(".ctrls").addEventListener("pointerdown",()=>{lastCtrl=performance.now()},true);
+document.querySelector(".ctrls").addEventListener("click",()=>{lastCtrl=performance.now()},true);
+function buildChapters(){if(!CHAPTERS.length)return;const S=$("chapSel");S.style.display="";
+ S.innerHTML=CHAPTERS.map((c,k)=>'<option value="'+k+'">第'+(k+1)+'章 '+esc(c.t)+'（'+(c.s+1)+'–'+(chapEnd(k)+1)+'）</option>').join("");
+ S.onchange=()=>{const k=+S.value;subState=0;if(onlyStar)onlyStar=false;playSeg(CHAPTERS[k].s);$("chapSel").blur()};
+ $("studyPanel").style.display="";
+ $("bar").insertAdjacentHTML("beforeend",CHAPTERS.slice(1).map(c=>'<i style="left:'+(c.s/SEGS.length*100)+'%"></i>').join(""))}
+function renderStudy(k){studyK=k;const c=CHAPTERS[k];$("studyTitle").textContent="📘 第"+(k+1)+"章学习 · "+c.t;
+ const ks=(c.key||[]).map(x=>'<div class="ks"><span class="go" data-n="'+x.n+'">▶ #'+x.n+'</span><span class="ke">'+esc(x.en)+'</span><div class="kz">'+esc(x.zh)+'</div><div class="kw">💡 '+esc(x.why)+'</div></div>').join("");
+ const ws=(c.words||[]).map(w=>'<div class="wd"><b>'+esc(w.w)+'</b><span class="ip">'+esc(w.ipa||"")+'</span>'+(w.old?'<span class="tag">'+esc(w.old)+'</span>':'')+' '+esc(w.zh)+(w.note?'<div class="nt">'+esc(w.note)+'</div>':'')+'</div>').join("");
+ $("study").innerHTML='<h3>🎯 听前大纲（先看这个再听）</h3><ol>'+(c.outline||[]).map(x=>'<li>'+esc(x)+'</li>').join("")+'</ol>'+
+  '<details id="kd"><summary>⭐ 听后重点句（听完再看）</summary>'+ks+'</details>'+
+  '<details id="wdd"><summary>📝 生词（'+(c.words||[]).length+'）</summary>'+ws+'</details>';
+ $("study").querySelectorAll(".go").forEach(g=>g.onclick=()=>{subState=0;if(onlyStar)onlyStar=false;playSeg(+g.dataset.n-1)})}
+function jumpTo(){const n=parseInt($("jumpN").value,10);if(!(n>=1&&n<=SEGS.length)){$("jumpN").value="";$("jumpN").placeholder="1–"+SEGS.length;return}
+ subState=0;if(onlyStar&&!stars.has(n-1))onlyStar=false;$("jumpN").blur();playSeg(n-1)}
+$("jumpGo").onclick=jumpTo;$("jumpN").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();jumpTo()}});
+$("jumpN").placeholder="1–"+SEGS.length;
+$("prev").onclick=()=>go(-1);$("next").onclick=()=>go(1);$("rep").onclick=()=>playSeg(cur);$("play").onclick=toggle;
+$("subbox").onclick=()=>{subState=(subState+1)%SUBCYCLE[subMode];renderSub()};
+function setStar(i,on){on?stars.add(i):stars.delete(i);if(!stars.size)onlyStar=false;saveStars();render();toast(on?"⭐ 已收藏第 "+(i+1)+" 句（共 "+stars.size+" 句）":"已取消收藏第 "+(i+1)+" 句")}
+$("star").onclick=e=>{e.preventDefault();e.stopPropagation();setStar(cur,!stars.has(cur))};
+// ---- 收藏夹 + 提问 ----
+const line=i=>"#"+(i+1)+" ["+fmt(SEGS[i].s)+"] "+SEGS[i].en+(SEGS[i].zh?"（"+SEGS[i].zh+"）":"");
+function renderFav(){const a=[...stars].sort((x,y)=>x-y);$("favInfo").textContent=a.length+" 句";
+ $("favList").innerHTML=a.length?a.map(i=>'<div class="fv"><div class="fh"><span class="fn" data-n="'+i+'">▶ #'+(i+1)+'</span><button class="del" data-del="'+i+'">取消收藏</button></div><div class="fe">'+esc(SEGS[i].en)+'</div><div class="fz">'+esc(SEGS[i].zh||"")+'</div>'+(QS[i]?'<div class="fq">❓ '+esc(QS[i])+'</div>':'')+'</div>').join(""):'<div class="empty">还没有收藏。听不懂或想复习的句子，点右上角 ☆ 收藏。</div>'}
+function renderQs(){const a=Object.keys(QS).map(Number).filter(i=>QS[i]&&i>=0&&i<SEGS.length).sort((x,y)=>x-y);$("qInfo").textContent=a.length+" 条";
+ $("qList").innerHTML=a.length?a.map(i=>'<div class="fv"><div class="fh"><span class="fn" data-n="'+i+'">▶ #'+(i+1)+'</span><button class="del" data-dq="'+i+'">删除</button></div><div class="fe">'+esc(SEGS[i].en)+'</div><div class="fq">❓ '+esc(QS[i])+'</div></div>').join(""):'<div class="empty">还没有提问。在句子卡片下面的“❓ 这句我想问”里写，自动保存。</div>'}
+function listClick(e){const n=e.target.closest(".fn"),d=e.target.closest("[data-del]"),q=e.target.closest("[data-dq]");
+ if(d){setStar(+d.dataset.del,false);return}
+ if(q){if(confirm("删除第 "+(+q.dataset.dq+1)+" 句的提问？")){delete QS[+q.dataset.dq];saveQs();render()}return}
+ if(n){const i=+n.dataset.n;subState=0;if(onlyStar&&!stars.has(i))onlyStar=false;playSeg(i);$("app").scrollIntoView({block:"start",behavior:"smooth"})}}
+$("favList").onclick=listClick;$("qList").onclick=listClick;
+const TITLE=document.title.replace(/^逐句精听 · /,"");
+function copyText(txt,what){const ok=()=>toast("📋 已复制"+what+"，去聊天里粘贴"),fail=()=>{$("copyTxt").value=txt;$("copyBox").style.display="block";$("copyBox").scrollIntoView({block:"center"})};
+ const legacy=()=>{try{const t=document.createElement("textarea");t.value=txt;t.setAttribute("readonly","");t.style.cssText="position:fixed;top:0;left:0;opacity:0";document.body.appendChild(t);t.select();t.setSelectionRange(0,txt.length);const r=document.execCommand("copy");t.remove();r?ok():fail()}catch(e){fail()}};
+ if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok,legacy);else legacy()}
+$("favCopy").onclick=()=>{const a=[...stars].sort((x,y)=>x-y);if(!a.length){toast("还没有收藏");return}
+ copyText("【逐句精听 · "+TITLE+"】我的收藏（"+a.length+" 句）\n\n"+a.map(i=>line(i)+"\n"+(SEGS[i].zh||"")+(QS[i]?"\n问："+QS[i]:"")).join("\n\n"),"收藏 "+a.length+" 句")};
+$("qCopy").onclick=()=>{const a=Object.keys(QS).map(Number).filter(i=>QS[i]).sort((x,y)=>x-y);if(!a.length){toast("还没有提问");return}
+ copyText("【逐句精听 · "+TITLE+"】我的提问（"+a.length+" 条）\n\n"+a.map(i=>line(i)+"\n问："+QS[i]).join("\n\n"),"提问 "+a.length+" 条")};
+$("favPlay").onclick=()=>{if(!stars.size){toast("还没有收藏");return}onlyStar=true;subState=0;playSeg([...stars].sort((x,y)=>x-y)[0]);$("app").scrollIntoView({block:"start",behavior:"smooth"})};
+$("copyClose").onclick=()=>{$("copyBox").style.display="none"};
+let qT=0;$("qIn").addEventListener("input",()=>{const i=+$("qIn").dataset.i,v=$("qIn").value.trim();if(v)QS[i]=$("qIn").value;else delete QS[i];
+ clearTimeout(qT);$("qState").textContent="保存中…";qT=setTimeout(()=>{saveQs();$("qState").textContent="✓ 已保存（第 "+(i+1)+" 句）";renderQs();renderFav();document.querySelectorAll('.item[data-i="'+i+'"] .s').forEach(e=>e.textContent=(stars.has(i)?"⭐":"")+(QS[i]?"❓":""))},400)});
+$("qIn").addEventListener("blur",()=>{clearTimeout(qT);saveQs();renderQs();renderFav()});
+// ---- 🎤 语音提问 (Web Speech API; Chrome on Android/desktop). Text is appended to the box and saved via the same "input" handler.
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+var rec=null,recI=-1;   // var: render() may run before this line
+let asrLang=localStorage.getItem("jingting.asrlang")==="en-US"?"en-US":"zh-CN",recBase="",recFinal="",recErr=false;
+function renderLang(){$("qLang").textContent=asrLang==="en-US"?"EN":"中";$("qLang").title="语音识别语言："+(asrLang==="en-US"?"英文（点一下换中文）":"中文（点一下换英文）")}
+renderLang();
+$("qLang").onclick=()=>{asrLang=asrLang==="en-US"?"zh-CN":"en-US";try{localStorage.setItem("jingting.asrlang",asrLang)}catch(e){}renderLang();
+ toast(asrLang==="en-US"?"🎤 语音识别：英文":"🎤 语音识别：中文（可夹英文单词）");if(rec){stopMic();setTimeout(startMic,350)}};
+// UI states: 0 idle, 1 启动中 (tapped, waiting for onstart), 2 正在听. A persistent status line (#qMsg) sits right under the box,
+// so errors are visible next to the button (the top toast is easy to miss) and Lily can screenshot the exact code.
+function micUI(st){const on=st>0;$("qMic").classList.toggle("rec",st===2);$("qMic").classList.toggle("wait",st===1);$("qBox").classList.toggle("rec",on);
+ $("qMicT").textContent=st===2?"停":st===1?"启动中":"说";
+ if(st===2){$("qState").textContent="🔴 正在听…";$("qInterim").textContent="正在听…（说完再点🎤停止）"}
+ else if(st===1){$("qState").textContent="⏳ 启动中…";$("qInterim").textContent="⏳ 语音识别启动中…"}
+ else $("qInterim").textContent=""}
+function micMsg(m,bad){const e=$("qMsg");e.textContent=m||"";e.style.display=m?"block":"none";e.classList.toggle("bad",!!bad)}
+function micJoin(a,b){b=b.trim();if(!b)return a;if(!a.trim())return b;return a+(/[\s\n]$/.test(a)?"":" ")+b}
+function micPut(interim){const q=$("qIn");if(+q.dataset.i!==recI){stopMic(true);return}
+ q.value=micJoin(recBase,recFinal);q.dispatchEvent(new Event("input"));
+ $("qInterim").textContent=interim?("…"+interim):($("qInterim").textContent||"正在听…")}
+const MICERR={"not-allowed":"麦克风权限被拒：点地址栏左边的🔒 → 权限 → 麦克风 → 允许",
+ "service-not-allowed":"手机的语音识别服务不可用（Chrome 要用“Google 语音服务”）",
+ "no-speech":"没听到声音，再点🎤说一遍","audio-capture":"麦克风被别的App占用或找不到麦克风",
+ "network":"语音识别要连 Google 服务器，网络不通","language-not-supported":"手机的语音服务不支持这个语言",
+ "bad-grammar":"识别参数出错","aborted":"识别被中断"};
+const KB="；也可以点输入框，用键盘上的🎤语音键";
+let recLog=[],recT0=0,recStarted=false,recHeard=false,recWD=0,recAlt=false,recRetried=false,micPerm="?";
+const MICVER="mic-v5";
+try{navigator.permissions&&navigator.permissions.query({name:"microphone"}).then(s=>{micPerm=s.state;s.onchange=()=>{micPerm=s.state}}).catch(()=>{})}catch(e){}
+// Big bottom sheet that stays until tapped: Lily missed the small status line and the 5 s toast.
+const KBHOW="点下面「⌨️ 改用键盘语音输入」→ 键盘弹出后，点键盘上的🎤（话筒）键说话，文字会直接进提问框，一样自动保存。";
+function micAlert(title,body){$("maT").textContent=title;$("maB").textContent=body+"\n\n"+KBHOW;
+ $("maD").textContent="诊断（截图发给老师）："+MICVER+" · 语言 "+(rec&&rec.lang||asrLang)+" · 麦克风权限 "+micPerm+" · "+recLog.join(" → ")+" · "+navigator.userAgent.replace(/^Mozilla\/5\.0 /,"").slice(0,120);
+ $("micAlert").classList.add("show")}
+function micAlertClose(){$("micAlert").classList.remove("show")}
+$("maX").addEventListener("click",e=>{e.stopPropagation();micAlertClose()});
+$("maKb").addEventListener("click",e=>{e.stopPropagation();micAlertClose();const q=$("qIn");q.focus();try{q.setSelectionRange(q.value.length,q.value.length)}catch(_){}q.scrollIntoView({block:"center"})});   // focus inside the tap = keyboard opens on Android
+$("maRetry").addEventListener("click",e=>{e.stopPropagation();micAlertClose();recRetried=false;startMic()});
+function rlog(s){recLog.push(s+"@"+((performance.now()-recT0)/1000).toFixed(1)+"s")}
+function startMic(isRetry){
+ if(!SR){micMsg("这个浏览器没有语音识别，请用 Chrome 打开"+KB,true);micAlert("❌ 这个浏览器不能语音识别","请用 Chrome 打开这个页面（OPPO 自带浏览器、微信/LINE 里打开都不行）。");return}
+ if(rec)return;micAlertClose();
+ recI=cur;$("qIn").dataset.i=cur;recBase=$("qIn").value;recFinal="";recErr="";recStarted=false;recHeard=false;if(!isRetry){recLog=[];recRetried=false}recT0=performance.now();
+ const wasPlaying=playing||!au.paused;if(wasPlaying){stopPlay();renderCnt()}   // otherwise the mic hears the video
+ let r;try{r=new SR()}catch(e){micMsg("识别出错：无法创建（"+(e&&e.name||e)+"）"+KB,true);micAlert("❌ 语音识别没法启动","无法创建识别器（"+(e&&e.name||e)+"）。");return}
+ rec=r;r.lang=recAlt&&asrLang==="zh-CN"?"cmn-Hans-CN":asrLang;r.interimResults=true;r.continuous=false;r.maxAlternatives=1;   // continuous=false: Android Chrome misbehaves with true
+ r.onstart=()=>{rlog("start");if(rec!==r)return;recStarted=true;clearTimeout(recWD);micUI(2);micMsg("")};
+ r.onaudiostart=()=>rlog("audio");r.onspeechstart=()=>{rlog("speech");recHeard=true};
+ r.onresult=e=>{let fin="",inter="";for(let i=0;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)fin+=t;else inter+=t}
+  if(rec!==r)return;if(!recStarted){recStarted=true;micUI(2)}recHeard=true;recFinal=fin;micPut(inter)};
+ r.onerror=e=>{const c=(e&&e.error)||"unknown";rlog("error:"+c);if(rec!==r)return;recErr=c;
+  if(c==="aborted"&&recUserAbort)return;   // our own cancel: silent
+  if(c==="language-not-supported"&&!recAlt&&asrLang==="zh-CN"){recAlt=true}   // next tap retries with cmn-Hans-CN
+  const m="识别出错："+c+"（"+(MICERR[c]||"未知错误")+"）";micMsg(m+(c==="no-speech"?"":KB),true);
+  micAlert(c==="no-speech"?"🤔 没听到声音":"❌ 语音识别出错："+c,(MICERR[c]||"未知错误")+(c==="not-allowed"||c==="audio-capture"||c==="service-not-allowed"?"\n另外检查：手机 设置 → 应用 → Google → 权限 → 麦克风 → 允许（Chrome 的语音识别是借 Google App 做的）。":""))};
+ r.onend=()=>{rlog("end");if(rec!==r)return;clearTimeout(recWD);rec=null;micUI(0);
+  const q=$("qIn");if(+q.dataset.i===recI){saveQs();renderQs();renderFav();
+   const dt=(performance.now()-recT0)/1000;
+   if(recFinal.trim()){$("qState").textContent="✓ 已保存（第 "+(recI+1)+" 句）";micMsg("")}
+   else if(recErr){$("qState").textContent="自动保存在本机"}
+   else if(!recHeard&&dt<2.5&&!recRetried){recRetried=true;rlog("auto-retry");setTimeout(()=>{if(!rec)startMic(true)},500)}   // Android sometimes drops the first start right after a permission prompt / audio focus change
+   else if(!recHeard&&dt<2.5){$("qState").textContent="❌ 没启动成功";   // the "flashes once" case: ended at once with no error code
+    micMsg("❌ 识别一启动就结束了，没给原因。请改用键盘上的🎤语音键（见下方说明）",true);
+    micAlert("❌ 语音识别一启动就结束了","手机没给任何错误原因，试了两次都一样。最常见的原因：\n① 手机上没有或停用了「Google」App / Google 语音服务（国行 OPPO 常见）；\n② 「Google」App 没有麦克风权限；\n③ 别的 App 正在占用麦克风。")}
+   else{$("qState").textContent="没听清，再点🎤试试";micMsg("🤔 没听到内容，再点🎤说一遍；还不行就用键盘上的🎤语音键",true);
+    micAlert("🤔 没有识别出文字","说话前等按钮变红、出现「正在听」再开口，靠近手机说。")}}};
+ micUI(1);micMsg("");recUserAbort=false;rlog(wasPlaying?"paused-video":"tap");
+ // Android Chrome: starting the recognizer while our <audio> still holds audio focus makes it end at once,
+ // so after pausing the video give Android ~350 ms to release focus (start() needs no user gesture in Chrome).
+ const go=()=>{if(rec!==r)return;try{r.start()}catch(e){rlog("start-throw:"+(e&&e.name));rec=null;micUI(0);micMsg("识别出错：启动失败（"+(e&&e.name||e)+"）"+KB,true);micAlert("❌ 语音识别启动失败",String(e&&e.name||e));return}
+ clearTimeout(recWD);recWD=setTimeout(()=>{if(rec===r&&!recStarted){micMsg("❌ 4 秒还没启动，见下方说明",true);micAlert("⏳ 4 秒了，麦克风还没启动","可能是麦克风权限没开：点地址栏左边的🔒或⚙ → 权限 → 麦克风 → 允许，然后关掉这个标签页重新打开。")}},4000)};
+ if(wasPlaying)setTimeout(go,350);else go()}
+var recUserAbort=false;
+function stopMic(abort){const r=rec;if(!r)return;recUserAbort=!!abort;try{abort?r.abort():r.stop()}catch(e){}if(abort){rec=null;clearTimeout(recWD);micUI(0)}}
+function micTap(e){if(e){e.preventDefault();e.stopPropagation()}if(rec)stopMic(!recStarted);else startMic();setTimeout(()=>$("qBox").scrollIntoView({block:"nearest",behavior:"smooth"}),0)}
+$("qMic").addEventListener("click",micTap);
+["pointerdown","touchstart","mousedown"].forEach(t=>$("qMic").addEventListener(t,e=>e.stopPropagation(),{passive:true}));
+$("onlyStar").onclick=()=>{if(!stars.size&&!onlyStar){alert("还没有标星的句子。听不懂时点右上角 ⭐");return}onlyStar=!onlyStar;if(onlyStar&&!stars.has(cur)){cur=order()[0]}subState=0;render()};
+$("ptsBox").open=localStorage.getItem(KEY+"ptsopen")==="1";$("ptsBox").addEventListener("toggle",()=>{try{localStorage.setItem(KEY+"ptsopen",$("ptsBox").open?"1":"0")}catch(e){}});
+$("cont").onchange=save;$("blurList").onchange=applySubMode;
+$("bar").onclick=e=>{const r=e.currentTarget.getBoundingClientRect();const i=Math.min(SEGS.length-1,Math.floor((e.clientX-r.left)/r.width*SEGS.length));subState=0;if(onlyStar&&!stars.has(i))onlyStar=false;playSeg(i)};
+// ---- 指环遥控 (Bluetooth ring / clicker) + keyboard ----
+// Rings come in three flavours: keyboard/HID keys, media keys (routed to the Media Session on Android),
+// and touch/mouse emulation that injects swipes, wheel ticks or taps. All map onto act(), which debounces so one press = one action.
+let remote=localStorage.getItem("jingting.remote")==="1",diag=false,lastAct=-1e9,lastActKind="",swipeT=-1e9,wheelT=-1e9,hoverT=-1e9;   // performance.now() starts near 0 on every load
+const DEB=350,WDEB=400,INTER="button,a,input,select,textarea,label,summary,.chip,.item,.sub-box,.bar,.go,.star,.panel,.qbox,#toast,#micAlert,#diag,#remoteExit,[onclick],[role=button]";
+let wheelActT=-1e9;
+const NEXTK=new Set(["ArrowRight","ArrowDown","PageDown","MediaTrackNext","AudioVolumeDown","VolumeDown"]);
+const PREVK=new Set(["ArrowLeft","ArrowUp","PageUp","MediaTrackPrevious","AudioVolumeUp","VolumeUp"]);
+const ACTZH={next:"下一句",prev:"上一句",replay:"重听",toggle:"播放/暂停"},ACTBTN={next:"next",prev:"prev",replay:"rep",toggle:"play"};
+const dlines=[];
+function dlog(s){if(!diag)return;const d=new Date();dlines.unshift(String(d.getMinutes()).padStart(2,"0")+":"+String(d.getSeconds()).padStart(2,"0")+" "+s);dlines.length=Math.min(dlines.length,10);$("diagLog").textContent=dlines.join("\n")}
+function act(kind,src){const now=performance.now();
+ if(now-lastAct<DEB){dlog("   ↳ 忽略（防连按）"+ACTZH[kind]);return false}
+ lastAct=now;lastActKind=kind;dlog("   ↳ 动作："+ACTZH[kind]+"（"+src+"）");
+ if(kind==="next")go(1);else if(kind==="prev")go(-1);else if(kind==="replay")playSeg(cur);else if(kind==="toggle")toggle();
+ const b=$(ACTBTN[kind]);if(b){b.classList.add("hit");setTimeout(()=>b.classList.remove("hit"),220)}
+ return true}
+function blurAll(){const a=document.activeElement;if(a&&a!==document.body&&!(a.matches&&a.matches("input[type=number],input[type=text],select,textarea")))a.blur()}
+function setRemote(on,quiet){remote=on;if(!quiet)localStorage.setItem("jingting.remote",on?"1":"0");document.documentElement.classList.toggle("remote",on);
+ const b=$("remoteBtn");b.textContent="🎮 遥控模式："+(on?"开":"关");b.classList.toggle("remon",on);$("remoteTip").style.display=on?"":"none";
+ if(on){blurAll();if(!quiet||window.scrollY>0)$("app").scrollIntoView({block:"start"})}}
+function setDiag(on){diag=on;$("diag").style.display=on?"":"none";if(on){dlines.length=0;$("diagLog").textContent="（等待信号… 遥控模式："+(remote?"开":"关")+"）"}}
+$("remoteBtn").onclick=()=>setRemote(!remote);$("remoteExit").onclick=()=>setRemote(false);
+$("diagBtn").onclick=e=>{e.preventDefault();setDiag(!diag)};$("diagX").onclick=()=>setDiag(false);$("diagC").onclick=()=>{dlines.length=0;$("diagLog").textContent="（已清空，等待信号…）"};
+document.addEventListener("visibilitychange",()=>dlog("页面"+(document.hidden?"切到后台 (hidden)":"回到前台 (visible)")));
+// keys
+document.addEventListener("keydown",e=>{const t=e.target,typing=!!(t&&t.matches&&t.matches("input[type=number],input[type=text],input:not([type]),textarea,select"));
+ dlog("键 key="+JSON.stringify(e.key)+" code="+(e.code||"-")+" keyCode="+e.keyCode+(e.repeat?" (按住重复)":"")+(typing?" [在输入框里]":""));
+ if(typing||e.ctrlKey||e.metaKey||e.altKey)return;
+ const k=e.key;
+ if(k===" "||e.code==="Space"||k==="Enter"){e.preventDefault();if(e.repeat)return;
+  if(k==="Enter")$("subbox").click();else act("replay","空格");return}
+ if(NEXTK.has(k)){e.preventDefault();if(!e.repeat)act("next",k);return}
+ if(PREVK.has(k)){e.preventDefault();if(!e.repeat)act("prev",k);return}
+ if(k==="MediaPlayPause"||(k==="MediaPlay"&&!playing)||((k==="MediaPause"||k==="MediaStop")&&playing)){e.preventDefault();if(!e.repeat)act("toggle",k);return}
+ if(k==="p"||k==="P"){toggle()}else if(k==="s"||k==="S"){$("star").click()}});
+document.addEventListener("keyup",e=>{if(e.key===" "||e.key==="Enter"){const t=e.target;if(!(t&&t.matches&&t.matches("input,textarea,select")))e.preventDefault()}},true);
+// media keys (Bluetooth next/prev/play) reach Android Chrome through the Media Session, not as key events
+if("mediaSession" in navigator){const ms=navigator.mediaSession,H=(a,f)=>{try{ms.setActionHandler(a,f)}catch(e){}};
+ H("nexttrack",()=>{dlog("媒体键 nexttrack");act("next","媒体键 下一曲")});
+ H("previoustrack",()=>{dlog("媒体键 previoustrack");act("prev","媒体键 上一曲")});
+ H("play",()=>{dlog("媒体键 play");if(!playing)act("toggle","媒体键 播放");else if(au.paused)startPlay()});
+ H("pause",()=>{dlog("媒体键 pause");if(playing){lastAct=performance.now();stopPlay();renderCnt()}else if(!au.paused)au.pause()});
+ try{ms.metadata=new MediaMetadata({title:document.title,artist:"逐句精听"})}catch(e){}}
+// swipes / drags / taps injected by touch- or mouse-emulating rings
+const ptr=new Map();
+addEventListener("pointerdown",e=>{ptr.set(e.pointerId,{x:e.clientX,y:e.clientY,t:performance.now(),type:e.pointerType,field:!!(e.target.closest&&e.target.closest("textarea,input,select,.qbox,#copyBox,.list"))})},true);
+addEventListener("pointermove",e=>{if(!diag||ptr.has(e.pointerId)||e.pointerType==="touch")return;const n=performance.now();if(n-hoverT>1200){hoverT=n;dlog("指针移动(没按下) "+e.pointerType+" @"+(e.clientX|0)+","+(e.clientY|0))}},true);
+addEventListener("pointercancel",e=>{const p=ptr.get(e.pointerId);ptr.delete(e.pointerId);if(p)dlog("滑动被页面滚动吃掉 "+p.type+"（请打开 🎮 指环遥控）")},true);
+addEventListener("pointerup",e=>{const p=ptr.get(e.pointerId);ptr.delete(e.pointerId);if(!p)return;
+ const dx=e.clientX-p.x,dy=e.clientY-p.y,dt=performance.now()-p.t,ax=Math.abs(dx),ay=Math.abs(dy);
+ const dir=ax<10&&ay<10?"":ay>=ax?(dy<0?" ↑上滑":" ↓下滑"):(dx<0?" ←左滑":" →右滑");
+ dlog((dir?"滑动":"点击")+dir+" "+p.type+" dx="+(dx|0)+" dy="+(dy|0)+" "+(dt|0)+"ms 起点@"+(p.x|0)+","+(p.y|0)+" 终点@"+(e.clientX|0)+","+(e.clientY|0));
+ if(!remote||p.field||Math.max(ax,ay)<30||dt>1500)return;
+ swipeT=performance.now();
+ if(ay>=ax)act(dy<0?"next":"prev",dy<0?"上滑":"下滑");else act(dx<0?"next":"prev",dx<0?"左滑":"右滑")},true);
+addEventListener("touchmove",e=>{if(remote&&e.cancelable&&!(e.target.closest&&e.target.closest("textarea,.list")))e.preventDefault()},{passive:false,capture:true});
+addEventListener("wheel",e=>{const n=performance.now(),gap=n-wheelT;wheelT=n;const d=Math.abs(e.deltaY)>=Math.abs(e.deltaX)?e.deltaY:e.deltaX;
+ if(gap>=250)dlog("滚轮 deltaY="+Math.round(e.deltaY)+" deltaX="+Math.round(e.deltaX)+" mode="+e.deltaMode);
+ if(!remote)return;e.preventDefault();if(gap<250||!d||n-wheelActT<WDEB)return;wheelActT=n;act(d>0?"next":"prev",d>0?"滚轮向下":"滚轮向上")},{passive:false,capture:true});
+addEventListener("click",e=>{
+ if(performance.now()-swipeT<300){e.preventDefault();e.stopPropagation();return}   // the click that ends a swipe is not a tap
+ const t=e.target,inter=!!(t.closest&&t.closest(INTER));   // buttons, ⭐, chips, links, inputs, panels: always do their own action, never switch/replay
+ if(remote&&!inter&&e.isTrusted){const w=innerWidth,x=e.clientX,edge=x<w*0.15?"ezL":x>w*0.85?"ezR":"";
+  if(edge){e.preventDefault();e.stopPropagation();const nx=edge==="ezR",ez=$(edge);dlog("点"+(nx?"右":"左")+"边缘");if(act(nx?"next":"prev",nx?"点右边缘":"点左边缘")){ez.classList.add("flash");setTimeout(()=>ez.classList.remove("flash"),200)}return}}
+ if(!inter&&e.isTrusted)dlog("点空白处"+(remote?"":"（遥控没开，不动作）"));
+ if(remote&&!inter&&e.isTrusted){act("replay","点空白");return}
+ if(inter)setTimeout(blurAll,0)},true);   // never leave focus on a button: Space/Enter would press it instead of reaching the page
+$("cont").addEventListener("change",()=>setTimeout(blurAll,0));$("blurList").addEventListener("change",()=>setTimeout(blurAll,0));
+// keep the element and the intent in sync: a play() that resolves after the user already paused is undone,
+// a system pause (call, other app) shows ▶, and timeupdate backs up the frame loop
+au.addEventListener("playing",()=>{if(!playing){au.pause();return}applyRate();if(!raf)loop()});
+au.addEventListener("pause",()=>{if(playing&&!gapT&&!au.seeking&&au.currentTime<(stopAt===null?1e9:stopAt-0.05)&&!au.ended){setTimeout(()=>{if(au.paused&&playing&&!gapT)setPlayUI(false)},250)}});
+au.addEventListener("timeupdate",()=>{if(playing&&!au.paused)check()});
+au.addEventListener("ended",()=>{if(playing&&stopAt!==null&&!gapT){segEnd();return}if(!gapT){stopAt=null;stopPlay()}});
+// decode embedded audio into a Blob URL (more reliable seeking on iOS Safari than a data: URI)
+function init(){
+ const p=parseInt(localStorage.getItem(KEY+"pos")||"0",10);cur=(p>=0&&p<SEGS.length)?p:0;
+ buildChapters();buildList();buildSpeeds();buildReps();buildSubs();applySubMode();render();$("loading").style.display="none";$("app").style.display="block";setRemote(remote,true)}
+setTimeout(init,30);
+window.__jt={SEGS,au,playSeg,go,toggle,get cur(){return cur},get playing(){return playing},get plays(){return plays},get rep(){return rep},get inGap(){return !!gapT},get rate(){return rate},get raf(){return raf},CHAPTERS,get subMode(){return subMode},get subState(){return subState},get remote(){return remote},setRemote,get lastAction(){return lastActKind}};
+</script>
+</body>
+</html>
