@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f3eb">
+<title>Lauren（@poteto）· Grok Bot 团队打造指南（精读）</title>
+<style>
+:root{color-scheme:light;--paper:#f6f3eb;--card:#fffdf8;--ink:#263b32;--muted:#71756c;--green:#284d3d;--line:#e3e3d8;--accent:#e6aa71}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65}button,select{font:inherit}button,a,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:var(--green);text-underline-offset:4px}button:focus-visible,a:focus-visible,summary:focus-visible,select:focus-visible{outline:3px solid #c97c45;outline-offset:4px}main{max-width:1000px;margin:auto;padding:24px 24px 128px}.masthead{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #d6dacd;padding-bottom:16px;font-size:12px;letter-spacing:.1em}.brand{font-weight:800;display:flex;align-items:center;gap:9px}.brand-icon{background:var(--green);color:#fff;border-radius:8px;width:26px;height:26px;display:grid;place-items:center;font-size:16px}.edition{color:var(--muted)}.hero{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:22px;align-items:center;padding:48px 0 38px}.eyebrow{font-size:12px;letter-spacing:.15em;color:#8c6647;font-weight:750;margin:0 0 14px}h1{font-size:clamp(27px,4.2vw,43px);line-height:1.35;letter-spacing:-.045em;margin:0 0 20px;font-weight:800;text-wrap:balance}.byline{display:flex;gap:12px;flex-wrap:wrap;font-size:13px}.stats{font-size:11px;color:var(--muted);margin:10px 0 23px}.primary{background:var(--green);border:0;color:#fff;border-radius:100px;min-height:50px;padding:12px 26px;font-weight:700;box-shadow:0 4px 0 #dce0d2}.primary:hover{background:#37634e}.hero-art{height:240px;position:relative;display:grid;place-items:center;isolation:isolate}.orbit{position:absolute;inset:18px 0;border:1px solid #d8dacc;border-radius:50%;transform:rotate(-25deg)}.orbit:after{content:"";position:absolute;inset:24px;border:1px dashed #d8dacc;border-radius:50%}.art-core{height:112px;width:112px;background:#dce4cf;border-radius:35px;display:grid;place-items:center;font-size:50px;transform:rotate(-8deg);box-shadow:8px 10px 0 #e9e7dc}.art-note{position:absolute;padding:7px 13px;border-radius:12px;background:#fffdf8;border:1px solid var(--line);font-size:12px;font-weight:650;box-shadow:0 5px 12px #263b3207}.art-note.one{top:22px;left:3px;transform:rotate(-9deg)}.art-note.two{bottom:21px;right:0;transform:rotate(7deg);background:#f4dcc2}.art-spark{position:absolute;right:10px;top:50px;font-size:24px;color:#b87d47}.section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:44px 0 18px}h2{font-size:23px;letter-spacing:-.025em;margin:0}.section-heading h2 small{font-size:12px;color:#9c9f90;font-weight:500;margin-right:10px}.section-note{font-size:12px;color:var(--muted)}.map-panel{background:#eeeee4;border:1px solid #e1e3d5;border-radius:25px;padding:25px}.map-core{max-width:520px;margin:0 auto 24px;background:var(--green);color:#fff;border-radius:18px;text-align:center;padding:21px 14px;position:relative}.map-core:after{content:"";height:24px;width:1px;background:#a9b4a1;position:absolute;left:50%;bottom:-25px}.map-core strong{display:block;font-size:clamp(19px,3vw,26px);line-height:1.3;letter-spacing:-.025em}.map-core span{display:block;color:#d9e2d1;font-size:14px;margin-top:7px}.map-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.map-tile{display:flex;flex-direction:column;gap:9px;padding:16px;border-radius:15px;text-decoration:none;transition:transform .18s;min-height:163px}.map-tile:hover{transform:translateY(-4px)}.map-tile:last-child{grid-column:span 2}.tile-top{display:flex;align-items:center;justify-content:space-between}.tile-icon{font-size:25px}.tile-number{font-size:11px;opacity:.55}.map-tile strong{font-size:15px;line-height:1.35}.map-tile>span:last-child{font-size:11px;opacity:.8;margin-top:auto}.tone-0{background:#f1dcc6}.tone-1{background:#d9e4ce}.tone-2{background:#d9e4e7}.tone-3{background:#e4deee}.tone-4{background:#f1e6ba}.source{border:1px solid var(--line);border-radius:16px;padding:17px 20px;margin-top:20px;background:#f0eee5}.source>summary{font-weight:700}.source-body{font-size:13px;overflow-wrap:anywhere;padding-top:8px}.source-body p{margin:10px 0}.source-body span{color:var(--muted)}.reading-list{display:grid;gap:17px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;min-width:0}.card-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.chip{display:inline-block;background:#edf0e5;color:#52624a;border-radius:7px;padding:4px 10px;font-size:12px;font-weight:650}.card-actions{display:flex;align-items:center;gap:14px}.folio{font-size:11px;color:#959b90;font-variant-numeric:tabular-nums}.sound{flex-shrink:0;border:1px solid #e1e5d7;border-radius:50%;height:38px;width:38px;background:#f5f6ee;display:grid;place-items:center;font-size:16px}.sound:hover{background:#e4ead9}.english{font-family:Georgia,"Times New Roman",serif;font-size:clamp(21px,2.8vw,27px);line-height:1.65;margin:20px 0 24px;white-space:pre-wrap;overflow-wrap:anywhere}.paragraph{scroll-margin-top:24px;transition:background .2s,border-color .2s,box-shadow .2s}.paragraph.is-reading{border-color:#75946b;background:#f5f8ed;box-shadow:0 0 0 3px #8ba97930}.paragraph.is-reading .chip{background:var(--green);color:white}details{border-top:1px solid #e8e9df;padding-top:12px;margin-top:12px}summary{cursor:pointer;list-style:none;font-size:13px;color:#5d6c54;display:flex;align-items:center;gap:8px;min-height:28px}summary::-webkit-details-marker{display:none}summary:before{content:"+";font-size:18px;font-weight:400;width:14px;line-height:1}details[open]>summary:before{content:"−"}.source{padding-top:17px}.source>summary:before{content:"↗";font-size:15px}.translation{font-size:15px;line-height:1.9;color:#52604f;margin:12px 0 4px}.count{background:#eef0e7;color:#7b8674;font-size:10px;border-radius:20px;padding:0 6px}.local-vocab ul{padding:0;list-style:none;margin:12px 0 0}.local-vocab li{display:flex;gap:12px;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px}.local-vocab li:last-child{border:0}.local-vocab li span{text-align:right;color:var(--muted);max-width:65%}.vocab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.vocab-card h3{font-family:Georgia,"Times New Roman",serif;font-size:22px;line-height:1.35;margin:0;overflow-wrap:anywhere}.meaning{font-size:13px;color:#697360;margin:10px 0 18px}.example{border-left:2px solid #dfe4d1;padding-left:13px}.micro-label{font-size:10px;color:#8a9180;letter-spacing:.1em}.example p{font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.6;margin:5px 0 18px}mark{background:#f2e3ba;color:inherit;border-radius:3px;padding:1px 0}.work-example{font-size:14px;color:#62705c;line-height:1.8}.jump{display:inline-block;font-size:11px;margin-top:17px;color:#7c866e;text-decoration:none}.jump:hover{text-decoration:underline}.hard-list{display:grid;gap:16px}.hard-en{font-family:Georgia,"Times New Roman",serif;font-size:21px;line-height:1.65;margin:17px 0}.hard-card ol{padding-left:23px;font-size:14px;line-height:1.9;color:#5b6855}.hard-card li{padding:5px 0 5px 6px}.hard-card li::marker{color:#9a7654;font-weight:700}footer{text-align:center;margin-top:42px;font-size:12px;color:#929987}.toolbar{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:952px;z-index:10;background:#fffdf8f5;backdrop-filter:blur(12px);border:1px solid #d8ddce;border-radius:18px;box-shadow:0 8px 35px #263b321a;display:flex;align-items:center;gap:16px;padding:12px 18px}.status{flex:1;font-size:12px;color:#6a765f;min-width:0}.status:before{content:"";display:inline-block;width:7px;height:7px;background:#b7c2a6;border-radius:50%;margin-right:8px}.toolbar.is-playing .status:before{background:#427543}.rate-control{display:flex;align-items:center;gap:7px;font-size:12px}.rate-control select{border:1px solid #dfe3d5;border-radius:8px;background:#f4f5ed;color:var(--ink);padding:8px 6px;min-height:40px}.stop{border:0;border-radius:10px;background:#e9ecdf;color:var(--green);padding:9px 14px;font-size:13px;min-height:40px}.notice{border:1px solid #d6ad7e;background:#fbecd8;border-radius:12px;padding:12px 16px;font-size:13px;margin-bottom:20px}[hidden]{display:none!important}button:disabled{opacity:.45;cursor:not-allowed}@media(min-width:750px){.hero-art{margin-right:10px}.vocab-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.vocab-card{padding:20px}}@media(max-width:640px){main{padding:18px 16px 135px}.hero{grid-template-columns:1fr;padding:32px 0 26px;gap:0}.hero-art{display:none}.hero:before{content:"🥚  →  🎯  →  ✨";font-size:26px;letter-spacing:13px;background:#e8ebdc;border-radius:16px;padding:14px 20px;margin-bottom:24px;width:fit-content}.stats{line-height:1.8}.primary{width:100%}.map-panel{padding:17px 12px}.map-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.map-tile{padding:14px;min-height:160px}.map-tile:last-child{min-height:135px}.card{padding:20px}.vocab-grid{grid-template-columns:1fr}.section-heading{margin-top:34px}.section-note{font-size:11px}.toolbar{gap:10px;padding:10px 12px;bottom:max(10px,env(safe-area-inset-bottom));border-radius:15px}.status{font-size:11px}.rate-control{gap:5px}.stop{padding:9px 10px}.edition{font-size:10px}.local-vocab li{flex-direction:column;gap:3px}.local-vocab li span{max-width:100%;text-align:left}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header class="masthead"><div class="brand"><span class="brand-icon" aria-hidden="true">读</span> 英语精读手册</div><span class="edition">工作与 AI · 01</span></header>
+<section class="hero" aria-labelledby="page-title"><div><p class="eyebrow">一篇短文 · 七个团队管理思路</p><h1 id="page-title">Lauren（@poteto）· Grok Bot 团队打造指南（精读）</h1><div class="byline"><span>lauren (@poteto)</span><span>📅 2026-11-01</span></div><p class="stats">约 110 万次浏览 · 1.0 万赞 · 1.9 万收藏（2026-11-02 读取）</p><button class="primary" id="read-all">🔊 全文朗读</button></div><div class="hero-art" aria-hidden="true"><div class="orbit"></div><div class="art-core">🥚</div><span class="art-note one">少而精</span><span class="art-note two">把事情做成 ↗</span><span class="art-spark">✳</span></div></section>
+<div class="notice" id="speech-notice" role="status" hidden></div>
+<nav aria-labelledby="map-title"><div class="section-heading"><h2 id="map-title"><small>01</small>结构图</h2><span class="section-note">点色块，跳到原文 ↘</span></div><div class="map-panel"><div class="map-core"><strong lang="en">Fewer bots, get things done</strong><span>少几个 Bot 把事情做成</span></div><div class="map-grid"><a class="map-tile tone-0" href="#p2"><span class="tile-top"><span class="tile-icon">🥚</span><span class="tile-number">01 ↗</span></span><strong lang="en">Use a bot designer</strong><span>用 Dr Eggbot 来设计 Bot</span></a><a class="map-tile tone-1" href="#p3"><span class="tile-top"><span class="tile-icon">🎯</span><span class="tile-number">02 ↗</span></span><strong lang="en">Fewer, better bots</strong><span>少而精，好管</span></a><a class="map-tile tone-2" href="#p4"><span class="tile-top"><span class="tile-icon">📘</span><span class="tile-number">03 ↗</span></span><strong lang="en">Turn instructions into skills</strong><span>教过的做法存成技能</span></a><a class="map-tile tone-3" href="#p5"><span class="tile-top"><span class="tile-icon">🔌</span><span class="tile-number">04 ↗</span></span><strong lang="en">Give it your tools</strong><span>连接器 + 保险库 + 自己的邮箱</span></a><a class="map-tile tone-4" href="#p6"><span class="tile-top"><span class="tile-icon">✋</span><span class="tile-number">05 ↗</span></span><strong lang="en">Kill the copy-paste</strong><span>手工复制粘贴的活交给 Bot</span></a><a class="map-tile tone-0" href="#p7"><span class="tile-top"><span class="tile-icon">🧑‍🎓</span><span class="tile-number">06 ↗</span></span><strong lang="en">Onboard it like an intern</strong><span>像带实习生一样带 Bot</span></a><a class="map-tile tone-1" href="#p8"><span class="tile-top"><span class="tile-icon">🎤</span><span class="tile-number">07 ↗</span></span><strong lang="en">Brain dump by voice, then &#x27;restate&#x27;</strong><span>语音一口气说完，再让它复述</span></a></div></div></nav>
+<details class="source"><summary>原文链接 <span class="count">来源与说明</span></summary><div class="source-body"><p>📅 2026-11-01<br><span>X 时间 2026-10-31 17:01 UTC，即泰国时间 2026-11-01 00:01</span></p><p>作者 @poteto · lauren (@poteto)<br><span>Lauren Tan，SpaceXAI Grok Bot 工程负责人，前 Netflix / Meta React Compiler</span></p><p><a href="https://x.com/poteto/status/2116576229319233596" target="_blank" rel="noopener noreferrer">在 X 阅读原帖 ↗</a></p><p><a href="https://x.ai/bot/_jOdbfkB16zxu7MRcmReE" target="_blank" rel="noopener noreferrer">查看 Grok Bot 分享链接 ↗</a><br><span>帖子末尾附的 Grok Bot 分享链接（原帖未注明是哪个 Bot，按上下文很可能是 Dr Eggbot）</span></p><p>原文全小写，这是 Lauren 发帖的个人风格，照原样保留。</p></div></details>
+<section aria-labelledby="reading-title"><div class="section-heading"><h2 id="reading-title"><small>02</small>全文逐段</h2><span class="section-note">8 段 · 听读与理解</span></div><div class="reading-list"><article class="card paragraph" id="p1"><div class="card-top"><span class="chip">开场</span><div class="card-actions"><span class="folio">01 / 08</span><button class="sound" data-kind="paragraph" data-index="0" aria-label="朗读第1段">🔊</button></div></div><p class="english" lang="en">here’s a short grok bot guide on how i create high quality bots and manage my team. ask @bot to read this post and help you improve your team!</p><details><summary>中文意思</summary><p class="translation">这是一份简短的 Grok Bot 指南，讲我怎么打造高质量的 Bot、怎么管理我的 Bot 团队。可以让 @bot 读一下这条帖子，帮你改进你自己的团队！</p></details><details class="local-vocab"><summary>本段生词 <span class="count">3</span></summary><ul><li><strong lang="en">high quality</strong><span>高质量的</span></li><li><strong lang="en">manage my team</strong><span>管理我的团队</span></li><li><strong lang="en">improve</strong><span>改进，提升</span></li></ul></details></article><article class="card paragraph" id="p2"><div class="card-top"><span class="chip">① 设计师</span><div class="card-actions"><span class="folio">02 / 08</span><button class="sound" data-kind="paragraph" data-index="1" aria-label="朗读第2段">🔊</button></div></div><p class="english" lang="en">• add dr eggbot to your team! he’s my bot designer that i use to create bots</p><details><summary>中文意思</summary><p class="translation">• 把 Dr Eggbot 加进你的团队！他是我的 Bot 设计师，我就是用他来创建 Bot 的。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">2</span></summary><ul><li><strong lang="en">add … to your team</strong><span>把……加入团队</span></li><li><strong lang="en">designer</strong><span>设计师</span></li></ul></details></article><article class="card paragraph" id="p3"><div class="card-top"><span class="chip">② 少而精</span><div class="card-actions"><span class="folio">03 / 08</span><button class="sound" data-kind="paragraph" data-index="2" aria-label="朗读第3段">🔊</button></div></div><p class="english" lang="en">• you don’t need a lot of bots. a few good bots can be more useful and easier to manage than a large team</p><details><summary>中文意思</summary><p class="translation">• Bot 不用多。几个好用的 Bot，往往比一大堆 Bot 更有用，也更好管。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">2</span></summary><ul><li><strong lang="en">a few good …</strong><span>几个好的……（少而精）</span></li><li><strong lang="en">easier to manage</strong><span>更好管理</span></li></ul></details></article><article class="card paragraph" id="p4"><div class="card-top"><span class="chip">③ 技能</span><div class="card-actions"><span class="folio">04 / 08</span><button class="sound" data-kind="paragraph" data-index="3" aria-label="朗读第4段">🔊</button></div></div><p class="english" lang="en">• tell your bots to create skills for itself as you give it instructions on how to do tasks. this lets them do them more consistently even over long conversations. you can even ask it to create a private github repo for you to store all your skills if you want them preserved independently</p><details><summary>中文意思</summary><p class="translation">• 你教 Bot 某件事怎么做的时候，让它顺手把做法存成自己的“技能”。这样即使对话拉得很长，它做事也能保持一致。想让这些技能独立保存的话，还可以让它帮你建一个私有的 GitHub 仓库，把所有技能都放进去。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">5</span></summary><ul><li><strong lang="en">instructions</strong><span>指示，操作说明</span></li><li><strong lang="en">consistently</strong><span>一贯地，稳定地</span></li><li><strong lang="en">even over …</strong><span>即使经过很长的（时间/过程）也……</span></li><li><strong lang="en">private repo</strong><span>私有仓库（只有自己能看的代码库）</span></li><li><strong lang="en">preserved independently</strong><span>独立保存（不依赖某个系统）</span></li></ul></details></article><article class="card paragraph" id="p5"><div class="card-top"><span class="chip">④ 工具</span><div class="card-actions"><span class="folio">05 / 08</span><button class="sound" data-kind="paragraph" data-index="4" aria-label="朗读第5段">🔊</button></div></div><p class="english" lang="en">• add connectors, use the vault, and give access to all the tools you use to do your work. you can also ask your bot to setup its own email and it can sign up for its own accounts for better separation </p><details><summary>中文意思</summary><p class="translation">• 加上连接器、用好保险库（vault），把你工作中用到的工具都开放给它。你还可以让 Bot 给自己开一个邮箱，用它注册自己的账号，这样它的账号和你的分开，更清楚。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">4</span></summary><ul><li><strong lang="en">give access to</strong><span>给……开放权限</span></li><li><strong lang="en">set up</strong><span>设置，开通（原文写成 setup，规范写法是动词 set up）</span></li><li><strong lang="en">sign up for</strong><span>注册（账号、服务）</span></li><li><strong lang="en">separation</strong><span>分开，隔离</span></li></ul></details></article><article class="card paragraph" id="p6"><div class="card-top"><span class="chip">⑤ 找手工活</span><div class="card-actions"><span class="folio">06 / 08</span><button class="sound" data-kind="paragraph" data-index="5" aria-label="朗读第6段">🔊</button></div></div><p class="english" lang="en">• thinking about all the work you do by hand, or steps in your workflows where you have to copy and paste information back to your bot. ask your bot how it can do that for you instead!</p><details><summary>中文意思</summary><p class="translation">• 想一想你还有哪些活是手工做的，或者流程里哪些步骤需要你把信息复制粘贴回去给 Bot。直接问 Bot：这些它能不能替你做！</p></details><details class="local-vocab"><summary>本段生词 <span class="count">4</span></summary><ul><li><strong lang="en">by hand</strong><span>手工，人工</span></li><li><strong lang="en">workflow</strong><span>工作流程</span></li><li><strong lang="en">copy and paste</strong><span>复制粘贴</span></li><li><strong lang="en">instead</strong><span>代替，改为</span></li></ul></details></article><article class="card paragraph" id="p7"><div class="card-top"><span class="chip">⑥ 当实习生带</span><div class="card-actions"><span class="folio">07 / 08</span><button class="sound" data-kind="paragraph" data-index="6" aria-label="朗读第7段">🔊</button></div></div><p class="english" lang="en">• imagine you hired an intern, how would you onboard them and help them do the work correctly and efficiently? introduce yourself to your bot and describe the work you do, then ask it how it can help you automate it</p><details><summary>中文意思</summary><p class="translation">• 假设你招了个实习生，你会怎么带他入职，帮他把活干对、干快？对 Bot 也一样：先介绍你自己、讲清楚你做什么工作，然后问它可以怎么帮你把这些工作自动化。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">4</span></summary><ul><li><strong lang="en">hire an intern</strong><span>招一个实习生</span></li><li><strong lang="en">onboard</strong><span>带新人入职，让新人上手</span></li><li><strong lang="en">correctly and efficiently</strong><span>又对又快</span></li><li><strong lang="en">automate</strong><span>自动化</span></li></ul></details></article><article class="card paragraph" id="p8"><div class="card-top"><span class="chip">⭐ 最爱技巧</span><div class="card-actions"><span class="folio">08 / 08</span><button class="sound" data-kind="paragraph" data-index="7" aria-label="朗读第8段">🔊</button></div></div><p class="english" lang="en">and my favorite tip: use voice mode or the transcription option! it’s a good way to just brain dump a lot of information. then, at the end, tell your bot to “restate this in your own words” so you can confirm it understood you</p><details><summary>中文意思</summary><p class="translation">还有我最喜欢的一个技巧：用语音模式或者语音转文字！这样可以一口气把脑子里的一大堆信息全倒出来。最后再对 Bot 说一句“用你自己的话复述一遍”，就能确认它真的听懂了你的意思。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">5</span></summary><ul><li><strong lang="en">tip</strong><span>小窍门，建议</span></li><li><strong lang="en">transcription</strong><span>转写（语音转文字）</span></li><li><strong lang="en">brain dump</strong><span>把脑子里的想法一股脑倒出来</span></li><li><strong lang="en">restate … in your own words</strong><span>用你自己的话复述</span></li><li><strong lang="en">confirm</strong><span>确认</span></li></ul></details></article></div></section>
+<section aria-labelledby="vocab-title"><div class="section-heading"><h2 id="vocab-title"><small>03</small>生词和词组</h2><span class="section-note">29 组 · 放进工作里</span></div><div class="vocab-grid"><article class="card vocab-card"><div class="card-top"><h3 lang="en">high quality</h3><button class="sound" data-kind="vocab" data-index="0" aria-label="朗读词组及原句：high quality">🔊</button></div><p class="meaning">高质量的</p><div class="example"><span class="micro-label">原句</span><p lang="en">how i create <mark>high quality</mark> bots</p></div><details><summary>工作例句</summary><p class="work-example">We only ship high quality parts to our Japanese customer.（我们只给日本客户发高质量的零件。）</p></details><a class="jump" href="#p1">↑ 第1段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">manage my team</h3><button class="sound" data-kind="vocab" data-index="1" aria-label="朗读词组及原句：manage my team">🔊</button></div><p class="meaning">管理我的团队</p><div class="example"><span class="micro-label">原句</span><p lang="en">how i create high quality bots and <mark>manage my team</mark></p></div><details><summary>工作例句</summary><p class="work-example">I manage a team of 200 people across three shifts.（我管理三个班次共 200 人的团队。）</p></details><a class="jump" href="#p1">↑ 第1段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">improve</h3><button class="sound" data-kind="vocab" data-index="2" aria-label="朗读词组及原句：improve">🔊</button></div><p class="meaning">改进，提升</p><div class="example"><span class="micro-label">原句</span><p lang="en">help you <mark>improve</mark> your team</p></div><details><summary>工作例句</summary><p class="work-example">We need to improve our on-time delivery rate this quarter.（这个季度要提高准时交货率。）</p></details><a class="jump" href="#p1">↑ 第1段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">add … to your team</h3><button class="sound" data-kind="vocab" data-index="3" aria-label="朗读词组及原句：add … to your team">🔊</button></div><p class="meaning">把……加入团队</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>add</mark> dr eggbot <mark>to your team</mark>!</p></div><details><summary>工作例句</summary><p class="work-example">Let&#x27;s add a quality engineer to the night shift.（给夜班加一名质量工程师。）</p></details><a class="jump" href="#p2">↑ 第2段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">designer</h3><button class="sound" data-kind="vocab" data-index="4" aria-label="朗读词组及原句：designer">🔊</button></div><p class="meaning">设计师</p><div class="example"><span class="micro-label">原句</span><p lang="en">he’s my bot <mark>designer</mark></p></div><details><summary>工作例句</summary><p class="work-example">Our mold designer will join the call at 3 pm.（我们的模具设计师下午三点参加电话会。）</p></details><a class="jump" href="#p2">↑ 第2段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">a few good …</h3><button class="sound" data-kind="vocab" data-index="5" aria-label="朗读词组及原句：a few good …">🔊</button></div><p class="meaning">几个好的……（少而精）</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>a few good</mark> bots can be more useful</p></div><details><summary>工作例句</summary><p class="work-example">A few good suppliers are better than twenty unreliable ones.（几个靠谱的供应商胜过二十个不靠谱的。）</p></details><a class="jump" href="#p3">↑ 第3段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">easier to manage</h3><button class="sound" data-kind="vocab" data-index="6" aria-label="朗读词组及原句：easier to manage">🔊</button></div><p class="meaning">更好管理</p><div class="example"><span class="micro-label">原句</span><p lang="en">more useful and <mark>easier to manage</mark> than a large team</p></div><details><summary>工作例句</summary><p class="work-example">A smaller warehouse is easier to manage.（小一点的仓库更好管。）</p></details><a class="jump" href="#p3">↑ 第3段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">instructions</h3><button class="sound" data-kind="vocab" data-index="7" aria-label="朗读词组及原句：instructions">🔊</button></div><p class="meaning">指示，操作说明</p><div class="example"><span class="micro-label">原句</span><p lang="en">as you give it <mark>instructions</mark> on how to do tasks</p></div><details><summary>工作例句</summary><p class="work-example">Please give the new operators clear instructions before they start.（新操作工上岗前要给他们讲清楚操作说明。）</p></details><a class="jump" href="#p4">↑ 第4段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">consistently</h3><button class="sound" data-kind="vocab" data-index="8" aria-label="朗读词组及原句：consistently">🔊</button></div><p class="meaning">一贯地，稳定地</p><div class="example"><span class="micro-label">原句</span><p lang="en">do them more <mark>consistently</mark></p></div><details><summary>工作例句</summary><p class="work-example">The line must hit the same quality consistently, not just on audit days.（产线要一直保持同样的质量，不是只在审核那天。）</p></details><a class="jump" href="#p4">↑ 第4段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">even over …</h3><button class="sound" data-kind="vocab" data-index="9" aria-label="朗读词组及原句：even over …">🔊</button></div><p class="meaning">即使经过很长的（时间/过程）也……</p><div class="example"><span class="micro-label">原句</span><p lang="en">more consistently <mark>even over</mark> long conversations</p></div><details><summary>工作例句</summary><p class="work-example">Keep the checklist at the machine so operators follow it consistently, even over long night shifts.（把检查表挂在机台旁，即使夜班很长，操作工也能一直照着做。）</p></details><a class="jump" href="#p4">↑ 第4段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">private repo</h3><button class="sound" data-kind="vocab" data-index="10" aria-label="朗读词组及原句：private repo">🔊</button></div><p class="meaning">私有仓库（只有自己能看的代码库）</p><div class="example"><span class="micro-label">原句</span><p lang="en">create a <mark>private</mark> github <mark>repo</mark> for you</p></div><details><summary>工作例句</summary><p class="work-example">Keep the customer drawings in a private folder, not the shared drive.（客户图纸放私有文件夹，别放共享盘。）</p></details><a class="jump" href="#p4">↑ 第4段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">preserved independently</h3><button class="sound" data-kind="vocab" data-index="11" aria-label="朗读词组及原句：preserved independently">🔊</button></div><p class="meaning">独立保存（不依赖某个系统）</p><div class="example"><span class="micro-label">原句</span><p lang="en">if you want them <mark>preserved independently</mark></p></div><details><summary>工作例句</summary><p class="work-example">Back up the SOPs so they&#x27;re preserved independently of the ERP.（把 SOP 备份一份，不依赖 ERP 系统单独保存。）</p></details><a class="jump" href="#p4">↑ 第4段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">give access to</h3><button class="sound" data-kind="vocab" data-index="12" aria-label="朗读词组及原句：give access to">🔊</button></div><p class="meaning">给……开放权限</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>give access to</mark> all the tools you use</p></div><details><summary>工作例句</summary><p class="work-example">Please give the auditor access to the training records.（请给审核员开放培训记录的权限。）</p></details><a class="jump" href="#p5">↑ 第5段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">set up</h3><button class="sound" data-kind="vocab" data-index="13" aria-label="朗读词组及原句：set up">🔊</button></div><p class="meaning">设置，开通（原文写成 setup，规范写法是动词 set up）</p><div class="example"><span class="micro-label">原句</span><p lang="en">ask your bot to <mark>setup</mark> its own email</p></div><details><summary>工作例句</summary><p class="work-example">IT will set up your email account on Monday.（IT 周一给你开通邮箱。）</p></details><a class="jump" href="#p5">↑ 第5段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">sign up for</h3><button class="sound" data-kind="vocab" data-index="14" aria-label="朗读词组及原句：sign up for">🔊</button></div><p class="meaning">注册（账号、服务）</p><div class="example"><span class="micro-label">原句</span><p lang="en">it can <mark>sign up for</mark> its own accounts</p></div><details><summary>工作例句</summary><p class="work-example">We signed up for the BOI online system last month.（我们上个月注册了 BOI 网上系统。）</p></details><a class="jump" href="#p5">↑ 第5段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">separation</h3><button class="sound" data-kind="vocab" data-index="15" aria-label="朗读词组及原句：separation">🔊</button></div><p class="meaning">分开，隔离</p><div class="example"><span class="micro-label">原句</span><p lang="en">for better <mark>separation</mark></p></div><details><summary>工作例句</summary><p class="work-example">We keep a clear separation between finished goods and rejected parts.（成品和不良品要严格分区。）</p></details><a class="jump" href="#p5">↑ 第5段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">by hand</h3><button class="sound" data-kind="vocab" data-index="16" aria-label="朗读词组及原句：by hand">🔊</button></div><p class="meaning">手工，人工</p><div class="example"><span class="micro-label">原句</span><p lang="en">all the work you do <mark>by hand</mark></p></div><details><summary>工作例句</summary><p class="work-example">We still count the inventory by hand every month.（我们每月还是人工盘点库存。）</p></details><a class="jump" href="#p6">↑ 第6段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">workflow</h3><button class="sound" data-kind="vocab" data-index="17" aria-label="朗读词组及原句：workflow">🔊</button></div><p class="meaning">工作流程</p><div class="example"><span class="micro-label">原句</span><p lang="en">steps in your <mark>workflow</mark>s</p></div><details><summary>工作例句</summary><p class="work-example">Let&#x27;s map the workflow for purchase approvals.（把采购审批的流程画出来。）</p></details><a class="jump" href="#p6">↑ 第6段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">copy and paste</h3><button class="sound" data-kind="vocab" data-index="18" aria-label="朗读词组及原句：copy and paste">🔊</button></div><p class="meaning">复制粘贴</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>copy and paste</mark> information back to your bot</p></div><details><summary>工作例句</summary><p class="work-example">Stop copying and pasting numbers from Excel into the report; let&#x27;s automate it.（别再把 Excel 的数字复制粘贴到报告里了，做成自动的。）</p></details><a class="jump" href="#p6">↑ 第6段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">instead</h3><button class="sound" data-kind="vocab" data-index="19" aria-label="朗读词组及原句：instead">🔊</button></div><p class="meaning">代替，改为</p><div class="example"><span class="micro-label">原句</span><p lang="en">ask your bot how it can do that for you <mark>instead</mark>!</p></div><details><summary>工作例句</summary><p class="work-example">Can we ship by sea instead?（能不能改走海运？）</p></details><a class="jump" href="#p6">↑ 第6段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">hire an intern</h3><button class="sound" data-kind="vocab" data-index="20" aria-label="朗读词组及原句：hire an intern">🔊</button></div><p class="meaning">招一个实习生</p><div class="example"><span class="micro-label">原句</span><p lang="en">imagine you hired <mark>an</mark> <mark>intern</mark></p></div><details><summary>工作例句</summary><p class="work-example">We hired two engineering interns from a Rayong university.（我们从罗勇的大学招了两个工程实习生。）</p></details><a class="jump" href="#p7">↑ 第7段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">onboard</h3><button class="sound" data-kind="vocab" data-index="21" aria-label="朗读词组及原句：onboard">🔊</button></div><p class="meaning">带新人入职，让新人上手</p><div class="example"><span class="micro-label">原句</span><p lang="en">how would you <mark>onboard</mark> them</p></div><details><summary>工作例句</summary><p class="work-example">HR will onboard the new supervisors next week.（人事下周给新主管做入职培训。）</p></details><a class="jump" href="#p7">↑ 第7段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">correctly and efficiently</h3><button class="sound" data-kind="vocab" data-index="22" aria-label="朗读词组及原句：correctly and efficiently">🔊</button></div><p class="meaning">又对又快</p><div class="example"><span class="micro-label">原句</span><p lang="en">help them do the work <mark>correctly and efficiently</mark></p></div><details><summary>工作例句</summary><p class="work-example">The new fixture helps operators load parts correctly and efficiently.（新夹具让操作工装件又准又快。）</p></details><a class="jump" href="#p7">↑ 第7段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">automate</h3><button class="sound" data-kind="vocab" data-index="23" aria-label="朗读词组及原句：automate">🔊</button></div><p class="meaning">自动化</p><div class="example"><span class="micro-label">原句</span><p lang="en">ask it how it can help you <mark>automate</mark> it</p></div><details><summary>工作例句</summary><p class="work-example">We plan to automate the packing station next year.（明年计划把包装工位自动化。）</p></details><a class="jump" href="#p7">↑ 第7段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">tip</h3><button class="sound" data-kind="vocab" data-index="24" aria-label="朗读词组及原句：tip">🔊</button></div><p class="meaning">小窍门，建议</p><div class="example"><span class="micro-label">原句</span><p lang="en">and my favorite <mark>tip</mark></p></div><details><summary>工作例句</summary><p class="work-example">One tip: send the agenda the day before the meeting.（一个小建议：会前一天把议程发出去。）</p></details><a class="jump" href="#p8">↑ 第8段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">transcription</h3><button class="sound" data-kind="vocab" data-index="25" aria-label="朗读词组及原句：transcription">🔊</button></div><p class="meaning">转写（语音转文字）</p><div class="example"><span class="micro-label">原句</span><p lang="en">use voice mode or the <mark>transcription</mark> option</p></div><details><summary>工作例句</summary><p class="work-example">Turn on transcription so we have notes from the customer call.（打开转写，客户电话就有记录了。）</p></details><a class="jump" href="#p8">↑ 第8段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">brain dump</h3><button class="sound" data-kind="vocab" data-index="26" aria-label="朗读词组及原句：brain dump">🔊</button></div><p class="meaning">把脑子里的想法一股脑倒出来</p><div class="example"><span class="micro-label">原句</span><p lang="en">a good way to just <mark>brain dump</mark> a lot of information</p></div><details><summary>工作例句</summary><p class="work-example">Let me brain dump everything I know about this customer, then you organize it.（我先把这个客户的情况一股脑说完，你再整理。）</p></details><a class="jump" href="#p8">↑ 第8段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">restate … in your own words</h3><button class="sound" data-kind="vocab" data-index="27" aria-label="朗读词组及原句：restate … in your own words">🔊</button></div><p class="meaning">用你自己的话复述</p><div class="example"><span class="micro-label">原句</span><p lang="en">tell your bot to “<mark>restate</mark> this <mark>in your own words</mark>”</p></div><details><summary>工作例句</summary><p class="work-example">Can you restate the customer&#x27;s complaint in your own words?（你能用自己的话把客户的投诉复述一遍吗？）</p></details><a class="jump" href="#p8">↑ 第8段</a></article><article class="card vocab-card"><div class="card-top"><h3 lang="en">confirm</h3><button class="sound" data-kind="vocab" data-index="28" aria-label="朗读词组及原句：confirm">🔊</button></div><p class="meaning">确认</p><div class="example"><span class="micro-label">原句</span><p lang="en">so you can <mark>confirm</mark> it understood you</p></div><details><summary>工作例句</summary><p class="work-example">Please confirm the delivery date by Friday.（请周五前确认交货日期。）</p></details><a class="jump" href="#p8">↑ 第8段</a></article></div></section>
+<section aria-labelledby="hard-title"><div class="section-heading"><h2 id="hard-title"><small>04</small>疑难句</h2><span class="section-note">6 句 · 拆开就明白</span></div><div class="hard-list"><article class="card hard-card"><div class="card-top"><span class="chip">句子 01</span><button class="sound" data-kind="hard" data-index="0" aria-label="朗读疑难句1">🔊</button></div><p class="hard-en" lang="en">tell your bots to create skills for itself as you give it instructions on how to do tasks.</p><details><summary>句子拆解与中文意思</summary><ol><li>tell your bots to create skills —— 主干：tell sb to do sth，让 Bot 去建技能</li><li>for itself —— 给它自己用（主语是复数 bots，按语法应是 themselves；随手写的帖子，单复数混用）</li><li>as you give it instructions —— as = 在……的同时，你边教它</li><li>on how to do tasks —— instructions on how to…：关于怎么做事的说明</li></ol><p class="translation">你一边教 Bot 怎么做事，一边让它把做法存成自己的技能。</p></details><a class="jump" href="#p4">↑ 第4段</a></article><article class="card hard-card"><div class="card-top"><span class="chip">句子 02</span><button class="sound" data-kind="hard" data-index="1" aria-label="朗读疑难句2">🔊</button></div><p class="hard-en" lang="en">you can even ask it to create a private github repo for you to store all your skills if you want them preserved independently</p><details><summary>句子拆解与中文意思</summary><ol><li>ask it to create a private github repo —— 让它建一个私有的 GitHub 仓库</li><li>for you to store all your skills —— for sb to do：给你用来存放所有技能</li><li>if you want them preserved independently —— want + 宾语 + 过去分词：想让它们被独立保存</li></ol><p class="translation">想让技能独立保存的话，甚至可以让它给你建个私有 GitHub 仓库来放。</p></details><a class="jump" href="#p4">↑ 第4段</a></article><article class="card hard-card"><div class="card-top"><span class="chip">句子 03</span><button class="sound" data-kind="hard" data-index="2" aria-label="朗读疑难句3">🔊</button></div><p class="hard-en" lang="en">you can also ask your bot to setup its own email and it can sign up for its own accounts for better separation</p><details><summary>句子拆解与中文意思</summary><ol><li>ask your bot to setup its own email —— 让 Bot 开自己的邮箱（setup 规范写作 set up）</li><li>and it can sign up for its own accounts —— 再用这个邮箱注册它自己的账号</li><li>for better separation —— 目的：和你的账号分得更开</li></ol><p class="translation">让 Bot 开自己的邮箱、注册自己的账号，和你的分开。</p></details><a class="jump" href="#p5">↑ 第5段</a></article><article class="card hard-card"><div class="card-top"><span class="chip">句子 04</span><button class="sound" data-kind="hard" data-index="3" aria-label="朗读疑难句4">🔊</button></div><p class="hard-en" lang="en">thinking about all the work you do by hand, or steps in your workflows where you have to copy and paste information back to your bot.</p><details><summary>句子拆解与中文意思</summary><ol><li>thinking about … —— 想一想……（这里用 -ing 开头当祈使句，规范写法是 think about）</li><li>all the work you do by hand —— 你手工做的所有活（you do by hand 是省略 that 的定语从句）</li><li>or steps in your workflows —— 或者流程里的那些步骤</li><li>where you have to copy and paste information back to your bot —— where 引导定语从句修饰 steps：在这些步骤里你得把信息复制粘贴回去给 Bot</li></ol><p class="translation">想想哪些活还靠手工，哪些步骤要你把信息复制粘贴给 Bot。</p></details><a class="jump" href="#p6">↑ 第6段</a></article><article class="card hard-card"><div class="card-top"><span class="chip">句子 05</span><button class="sound" data-kind="hard" data-index="4" aria-label="朗读疑难句5">🔊</button></div><p class="hard-en" lang="en">imagine you hired an intern, how would you onboard them and help them do the work correctly and efficiently?</p><details><summary>句子拆解与中文意思</summary><ol><li>imagine you hired an intern —— 假设你招了个实习生（hired 用过去式表示假设）</li><li>how would you onboard them —— would 表示假设情况下“你会怎么做”；them 指性别不明的单个人</li><li>and help them do the work —— help sb do sth，帮他干活</li><li>correctly and efficiently —— 又对又快</li></ol><p class="translation">假如你招了个实习生，你会怎么带他、帮他把活干得又对又快？</p></details><a class="jump" href="#p7">↑ 第7段</a></article><article class="card hard-card"><div class="card-top"><span class="chip">句子 06</span><button class="sound" data-kind="hard" data-index="5" aria-label="朗读疑难句6">🔊</button></div><p class="hard-en" lang="en">then, at the end, tell your bot to “restate this in your own words” so you can confirm it understood you</p><details><summary>句子拆解与中文意思</summary><ol><li>then, at the end —— 然后在最后</li><li>tell your bot to “restate this in your own words” —— 让 Bot 用自己的话复述</li><li>so you can confirm —— so = 这样就能……（表目的）</li><li>it understood you —— 它理解了你（understood 是过去式，指刚才那番话）</li></ol><p class="translation">最后让 Bot 用自己的话复述一遍，就能确认它听懂了。</p></details><a class="jump" href="#p8">↑ 第8段</a></article></div></section>
+<footer>慢慢读，把好想法带进工作里。</footer>
+<noscript><p class="notice">请启用 JavaScript 以使用朗读功能，全文及学习内容可直接阅读。</p></noscript>
+</main>
+<div class="toolbar" id="toolbar" role="region" aria-label="朗读控制"><span class="status" id="speech-status" role="status" aria-live="polite">准备好，听一听</span><label class="rate-control" for="speed">语速 <select id="speed"><option value="0.6">0.6×</option><option value="0.75">0.75×</option><option value="0.9" selected>0.9×</option><option value="1.0">1.0×</option><option value="1.2">1.2×</option></select></label><button class="stop" id="stop">⏹ 停止</button></div>
+<script>
+'use strict';
+const content = {
+ "meta": {
+  "title": "Lauren（@poteto）· Grok Bot 团队打造指南（精读）",
+  "author": "lauren (@poteto)",
+  "author_note": "Lauren Tan，SpaceXAI Grok Bot 工程负责人，前 Netflix / Meta React Compiler",
+  "date": "2026-11-01",
+  "date_note": "X 时间 2026-10-31 17:01 UTC，即泰国时间 2026-11-01 00:01",
+  "url": "https://x.com/poteto/status/2116576229319233596",
+  "bot_link": "https://x.ai/bot/_jOdbfkB16zxu7MRcmReE",
+  "bot_link_note": "帖子末尾附的 Grok Bot 分享链接（原帖未注明是哪个 Bot，按上下文很可能是 Dr Eggbot）",
+  "stats": "约 110 万次浏览 · 1.0 万赞 · 1.9 万收藏（2026-11-02 读取）",
+  "note": "原文全小写，这是 Lauren 发帖的个人风格，照原样保留。"
+ },
+ "map": [
+  {
+   "icon": "🥚",
+   "en": "Use a bot designer",
+   "zh": "用 Dr Eggbot 来设计 Bot",
+   "p": 2
+  },
+  {
+   "icon": "🎯",
+   "en": "Fewer, better bots",
+   "zh": "少而精，好管",
+   "p": 3
+  },
+  {
+   "icon": "📘",
+   "en": "Turn instructions into skills",
+   "zh": "教过的做法存成技能",
+   "p": 4
+  },
+  {
+   "icon": "🔌",
+   "en": "Give it your tools",
+   "zh": "连接器 + 保险库 + 自己的邮箱",
+   "p": 5
+  },
+  {
+   "icon": "✋",
+   "en": "Kill the copy-paste",
+   "zh": "手工复制粘贴的活交给 Bot",
+   "p": 6
+  },
+  {
+   "icon": "🧑‍🎓",
+   "en": "Onboard it like an intern",
+   "zh": "像带实习生一样带 Bot",
+   "p": 7
+  },
+  {
+   "icon": "🎤",
+   "en": "Brain dump by voice, then 'restate'",
+   "zh": "语音一口气说完，再让它复述",
+   "p": 8
+  }
+ ],
+ "paragraphs": [
+  {
+   "n": 1,
+   "tag": "开场",
+   "en": "here’s a short grok bot guide on how i create high quality bots and manage my team. ask @bot to read this post and help you improve your team!",
+   "zh": "这是一份简短的 Grok Bot 指南，讲我怎么打造高质量的 Bot、怎么管理我的 Bot 团队。可以让 @bot 读一下这条帖子，帮你改进你自己的团队！"
+  },
+  {
+   "n": 2,
+   "tag": "① 设计师",
+   "en": "• add dr eggbot to your team! he’s my bot designer that i use to create bots",
+   "zh": "• 把 Dr Eggbot 加进你的团队！他是我的 Bot 设计师，我就是用他来创建 Bot 的。"
+  },
+  {
+   "n": 3,
+   "tag": "② 少而精",
+   "en": "• you don’t need a lot of bots. a few good bots can be more useful and easier to manage than a large team",
+   "zh": "• Bot 不用多。几个好用的 Bot，往往比一大堆 Bot 更有用，也更好管。"
+  },
+  {
+   "n": 4,
+   "tag": "③ 技能",
+   "en": "• tell your bots to create skills for itself as you give it instructions on how to do tasks. this lets them do them more consistently even over long conversations. you can even ask it to create a private github repo for you to store all your skills if you want them preserved independently",
+   "zh": "• 你教 Bot 某件事怎么做的时候，让它顺手把做法存成自己的“技能”。这样即使对话拉得很长，它做事也能保持一致。想让这些技能独立保存的话，还可以让它帮你建一个私有的 GitHub 仓库，把所有技能都放进去。"
+  },
+  {
+   "n": 5,
+   "tag": "④ 工具",
+   "en": "• add connectors, use the vault, and give access to all the tools you use to do your work. you can also ask your bot to setup its own email and it can sign up for its own accounts for better separation ",
+   "zh": "• 加上连接器、用好保险库（vault），把你工作中用到的工具都开放给它。你还可以让 Bot 给自己开一个邮箱，用它注册自己的账号，这样它的账号和你的分开，更清楚。"
+  },
+  {
+   "n": 6,
+   "tag": "⑤ 找手工活",
+   "en": "• thinking about all the work you do by hand, or steps in your workflows where you have to copy and paste information back to your bot. ask your bot how it can do that for you instead!",
+   "zh": "• 想一想你还有哪些活是手工做的，或者流程里哪些步骤需要你把信息复制粘贴回去给 Bot。直接问 Bot：这些它能不能替你做！"
+  },
+  {
+   "n": 7,
+   "tag": "⑥ 当实习生带",
+   "en": "• imagine you hired an intern, how would you onboard them and help them do the work correctly and efficiently? introduce yourself to your bot and describe the work you do, then ask it how it can help you automate it",
+   "zh": "• 假设你招了个实习生，你会怎么带他入职，帮他把活干对、干快？对 Bot 也一样：先介绍你自己、讲清楚你做什么工作，然后问它可以怎么帮你把这些工作自动化。"
+  },
+  {
+   "n": 8,
+   "tag": "⭐ 最爱技巧",
+   "en": "and my favorite tip: use voice mode or the transcription option! it’s a good way to just brain dump a lot of information. then, at the end, tell your bot to “restate this in your own words” so you can confirm it understood you",
+   "zh": "还有我最喜欢的一个技巧：用语音模式或者语音转文字！这样可以一口气把脑子里的一大堆信息全倒出来。最后再对 Bot 说一句“用你自己的话复述一遍”，就能确认它真的听懂了你的意思。"
+  }
+ ],
+ "vocab": [
+  {
+   "w": "high quality",
+   "zh": "高质量的",
+   "p": 1,
+   "src": "how i create high quality bots",
+   "ex": "We only ship high quality parts to our Japanese customer.（我们只给日本客户发高质量的零件。）"
+  },
+  {
+   "w": "manage my team",
+   "zh": "管理我的团队",
+   "p": 1,
+   "src": "how i create high quality bots and manage my team",
+   "ex": "I manage a team of 200 people across three shifts.（我管理三个班次共 200 人的团队。）"
+  },
+  {
+   "w": "improve",
+   "zh": "改进，提升",
+   "p": 1,
+   "src": "help you improve your team",
+   "ex": "We need to improve our on-time delivery rate this quarter.（这个季度要提高准时交货率。）"
+  },
+  {
+   "w": "add … to your team",
+   "zh": "把……加入团队",
+   "p": 2,
+   "src": "add dr eggbot to your team!",
+   "ex": "Let's add a quality engineer to the night shift.（给夜班加一名质量工程师。）"
+  },
+  {
+   "w": "designer",
+   "zh": "设计师",
+   "p": 2,
+   "src": "he’s my bot designer",
+   "ex": "Our mold designer will join the call at 3 pm.（我们的模具设计师下午三点参加电话会。）"
+  },
+  {
+   "w": "a few good …",
+   "zh": "几个好的……（少而精）",
+   "p": 3,
+   "src": "a few good bots can be more useful",
+   "ex": "A few good suppliers are better than twenty unreliable ones.（几个靠谱的供应商胜过二十个不靠谱的。）"
+  },
+  {
+   "w": "easier to manage",
+   "zh": "更好管理",
+   "p": 3,
+   "src": "more useful and easier to manage than a large team",
+   "ex": "A smaller warehouse is easier to manage.（小一点的仓库更好管。）"
+  },
+  {
+   "w": "instructions",
+   "zh": "指示，操作说明",
+   "p": 4,
+   "src": "as you give it instructions on how to do tasks",
+   "ex": "Please give the new operators clear instructions before they start.（新操作工上岗前要给他们讲清楚操作说明。）"
+  },
+  {
+   "w": "consistently",
+   "zh": "一贯地，稳定地",
+   "p": 4,
+   "src": "do them more consistently",
+   "ex": "The line must hit the same quality consistently, not just on audit days.（产线要一直保持同样的质量，不是只在审核那天。）"
+  },
+  {
+   "w": "even over …",
+   "zh": "即使经过很长的（时间/过程）也……",
+   "p": 4,
+   "src": "more consistently even over long conversations",
+   "ex": "Keep the checklist at the machine so operators follow it consistently, even over long night shifts.（把检查表挂在机台旁，即使夜班很长，操作工也能一直照着做。）"
+  },
+  {
+   "w": "private repo",
+   "zh": "私有仓库（只有自己能看的代码库）",
+   "p": 4,
+   "src": "create a private github repo for you",
+   "ex": "Keep the customer drawings in a private folder, not the shared drive.（客户图纸放私有文件夹，别放共享盘。）"
+  },
+  {
+   "w": "preserved independently",
+   "zh": "独立保存（不依赖某个系统）",
+   "p": 4,
+   "src": "if you want them preserved independently",
+   "ex": "Back up the SOPs so they're preserved independently of the ERP.（把 SOP 备份一份，不依赖 ERP 系统单独保存。）"
+  },
+  {
+   "w": "give access to",
+   "zh": "给……开放权限",
+   "p": 5,
+   "src": "give access to all the tools you use",
+   "ex": "Please give the auditor access to the training records.（请给审核员开放培训记录的权限。）"
+  },
+  {
+   "w": "set up",
+   "zh": "设置，开通（原文写成 setup，规范写法是动词 set up）",
+   "p": 5,
+   "src": "ask your bot to setup its own email",
+   "ex": "IT will set up your email account on Monday.（IT 周一给你开通邮箱。）"
+  },
+  {
+   "w": "sign up for",
+   "zh": "注册（账号、服务）",
+   "p": 5,
+   "src": "it can sign up for its own accounts",
+   "ex": "We signed up for the BOI online system last month.（我们上个月注册了 BOI 网上系统。）"
+  },
+  {
+   "w": "separation",
+   "zh": "分开，隔离",
+   "p": 5,
+   "src": "for better separation",
+   "ex": "We keep a clear separation between finished goods and rejected parts.（成品和不良品要严格分区。）"
+  },
+  {
+   "w": "by hand",
+   "zh": "手工，人工",
+   "p": 6,
+   "src": "all the work you do by hand",
+   "ex": "We still count the inventory by hand every month.（我们每月还是人工盘点库存。）"
+  },
+  {
+   "w": "workflow",
+   "zh": "工作流程",
+   "p": 6,
+   "src": "steps in your workflows",
+   "ex": "Let's map the workflow for purchase approvals.（把采购审批的流程画出来。）"
+  },
+  {
+   "w": "copy and paste",
+   "zh": "复制粘贴",
+   "p": 6,
+   "src": "copy and paste information back to your bot",
+   "ex": "Stop copying and pasting numbers from Excel into the report; let's automate it.（别再把 Excel 的数字复制粘贴到报告里了，做成自动的。）"
+  },
+  {
+   "w": "instead",
+   "zh": "代替，改为",
+   "p": 6,
+   "src": "ask your bot how it can do that for you instead!",
+   "ex": "Can we ship by sea instead?（能不能改走海运？）"
+  },
+  {
+   "w": "hire an intern",
+   "zh": "招一个实习生",
+   "p": 7,
+   "src": "imagine you hired an intern",
+   "ex": "We hired two engineering interns from a Rayong university.（我们从罗勇的大学招了两个工程实习生。）"
+  },
+  {
+   "w": "onboard",
+   "zh": "带新人入职，让新人上手",
+   "p": 7,
+   "src": "how would you onboard them",
+   "ex": "HR will onboard the new supervisors next week.（人事下周给新主管做入职培训。）"
+  },
+  {
+   "w": "correctly and efficiently",
+   "zh": "又对又快",
+   "p": 7,
+   "src": "help them do the work correctly and efficiently",
+   "ex": "The new fixture helps operators load parts correctly and efficiently.（新夹具让操作工装件又准又快。）"
+  },
+  {
+   "w": "automate",
+   "zh": "自动化",
+   "p": 7,
+   "src": "ask it how it can help you automate it",
+   "ex": "We plan to automate the packing station next year.（明年计划把包装工位自动化。）"
+  },
+  {
+   "w": "tip",
+   "zh": "小窍门，建议",
+   "p": 8,
+   "src": "and my favorite tip",
+   "ex": "One tip: send the agenda the day before the meeting.（一个小建议：会前一天把议程发出去。）"
+  },
+  {
+   "w": "transcription",
+   "zh": "转写（语音转文字）",
+   "p": 8,
+   "src": "use voice mode or the transcription option",
+   "ex": "Turn on transcription so we have notes from the customer call.（打开转写，客户电话就有记录了。）"
+  },
+  {
+   "w": "brain dump",
+   "zh": "把脑子里的想法一股脑倒出来",
+   "p": 8,
+   "src": "a good way to just brain dump a lot of information",
+   "ex": "Let me brain dump everything I know about this customer, then you organize it.（我先把这个客户的情况一股脑说完，你再整理。）"
+  },
+  {
+   "w": "restate … in your own words",
+   "zh": "用你自己的话复述",
+   "p": 8,
+   "src": "tell your bot to “restate this in your own words”",
+   "ex": "Can you restate the customer's complaint in your own words?（你能用自己的话把客户的投诉复述一遍吗？）"
+  },
+  {
+   "w": "confirm",
+   "zh": "确认",
+   "p": 8,
+   "src": "so you can confirm it understood you",
+   "ex": "Please confirm the delivery date by Friday.（请周五前确认交货日期。）"
+  }
+ ],
+ "hard": [
+  {
+   "p": 4,
+   "en": "tell your bots to create skills for itself as you give it instructions on how to do tasks.",
+   "parts": [
+    "tell your bots to create skills —— 主干：tell sb to do sth，让 Bot 去建技能",
+    "for itself —— 给它自己用（主语是复数 bots，按语法应是 themselves；随手写的帖子，单复数混用）",
+    "as you give it instructions —— as = 在……的同时，你边教它",
+    "on how to do tasks —— instructions on how to…：关于怎么做事的说明"
+   ],
+   "zh": "你一边教 Bot 怎么做事，一边让它把做法存成自己的技能。"
+  },
+  {
+   "p": 4,
+   "en": "you can even ask it to create a private github repo for you to store all your skills if you want them preserved independently",
+   "parts": [
+    "ask it to create a private github repo —— 让它建一个私有的 GitHub 仓库",
+    "for you to store all your skills —— for sb to do：给你用来存放所有技能",
+    "if you want them preserved independently —— want + 宾语 + 过去分词：想让它们被独立保存"
+   ],
+   "zh": "想让技能独立保存的话，甚至可以让它给你建个私有 GitHub 仓库来放。"
+  },
+  {
+   "p": 5,
+   "en": "you can also ask your bot to setup its own email and it can sign up for its own accounts for better separation",
+   "parts": [
+    "ask your bot to setup its own email —— 让 Bot 开自己的邮箱（setup 规范写作 set up）",
+    "and it can sign up for its own accounts —— 再用这个邮箱注册它自己的账号",
+    "for better separation —— 目的：和你的账号分得更开"
+   ],
+   "zh": "让 Bot 开自己的邮箱、注册自己的账号，和你的分开。"
+  },
+  {
+   "p": 6,
+   "en": "thinking about all the work you do by hand, or steps in your workflows where you have to copy and paste information back to your bot.",
+   "parts": [
+    "thinking about … —— 想一想……（这里用 -ing 开头当祈使句，规范写法是 think about）",
+    "all the work you do by hand —— 你手工做的所有活（you do by hand 是省略 that 的定语从句）",
+    "or steps in your workflows —— 或者流程里的那些步骤",
+    "where you have to copy and paste information back to your bot —— where 引导定语从句修饰 steps：在这些步骤里你得把信息复制粘贴回去给 Bot"
+   ],
+   "zh": "想想哪些活还靠手工，哪些步骤要你把信息复制粘贴给 Bot。"
+  },
+  {
+   "p": 7,
+   "en": "imagine you hired an intern, how would you onboard them and help them do the work correctly and efficiently?",
+   "parts": [
+    "imagine you hired an intern —— 假设你招了个实习生（hired 用过去式表示假设）",
+    "how would you onboard them —— would 表示假设情况下“你会怎么做”；them 指性别不明的单个人",
+    "and help them do the work —— help sb do sth，帮他干活",
+    "correctly and efficiently —— 又对又快"
+   ],
+   "zh": "假如你招了个实习生，你会怎么带他、帮他把活干得又对又快？"
+  },
+  {
+   "p": 8,
+   "en": "then, at the end, tell your bot to “restate this in your own words” so you can confirm it understood you",
+   "parts": [
+    "then, at the end —— 然后在最后",
+    "tell your bot to “restate this in your own words” —— 让 Bot 用自己的话复述",
+    "so you can confirm —— so = 这样就能……（表目的）",
+    "it understood you —— 它理解了你（understood 是过去式，指刚才那番话）"
+   ],
+   "zh": "最后让 Bot 用自己的话复述一遍，就能确认它听懂了。"
+  }
+ ]
+};
+const synth = window.speechSynthesis;
+const supported = !!synth && typeof window.SpeechSynthesisUtterance === 'function';
+const status = document.getElementById('speech-status');
+const toolbar = document.getElementById('toolbar');
+const speed = document.getElementById('speed');
+let englishVoice = null;
+let session = null;
+let revision = 0;
+let activeUtterance = null;
+function loadVoices() {
+  if (!supported) return;
+  const voices = synth.getVoices();
+  englishVoice = voices.find(v => /^en[-_]US$/i.test(v.lang)) || voices.find(v => /^en\b/i.test(v.lang)) || null;
+}
+function clearHighlight() {
+  document.querySelectorAll('.is-reading').forEach(card => {
+    card.classList.remove('is-reading');
+    card.removeAttribute('aria-current');
+  });
+}
+function reset(message) {
+  revision++;
+  session = null;
+  activeUtterance = null;
+  if (supported) synth.cancel();
+  clearHighlight();
+  toolbar.classList.remove('is-playing');
+  document.getElementById('read-all').setAttribute('aria-pressed', 'false');
+  status.textContent = message;
+}
+function speakCurrent() {
+  if (!session) return;
+  const token = ++revision;
+  // Invalidate old callbacks before cancel(), including callbacks dispatched synchronously.
+  synth.cancel();
+  const item = session.items[session.index];
+  const utterance = new SpeechSynthesisUtterance(item.text);
+  activeUtterance = utterance;
+  utterance.lang = 'en-US';
+  utterance.rate = Number(speed.value);
+  if (englishVoice) utterance.voice = englishVoice;
+  clearHighlight();
+  if (item.paragraph) {
+    const card = document.getElementById('p' + item.paragraph);
+    card.classList.add('is-reading');
+    card.setAttribute('aria-current', 'true');
+    if (session.full) {
+      const rect = card.getBoundingClientRect();
+      if (rect.top < 15 || rect.bottom > window.innerHeight - 110) {
+        card.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }
+    }
+  }
+  toolbar.classList.add('is-playing');
+  status.textContent = item.label;
+  utterance.onend = () => {
+    if (token !== revision || !session) return;
+    session.index++;
+    if (session.index < session.items.length) speakCurrent();
+    else reset('朗读完毕');
+  };
+  utterance.onerror = event => {
+    if (token !== revision) return;
+    reset(event.error === 'not-allowed' ? '请点击朗读按钮后重试' : '朗读暂不可用，请重试');
+  };
+  try { synth.speak(utterance); }
+  catch (_) { if (token === revision) reset('朗读暂不可用，请重试'); }
+}
+function start(items, full = false) {
+  if (!supported) return;
+  reset('准备朗读');
+  loadVoices();
+  session = { items, index: 0, full };
+  document.getElementById('read-all').setAttribute('aria-pressed', String(full));
+  speakCurrent();
+}
+function paragraphItem(p) {
+  return { text: p.en, paragraph: p.n, label: '正在朗读 · 第 ' + p.n + ' 段' };
+}
+document.getElementById('read-all').setAttribute('aria-pressed', 'false');
+document.getElementById('read-all').addEventListener('click', () => start(content.paragraphs.map(paragraphItem), true));
+document.querySelectorAll('[data-kind]').forEach(button => {
+  button.addEventListener('click', () => {
+    const index = Number(button.dataset.index);
+    const kind = button.dataset.kind;
+    if (kind === 'paragraph') start([paragraphItem(content.paragraphs[index])]);
+    if (kind === 'vocab') {
+      const v = content.vocab[index];
+      start([{ text: v.w + '. ' + v.src, label: '正在朗读 · 生词与原句' }]);
+    }
+    if (kind === 'hard') start([{ text: content.hard[index].en, label: '正在朗读 · 疑难句 ' + (index + 1) }]);
+  });
+});
+speed.addEventListener('change', () => { if (session) speakCurrent(); });
+document.getElementById('stop').addEventListener('click', () => reset('已停止朗读'));
+if (supported) {
+  loadVoices();
+  synth.addEventListener('voiceschanged', loadVoices);
+  window.addEventListener('pagehide', () => reset('已停止朗读'));
+} else {
+  const notice = document.getElementById('speech-notice');
+  notice.hidden = false;
+  notice.textContent = '当前浏览器不支持语音朗读，请使用支持朗读的浏览器继续学习。';
+  status.textContent = '当前浏览器不支持朗读';
+  document.querySelectorAll('.sound, #read-all, #stop, #speed').forEach(control => { control.disabled = true; });
+}
+</script>
+</body>
+</html>
