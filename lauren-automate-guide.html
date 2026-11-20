@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f6f3eb">
+<title>Lauren（@poteto）· 用 Grok Bot 自动化一切（精读）</title>
+<style>
+:root{color-scheme:light;--paper:#f6f3eb;--card:#fffdf8;--ink:#263b32;--muted:#71756c;--green:#284d3d;--line:#e3e3d8;--accent:#e6aa71}*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:24px}body{margin:0;background:var(--paper);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.65}button,select{font:inherit}button,a,select{-webkit-tap-highlight-color:transparent}button{cursor:pointer}a{color:var(--green);text-underline-offset:4px}button:focus-visible,a:focus-visible,summary:focus-visible,select:focus-visible{outline:3px solid #c97c45;outline-offset:4px}main{max-width:1000px;margin:auto;padding:24px 24px 128px}.masthead{display:flex;justify-content:space-between;gap:12px;align-items:center;border-bottom:1px solid #d6dacd;padding-bottom:16px;font-size:12px;letter-spacing:.1em}.brand{font-weight:800;display:flex;align-items:center;gap:9px}.brand-icon{background:var(--green);color:#fff;border-radius:8px;width:26px;height:26px;display:grid;place-items:center;font-size:16px}.edition{color:var(--muted)}.hero{display:grid;grid-template-columns:minmax(0,1fr) 220px;gap:22px;align-items:center;padding:48px 0 38px}.eyebrow{font-size:12px;letter-spacing:.15em;color:#8c6647;font-weight:750;margin:0 0 14px}h1{font-size:clamp(27px,4.2vw,43px);line-height:1.35;letter-spacing:-.045em;margin:0 0 20px;font-weight:800;text-wrap:balance}.byline{display:flex;gap:12px;flex-wrap:wrap;font-size:13px}.stats{font-size:11px;color:var(--muted);margin:10px 0 23px}.primary{background:var(--green);border:0;color:#fff;border-radius:100px;min-height:50px;padding:12px 26px;font-weight:700;box-shadow:0 4px 0 #dce0d2}.primary:hover{background:#37634e}.hero-art{height:240px;position:relative;display:grid;place-items:center;isolation:isolate}.orbit{position:absolute;inset:18px 0;border:1px solid #d8dacc;border-radius:50%;transform:rotate(-25deg)}.orbit:after{content:"";position:absolute;inset:24px;border:1px dashed #d8dacc;border-radius:50%}.art-core{height:112px;width:112px;background:#dce4cf;border-radius:35px;display:grid;place-items:center;font-size:50px;transform:rotate(-8deg);box-shadow:8px 10px 0 #e9e7dc}.art-note{position:absolute;padding:7px 13px;border-radius:12px;background:#fffdf8;border:1px solid var(--line);font-size:12px;font-weight:650;box-shadow:0 5px 12px #263b3207}.art-note.one{top:22px;left:3px;transform:rotate(-9deg)}.art-note.two{bottom:21px;right:0;transform:rotate(7deg);background:#f4dcc2}.art-spark{position:absolute;right:10px;top:50px;font-size:24px;color:#b87d47}.section-heading{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:44px 0 18px}h2{font-size:23px;letter-spacing:-.025em;margin:0}.section-heading h2 small{font-size:12px;color:#9c9f90;font-weight:500;margin-right:10px}.section-note{font-size:12px;color:var(--muted)}.map-panel{background:#eeeee4;border:1px solid #e1e3d5;border-radius:25px;padding:25px}.map-core{max-width:520px;margin:0 auto 24px;background:var(--green);color:#fff;border-radius:18px;text-align:center;padding:21px 14px;position:relative}.map-core:after{content:"";height:24px;width:1px;background:#a9b4a1;position:absolute;left:50%;bottom:-25px}.map-core strong{display:block;font-size:clamp(19px,3vw,26px);line-height:1.3;letter-spacing:-.025em}.map-core span{display:block;color:#d9e2d1;font-size:14px;margin-top:7px}.map-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.map-tile{display:flex;flex-direction:column;gap:9px;padding:16px;border-radius:15px;text-decoration:none;transition:transform .18s;min-height:163px}.map-tile:hover{transform:translateY(-4px)}.map-tile:last-child{grid-column:span 2}.tile-top{display:flex;align-items:center;justify-content:space-between}.tile-icon{font-size:25px}.tile-number{font-size:11px;opacity:.55}.map-tile strong{font-size:15px;line-height:1.35}.map-tile>span:last-child{font-size:11px;opacity:.8;margin-top:auto}.tone-0{background:#f1dcc6}.tone-1{background:#d9e4ce}.tone-2{background:#d9e4e7}.tone-3{background:#e4deee}.tone-4{background:#f1e6ba}.source{border:1px solid var(--line);border-radius:16px;padding:17px 20px;margin-top:20px;background:#f0eee5}.source>summary{font-weight:700}.source-body{font-size:13px;overflow-wrap:anywhere;padding-top:8px}.source-body p{margin:10px 0}.source-body span{color:var(--muted)}.reading-list{display:grid;gap:17px}.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;min-width:0}.card-top{display:flex;justify-content:space-between;gap:12px;align-items:center}.chip{display:inline-block;background:#edf0e5;color:#52624a;border-radius:7px;padding:4px 10px;font-size:12px;font-weight:650}.card-actions{display:flex;align-items:center;gap:14px}.folio{font-size:11px;color:#959b90;font-variant-numeric:tabular-nums}.sound{flex-shrink:0;border:1px solid #e1e5d7;border-radius:50%;height:38px;width:38px;background:#f5f6ee;display:grid;place-items:center;font-size:16px}.sound:hover{background:#e4ead9}.english{font-family:Georgia,"Times New Roman",serif;font-size:clamp(21px,2.8vw,27px);line-height:1.65;margin:20px 0 24px;white-space:pre-wrap;overflow-wrap:anywhere}.paragraph{scroll-margin-top:24px;transition:background .2s,border-color .2s,box-shadow .2s}.paragraph.is-reading{border-color:#75946b;background:#f5f8ed;box-shadow:0 0 0 3px #8ba97930}.paragraph.is-reading .chip{background:var(--green);color:white}details{border-top:1px solid #e8e9df;padding-top:12px;margin-top:12px}summary{cursor:pointer;list-style:none;font-size:13px;color:#5d6c54;display:flex;align-items:center;gap:8px;min-height:28px}summary::-webkit-details-marker{display:none}summary:before{content:"+";font-size:18px;font-weight:400;width:14px;line-height:1}details[open]>summary:before{content:"−"}.source{padding-top:17px}.source>summary:before{content:"↗";font-size:15px}.translation{font-size:15px;line-height:1.9;color:#52604f;margin:12px 0 4px}.count{background:#eef0e7;color:#7b8674;font-size:10px;border-radius:20px;padding:0 6px}.local-vocab ul{padding:0;list-style:none;margin:12px 0 0}.local-vocab li{display:flex;gap:12px;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:13px}.local-vocab li:last-child{border:0}.local-vocab li span{text-align:right;color:var(--muted);max-width:65%}.vocab-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.vocab-card h3{font-family:Georgia,"Times New Roman",serif;font-size:22px;line-height:1.35;margin:0;overflow-wrap:anywhere}.meaning{font-size:13px;color:#697360;margin:10px 0 18px}.example{border-left:2px solid #dfe4d1;padding-left:13px}.micro-label{font-size:10px;color:#8a9180;letter-spacing:.1em}.example p{font-family:Georgia,"Times New Roman",serif;font-size:17px;line-height:1.6;margin:5px 0 18px}mark{background:#f2e3ba;color:inherit;border-radius:3px;padding:1px 0}.work-example{font-size:14px;color:#62705c;line-height:1.8}.jump{display:inline-block;font-size:11px;margin-top:17px;color:#7c866e;text-decoration:none}.jump:hover{text-decoration:underline}.hard-list{display:grid;gap:16px}.hard-en{font-family:Georgia,"Times New Roman",serif;font-size:21px;line-height:1.65;margin:17px 0}.hard-card ol{padding-left:23px;font-size:14px;line-height:1.9;color:#5b6855}.hard-card li{padding:5px 0 5px 6px}.hard-card li::marker{color:#9a7654;font-weight:700}footer{text-align:center;margin-top:42px;font-size:12px;color:#929987}.toolbar{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:952px;z-index:10;background:#fffdf8f5;backdrop-filter:blur(12px);border:1px solid #d8ddce;border-radius:18px;box-shadow:0 8px 35px #263b321a;display:flex;align-items:center;gap:16px;padding:12px 18px}.status{flex:1;font-size:12px;color:#6a765f;min-width:0}.status:before{content:"";display:inline-block;width:7px;height:7px;background:#b7c2a6;border-radius:50%;margin-right:8px}.toolbar.is-playing .status:before{background:#427543}.rate-control{display:flex;align-items:center;gap:7px;font-size:12px}.rate-control select{border:1px solid #dfe3d5;border-radius:8px;background:#f4f5ed;color:var(--ink);padding:8px 6px;min-height:40px}.stop{border:0;border-radius:10px;background:#e9ecdf;color:var(--green);padding:9px 14px;font-size:13px;min-height:40px}.notice{border:1px solid #d6ad7e;background:#fbecd8;border-radius:12px;padding:12px 16px;font-size:13px;margin-bottom:20px}[hidden]{display:none!important}button:disabled{opacity:.45;cursor:not-allowed}@media(min-width:750px){.hero-art{margin-right:10px}.vocab-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.vocab-card{padding:20px}}@media(max-width:640px){main{padding:18px 16px 135px}.hero{grid-template-columns:1fr;padding:32px 0 26px;gap:0}.hero-art{display:none}.hero:before{content:"🥚  →  🎯  →  ✨";font-size:26px;letter-spacing:13px;background:#e8ebdc;border-radius:16px;padding:14px 20px;margin-bottom:24px;width:fit-content}.stats{line-height:1.8}.primary{width:100%}.map-panel{padding:17px 12px}.map-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.map-tile{padding:14px;min-height:160px}.map-tile:last-child{min-height:135px}.card{padding:20px}.vocab-grid{grid-template-columns:1fr}.section-heading{margin-top:34px}.section-note{font-size:11px}.toolbar{gap:10px;padding:10px 12px;bottom:max(10px,env(safe-area-inset-bottom));border-radius:15px}.status{font-size:11px}.rate-control{gap:5px}.stop{padding:9px 10px}.edition{font-size:10px}.local-vocab li{flex-direction:column;gap:3px}.local-vocab li span{max-width:100%;text-align:left}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<main>
+<header class="masthead"><div class="brand"><span class="brand-icon" aria-hidden="true">读</span> 英语精读手册</div><span class="edition">工作与 AI · 02</span></header>
+<section class="hero" aria-labelledby="page-title"><div><p class="eyebrow">一篇长文 · 八个自动化主题</p><h1 id="page-title">Lauren（@poteto）· 用 Grok Bot 自动化一切（精读）</h1><div class="byline"><span>Lauren Tan (@poteto)</span><span>📅 2026-11-19</span></div><p class="stats">约 244 万次浏览 · 1.6 万赞 · 2.9 万收藏（2026-11-20 读取）</p><button class="primary" id="read-all">🔊 全文朗读</button></div><div class="hero-art" aria-hidden="true"><div class="orbit"></div><div class="art-core">⚙️</div><span class="art-note one">先定目标</span><span class="art-note two">交给 Bot 执行 ↗</span><span class="art-spark">✦</span></div></section>
+<div class="notice" id="speech-notice" role="status" hidden></div>
+<nav aria-labelledby="map-title"><div class="section-heading"><h2 id="map-title"><small>01</small>结构图</h2><span class="section-note">点色块，跳到原文 ↘</span></div><div class="map-panel"><div class="map-core"><strong lang="en">Goal + process, then let the bot run it</strong><span>先定目标和流程，再交给 Bot 跑</span></div><div class="map-grid"><a class="map-tile tone-0" href="#p2"><span class="tile-top"><span class="tile-icon">🧠</span><span class="tile-number">01 ↗</span></span><strong lang="en">A way of thinking</strong><span>一种思维方式</span></a>
+<a class="map-tile tone-1" href="#p4"><span class="tile-top"><span class="tile-icon">💻</span><span class="tile-number">02 ↗</span></span><strong lang="en">Grok Bot is automation for everyone</strong><span>人人都能做自动化</span></a>
+<a class="map-tile tone-2" href="#p6"><span class="tile-top"><span class="tile-icon">🎯</span><span class="tile-number">03 ↗</span></span><strong lang="en">Start with the goal</strong><span>先定目标</span></a>
+<a class="map-tile tone-3" href="#p11"><span class="tile-top"><span class="tile-icon">📋</span><span class="tile-number">04 ↗</span></span><strong lang="en">The process</strong><span>梳理流程</span></a>
+<a class="map-tile tone-4" href="#p15"><span class="tile-top"><span class="tile-icon">💡</span><span class="tile-number">05 ↗</span></span><strong lang="en">Teach your bot how you think</strong><span>教 Bot 怎么判断</span></a>
+<a class="map-tile tone-0" href="#p18"><span class="tile-top"><span class="tile-icon">📈</span><span class="tile-number">06 ↗</span></span><strong lang="en">Let your bots improve themselves</strong><span>让 Bot 持续改进</span></a>
+<a class="map-tile tone-1" href="#p21"><span class="tile-top"><span class="tile-icon">⏱️</span><span class="tile-number">07 ↗</span></span><strong lang="en">Making bots do work automatically</strong><span>设置自动触发</span></a>
+<a class="map-tile tone-2" href="#p22"><span class="tile-top"><span class="tile-icon">🥚</span><span class="tile-number">08 ↗</span></span><strong lang="en">Install Dr Eggbot</strong><span>安装 Dr Eggbot</span></a></div></div></nav>
+<details class="source"><summary>原文链接 <span class="count">来源与说明</span></summary><div class="source-body"><p>📅 2026-11-19<br><span>X 发布时间 2026-11-18 21:00 UTC，即泰国时间 2026-11-19 04:00</span></p><p>作者 Lauren Tan (@poteto)<br><span>Lauren Tan，SpaceXAI Grok Bot 工程负责人</span></p><p><a href="https://x.com/poteto/status/2123159537016533493" target="_blank" rel="noopener noreferrer">在 X 阅读原帖 ↗</a></p><p><a href="https://grok-bot.directory/bots/dr-eggbot-v2" target="_blank" rel="noopener noreferrer">查看 Grok Bot 分享链接 ↗</a><br><span>原文结尾让大家安装 Dr Eggbot，但我们读到的正文没有附链接。这是社区目录 grok-bot.directory（非官方，11-19 上线）里署名“lauren 🎀”的 dr eggbot v2，简介与原文一致，很可能就是她本人发布的，但没有官方确认。添加前先看清它要哪些权限。</span></p><p>X 长文（Article）。原文较长，按小标题分成若干段卡片；英文逐字照原文，中文为 AI 初译 + 人工校对。</p></div></details>
+<section aria-labelledby="reading-title"><div class="section-heading"><h2 id="reading-title"><small>02</small>全文逐段</h2><span class="section-note">22 段 · 听读与理解</span></div><div class="reading-list"><article class="card paragraph" id="p1"><div class="card-top"><span class="chip">开场</span><div class="card-actions"><span class="folio">01 / 22</span><button class="sound" data-kind="paragraph" data-index="0" aria-label="朗读第1段">🔊</button></div></div><p class="english" lang="en">Automation can be surprisingly hard to get right, even for people who do it every day. I’d like to share how I approach it, at work and in my personal life, and how Grok Bot can help you take on more ambitious goals.</p><details><summary>中文意思</summary><p class="translation">自动化要做对，可能比你想的还难，就连天天做这件事的人也一样。我想分享自己在工作和生活中是怎么做自动化的，以及 Grok Bot 怎样帮你挑战更有难度的目标。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">2</span></summary><ul><li><strong lang="en">get right</strong><span>把……做对、做准确</span></li><li><strong lang="en">take on</strong><span>承担，着手应对（任务或挑战）</span></li></ul></details></article>
+<article class="card paragraph" id="p2"><div class="card-top"><span class="chip">① 思维方式</span><div class="card-actions"><span class="folio">02 / 22</span><button class="sound" data-kind="paragraph" data-index="1" aria-label="朗读第2段">🔊</button></div></div><p class="english" lang="en">A way of thinking<br>Automation is really just a way of thinking that anyone can learn. It&#x27;s about thinking systematically and logically, breaking things down into small steps while keeping a goal in mind. <br>There are 2 parts to it: a goal, and a process.<br>An everyday example of this is baking an apple pie (the goal). You follow a recipe or process which has clearly laid out steps - buying and preparing the right ingredients, assembling the pie and decorating it, baking it, letting it cool, and so on. Or if you&#x27;re replacing a flat tire (also a goal), you might need to find a way to jack the car up so you can reach the tire, find the tools to remove and replace it with a new one, and then put everything back together again.<br>Simply put, the goal is what you want at the end, and the process is how you get there.</p><details><summary>中文意思</summary><p class="translation">一种思维方式<br>自动化说到底是一种人人都能学会的思维方式。你需要有条理、有逻辑地思考，心里有个目标，再把事情拆成一个个小步骤。<br>这里有两个部分：目标和流程。<br>拿烤苹果派这个日常例子来说，烤出苹果派就是目标。你会照着食谱或流程一步步来：买齐并准备好食材、组装和装饰派、放进烤箱、出炉后晾凉，等等。再比如换掉瘪了的轮胎，这也是个目标。你可能要先想办法用千斤顶把车顶起来，好够到轮胎，再找工具把旧轮胎拆下来、换上新的，最后把各处装回原位。<br>简单说，目标是你最后想得到的结果，流程是达到这个结果的办法。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">2</span></summary><ul><li><strong lang="en">breaking things down</strong><span>把事情分解成更小的部分</span></li><li><strong lang="en">laid out</strong><span>列明，清楚地安排好</span></li></ul></details></article>
+<article class="card paragraph" id="p3"><div class="card-top"><span class="chip">① 思维方式</span><div class="card-actions"><span class="folio">03 / 22</span><button class="sound" data-kind="paragraph" data-index="2" aria-label="朗读第3段">🔊</button></div></div><p class="english" lang="en">Automation is the same thing: a goal and a process, but with the addition of something like a machine, like the ones a bakery might use to bake lots of apple pies. Or code, what software engineers used to write by hand to automate stuff that could be done by a computer. It&#x27;s about breaking things down into steps towards a goal, then automating the process so you don&#x27;t have to personally do it every time.</p><details><summary>中文意思</summary><p class="translation">自动化也是这个道理：有目标和流程，再加上一台机器之类的东西，比如面包店用来大量烤苹果派的设备。也可以用代码，也就是软件工程师以前手写来让电脑自动完成某些工作的程序。你先把通往目标的工作拆成若干步骤，再让流程自动运行，这样就不用每次都亲自做。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">1</span></summary><ul><li><strong lang="en">by hand</strong><span>手工，靠人工操作</span></li></ul></details></article>
+<article class="card paragraph" id="p4"><div class="card-top"><span class="chip">② 人人可用</span><div class="card-actions"><span class="folio">04 / 22</span><button class="sound" data-kind="paragraph" data-index="3" aria-label="朗读第4段">🔊</button></div></div><p class="english" lang="en">Grok Bot is automation for everyone<br>Just a year or two ago, automation was limited to those with the technical know-how of how to build or put together machines or write code. With Grok Bot, automating anything that can be done with a computer is now in reach even for people who aren&#x27;t technical or software engineers! And the really surprising thing is just how much computers can do, even on tasks that you might not think a bot is capable of doing. <br>You don’t need to know how to write code to start automating tasks with Grok Bot. You can describe what you want in plain English, then work with your bot to figure out the steps. Bots can write code for you, and use its own computer to do pretty much anything that you can do on your own computer or smartphone. </p><details><summary>中文意思</summary><p class="translation">Grok Bot 让人人都能做自动化<br>一两年前，自动化还只限于懂得制造、组装机器或写代码的人。现在有了 Grok Bot，即使没有技术背景，也能把电脑能做的事自动化，无须当软件工程师！真正令人意外的是电脑能做的事情有这么多，包括一些你原以为 Bot 做不了的任务。<br>用 Grok Bot 开始做任务自动化，无须会写代码。用简单明白的英语描述你想要什么，然后和 Bot 一起梳理步骤。Bot 能替你写代码，也能用它自己的电脑做几乎所有你在电脑或手机上能做的事。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">2</span></summary><ul><li><strong lang="en">technical know-how</strong><span>实际操作所需的专业知识和技能</span></li><li><strong lang="en">in reach</strong><span>触手可及，在可实现的范围内</span></li></ul></details></article>
+<article class="card paragraph" id="p5"><div class="card-top"><span class="chip">② 人人可用</span><div class="card-actions"><span class="folio">05 / 22</span><button class="sound" data-kind="paragraph" data-index="4" aria-label="朗读第5段">🔊</button></div></div><p class="english" lang="en">If you&#x27;re not technical, I want you to suspend your disbelief for a moment. Bots really can do anything that you can do on a computer. It can move its own mouse around and click on things, install or connect to apps and software that you use everyday, browse the internet on its own browser, join meetings and take notes for you, and so much more. <br>And because so much of our work and life these days relies on technology, it means that more and more work can be done by a bot instead, freeing you up to focus on other things.</p><details><summary>中文意思</summary><p class="translation">如果你没有技术背景，我想请你先把怀疑放一放。你在电脑上能做的事，Bot 真的也能做。它可以移动自己的鼠标、点击界面，安装或连接你日常用的应用和软件，用自己的浏览器上网，还能替你参会、记笔记，能做的远不止这些。<br>如今工作和生活中有这么多事依赖技术，意味着越来越多的工作可以交给 Bot，让你腾出时间和精力去做其他事。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">2</span></summary><ul><li><strong lang="en">suspend your disbelief</strong><span>暂时放下怀疑，先接受某个设想</span></li><li><strong lang="en">freeing you up</strong><span>让你腾出时间或精力</span></li></ul></details></article>
+<article class="card paragraph" id="p6"><div class="card-top"><span class="chip">③ 先定目标</span><div class="card-actions"><span class="folio">06 / 22</span><button class="sound" data-kind="paragraph" data-index="5" aria-label="朗读第6段">🔊</button></div></div><p class="english" lang="en">Start with the goal<br>To make this concrete, let&#x27;s build a new bot together that will automate something for you. Go to Grok Bot, then make a new bot and give it any name you like. If you&#x27;re struggling to find a name, just call it Potato and ask it to name itself later.<br>Before we start chatting with the bot: when I think about automation, I always start with thinking about the goal. What are we trying to do here? </p><details><summary>中文意思</summary><p class="translation">先从目标出发<br>我们来实际做一遍：一起建一个新 Bot，让它帮你自动处理一件事。打开 Grok Bot，新建一个 Bot，取个你喜欢的名字。要是想不出名字，就先叫它 Potato，之后再让它给自己起名。<br>跟 Bot 开聊之前，我每次考虑做自动化，都会先想清楚目标。我们到底要做成什么事？</p></details><details class="local-vocab"><summary>本段生词 <span class="count">1</span></summary><ul><li><strong lang="en">make this concrete</strong><span>用实际做法把抽象想法讲明白</span></li></ul></details></article>
+<article class="card paragraph" id="p7"><div class="card-top"><span class="chip">③ 先定目标</span><div class="card-actions"><span class="folio">07 / 22</span><button class="sound" data-kind="paragraph" data-index="6" aria-label="朗读第7段">🔊</button></div></div><p class="english" lang="en">One mistake I often see is that people confuse the process for the goal. For example, you may already have a well-defined process at work for the tasks that you do. But the goal is not to fill up a form, or to send an email. That&#x27;s just a step in the process. <br>Instead, think about the goal at the end: what is this process for, and where does it fit into the business? Does it help increase revenue (eg processing a sale, building new features), or does it reduce costs (eg ordering just the right amount of inventory)? If you&#x27;re not sure, chat with your manager or colleagues, or even ask Bot to help you figure it out!<br>Clarifying what the goal is the best place to start because it focuses you and Grok Bot on the end result. You may actually find that bots can figure out how to make the process more efficient too, so it&#x27;s important not to be too attached to a specific process, since it&#x27;s a means to an end after all.</p><details><summary>中文意思</summary><p class="translation">我常看到一个错误，就是把流程当成目标。比如，你手头的工作可能已经有一套明确的流程。但填一张表或发一封邮件只是流程中的一步。<br>想想最终要达到什么目标：这套流程有什么用？它在整个业务里起什么作用？是为了增加营收，比如处理一笔销售或开发新功能，还是为了降低成本，比如只采购刚好够用的库存？如果不确定，可以跟主管或同事聊聊，甚至请 Bot 帮你想清楚！<br>先明确目标最合适，因为这能让你和 Grok Bot 都盯住最终结果。你也许还会发现，Bot 能想出更高效的做法。流程终究是实现目标的手段，没必要太执着于某一种做法。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">3</span></summary><ul><li><strong lang="en">well-defined</strong><span>界定清楚的，明确的</span></li><li><strong lang="en">fit into</strong><span>在更大的体系中起作用，与其他环节衔接</span></li><li><strong lang="en">means to an end</strong><span>实现某个目标的手段</span></li></ul></details></article>
+<article class="card paragraph" id="p8"><div class="card-top"><span class="chip">③ 先定目标</span><div class="card-actions"><span class="folio">08 / 22</span><button class="sound" data-kind="paragraph" data-index="7" aria-label="朗读第8段">🔊</button></div></div><p class="english" lang="en">Once you&#x27;re figured out the goal, start by describing it to the new bot, then ask it to pick a name for itself if you&#x27;d rather not call it Potato. <br>&quot;Hi Potato, this is the goal I want you to be responsible for: &lt;goal&gt;. Pick out a name and picture for yourself based on it.&quot;</p><details><summary>中文意思</summary><p class="translation">想清楚目标后，先把它讲给新 Bot 听。如果你想换掉 Potato 这个名字，就让它自己起一个。<br>“你好，Potato，我想让你负责这个目标：&lt;目标&gt;。请根据这个目标给自己选一个名字和一张头像。”</p></details><details class="local-vocab"><summary>本段生词 <span class="count">1</span></summary><ul><li><strong lang="en">be responsible for</strong><span>对……负责，负责某项工作</span></li></ul></details></article>
+<article class="card paragraph" id="p9"><div class="card-top"><span class="chip">③ 先定目标</span><div class="card-actions"><span class="folio">09 / 22</span><button class="sound" data-kind="paragraph" data-index="8" aria-label="朗读第9段">🔊</button></div></div><p class="english" lang="en">Here are some starter goal ideas you can tell your bot:<br>Save money towards buying a new car, house, college fund for my kids<br>Schedule new customer bookings for my small business<br>Improve my customer experience for my small business so they leave me good reviews<br>Hire new employee for my small business<br>Gather feedback for my product so I can make improvements to it<br>Prepare slides for a weekly meeting<br>Build new features for my product</p><details><summary>中文意思</summary><p class="translation">下面是几个可以告诉 Bot 的入门目标：<br>攒钱买新车、买房，或者给孩子存大学教育金<br>为我的小生意安排新客户预约<br>改善我的小生意的客户体验，让客户愿意给我好评<br>为我的小生意招一名新员工<br>收集产品反馈，好进一步改进产品<br>准备每周例会的幻灯片<br>为产品开发新功能</p></details><details class="local-vocab"><summary>本段生词 <span class="count">1</span></summary><ul><li><strong lang="en">gather feedback</strong><span>收集反馈意见</span></li></ul></details></article>
+<article class="card paragraph" id="p10"><div class="card-top"><span class="chip">③ 先定目标</span><div class="card-actions"><span class="folio">10 / 22</span><button class="sound" data-kind="paragraph" data-index="9" aria-label="朗读第10段">🔊</button></div></div><p class="english" lang="en">If you&#x27;re not quite sure how to describe your goal, ask Potato to help you! Tell it:<br>&quot;Hi Potato, I&#x27;d like you to be responsible for a goal, but I&#x27;m not sure how to best describe it. Can you ask me some questions and interview me until we have a goal that I&#x27;m happy with?&quot;</p><details><summary>中文意思</summary><p class="translation">如果你还不太确定该怎么描述目标，就请 Potato 帮忙！你可以这样说：<br>“你好，Potato，我想让你负责一个目标，但还没想好怎么描述最合适。你能问我一些问题，跟我聊一聊，直到我们定出一个我满意的目标吗？”</p></details><details class="local-vocab"><summary>本段生词 <span class="count">1</span></summary><ul><li><strong lang="en">happy with</strong><span>对……满意，认可</span></li></ul></details></article>
+<article class="card paragraph" id="p11"><div class="card-top"><span class="chip">④ 流程</span><div class="card-actions"><span class="folio">11 / 22</span><button class="sound" data-kind="paragraph" data-index="10" aria-label="朗读第11段">🔊</button></div></div><p class="english" lang="en">The process<br>Once you&#x27;ve told it your goal, think about how you would achieve this goal if you were doing it, then ask the bot to see where it can make things more efficient. If you&#x27;d rather it do a task exactly following your process, you can tell it that too.</p><details><summary>中文意思</summary><p class="translation">流程<br>把目标告诉 Bot 后，想想如果是你自己做，你会怎么实现它，再让 Bot 看看哪里可以提高效率。要是你更希望它严格按照你的流程做，也可以直接告诉它。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">1</span></summary><ul><li><strong lang="en">you&#x27;d rather</strong><span>你更希望，你宁愿</span></li></ul></details></article>
+<article class="card paragraph" id="p12"><div class="card-top"><span class="chip">④ 流程</span><div class="card-actions"><span class="folio">12 / 22</span><button class="sound" data-kind="paragraph" data-index="11" aria-label="朗读第12段">🔊</button></div></div><p class="english" lang="en">The best way to give bot this information is to use voice dictation in Grok Bot and speak for a while, brain dump everything it needs to know to do the job, and don&#x27;t worry about the stream of consciousness or organizing your thoughts first. Tell it:<br>The steps you usually take<br>The things you watch out for and pay attention to<br>The apps and tools you use to do it<br>How you check that the work was done right<br>Where you get the information you need to do it (eg email, Slack/Teams, a ticket, an app or website)<br>Where you get feedback on how it went (eg customer feedback/review, feedback from colleagues)</p><details><summary>中文意思</summary><p class="translation">最好的办法是在 Grok Bot 里用语音转文字，花点时间，把它完成工作需要知道的事一股脑儿说出来。想到什么就说什么，先不用整理思路。告诉它：<br>你通常怎么一步步做<br>你会留意哪些事项、重点关注什么<br>你用哪些应用和工具<br>你怎么核对工作有没有做对<br>你从哪里拿到所需信息（例如邮件、Slack/Teams、工单、应用或网站）<br>你从哪里了解做得怎么样（例如客户反馈或评价、同事的反馈）</p></details><details class="local-vocab"><summary>本段生词 <span class="count">3</span></summary><ul><li><strong lang="en">voice dictation</strong><span>语音听写，语音转文字</span></li><li><strong lang="en">brain dump</strong><span>把脑子里的信息或想法一股脑儿倒出来</span></li><li><strong lang="en">stream of consciousness</strong><span>跟着思路自然往下说，想到哪儿说到哪儿</span></li></ul></details></article>
+<article class="card paragraph" id="p13"><div class="card-top"><span class="chip">④ 流程</span><div class="card-actions"><span class="folio">13 / 22</span><button class="sound" data-kind="paragraph" data-index="12" aria-label="朗读第13段">🔊</button></div></div><p class="english" lang="en">&quot;Potato, this is how I usually do this goal myself: &lt;process&gt;<br><br>I want you to think about how you can take this over completely from me. Before you begin, restate what you think my goal and process is in simple English so I can give you feedback and confirm it. I don&#x27;t want you to start executing on this yet, let&#x27;s focus on getting the process planned first.&quot;</p><details><summary>中文意思</summary><p class="translation">“Potato，为了实现这个目标，我平时自己是这么做的：&lt;流程&gt;<br><br>请想想你怎么才能把这件事完全接过去。开始之前，请用简单的英语复述一下你理解的目标和流程，好让我给你反馈并确认。先别开始执行，我们先把流程规划好。”</p></details><details class="local-vocab"><summary>本段生词 <span class="count">2</span></summary><ul><li><strong lang="en">take this over</strong><span>把这件事接过来，接手</span></li><li><strong lang="en">restate</strong><span>复述，换一种说法说清楚</span></li></ul></details></article>
+<article class="card paragraph" id="p14"><div class="card-top"><span class="chip">④ 流程</span><div class="card-actions"><span class="folio">14 / 22</span><button class="sound" data-kind="paragraph" data-index="13" aria-label="朗读第14段">🔊</button></div></div><p class="english" lang="en">Don&#x27;t worry about getting it right on the first pass. Review what the bot says and then correct it by giving it more information. Once you&#x27;ve done this a few times, you should have something you&#x27;re happy with. You can then tell bot to proceed, and to start connecting to the apps and tools it needs to do the job correctly.<br>If you&#x27;re feeling ambitious, you can even ask it to review the process against the goal and see if it can think of a better or more efficient way to do it.<br>&quot;Review our process against my original goal, and if you see a way to make it better or more efficient, let me know.&quot;</p><details><summary>中文意思</summary><p class="translation">第一轮没弄对也不用担心。看看 Bot 怎么说，再补充信息来纠正它。这样来回几次，应该就能得到你满意的方案。然后你就可以让 Bot 继续，让它开始连接做好这件事所需的应用和工具。<br>想再进一步的话，还可以让它对照目标检查流程，看看能不能想出更好或更高效的做法。<br>“请对照我最初的目标检查一下我们的流程。如果你发现有更好或更高效的做法，请告诉我。”</p></details><details class="local-vocab"><summary>本段生词 <span class="count">2</span></summary><ul><li><strong lang="en">on the first pass</strong><span>在第一遍处理时，第一轮就</span></li><li><strong lang="en">review the process against</strong><span>对照某个标准或目标检查流程</span></li></ul></details></article>
+<article class="card paragraph" id="p15"><div class="card-top"><span class="chip">⑤ 教它你的判断</span><div class="card-actions"><span class="folio">15 / 22</span><button class="sound" data-kind="paragraph" data-index="14" aria-label="朗读第15段">🔊</button></div></div><p class="english" lang="en">Teach your bot how you think<br>One thing that&#x27;s easy to forget when explaining a process is how much you do without really thinking about it. If you&#x27;re booking customers, you probably know which services take longer, who can do each job, and when to leave extra time between appointments. These decisions might feel obvious to you, but your bot needs that context too. Think about what you&#x27;re paying attention to when you do the task yourself, and what makes you do something differently.</p><details><summary>中文意思</summary><p class="translation">把你的判断方法教给 Bot<br>讲解流程时，很容易漏掉那些你几乎不用想就会做的事。比如安排客户预约时，你大概知道哪些服务耗时更长、每项工作该派给谁，以及什么时候要在两场预约之间多留一点时间。你可能觉得这些判断理所当然，但 Bot 也需要了解背后的情况。想一想，你自己做这件事时会留意什么，什么情况会让你换一种做法。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">1</span></summary><ul><li><strong lang="en">leave extra time</strong><span>额外多留一些时间</span></li></ul></details></article>
+<article class="card paragraph" id="p16"><div class="card-top"><span class="chip">⑤ 教它你的判断</span><div class="card-actions"><span class="folio">16 / 22</span><button class="sound" data-kind="paragraph" data-index="15" aria-label="朗读第16段">🔊</button></div></div><p class="english" lang="en">Tell it where you get that information and how you check that the work is done right. For example, if an email and your booking system show different appointment times, which should it trust? A booking also isn&#x27;t finished just because an email was sent. The appointment needs to be saved correctly and the customer needs a confirmation. If you&#x27;re still waiting for details, have the bot keep track of that so it can pick things back up later without accidentally creating another booking.</p><details><summary>中文意思</summary><p class="translation">告诉它这些信息从哪里来，以及你怎么确认工作做对了。比如，邮件和预约系统上的时间不一致，它应该以哪个为准？发出一封邮件也不等于预约办妥。预约得正确录入，客户也得收到确认。如果还有信息没拿到，就让 Bot 记下来，之后能接着办，避免不小心重复创建预约。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">2</span></summary><ul><li><strong lang="en">keep track of</strong><span>持续记录、跟进</span></li><li><strong lang="en">pick things back up</strong><span>把暂停的事接着做</span></li></ul></details></article>
+<article class="card paragraph" id="p17"><div class="card-top"><span class="chip">⑤ 教它你的判断</span><div class="card-actions"><span class="folio">17 / 22</span><button class="sound" data-kind="paragraph" data-index="16" aria-label="朗读第17段">🔊</button></div></div><p class="english" lang="en">Don&#x27;t worry about explaining every possible situation upfront. Start with a few real examples, including ones where something went wrong or you had to do something differently. Ask the bot how it would handle them, then give it feedback. You can also ask it to help you figure out what you&#x27;ve forgotten to explain!<br>“Potato, help me figure out what I haven&#x27;t told you about this process yet. Ask me questions about how I make decisions, where I get my information, how I check the work, and when you should ask me for help. Ask one question at a time, then walk me through a few examples so I can give you feedback before we automate this.”</p><details><summary>中文意思</summary><p class="translation">不用一开始就把所有可能的情况都讲完。先挑几个真实例子，包括出过问题的，或你不得不改变做法的。问问 Bot 会怎么处理，再给它反馈。你还可以让它帮你找出自己漏讲了什么！<br>“Potato，帮我找找这个流程里还有什么我没告诉你。请问我怎么做判断、从哪里获取信息、怎么检查工作，以及你什么时候该来找我帮忙。一次问一个问题，然后带我过几个例子，好让我在把这件事自动化之前给你反馈。”</p></details><details class="local-vocab"><summary>本段生词 <span class="count">1</span></summary><ul><li><strong lang="en">upfront</strong><span>一开始，事先</span></li></ul></details></article>
+<article class="card paragraph" id="p18"><div class="card-top"><span class="chip">⑥ 自我改进</span><div class="card-actions"><span class="folio">18 / 22</span><button class="sound" data-kind="paragraph" data-index="17" aria-label="朗读第18段">🔊</button></div></div><p class="english" lang="en">Let your bots improve themselves<br>Once your bot is performing the workflow, it&#x27;s important to give it feedback so it can improve. The best way to do it is to equip your bot with the apps and tools it needs to get that feedback for itself. The way I approach this is to think about what I would do if it was me doing the task and I wanted to self improve.<br>For example, if your bot is managing new customer bookings for you, a way to let it improve itself is by letting it monitor your emails, social media, or Google/Yelp reviews for customer feedback. It can look out for that feedback and then take the initiative to propose improvements to your process. <br>Maybe a customer says on Yelp that they had to wait very long before someone could attend to them. If your bot can look up this information on Yelp for itself, and also look up any records you have for the customer that day, it could see what might have gone wrong. </p><details><summary>中文意思</summary><p class="translation">让 Bot 自己改进<br>Bot 开始执行流程之后，给它反馈很重要，这样它才能改进。最好的做法是让 Bot 用上所需的应用和工具，自己去获取反馈。我的思路是想一想：如果这件事是我在做，而我想提高自己的表现，我会怎么做？<br>例如，Bot 如果在帮你管理新的客户预约，你可以让它查看邮件、社交媒体或 Google/Yelp 上的评价，从中收集客户反馈。它可以自己留意这些反馈，再主动提出流程改进建议。<br>比如有客户在 Yelp 上说，等了很久才有人接待。要是 Bot 能自己在 Yelp 上查到这条评价，还能查到这位客户当天的相关记录，就可能看出问题出在哪儿。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">2</span></summary><ul><li><strong lang="en">take the initiative</strong><span>主动采取行动</span></li><li><strong lang="en">attend to</strong><span>接待，处理，照料</span></li></ul></details></article>
+<article class="card paragraph" id="p19"><div class="card-top"><span class="chip">⑥ 自我改进</span><div class="card-actions"><span class="folio">19 / 22</span><button class="sound" data-kind="paragraph" data-index="18" aria-label="朗读第19段">🔊</button></div></div><p class="english" lang="en">In that sense, the more computerized your business is, the better for bots and automation. The availability of that data is what gives your bot the ability to come up with better improvements. And the best part is that Grok Bot can build tools for you to get this data! For example, if you&#x27;re operating a car repair service, you could ask bot to build you an app that you can use on your computer and phone to log details about a customer visit. <br>If you log the time of: <br>when they got to your shop<br>when they were able to speak to a service rep<br>when you took possession of their keys<br>when service started and finished<br>You could work out how long they spent waiting and better diagnose why. This is just a simple example, but the key lesson here is that the more data you have available to Grok Bot, the better it can help you and your business and work. </p><details><summary>中文意思</summary><p class="translation">从这个角度看，业务数字化程度越高，就越有利于使用 Bot 和做自动化。有了这些数据，Bot 才能提出更好的改进建议。更棒的是，Grok Bot 还能帮你开发工具来获取数据！比如你开了一家汽车维修店，可以让 Bot 做一个电脑和手机上都能用的应用，记录客户到店服务的细节。<br>如果你记录下这些时间：<br>客户几点到店<br>客户几点和服务顾问对接上<br>你几点接过客户的车钥匙<br>维修几点开始、几点完成<br>你就能算出客户等了多久，也更容易找出等待的原因。这只是个简单的例子。要点是，Grok Bot 能用的数据越多，就越能帮到你本人、你的业务和日常工作。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">1</span></summary><ul><li><strong lang="en">took possession of</strong><span>接收，实际接管</span></li></ul></details></article>
+<article class="card paragraph" id="p20"><div class="card-top"><span class="chip">⑥ 自我改进</span><div class="card-actions"><span class="folio">20 / 22</span><button class="sound" data-kind="paragraph" data-index="19" aria-label="朗读第20段">🔊</button></div></div><p class="english" lang="en">Bots can also cross reference data across multiple sources if you have something like an ID - some kind of number or unique text like an email address that gives that data an identity. This could be a customer ID or email address, an order number, a part number, a barcode, an employee ID, and so on. If you use multiple apps and services, having unique and consistent IDs across all these tools will help you bring that data together so bot can fully understand what&#x27;s going on. </p><details><summary>中文意思</summary><p class="translation">如果数据有 ID 之类的标识，Bot 还能把多个来源的数据交叉比对。这类标识可以是一串编号，也可以是邮箱地址之类的唯一文本，用来识别对应记录。客户编号或邮箱地址、订单号、零件号、条形码、员工编号，都可以充当这个标识。如果你用了多个应用或服务，在各个工具里使用唯一且统一的 ID，就更容易把数据汇总起来，让 Bot 看清全貌。</p></details><details class="local-vocab"><summary>本段生词 <span class="count">1</span></summary><ul><li><strong lang="en">cross reference</strong><span>交叉比对，相互核验</span></li></ul></details></article>
+<article class="card paragraph" id="p21"><div class="card-top"><span class="chip">⑦ 自动触发</span><div class="card-actions"><span class="folio">21 / 22</span><button class="sound" data-kind="paragraph" data-index="20" aria-label="朗读第21段">🔊</button></div></div><p class="english" lang="en">Making bots do work automatically<br>The next thing is, when should the bot do the work?  Should it start when an email arrives, when someone sends a message, or on a regular schedule? In Grok Bot, you set this up with routines.<br>Without a routine, bots will only do the work when you ask them to. This is fine when you&#x27;re first starting out with using bot, but if you want to streamline things, you&#x27;ll want to figure out how to get the bot to do it automatically, so you&#x27;re no longer the bottleneck.<br>Usually, the work happens with some kind of trigger like an email or Slack/Teams message. Or maybe it happens on a regular schedule, like once a week or every other day. Either way, if you ask your bot to set it up, it will! </p><details><summary>中文意思</summary><p class="translation">让 Bot 自动做事<br>接下来要想的是，Bot 该什么时候开始干活？收到邮件时、有人发消息时，还是按固定时间表？在 Grok Bot 里，你可以用 routine（例行任务）来设置。<br>如果没设 routine，Bot 只会在你开口时干活。刚开始用 Bot，这样就够了。如果你想让流程更顺畅，就得想想怎么让 Bot 自动执行，这样工作就不会卡在你这里。<br>通常，工作会由某个事件触发，比如收到一封邮件或一条 Slack/Teams 消息。也可以按固定时间表执行，比如每周一次或隔天一次。两种方式，你都可以让 Bot 帮你设好！</p></details><details class="local-vocab"><summary>本段生词 <span class="count">3</span></summary><ul><li><strong lang="en">streamline</strong><span>精简流程，提高效率</span></li><li><strong lang="en">bottleneck</strong><span>瓶颈，拖慢整个流程的环节</span></li><li><strong lang="en">trigger</strong><span>触发条件，启动流程的事件</span></li></ul></details></article>
+<article class="card paragraph" id="p22"><div class="card-top"><span class="chip">⑧ Dr Eggbot</span><div class="card-actions"><span class="folio">22 / 22</span><button class="sound" data-kind="paragraph" data-index="21" aria-label="朗读第22段">🔊</button></div></div><p class="english" lang="en">Install Dr Eggbot<br>I taught everything I know about automating work to Dr Eggbot, so if you want to start automating your work more, install it and ask it to help you! Dr Eggbot is a bot designer - it will create high quality bots for you.<br><br>Thanks for reading!</p><details><summary>中文意思</summary><p class="translation">安装 Dr Eggbot<br>我把自己知道的工作自动化方法都教给了 Dr Eggbot。如果你也想把更多工作自动化，可以安装它，请它帮忙！Dr Eggbot 是个 Bot 设计师，会帮你创建高质量的 Bot。<br><br>感谢阅读！</p></details><details class="local-vocab"><summary>本段生词 <span class="count">1</span></summary><ul><li><strong lang="en">everything I know about</strong><span>我对……所知道的一切</span></li></ul></details></article></div></section>
+<section aria-labelledby="vocab-title"><div class="section-heading"><h2 id="vocab-title"><small>03</small>生词和词组</h2><span class="section-note">36 组 · 放进工作里</span></div><div class="vocab-grid"><article class="card vocab-card"><div class="card-top"><h3 lang="en">get right</h3><button class="sound" data-kind="vocab" data-index="0" aria-label="朗读词组及原句：get right">🔊</button></div><p class="meaning">把……做对、做准确</p><div class="example"><span class="micro-label">原句</span><p lang="en">hard to <mark>get right</mark></p></div><details><summary>工作例句</summary><p class="work-example">The handover between shifts is hard to get right when the line is running overtime.（产线加班时，班次之间的交接很容易出差错。）</p></details><a class="jump" href="#p1">↑ 第1段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">take on</h3><button class="sound" data-kind="vocab" data-index="1" aria-label="朗读词组及原句：take on">🔊</button></div><p class="meaning">承担，着手应对（任务或挑战）</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>take on</mark> more ambitious goals</p></div><details><summary>工作例句</summary><p class="work-example">Can our Rayong plant take on one more export order this month?（我们罗勇的工厂这个月还能再接一笔出口订单吗？）</p></details><a class="jump" href="#p1">↑ 第1段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">breaking things down</h3><button class="sound" data-kind="vocab" data-index="2" aria-label="朗读词组及原句：breaking things down">🔊</button></div><p class="meaning">把事情分解成更小的部分</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>breaking things down</mark> into small steps</p></div><details><summary>工作例句</summary><p class="work-example">Break the line changeover down into steps that a new operator can follow.（把产线换型拆成新操作员也能照着做的步骤。）</p></details><a class="jump" href="#p2">↑ 第2段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">laid out</h3><button class="sound" data-kind="vocab" data-index="3" aria-label="朗读词组及原句：laid out">🔊</button></div><p class="meaning">列明，清楚地安排好</p><div class="example"><span class="micro-label">原句</span><p lang="en">clearly <mark>laid out</mark> steps</p></div><details><summary>工作例句</summary><p class="work-example">The inspection criteria are laid out in the control plan.（检验标准在控制计划里列得很清楚。）</p></details><a class="jump" href="#p2">↑ 第2段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">by hand</h3><button class="sound" data-kind="vocab" data-index="4" aria-label="朗读词组及原句：by hand">🔊</button></div><p class="meaning">手工，靠人工操作</p><div class="example"><span class="micro-label">原句</span><p lang="en">write <mark>by hand</mark> to automate stuff</p></div><details><summary>工作例句</summary><p class="work-example">We still enter the actual shipment weight by hand.（我们仍然靠人工录入实际发货重量。）</p></details><a class="jump" href="#p3">↑ 第3段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">technical know-how</h3><button class="sound" data-kind="vocab" data-index="5" aria-label="朗读词组及原句：technical know-how">🔊</button></div><p class="meaning">实际操作所需的专业知识和技能</p><div class="example"><span class="micro-label">原句</span><p lang="en">with the <mark>technical know-how</mark></p></div><details><summary>工作例句</summary><p class="work-example">We need someone with the technical know-how to set up the new molding machine.（我们需要一位懂得如何调试新注塑机的人。）</p></details><a class="jump" href="#p4">↑ 第4段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">in reach</h3><button class="sound" data-kind="vocab" data-index="6" aria-label="朗读词组及原句：in reach">🔊</button></div><p class="meaning">触手可及，在可实现的范围内</p><div class="example"><span class="micro-label">原句</span><p lang="en">is now <mark>in reach</mark> even for people</p></div><details><summary>工作例句</summary><p class="work-example">With the new fixture, a shorter changeover time is finally in reach.（有了新夹具，终于有望缩短换型时间了。）</p></details><a class="jump" href="#p4">↑ 第4段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">suspend your disbelief</h3><button class="sound" data-kind="vocab" data-index="7" aria-label="朗读词组及原句：suspend your disbelief">🔊</button></div><p class="meaning">暂时放下怀疑，先接受某个设想</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>suspend your disbelief</mark> for a moment</p></div><details><summary>工作例句</summary><p class="work-example">Suspend your disbelief for a moment and imagine clearing every shipment with one shared checklist.（先把怀疑放一放，想象一下每票货都能用同一份共享清单办理清关。）</p></details><a class="jump" href="#p5">↑ 第5段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">freeing you up</h3><button class="sound" data-kind="vocab" data-index="8" aria-label="朗读词组及原句：freeing you up">🔊</button></div><p class="meaning">让你腾出时间或精力</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>freeing you up</mark> to focus on other things</p></div><details><summary>工作例句</summary><p class="work-example">The warehouse team can handle the stock count, freeing you up to review purchase orders.（仓库团队可以负责盘点，让你腾出时间审核采购订单。）</p></details><a class="jump" href="#p5">↑ 第5段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">make this concrete</h3><button class="sound" data-kind="vocab" data-index="9" aria-label="朗读词组及原句：make this concrete">🔊</button></div><p class="meaning">用实际做法把抽象想法讲明白</p><div class="example"><span class="micro-label">原句</span><p lang="en">To <mark>make this concrete</mark></p></div><details><summary>工作例句</summary><p class="work-example">To make this concrete, let&#x27;s walk through yesterday&#x27;s late shipment.（我们拿昨天那票延迟发运的货走一遍，把这个办法讲清楚。）</p></details><a class="jump" href="#p6">↑ 第6段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">well-defined</h3><button class="sound" data-kind="vocab" data-index="10" aria-label="朗读词组及原句：well-defined">🔊</button></div><p class="meaning">界定清楚的，明确的</p><div class="example"><span class="micro-label">原句</span><p lang="en">a <mark>well-defined</mark> process at work</p></div><details><summary>工作例句</summary><p class="work-example">We need a well-defined process for approving urgent purchases.（我们需要一套明确的紧急采购审批流程。）</p></details><a class="jump" href="#p7">↑ 第7段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">fit into</h3><button class="sound" data-kind="vocab" data-index="11" aria-label="朗读词组及原句：fit into">🔊</button></div><p class="meaning">在更大的体系中起作用，与其他环节衔接</p><div class="example"><span class="micro-label">原句</span><p lang="en">where does it <mark>fit into</mark> the business?</p></div><details><summary>工作例句</summary><p class="work-example">How does incoming inspection fit into the overall purchasing workflow?（来料检验在整个采购流程中起什么作用？）</p></details><a class="jump" href="#p7">↑ 第7段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">means to an end</h3><button class="sound" data-kind="vocab" data-index="12" aria-label="朗读词组及原句：means to an end">🔊</button></div><p class="meaning">实现某个目标的手段</p><div class="example"><span class="micro-label">原句</span><p lang="en">it&#x27;s a <mark>means to an end</mark> after all</p></div><details><summary>工作例句</summary><p class="work-example">The daily stock report is a means to an end: preventing material shortages.（每日库存报告是手段，目的是防止缺料。）</p></details><a class="jump" href="#p7">↑ 第7段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">be responsible for</h3><button class="sound" data-kind="vocab" data-index="13" aria-label="朗读词组及原句：be responsible for">🔊</button></div><p class="meaning">对……负责，负责某项工作</p><div class="example"><span class="micro-label">原句</span><p lang="en">I want you to <mark>be responsible for</mark></p></div><details><summary>工作例句</summary><p class="work-example">Who will be responsible for checking the packing list before customs clearance?（清关前由谁负责核对装箱单？）</p></details><a class="jump" href="#p8">↑ 第8段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">gather feedback</h3><button class="sound" data-kind="vocab" data-index="14" aria-label="朗读词组及原句：gather feedback">🔊</button></div><p class="meaning">收集反馈意见</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>Gather feedback</mark> for my product</p></div><details><summary>工作例句</summary><p class="work-example">HR will gather feedback from new operators after their first week.（新操作员入职一周后，人事会收集他们的反馈。）</p></details><a class="jump" href="#p9">↑ 第9段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">happy with</h3><button class="sound" data-kind="vocab" data-index="15" aria-label="朗读词组及原句：happy with">🔊</button></div><p class="meaning">对……满意，认可</p><div class="example"><span class="micro-label">原句</span><p lang="en">a goal that I&#x27;m <mark>happy with</mark></p></div><details><summary>工作例句</summary><p class="work-example">Let me know if you are happy with the supplier’s revised lead time.（如果你认可供应商修改后的交期，请告诉我。）</p></details><a class="jump" href="#p10">↑ 第10段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">you&#x27;d rather</h3><button class="sound" data-kind="vocab" data-index="16" aria-label="朗读词组及原句：you&#x27;d rather">🔊</button></div><p class="meaning">你更希望，你宁愿</p><div class="example"><span class="micro-label">原句</span><p lang="en">If <mark>you&#x27;d rather</mark> it do a task</p></div><details><summary>工作例句</summary><p class="work-example">If you’d rather we ship by sea, we can ask the forwarder for a revised quote.（如果你更希望我们走海运，可以请货代重新报价。）</p></details><a class="jump" href="#p11">↑ 第11段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">voice dictation</h3><button class="sound" data-kind="vocab" data-index="17" aria-label="朗读词组及原句：voice dictation">🔊</button></div><p class="meaning">语音听写，语音转文字</p><div class="example"><span class="micro-label">原句</span><p lang="en">use <mark>voice dictation</mark> in Grok Bot</p></div><details><summary>工作例句</summary><p class="work-example">During the line walk, I use voice dictation to capture issues for the shift report.（巡线时，我用语音转文字记录问题，回头写进班次报告。）</p></details><a class="jump" href="#p12">↑ 第12段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">brain dump</h3><button class="sound" data-kind="vocab" data-index="18" aria-label="朗读词组及原句：brain dump">🔊</button></div><p class="meaning">把脑子里的信息或想法一股脑儿倒出来</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>brain dump</mark> everything it needs to know</p></div><details><summary>工作例句</summary><p class="work-example">Let me brain dump what I know about the delayed shipment before we write the timeline.（写时间线之前，我先把知道的延迟发运情况一股脑儿说出来。）</p></details><a class="jump" href="#p12">↑ 第12段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">stream of consciousness</h3><button class="sound" data-kind="vocab" data-index="19" aria-label="朗读词组及原句：stream of consciousness">🔊</button></div><p class="meaning">跟着思路自然往下说，想到哪儿说到哪儿</p><div class="example"><span class="micro-label">原句</span><p lang="en">don&#x27;t worry about the <mark>stream of consciousness</mark></p></div><details><summary>工作例句</summary><p class="work-example">My first audit notes were a stream of consciousness, so I grouped them by production area afterward.（审核时我先想到哪儿记到哪儿，之后再按生产区域整理。）</p></details><a class="jump" href="#p12">↑ 第12段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">take this over</h3><button class="sound" data-kind="vocab" data-index="20" aria-label="朗读词组及原句：take this over">🔊</button></div><p class="meaning">把这件事接过来，接手</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>take this over</mark> completely from me</p></div><details><summary>工作例句</summary><p class="work-example">Could you take this over while I meet with the customs broker?（我跟报关代理开会时，你能接手这件事吗？）</p></details><a class="jump" href="#p13">↑ 第13段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">restate</h3><button class="sound" data-kind="vocab" data-index="21" aria-label="朗读词组及原句：restate">🔊</button></div><p class="meaning">复述，换一种说法说清楚</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>restate</mark> what you think my goal and process is</p></div><details><summary>工作例句</summary><p class="work-example">Before we issue the purchase order, please restate the agreed delivery terms in your own words.（下采购订单之前，请用你自己的话复述双方谈妥的交货条款。）</p></details><a class="jump" href="#p13">↑ 第13段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">on the first pass</h3><button class="sound" data-kind="vocab" data-index="22" aria-label="朗读词组及原句：on the first pass">🔊</button></div><p class="meaning">在第一遍处理时，第一轮就</p><div class="example"><span class="micro-label">原句</span><p lang="en">getting it right <mark>on the first pass</mark></p></div><details><summary>工作例句</summary><p class="work-example">We caught three mismatched item codes on the first pass.（第一轮核对就发现了三个对不上的物料编码。）</p></details><a class="jump" href="#p14">↑ 第14段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">review the process against</h3><button class="sound" data-kind="vocab" data-index="23" aria-label="朗读词组及原句：review the process against">🔊</button></div><p class="meaning">对照某个标准或目标检查流程</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>review the process against</mark> the goal</p></div><details><summary>工作例句</summary><p class="work-example">Review the process against our dispatch checklist before the next container is loaded.（下一个集装箱装货前，按出货检查表核对一遍流程。）</p></details><a class="jump" href="#p14">↑ 第14段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">leave extra time</h3><button class="sound" data-kind="vocab" data-index="24" aria-label="朗读词组及原句：leave extra time">🔊</button></div><p class="meaning">额外多留一些时间</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>leave extra time</mark> between appointments</p></div><details><summary>工作例句</summary><p class="work-example">Leave extra time between batches for cleaning and inspection.（两批生产之间多留一点时间做清洁和检查。）</p></details><a class="jump" href="#p15">↑ 第15段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">keep track of</h3><button class="sound" data-kind="vocab" data-index="25" aria-label="朗读词组及原句：keep track of">🔊</button></div><p class="meaning">持续记录、跟进</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>keep track of</mark> that</p></div><details><summary>工作例句</summary><p class="work-example">Keep track of missing documents for each BOI shipment.（逐票记录并跟进 BOI 货物缺少的单证。）</p></details><a class="jump" href="#p16">↑ 第16段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">pick things back up</h3><button class="sound" data-kind="vocab" data-index="26" aria-label="朗读词组及原句：pick things back up">🔊</button></div><p class="meaning">把暂停的事接着做</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>pick things back up</mark> later</p></div><details><summary>工作例句</summary><p class="work-example">We can pick things back up once the supplier sends the corrected invoice.（等供应商发来改好的发票，我们就能接着处理。）</p></details><a class="jump" href="#p16">↑ 第16段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">upfront</h3><button class="sound" data-kind="vocab" data-index="27" aria-label="朗读词组及原句：upfront">🔊</button></div><p class="meaning">一开始，事先</p><div class="example"><span class="micro-label">原句</span><p lang="en">explaining every possible situation <mark>upfront</mark></p></div><details><summary>工作例句</summary><p class="work-example">Let the forwarder know upfront which documents we need before pickup.（提前告诉货代，提货前我们需要哪些单证。）</p></details><a class="jump" href="#p17">↑ 第17段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">take the initiative</h3><button class="sound" data-kind="vocab" data-index="28" aria-label="朗读词组及原句：take the initiative">🔊</button></div><p class="meaning">主动采取行动</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>take the initiative</mark> to propose improvements</p></div><details><summary>工作例句</summary><p class="work-example">Please take the initiative to flag any delivery risk before we run out of stock.（请在库存用完前主动报告任何交货风险。）</p></details><a class="jump" href="#p18">↑ 第18段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">attend to</h3><button class="sound" data-kind="vocab" data-index="29" aria-label="朗读词组及原句：attend to">🔊</button></div><p class="meaning">接待，处理，照料</p><div class="example"><span class="micro-label">原句</span><p lang="en">someone could <mark>attend to</mark> them</p></div><details><summary>工作例句</summary><p class="work-example">A technician will attend to the machine fault before the next shift starts.（下个班次开始前，会有技术员来处理设备故障。）</p></details><a class="jump" href="#p18">↑ 第18段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">took possession of</h3><button class="sound" data-kind="vocab" data-index="30" aria-label="朗读词组及原句：took possession of">🔊</button></div><p class="meaning">接收，实际接管</p><div class="example"><span class="micro-label">原句</span><p lang="en">when you <mark>took possession of</mark> their keys</p></div><details><summary>工作例句</summary><p class="work-example">The warehouse took possession of the shipment after checking the seal.（仓库检查封条后接收了这批货。）</p></details><a class="jump" href="#p19">↑ 第19段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">cross reference</h3><button class="sound" data-kind="vocab" data-index="31" aria-label="朗读词组及原句：cross reference">🔊</button></div><p class="meaning">交叉比对，相互核验</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>cross reference</mark> data across multiple sources</p></div><details><summary>工作例句</summary><p class="work-example">Cross-reference the invoice with the packing list before sending the documents to our customs broker.（把单证发给报关代理前，先交叉核对发票和装箱单。）</p></details><a class="jump" href="#p20">↑ 第20段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">streamline</h3><button class="sound" data-kind="vocab" data-index="32" aria-label="朗读词组及原句：streamline">🔊</button></div><p class="meaning">精简流程，提高效率</p><div class="example"><span class="micro-label">原句</span><p lang="en">if you want to <mark>streamline</mark> things</p></div><details><summary>工作例句</summary><p class="work-example">We can streamline purchase approvals by using one request form across all departments.（各部门统一用一张申请表，就能简化采购审批。）</p></details><a class="jump" href="#p21">↑ 第21段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">bottleneck</h3><button class="sound" data-kind="vocab" data-index="33" aria-label="朗读词组及原句：bottleneck">🔊</button></div><p class="meaning">瓶颈，拖慢整个流程的环节</p><div class="example"><span class="micro-label">原句</span><p lang="en">you&#x27;re no longer the <mark>bottleneck</mark></p></div><details><summary>工作例句</summary><p class="work-example">Final inspection is the bottleneck when both lines finish at the same time.（两条线同时完工时，终检就成了瓶颈。）</p></details><a class="jump" href="#p21">↑ 第21段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">trigger</h3><button class="sound" data-kind="vocab" data-index="34" aria-label="朗读词组及原句：trigger">🔊</button></div><p class="meaning">触发条件，启动流程的事件</p><div class="example"><span class="micro-label">原句</span><p lang="en">some kind of <mark>trigger</mark> like an email</p></div><details><summary>工作例句</summary><p class="work-example">A missed delivery date is the trigger for a purchasing alert.（超过交货日期就会触发采购提醒。）</p></details><a class="jump" href="#p21">↑ 第21段</a></article>
+<article class="card vocab-card"><div class="card-top"><h3 lang="en">everything I know about</h3><button class="sound" data-kind="vocab" data-index="35" aria-label="朗读词组及原句：everything I know about">🔊</button></div><p class="meaning">我对……所知道的一切</p><div class="example"><span class="micro-label">原句</span><p lang="en"><mark>everything I know about</mark> automating work</p></div><details><summary>工作例句</summary><p class="work-example">I shared everything I know about the supplier’s quality issues with the new purchasing manager.（我把自己知道的供应商质量问题都告诉了新任采购经理。）</p></details><a class="jump" href="#p22">↑ 第22段</a></article></div></section>
+<section aria-labelledby="hard-title"><div class="section-heading"><h2 id="hard-title"><small>04</small>疑难句</h2><span class="section-note">9 句 · 拆开就明白</span></div><div class="hard-list"><article class="card hard-card"><div class="card-top"><span class="chip">句子 01</span><button class="sound" data-kind="hard" data-index="0" aria-label="朗读疑难句1">🔊</button></div><p class="hard-en" lang="en">It&#x27;s about thinking systematically and logically, breaking things down into small steps while keeping a goal in mind.</p><details><summary>句子拆解与中文意思</summary><ol><li>It&#x27;s about thinking systematically and logically —— be about 后接动名词，说明自动化需要有条理、有逻辑地思考</li><li>breaking things down into small steps —— break A down into B 表示把 A 拆成若干个 B</li><li>while keeping a goal in mind —— while + 动词 -ing 表示同时发生，拆步骤时始终记住目标</li></ol><p class="translation">你需要有条理、有逻辑地思考，心里始终有个目标，同时把事情拆成一个个小步骤。</p></details><a class="jump" href="#p2">↑ 第2段</a></article>
+<article class="card hard-card"><div class="card-top"><span class="chip">句子 02</span><button class="sound" data-kind="hard" data-index="1" aria-label="朗读疑难句2">🔊</button></div><p class="hard-en" lang="en">With Grok Bot, automating anything that can be done with a computer is now in reach even for people who aren&#x27;t technical or software engineers!</p><details><summary>句子拆解与中文意思</summary><ol><li>With Grok Bot —— 句首介词短语说明有了什么条件</li><li>automating anything that can be done with a computer —— 整个动名词短语作主语，that 从句修饰 anything，说明事情可以用电脑完成</li><li>is now in reach even for people —— 主干谓语是 is，in reach 表示现在做得到了，even 强调覆盖的人群</li><li>who aren&#x27;t technical or software engineers —— who 从句修饰 people，泛指没有技术背景的人</li></ol><p class="translation">现在有了 Grok Bot，哪怕没有技术背景，也能把电脑能做的事自动化！</p></details><a class="jump" href="#p4">↑ 第4段</a></article>
+<article class="card hard-card"><div class="card-top"><span class="chip">句子 03</span><button class="sound" data-kind="hard" data-index="2" aria-label="朗读疑难句3">🔊</button></div><p class="hard-en" lang="en">And because so much of our work and life these days relies on technology, it means that more and more work can be done by a bot instead, freeing you up to focus on other things.</p><details><summary>句子拆解与中文意思</summary><ol><li>because so much of our work and life these days relies on technology —— because 引出原因，如今工作和生活中有很多事依赖技术</li><li>it means that more and more work can be done by a bot instead —— that 引出 means 的宾语从句，can be done 是带情态动词的被动结构</li><li>freeing you up to focus on other things —— 现在分词短语表示结果，让你腾出时间和精力去做别的事</li></ol><p class="translation">如今工作和生活中有这么多事依赖技术，意味着越来越多的工作可以交给 Bot，让你腾出精力去做其他事。</p></details><a class="jump" href="#p5">↑ 第5段</a></article>
+<article class="card hard-card"><div class="card-top"><span class="chip">句子 04</span><button class="sound" data-kind="hard" data-index="3" aria-label="朗读疑难句4">🔊</button></div><p class="hard-en" lang="en">You may actually find that bots can figure out how to make the process more efficient too, so it&#x27;s important not to be too attached to a specific process, since it&#x27;s a means to an end after all.</p><details><summary>句子拆解与中文意思</summary><ol><li>find that bots can figure out how to make the process more efficient —— that 从句作 find 的宾语，how to make … 作 figure out 的宾语</li><li>make the process more efficient —— make + 宾语 + 形容词，表示使流程变得更高效</li><li>so it&#x27;s important not to be too attached to a specific process —— so 引出结论，it 是形式主语，not to be … 是真正的主语</li><li>since it&#x27;s a means to an end after all —— since 表原因，after all 有“毕竟、终究”的语气</li></ol><p class="translation">你也许还会发现，Bot 能想出更高效的做法，所以没必要太执着于某一种流程，毕竟流程只是实现目标的手段。</p></details><a class="jump" href="#p7">↑ 第7段</a></article>
+<article class="card hard-card"><div class="card-top"><span class="chip">句子 05</span><button class="sound" data-kind="hard" data-index="4" aria-label="朗读疑难句5">🔊</button></div><p class="hard-en" lang="en">If you&#x27;d rather it do a task exactly following your process, you can tell it that too.</p><details><summary>句子拆解与中文意思</summary><ol><li>If you&#x27;d rather it do a task —— if 引出条件。would rather 后可接从句，it 是从句主语，指 Bot。原文用原形 do，有些场合也会用过去式 did 表达偏好</li><li>exactly following your process —— following 短语说明怎么做，exactly 强调照流程一步不差地做</li><li>you can tell it that too —— tell + 人或对象 + 内容。it 指 Bot，that 指前面说的偏好</li></ol><p class="translation">如果你更希望 Bot 严格照你的流程办事，也可以直接告诉它。</p></details><a class="jump" href="#p11">↑ 第11段</a></article>
+<article class="card hard-card"><div class="card-top"><span class="chip">句子 06</span><button class="sound" data-kind="hard" data-index="5" aria-label="朗读疑难句6">🔊</button></div><p class="hard-en" lang="en">Before you begin, restate what you think my goal and process is in simple English so I can give you feedback and confirm it.</p><details><summary>句子拆解与中文意思</summary><ol><li>Before you begin —— 时间从句放在句首，限定复述要在执行之前</li><li>restate what you think my goal and process is —— restate 是祈使句的动词，what 引出的从句是复述的内容。goal 和 process 并列，书面英语通常用 are</li><li>in simple English —— 说明用什么方式复述，用简单的英语</li><li>so I can give you feedback and confirm it —— so 引出目的，give 和 confirm 共用前面的 can</li></ol><p class="translation">开始前，请用简单的英语复述一下你理解的目标和流程，好让我给你反馈并确认。</p></details><a class="jump" href="#p13">↑ 第13段</a></article>
+<article class="card hard-card"><div class="card-top"><span class="chip">句子 07</span><button class="sound" data-kind="hard" data-index="6" aria-label="朗读疑难句7">🔊</button></div><p class="hard-en" lang="en">If you&#x27;re still waiting for details, have the bot keep track of that so it can pick things back up later without accidentally creating another booking.</p><details><summary>句子拆解与中文意思</summary><ol><li>If you&#x27;re still waiting for details —— if 引出条件，表示还有细节没拿到</li><li>have the bot keep track of that —— have + 宾语 + 动词原形，表示让 Bot 记下这件待办</li><li>so it can pick things back up later —— so 表目的，让 Bot 之后可以接着处理</li><li>without accidentally creating another booking —— without 后接动名词，表示继续处理时避免意外重复预约</li></ol><p class="translation">如果还有细节没拿到，让 Bot 记下来，这样之后就能接着办，也不会不小心重复创建预约。</p></details><a class="jump" href="#p16">↑ 第16段</a></article>
+<article class="card hard-card"><div class="card-top"><span class="chip">句子 08</span><button class="sound" data-kind="hard" data-index="7" aria-label="朗读疑难句8">🔊</button></div><p class="hard-en" lang="en">This is just a simple example, but the key lesson here is that the more data you have available to Grok Bot, the better it can help you and your business and work.</p><details><summary>句子拆解与中文意思</summary><ol><li>This is just a simple example, but the key lesson here is that … —— but 引出此例想说明的道理，that 从句说明道理是什么</li><li>the more data you have available to Grok Bot —— the + 比较级结构的前半句，说明 Grok Bot 能用的数据越多</li><li>the better it can help you and your business and work —— the + 比较级接在后半句，两部分合起来表示“越……就越……”</li></ol><p class="translation">这只是个简单的例子。Grok Bot 能用的数据越多，就越能帮到你本人、你的业务和日常工作。</p></details><a class="jump" href="#p19">↑ 第19段</a></article>
+<article class="card hard-card"><div class="card-top"><span class="chip">句子 09</span><button class="sound" data-kind="hard" data-index="8" aria-label="朗读疑难句9">🔊</button></div><p class="hard-en" lang="en">If you use multiple apps and services, having unique and consistent IDs across all these tools will help you bring that data together so bot can fully understand what&#x27;s going on.</p><details><summary>句子拆解与中文意思</summary><ol><li>If you use multiple apps and services —— if 引出条件，适用于同时使用多个应用和服务的情况</li><li>having unique and consistent IDs across all these tools —— 整个动名词短语作主语，强调在各工具里使用唯一且统一的 ID</li><li>will help you bring that data together —— help sb do sth 表示帮助某人做某事，这里指把分散的数据汇总起来</li><li>so bot can fully understand what&#x27;s going on —— so 引出目的，what&#x27;s going on 作 understand 的宾语，表示实际发生了什么</li></ol><p class="translation">如果你用了多个应用或服务，在各个工具里使用唯一且统一的 ID，就更容易把数据汇总起来，让 Bot 看清全貌。</p></details><a class="jump" href="#p20">↑ 第20段</a></article></div></section>
+<footer>慢慢读，把好想法带进工作里。</footer>
+<noscript><p class="notice">请启用 JavaScript 以使用朗读功能，全文及学习内容可直接阅读。</p></noscript>
+</main>
+<div class="toolbar" id="toolbar" role="region" aria-label="朗读控制"><span class="status" id="speech-status" role="status" aria-live="polite">准备好，听一听</span><label class="rate-control" for="speed">语速 <select id="speed"><option value="0.6">0.6×</option><option value="0.75">0.75×</option><option value="0.9" selected>0.9×</option><option value="1.0">1.0×</option><option value="1.2">1.2×</option></select></label><button class="stop" id="stop">⏹ 停止</button></div>
+<script>
+'use strict';
+const content = {
+  "meta": {
+    "title": "Lauren（@poteto）· 用 Grok Bot 自动化一切（精读）",
+    "author": "Lauren Tan (@poteto)",
+    "author_note": "Lauren Tan，SpaceXAI Grok Bot 工程负责人",
+    "date": "2026-11-19",
+    "date_note": "X 发布时间 2026-11-18 21:00 UTC，即泰国时间 2026-11-19 04:00",
+    "url": "https://x.com/poteto/status/2123159537016533493",
+    "bot_link": "https://grok-bot.directory/bots/dr-eggbot-v2",
+    "bot_link_note": "原文结尾让大家安装 Dr Eggbot，但我们读到的正文没有附链接。这是社区目录 grok-bot.directory（非官方，11-19 上线）里署名“lauren 🎀”的 dr eggbot v2，简介与原文一致，很可能就是她本人发布的，但没有官方确认。添加前先看清它要哪些权限。",
+    "stats": "约 244 万次浏览 · 1.6 万赞 · 2.9 万收藏（2026-11-20 读取）",
+    "note": "X 长文（Article）。原文较长，按小标题分成若干段卡片；英文逐字照原文，中文为 AI 初译 + 人工校对。"
+  },
+  "map": [
+    {
+      "icon": "🧠",
+      "en": "A way of thinking",
+      "zh": "一种思维方式",
+      "p": 2
+    },
+    {
+      "icon": "💻",
+      "en": "Grok Bot is automation for everyone",
+      "zh": "人人都能做自动化",
+      "p": 4
+    },
+    {
+      "icon": "🎯",
+      "en": "Start with the goal",
+      "zh": "先定目标",
+      "p": 6
+    },
+    {
+      "icon": "📋",
+      "en": "The process",
+      "zh": "梳理流程",
+      "p": 11
+    },
+    {
+      "icon": "💡",
+      "en": "Teach your bot how you think",
+      "zh": "教 Bot 怎么判断",
+      "p": 15
+    },
+    {
+      "icon": "📈",
+      "en": "Let your bots improve themselves",
+      "zh": "让 Bot 持续改进",
+      "p": 18
+    },
+    {
+      "icon": "⏱️",
+      "en": "Making bots do work automatically",
+      "zh": "设置自动触发",
+      "p": 21
+    },
+    {
+      "icon": "🥚",
+      "en": "Install Dr Eggbot",
+      "zh": "安装 Dr Eggbot",
+      "p": 22
+    }
+  ],
+  "paragraphs": [
+    {
+      "n": 1,
+      "tag": "开场",
+      "en": "Automation can be surprisingly hard to get right, even for people who do it every day. I’d like to share how I approach it, at work and in my personal life, and how Grok Bot can help you take on more ambitious goals.",
+      "zh": "自动化要做对，可能比你想的还难，就连天天做这件事的人也一样。我想分享自己在工作和生活中是怎么做自动化的，以及 Grok Bot 怎样帮你挑战更有难度的目标。"
+    },
+    {
+      "n": 2,
+      "tag": "① 思维方式",
+      "en": "A way of thinking\nAutomation is really just a way of thinking that anyone can learn. It's about thinking systematically and logically, breaking things down into small steps while keeping a goal in mind. \nThere are 2 parts to it: a goal, and a process.\nAn everyday example of this is baking an apple pie (the goal). You follow a recipe or process which has clearly laid out steps - buying and preparing the right ingredients, assembling the pie and decorating it, baking it, letting it cool, and so on. Or if you're replacing a flat tire (also a goal), you might need to find a way to jack the car up so you can reach the tire, find the tools to remove and replace it with a new one, and then put everything back together again.\nSimply put, the goal is what you want at the end, and the process is how you get there.",
+      "zh": "一种思维方式\n自动化说到底是一种人人都能学会的思维方式。你需要有条理、有逻辑地思考，心里有个目标，再把事情拆成一个个小步骤。\n这里有两个部分：目标和流程。\n拿烤苹果派这个日常例子来说，烤出苹果派就是目标。你会照着食谱或流程一步步来：买齐并准备好食材、组装和装饰派、放进烤箱、出炉后晾凉，等等。再比如换掉瘪了的轮胎，这也是个目标。你可能要先想办法用千斤顶把车顶起来，好够到轮胎，再找工具把旧轮胎拆下来、换上新的，最后把各处装回原位。\n简单说，目标是你最后想得到的结果，流程是达到这个结果的办法。"
+    },
+    {
+      "n": 3,
+      "tag": "① 思维方式",
+      "en": "Automation is the same thing: a goal and a process, but with the addition of something like a machine, like the ones a bakery might use to bake lots of apple pies. Or code, what software engineers used to write by hand to automate stuff that could be done by a computer. It's about breaking things down into steps towards a goal, then automating the process so you don't have to personally do it every time.",
+      "zh": "自动化也是这个道理：有目标和流程，再加上一台机器之类的东西，比如面包店用来大量烤苹果派的设备。也可以用代码，也就是软件工程师以前手写来让电脑自动完成某些工作的程序。你先把通往目标的工作拆成若干步骤，再让流程自动运行，这样就不用每次都亲自做。"
+    },
+    {
+      "n": 4,
+      "tag": "② 人人可用",
+      "en": "Grok Bot is automation for everyone\nJust a year or two ago, automation was limited to those with the technical know-how of how to build or put together machines or write code. With Grok Bot, automating anything that can be done with a computer is now in reach even for people who aren't technical or software engineers! And the really surprising thing is just how much computers can do, even on tasks that you might not think a bot is capable of doing. \nYou don’t need to know how to write code to start automating tasks with Grok Bot. You can describe what you want in plain English, then work with your bot to figure out the steps. Bots can write code for you, and use its own computer to do pretty much anything that you can do on your own computer or smartphone. ",
+      "zh": "Grok Bot 让人人都能做自动化\n一两年前，自动化还只限于懂得制造、组装机器或写代码的人。现在有了 Grok Bot，即使没有技术背景，也能把电脑能做的事自动化，无须当软件工程师！真正令人意外的是电脑能做的事情有这么多，包括一些你原以为 Bot 做不了的任务。\n用 Grok Bot 开始做任务自动化，无须会写代码。用简单明白的英语描述你想要什么，然后和 Bot 一起梳理步骤。Bot 能替你写代码，也能用它自己的电脑做几乎所有你在电脑或手机上能做的事。"
+    },
+    {
+      "n": 5,
+      "tag": "② 人人可用",
+      "en": "If you're not technical, I want you to suspend your disbelief for a moment. Bots really can do anything that you can do on a computer. It can move its own mouse around and click on things, install or connect to apps and software that you use everyday, browse the internet on its own browser, join meetings and take notes for you, and so much more. \nAnd because so much of our work and life these days relies on technology, it means that more and more work can be done by a bot instead, freeing you up to focus on other things.",
+      "zh": "如果你没有技术背景，我想请你先把怀疑放一放。你在电脑上能做的事，Bot 真的也能做。它可以移动自己的鼠标、点击界面，安装或连接你日常用的应用和软件，用自己的浏览器上网，还能替你参会、记笔记，能做的远不止这些。\n如今工作和生活中有这么多事依赖技术，意味着越来越多的工作可以交给 Bot，让你腾出时间和精力去做其他事。"
+    },
+    {
+      "n": 6,
+      "tag": "③ 先定目标",
+      "en": "Start with the goal\nTo make this concrete, let's build a new bot together that will automate something for you. Go to Grok Bot, then make a new bot and give it any name you like. If you're struggling to find a name, just call it Potato and ask it to name itself later.\nBefore we start chatting with the bot: when I think about automation, I always start with thinking about the goal. What are we trying to do here? ",
+      "zh": "先从目标出发\n我们来实际做一遍：一起建一个新 Bot，让它帮你自动处理一件事。打开 Grok Bot，新建一个 Bot，取个你喜欢的名字。要是想不出名字，就先叫它 Potato，之后再让它给自己起名。\n跟 Bot 开聊之前，我每次考虑做自动化，都会先想清楚目标。我们到底要做成什么事？"
+    },
+    {
+      "n": 7,
+      "tag": "③ 先定目标",
+      "en": "One mistake I often see is that people confuse the process for the goal. For example, you may already have a well-defined process at work for the tasks that you do. But the goal is not to fill up a form, or to send an email. That's just a step in the process. \nInstead, think about the goal at the end: what is this process for, and where does it fit into the business? Does it help increase revenue (eg processing a sale, building new features), or does it reduce costs (eg ordering just the right amount of inventory)? If you're not sure, chat with your manager or colleagues, or even ask Bot to help you figure it out!\nClarifying what the goal is the best place to start because it focuses you and Grok Bot on the end result. You may actually find that bots can figure out how to make the process more efficient too, so it's important not to be too attached to a specific process, since it's a means to an end after all.",
+      "zh": "我常看到一个错误，就是把流程当成目标。比如，你手头的工作可能已经有一套明确的流程。但填一张表或发一封邮件只是流程中的一步。\n想想最终要达到什么目标：这套流程有什么用？它在整个业务里起什么作用？是为了增加营收，比如处理一笔销售或开发新功能，还是为了降低成本，比如只采购刚好够用的库存？如果不确定，可以跟主管或同事聊聊，甚至请 Bot 帮你想清楚！\n先明确目标最合适，因为这能让你和 Grok Bot 都盯住最终结果。你也许还会发现，Bot 能想出更高效的做法。流程终究是实现目标的手段，没必要太执着于某一种做法。"
+    },
+    {
+      "n": 8,
+      "tag": "③ 先定目标",
+      "en": "Once you're figured out the goal, start by describing it to the new bot, then ask it to pick a name for itself if you'd rather not call it Potato. \n\"Hi Potato, this is the goal I want you to be responsible for: \u003cgoal>. Pick out a name and picture for yourself based on it.\"",
+      "zh": "想清楚目标后，先把它讲给新 Bot 听。如果你想换掉 Potato 这个名字，就让它自己起一个。\n“你好，Potato，我想让你负责这个目标：\u003c目标>。请根据这个目标给自己选一个名字和一张头像。”"
+    },
+    {
+      "n": 9,
+      "tag": "③ 先定目标",
+      "en": "Here are some starter goal ideas you can tell your bot:\nSave money towards buying a new car, house, college fund for my kids\nSchedule new customer bookings for my small business\nImprove my customer experience for my small business so they leave me good reviews\nHire new employee for my small business\nGather feedback for my product so I can make improvements to it\nPrepare slides for a weekly meeting\nBuild new features for my product",
+      "zh": "下面是几个可以告诉 Bot 的入门目标：\n攒钱买新车、买房，或者给孩子存大学教育金\n为我的小生意安排新客户预约\n改善我的小生意的客户体验，让客户愿意给我好评\n为我的小生意招一名新员工\n收集产品反馈，好进一步改进产品\n准备每周例会的幻灯片\n为产品开发新功能"
+    },
+    {
+      "n": 10,
+      "tag": "③ 先定目标",
+      "en": "If you're not quite sure how to describe your goal, ask Potato to help you! Tell it:\n\"Hi Potato, I'd like you to be responsible for a goal, but I'm not sure how to best describe it. Can you ask me some questions and interview me until we have a goal that I'm happy with?\"",
+      "zh": "如果你还不太确定该怎么描述目标，就请 Potato 帮忙！你可以这样说：\n“你好，Potato，我想让你负责一个目标，但还没想好怎么描述最合适。你能问我一些问题，跟我聊一聊，直到我们定出一个我满意的目标吗？”"
+    },
+    {
+      "n": 11,
+      "tag": "④ 流程",
+      "en": "The process\nOnce you've told it your goal, think about how you would achieve this goal if you were doing it, then ask the bot to see where it can make things more efficient. If you'd rather it do a task exactly following your process, you can tell it that too.",
+      "zh": "流程\n把目标告诉 Bot 后，想想如果是你自己做，你会怎么实现它，再让 Bot 看看哪里可以提高效率。要是你更希望它严格按照你的流程做，也可以直接告诉它。"
+    },
+    {
+      "n": 12,
+      "tag": "④ 流程",
+      "en": "The best way to give bot this information is to use voice dictation in Grok Bot and speak for a while, brain dump everything it needs to know to do the job, and don't worry about the stream of consciousness or organizing your thoughts first. Tell it:\nThe steps you usually take\nThe things you watch out for and pay attention to\nThe apps and tools you use to do it\nHow you check that the work was done right\nWhere you get the information you need to do it (eg email, Slack/Teams, a ticket, an app or website)\nWhere you get feedback on how it went (eg customer feedback/review, feedback from colleagues)",
+      "zh": "最好的办法是在 Grok Bot 里用语音转文字，花点时间，把它完成工作需要知道的事一股脑儿说出来。想到什么就说什么，先不用整理思路。告诉它：\n你通常怎么一步步做\n你会留意哪些事项、重点关注什么\n你用哪些应用和工具\n你怎么核对工作有没有做对\n你从哪里拿到所需信息（例如邮件、Slack/Teams、工单、应用或网站）\n你从哪里了解做得怎么样（例如客户反馈或评价、同事的反馈）"
+    },
+    {
+      "n": 13,
+      "tag": "④ 流程",
+      "en": "\"Potato, this is how I usually do this goal myself: \u003cprocess>\n\nI want you to think about how you can take this over completely from me. Before you begin, restate what you think my goal and process is in simple English so I can give you feedback and confirm it. I don't want you to start executing on this yet, let's focus on getting the process planned first.\"",
+      "zh": "“Potato，为了实现这个目标，我平时自己是这么做的：\u003c流程>\n\n请想想你怎么才能把这件事完全接过去。开始之前，请用简单的英语复述一下你理解的目标和流程，好让我给你反馈并确认。先别开始执行，我们先把流程规划好。”"
+    },
+    {
+      "n": 14,
+      "tag": "④ 流程",
+      "en": "Don't worry about getting it right on the first pass. Review what the bot says and then correct it by giving it more information. Once you've done this a few times, you should have something you're happy with. You can then tell bot to proceed, and to start connecting to the apps and tools it needs to do the job correctly.\nIf you're feeling ambitious, you can even ask it to review the process against the goal and see if it can think of a better or more efficient way to do it.\n\"Review our process against my original goal, and if you see a way to make it better or more efficient, let me know.\"",
+      "zh": "第一轮没弄对也不用担心。看看 Bot 怎么说，再补充信息来纠正它。这样来回几次，应该就能得到你满意的方案。然后你就可以让 Bot 继续，让它开始连接做好这件事所需的应用和工具。\n想再进一步的话，还可以让它对照目标检查流程，看看能不能想出更好或更高效的做法。\n“请对照我最初的目标检查一下我们的流程。如果你发现有更好或更高效的做法，请告诉我。”"
+    },
+    {
+      "n": 15,
+      "tag": "⑤ 教它你的判断",
+      "en": "Teach your bot how you think\nOne thing that's easy to forget when explaining a process is how much you do without really thinking about it. If you're booking customers, you probably know which services take longer, who can do each job, and when to leave extra time between appointments. These decisions might feel obvious to you, but your bot needs that context too. Think about what you're paying attention to when you do the task yourself, and what makes you do something differently.",
+      "zh": "把你的判断方法教给 Bot\n讲解流程时，很容易漏掉那些你几乎不用想就会做的事。比如安排客户预约时，你大概知道哪些服务耗时更长、每项工作该派给谁，以及什么时候要在两场预约之间多留一点时间。你可能觉得这些判断理所当然，但 Bot 也需要了解背后的情况。想一想，你自己做这件事时会留意什么，什么情况会让你换一种做法。"
+    },
+    {
+      "n": 16,
+      "tag": "⑤ 教它你的判断",
+      "en": "Tell it where you get that information and how you check that the work is done right. For example, if an email and your booking system show different appointment times, which should it trust? A booking also isn't finished just because an email was sent. The appointment needs to be saved correctly and the customer needs a confirmation. If you're still waiting for details, have the bot keep track of that so it can pick things back up later without accidentally creating another booking.",
+      "zh": "告诉它这些信息从哪里来，以及你怎么确认工作做对了。比如，邮件和预约系统上的时间不一致，它应该以哪个为准？发出一封邮件也不等于预约办妥。预约得正确录入，客户也得收到确认。如果还有信息没拿到，就让 Bot 记下来，之后能接着办，避免不小心重复创建预约。"
+    },
+    {
+      "n": 17,
+      "tag": "⑤ 教它你的判断",
+      "en": "Don't worry about explaining every possible situation upfront. Start with a few real examples, including ones where something went wrong or you had to do something differently. Ask the bot how it would handle them, then give it feedback. You can also ask it to help you figure out what you've forgotten to explain!\n“Potato, help me figure out what I haven't told you about this process yet. Ask me questions about how I make decisions, where I get my information, how I check the work, and when you should ask me for help. Ask one question at a time, then walk me through a few examples so I can give you feedback before we automate this.”",
+      "zh": "不用一开始就把所有可能的情况都讲完。先挑几个真实例子，包括出过问题的，或你不得不改变做法的。问问 Bot 会怎么处理，再给它反馈。你还可以让它帮你找出自己漏讲了什么！\n“Potato，帮我找找这个流程里还有什么我没告诉你。请问我怎么做判断、从哪里获取信息、怎么检查工作，以及你什么时候该来找我帮忙。一次问一个问题，然后带我过几个例子，好让我在把这件事自动化之前给你反馈。”"
+    },
+    {
+      "n": 18,
+      "tag": "⑥ 自我改进",
+      "en": "Let your bots improve themselves\nOnce your bot is performing the workflow, it's important to give it feedback so it can improve. The best way to do it is to equip your bot with the apps and tools it needs to get that feedback for itself. The way I approach this is to think about what I would do if it was me doing the task and I wanted to self improve.\nFor example, if your bot is managing new customer bookings for you, a way to let it improve itself is by letting it monitor your emails, social media, or Google/Yelp reviews for customer feedback. It can look out for that feedback and then take the initiative to propose improvements to your process. \nMaybe a customer says on Yelp that they had to wait very long before someone could attend to them. If your bot can look up this information on Yelp for itself, and also look up any records you have for the customer that day, it could see what might have gone wrong. ",
+      "zh": "让 Bot 自己改进\nBot 开始执行流程之后，给它反馈很重要，这样它才能改进。最好的做法是让 Bot 用上所需的应用和工具，自己去获取反馈。我的思路是想一想：如果这件事是我在做，而我想提高自己的表现，我会怎么做？\n例如，Bot 如果在帮你管理新的客户预约，你可以让它查看邮件、社交媒体或 Google/Yelp 上的评价，从中收集客户反馈。它可以自己留意这些反馈，再主动提出流程改进建议。\n比如有客户在 Yelp 上说，等了很久才有人接待。要是 Bot 能自己在 Yelp 上查到这条评价，还能查到这位客户当天的相关记录，就可能看出问题出在哪儿。"
+    },
+    {
+      "n": 19,
+      "tag": "⑥ 自我改进",
+      "en": "In that sense, the more computerized your business is, the better for bots and automation. The availability of that data is what gives your bot the ability to come up with better improvements. And the best part is that Grok Bot can build tools for you to get this data! For example, if you're operating a car repair service, you could ask bot to build you an app that you can use on your computer and phone to log details about a customer visit. \nIf you log the time of: \nwhen they got to your shop\nwhen they were able to speak to a service rep\nwhen you took possession of their keys\nwhen service started and finished\nYou could work out how long they spent waiting and better diagnose why. This is just a simple example, but the key lesson here is that the more data you have available to Grok Bot, the better it can help you and your business and work. ",
+      "zh": "从这个角度看，业务数字化程度越高，就越有利于使用 Bot 和做自动化。有了这些数据，Bot 才能提出更好的改进建议。更棒的是，Grok Bot 还能帮你开发工具来获取数据！比如你开了一家汽车维修店，可以让 Bot 做一个电脑和手机上都能用的应用，记录客户到店服务的细节。\n如果你记录下这些时间：\n客户几点到店\n客户几点和服务顾问对接上\n你几点接过客户的车钥匙\n维修几点开始、几点完成\n你就能算出客户等了多久，也更容易找出等待的原因。这只是个简单的例子。要点是，Grok Bot 能用的数据越多，就越能帮到你本人、你的业务和日常工作。"
+    },
+    {
+      "n": 20,
+      "tag": "⑥ 自我改进",
+      "en": "Bots can also cross reference data across multiple sources if you have something like an ID - some kind of number or unique text like an email address that gives that data an identity. This could be a customer ID or email address, an order number, a part number, a barcode, an employee ID, and so on. If you use multiple apps and services, having unique and consistent IDs across all these tools will help you bring that data together so bot can fully understand what's going on. ",
+      "zh": "如果数据有 ID 之类的标识，Bot 还能把多个来源的数据交叉比对。这类标识可以是一串编号，也可以是邮箱地址之类的唯一文本，用来识别对应记录。客户编号或邮箱地址、订单号、零件号、条形码、员工编号，都可以充当这个标识。如果你用了多个应用或服务，在各个工具里使用唯一且统一的 ID，就更容易把数据汇总起来，让 Bot 看清全貌。"
+    },
+    {
+      "n": 21,
+      "tag": "⑦ 自动触发",
+      "en": "Making bots do work automatically\nThe next thing is, when should the bot do the work?  Should it start when an email arrives, when someone sends a message, or on a regular schedule? In Grok Bot, you set this up with routines.\nWithout a routine, bots will only do the work when you ask them to. This is fine when you're first starting out with using bot, but if you want to streamline things, you'll want to figure out how to get the bot to do it automatically, so you're no longer the bottleneck.\nUsually, the work happens with some kind of trigger like an email or Slack/Teams message. Or maybe it happens on a regular schedule, like once a week or every other day. Either way, if you ask your bot to set it up, it will! ",
+      "zh": "让 Bot 自动做事\n接下来要想的是，Bot 该什么时候开始干活？收到邮件时、有人发消息时，还是按固定时间表？在 Grok Bot 里，你可以用 routine（例行任务）来设置。\n如果没设 routine，Bot 只会在你开口时干活。刚开始用 Bot，这样就够了。如果你想让流程更顺畅，就得想想怎么让 Bot 自动执行，这样工作就不会卡在你这里。\n通常，工作会由某个事件触发，比如收到一封邮件或一条 Slack/Teams 消息。也可以按固定时间表执行，比如每周一次或隔天一次。两种方式，你都可以让 Bot 帮你设好！"
+    },
+    {
+      "n": 22,
+      "tag": "⑧ Dr Eggbot",
+      "en": "Install Dr Eggbot\nI taught everything I know about automating work to Dr Eggbot, so if you want to start automating your work more, install it and ask it to help you! Dr Eggbot is a bot designer - it will create high quality bots for you.\n\nThanks for reading!",
+      "zh": "安装 Dr Eggbot\n我把自己知道的工作自动化方法都教给了 Dr Eggbot。如果你也想把更多工作自动化，可以安装它，请它帮忙！Dr Eggbot 是个 Bot 设计师，会帮你创建高质量的 Bot。\n\n感谢阅读！"
+    }
+  ],
+  "vocab": [
+    {
+      "w": "get right",
+      "zh": "把……做对、做准确",
+      "p": 1,
+      "src": "hard to get right",
+      "ex": "The handover between shifts is hard to get right when the line is running overtime.（产线加班时，班次之间的交接很容易出差错。）"
+    },
+    {
+      "w": "take on",
+      "zh": "承担，着手应对（任务或挑战）",
+      "p": 1,
+      "src": "take on more ambitious goals",
+      "ex": "Can our Rayong plant take on one more export order this month?（我们罗勇的工厂这个月还能再接一笔出口订单吗？）"
+    },
+    {
+      "w": "breaking things down",
+      "zh": "把事情分解成更小的部分",
+      "p": 2,
+      "src": "breaking things down into small steps",
+      "ex": "Break the line changeover down into steps that a new operator can follow.（把产线换型拆成新操作员也能照着做的步骤。）"
+    },
+    {
+      "w": "laid out",
+      "zh": "列明，清楚地安排好",
+      "p": 2,
+      "src": "clearly laid out steps",
+      "ex": "The inspection criteria are laid out in the control plan.（检验标准在控制计划里列得很清楚。）"
+    },
+    {
+      "w": "by hand",
+      "zh": "手工，靠人工操作",
+      "p": 3,
+      "src": "write by hand to automate stuff",
+      "ex": "We still enter the actual shipment weight by hand.（我们仍然靠人工录入实际发货重量。）"
+    },
+    {
+      "w": "technical know-how",
+      "zh": "实际操作所需的专业知识和技能",
+      "p": 4,
+      "src": "with the technical know-how",
+      "ex": "We need someone with the technical know-how to set up the new molding machine.（我们需要一位懂得如何调试新注塑机的人。）"
+    },
+    {
+      "w": "in reach",
+      "zh": "触手可及，在可实现的范围内",
+      "p": 4,
+      "src": "is now in reach even for people",
+      "ex": "With the new fixture, a shorter changeover time is finally in reach.（有了新夹具，终于有望缩短换型时间了。）"
+    },
+    {
+      "w": "suspend your disbelief",
+      "zh": "暂时放下怀疑，先接受某个设想",
+      "p": 5,
+      "src": "suspend your disbelief for a moment",
+      "ex": "Suspend your disbelief for a moment and imagine clearing every shipment with one shared checklist.（先把怀疑放一放，想象一下每票货都能用同一份共享清单办理清关。）"
+    },
+    {
+      "w": "freeing you up",
+      "zh": "让你腾出时间或精力",
+      "p": 5,
+      "src": "freeing you up to focus on other things",
+      "ex": "The warehouse team can handle the stock count, freeing you up to review purchase orders.（仓库团队可以负责盘点，让你腾出时间审核采购订单。）"
+    },
+    {
+      "w": "make this concrete",
+      "zh": "用实际做法把抽象想法讲明白",
+      "p": 6,
+      "src": "To make this concrete",
+      "ex": "To make this concrete, let's walk through yesterday's late shipment.（我们拿昨天那票延迟发运的货走一遍，把这个办法讲清楚。）"
+    },
+    {
+      "w": "well-defined",
+      "zh": "界定清楚的，明确的",
+      "p": 7,
+      "src": "a well-defined process at work",
+      "ex": "We need a well-defined process for approving urgent purchases.（我们需要一套明确的紧急采购审批流程。）"
+    },
+    {
+      "w": "fit into",
+      "zh": "在更大的体系中起作用，与其他环节衔接",
+      "p": 7,
+      "src": "where does it fit into the business?",
+      "ex": "How does incoming inspection fit into the overall purchasing workflow?（来料检验在整个采购流程中起什么作用？）"
+    },
+    {
+      "w": "means to an end",
+      "zh": "实现某个目标的手段",
+      "p": 7,
+      "src": "it's a means to an end after all",
+      "ex": "The daily stock report is a means to an end: preventing material shortages.（每日库存报告是手段，目的是防止缺料。）"
+    },
+    {
+      "w": "be responsible for",
+      "zh": "对……负责，负责某项工作",
+      "p": 8,
+      "src": "I want you to be responsible for",
+      "ex": "Who will be responsible for checking the packing list before customs clearance?（清关前由谁负责核对装箱单？）"
+    },
+    {
+      "w": "gather feedback",
+      "zh": "收集反馈意见",
+      "p": 9,
+      "src": "Gather feedback for my product",
+      "ex": "HR will gather feedback from new operators after their first week.（新操作员入职一周后，人事会收集他们的反馈。）"
+    },
+    {
+      "w": "happy with",
+      "zh": "对……满意，认可",
+      "p": 10,
+      "src": "a goal that I'm happy with",
+      "ex": "Let me know if you are happy with the supplier’s revised lead time.（如果你认可供应商修改后的交期，请告诉我。）"
+    },
+    {
+      "w": "you'd rather",
+      "zh": "你更希望，你宁愿",
+      "p": 11,
+      "src": "If you'd rather it do a task",
+      "ex": "If you’d rather we ship by sea, we can ask the forwarder for a revised quote.（如果你更希望我们走海运，可以请货代重新报价。）"
+    },
+    {
+      "w": "voice dictation",
+      "zh": "语音听写，语音转文字",
+      "p": 12,
+      "src": "use voice dictation in Grok Bot",
+      "ex": "During the line walk, I use voice dictation to capture issues for the shift report.（巡线时，我用语音转文字记录问题，回头写进班次报告。）"
+    },
+    {
+      "w": "brain dump",
+      "zh": "把脑子里的信息或想法一股脑儿倒出来",
+      "p": 12,
+      "src": "brain dump everything it needs to know",
+      "ex": "Let me brain dump what I know about the delayed shipment before we write the timeline.（写时间线之前，我先把知道的延迟发运情况一股脑儿说出来。）"
+    },
+    {
+      "w": "stream of consciousness",
+      "zh": "跟着思路自然往下说，想到哪儿说到哪儿",
+      "p": 12,
+      "src": "don't worry about the stream of consciousness",
+      "ex": "My first audit notes were a stream of consciousness, so I grouped them by production area afterward.（审核时我先想到哪儿记到哪儿，之后再按生产区域整理。）"
+    },
+    {
+      "w": "take this over",
+      "zh": "把这件事接过来，接手",
+      "p": 13,
+      "src": "take this over completely from me",
+      "ex": "Could you take this over while I meet with the customs broker?（我跟报关代理开会时，你能接手这件事吗？）"
+    },
+    {
+      "w": "restate",
+      "zh": "复述，换一种说法说清楚",
+      "p": 13,
+      "src": "restate what you think my goal and process is",
+      "ex": "Before we issue the purchase order, please restate the agreed delivery terms in your own words.（下采购订单之前，请用你自己的话复述双方谈妥的交货条款。）"
+    },
+    {
+      "w": "on the first pass",
+      "zh": "在第一遍处理时，第一轮就",
+      "p": 14,
+      "src": "getting it right on the first pass",
+      "ex": "We caught three mismatched item codes on the first pass.（第一轮核对就发现了三个对不上的物料编码。）"
+    },
+    {
+      "w": "review the process against",
+      "zh": "对照某个标准或目标检查流程",
+      "p": 14,
+      "src": "review the process against the goal",
+      "ex": "Review the process against our dispatch checklist before the next container is loaded.（下一个集装箱装货前，按出货检查表核对一遍流程。）"
+    },
+    {
+      "w": "leave extra time",
+      "zh": "额外多留一些时间",
+      "p": 15,
+      "src": "leave extra time between appointments",
+      "ex": "Leave extra time between batches for cleaning and inspection.（两批生产之间多留一点时间做清洁和检查。）"
+    },
+    {
+      "w": "keep track of",
+      "zh": "持续记录、跟进",
+      "p": 16,
+      "src": "keep track of that",
+      "ex": "Keep track of missing documents for each BOI shipment.（逐票记录并跟进 BOI 货物缺少的单证。）"
+    },
+    {
+      "w": "pick things back up",
+      "zh": "把暂停的事接着做",
+      "p": 16,
+      "src": "pick things back up later",
+      "ex": "We can pick things back up once the supplier sends the corrected invoice.（等供应商发来改好的发票，我们就能接着处理。）"
+    },
+    {
+      "w": "upfront",
+      "zh": "一开始，事先",
+      "p": 17,
+      "src": "explaining every possible situation upfront",
+      "ex": "Let the forwarder know upfront which documents we need before pickup.（提前告诉货代，提货前我们需要哪些单证。）"
+    },
+    {
+      "w": "take the initiative",
+      "zh": "主动采取行动",
+      "p": 18,
+      "src": "take the initiative to propose improvements",
+      "ex": "Please take the initiative to flag any delivery risk before we run out of stock.（请在库存用完前主动报告任何交货风险。）"
+    },
+    {
+      "w": "attend to",
+      "zh": "接待，处理，照料",
+      "p": 18,
+      "src": "someone could attend to them",
+      "ex": "A technician will attend to the machine fault before the next shift starts.（下个班次开始前，会有技术员来处理设备故障。）"
+    },
+    {
+      "w": "took possession of",
+      "zh": "接收，实际接管",
+      "p": 19,
+      "src": "when you took possession of their keys",
+      "ex": "The warehouse took possession of the shipment after checking the seal.（仓库检查封条后接收了这批货。）"
+    },
+    {
+      "w": "cross reference",
+      "zh": "交叉比对，相互核验",
+      "p": 20,
+      "src": "cross reference data across multiple sources",
+      "ex": "Cross-reference the invoice with the packing list before sending the documents to our customs broker.（把单证发给报关代理前，先交叉核对发票和装箱单。）"
+    },
+    {
+      "w": "streamline",
+      "zh": "精简流程，提高效率",
+      "p": 21,
+      "src": "if you want to streamline things",
+      "ex": "We can streamline purchase approvals by using one request form across all departments.（各部门统一用一张申请表，就能简化采购审批。）"
+    },
+    {
+      "w": "bottleneck",
+      "zh": "瓶颈，拖慢整个流程的环节",
+      "p": 21,
+      "src": "you're no longer the bottleneck",
+      "ex": "Final inspection is the bottleneck when both lines finish at the same time.（两条线同时完工时，终检就成了瓶颈。）"
+    },
+    {
+      "w": "trigger",
+      "zh": "触发条件，启动流程的事件",
+      "p": 21,
+      "src": "some kind of trigger like an email",
+      "ex": "A missed delivery date is the trigger for a purchasing alert.（超过交货日期就会触发采购提醒。）"
+    },
+    {
+      "w": "everything I know about",
+      "zh": "我对……所知道的一切",
+      "p": 22,
+      "src": "everything I know about automating work",
+      "ex": "I shared everything I know about the supplier’s quality issues with the new purchasing manager.（我把自己知道的供应商质量问题都告诉了新任采购经理。）"
+    }
+  ],
+  "hard": [
+    {
+      "p": 2,
+      "en": "It's about thinking systematically and logically, breaking things down into small steps while keeping a goal in mind.",
+      "parts": [
+        "It's about thinking systematically and logically —— be about 后接动名词，说明自动化需要有条理、有逻辑地思考",
+        "breaking things down into small steps —— break A down into B 表示把 A 拆成若干个 B",
+        "while keeping a goal in mind —— while + 动词 -ing 表示同时发生，拆步骤时始终记住目标"
+      ],
+      "zh": "你需要有条理、有逻辑地思考，心里始终有个目标，同时把事情拆成一个个小步骤。"
+    },
+    {
+      "p": 4,
+      "en": "With Grok Bot, automating anything that can be done with a computer is now in reach even for people who aren't technical or software engineers!",
+      "parts": [
+        "With Grok Bot —— 句首介词短语说明有了什么条件",
+        "automating anything that can be done with a computer —— 整个动名词短语作主语，that 从句修饰 anything，说明事情可以用电脑完成",
+        "is now in reach even for people —— 主干谓语是 is，in reach 表示现在做得到了，even 强调覆盖的人群",
+        "who aren't technical or software engineers —— who 从句修饰 people，泛指没有技术背景的人"
+      ],
+      "zh": "现在有了 Grok Bot，哪怕没有技术背景，也能把电脑能做的事自动化！"
+    },
+    {
+      "p": 5,
+      "en": "And because so much of our work and life these days relies on technology, it means that more and more work can be done by a bot instead, freeing you up to focus on other things.",
+      "parts": [
+        "because so much of our work and life these days relies on technology —— because 引出原因，如今工作和生活中有很多事依赖技术",
+        "it means that more and more work can be done by a bot instead —— that 引出 means 的宾语从句，can be done 是带情态动词的被动结构",
+        "freeing you up to focus on other things —— 现在分词短语表示结果，让你腾出时间和精力去做别的事"
+      ],
+      "zh": "如今工作和生活中有这么多事依赖技术，意味着越来越多的工作可以交给 Bot，让你腾出精力去做其他事。"
+    },
+    {
+      "p": 7,
+      "en": "You may actually find that bots can figure out how to make the process more efficient too, so it's important not to be too attached to a specific process, since it's a means to an end after all.",
+      "parts": [
+        "find that bots can figure out how to make the process more efficient —— that 从句作 find 的宾语，how to make … 作 figure out 的宾语",
+        "make the process more efficient —— make + 宾语 + 形容词，表示使流程变得更高效",
+        "so it's important not to be too attached to a specific process —— so 引出结论，it 是形式主语，not to be … 是真正的主语",
+        "since it's a means to an end after all —— since 表原因，after all 有“毕竟、终究”的语气"
+      ],
+      "zh": "你也许还会发现，Bot 能想出更高效的做法，所以没必要太执着于某一种流程，毕竟流程只是实现目标的手段。"
+    },
+    {
+      "p": 11,
+      "en": "If you'd rather it do a task exactly following your process, you can tell it that too.",
+      "parts": [
+        "If you'd rather it do a task —— if 引出条件。would rather 后可接从句，it 是从句主语，指 Bot。原文用原形 do，有些场合也会用过去式 did 表达偏好",
+        "exactly following your process —— following 短语说明怎么做，exactly 强调照流程一步不差地做",
+        "you can tell it that too —— tell + 人或对象 + 内容。it 指 Bot，that 指前面说的偏好"
+      ],
+      "zh": "如果你更希望 Bot 严格照你的流程办事，也可以直接告诉它。"
+    },
+    {
+      "p": 13,
+      "en": "Before you begin, restate what you think my goal and process is in simple English so I can give you feedback and confirm it.",
+      "parts": [
+        "Before you begin —— 时间从句放在句首，限定复述要在执行之前",
+        "restate what you think my goal and process is —— restate 是祈使句的动词，what 引出的从句是复述的内容。goal 和 process 并列，书面英语通常用 are",
+        "in simple English —— 说明用什么方式复述，用简单的英语",
+        "so I can give you feedback and confirm it —— so 引出目的，give 和 confirm 共用前面的 can"
+      ],
+      "zh": "开始前，请用简单的英语复述一下你理解的目标和流程，好让我给你反馈并确认。"
+    },
+    {
+      "p": 16,
+      "en": "If you're still waiting for details, have the bot keep track of that so it can pick things back up later without accidentally creating another booking.",
+      "parts": [
+        "If you're still waiting for details —— if 引出条件，表示还有细节没拿到",
+        "have the bot keep track of that —— have + 宾语 + 动词原形，表示让 Bot 记下这件待办",
+        "so it can pick things back up later —— so 表目的，让 Bot 之后可以接着处理",
+        "without accidentally creating another booking —— without 后接动名词，表示继续处理时避免意外重复预约"
+      ],
+      "zh": "如果还有细节没拿到，让 Bot 记下来，这样之后就能接着办，也不会不小心重复创建预约。"
+    },
+    {
+      "p": 19,
+      "en": "This is just a simple example, but the key lesson here is that the more data you have available to Grok Bot, the better it can help you and your business and work.",
+      "parts": [
+        "This is just a simple example, but the key lesson here is that … —— but 引出此例想说明的道理，that 从句说明道理是什么",
+        "the more data you have available to Grok Bot —— the + 比较级结构的前半句，说明 Grok Bot 能用的数据越多",
+        "the better it can help you and your business and work —— the + 比较级接在后半句，两部分合起来表示“越……就越……”"
+      ],
+      "zh": "这只是个简单的例子。Grok Bot 能用的数据越多，就越能帮到你本人、你的业务和日常工作。"
+    },
+    {
+      "p": 20,
+      "en": "If you use multiple apps and services, having unique and consistent IDs across all these tools will help you bring that data together so bot can fully understand what's going on.",
+      "parts": [
+        "If you use multiple apps and services —— if 引出条件，适用于同时使用多个应用和服务的情况",
+        "having unique and consistent IDs across all these tools —— 整个动名词短语作主语，强调在各工具里使用唯一且统一的 ID",
+        "will help you bring that data together —— help sb do sth 表示帮助某人做某事，这里指把分散的数据汇总起来",
+        "so bot can fully understand what's going on —— so 引出目的，what's going on 作 understand 的宾语，表示实际发生了什么"
+      ],
+      "zh": "如果你用了多个应用或服务，在各个工具里使用唯一且统一的 ID，就更容易把数据汇总起来，让 Bot 看清全貌。"
+    }
+  ]
+};
+const synth = window.speechSynthesis;
+const supported = !!synth && typeof window.SpeechSynthesisUtterance === 'function';
+const status = document.getElementById('speech-status');
+const toolbar = document.getElementById('toolbar');
+const speed = document.getElementById('speed');
+let englishVoice = null;
+let session = null;
+let revision = 0;
+let activeUtterance = null;
+function loadVoices() {
+  if (!supported) return;
+  const voices = synth.getVoices();
+  englishVoice = voices.find(v => /^en[-_]US$/i.test(v.lang)) || voices.find(v => /^en\b/i.test(v.lang)) || null;
+}
+function clearHighlight() {
+  document.querySelectorAll('.is-reading').forEach(card => {
+    card.classList.remove('is-reading');
+    card.removeAttribute('aria-current');
+  });
+}
+function reset(message) {
+  revision++;
+  session = null;
+  activeUtterance = null;
+  if (supported) synth.cancel();
+  clearHighlight();
+  toolbar.classList.remove('is-playing');
+  document.getElementById('read-all').setAttribute('aria-pressed', 'false');
+  status.textContent = message;
+}
+function speakCurrent() {
+  if (!session) return;
+  const token = ++revision;
+  // Invalidate old callbacks before cancel(), including callbacks dispatched synchronously.
+  synth.cancel();
+  const item = session.items[session.index];
+  const utterance = new SpeechSynthesisUtterance(item.text);
+  activeUtterance = utterance;
+  utterance.lang = 'en-US';
+  utterance.rate = Number(speed.value);
+  if (englishVoice) utterance.voice = englishVoice;
+  clearHighlight();
+  if (item.paragraph) {
+    const card = document.getElementById('p' + item.paragraph);
+    card.classList.add('is-reading');
+    card.setAttribute('aria-current', 'true');
+    if (session.full) {
+      const rect = card.getBoundingClientRect();
+      if (rect.top < 15 || rect.bottom > window.innerHeight - 110) {
+        card.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }
+    }
+  }
+  toolbar.classList.add('is-playing');
+  status.textContent = item.label;
+  utterance.onend = () => {
+    if (token !== revision || !session) return;
+    session.index++;
+    if (session.index < session.items.length) speakCurrent();
+    else reset('朗读完毕');
+  };
+  utterance.onerror = event => {
+    if (token !== revision) return;
+    reset(event.error === 'not-allowed' ? '请点击朗读按钮后重试' : '朗读暂不可用，请重试');
+  };
+  try { synth.speak(utterance); }
+  catch (_) { if (token === revision) reset('朗读暂不可用，请重试'); }
+}
+function start(items, full = false) {
+  if (!supported) return;
+  reset('准备朗读');
+  loadVoices();
+  session = { items, index: 0, full };
+  document.getElementById('read-all').setAttribute('aria-pressed', String(full));
+  speakCurrent();
+}
+function paragraphItem(p) {
+  return { text: p.en, paragraph: p.n, label: '正在朗读 · 第 ' + p.n + ' 段' };
+}
+document.getElementById('read-all').setAttribute('aria-pressed', 'false');
+document.getElementById('read-all').addEventListener('click', () => start(content.paragraphs.map(paragraphItem), true));
+document.querySelectorAll('[data-kind]').forEach(button => {
+  button.addEventListener('click', () => {
+    const index = Number(button.dataset.index);
+    const kind = button.dataset.kind;
+    if (kind === 'paragraph') start([paragraphItem(content.paragraphs[index])]);
+    if (kind === 'vocab') {
+      const v = content.vocab[index];
+      start([{ text: v.w + '. ' + v.src, label: '正在朗读 · 生词与原句' }]);
+    }
+    if (kind === 'hard') start([{ text: content.hard[index].en, label: '正在朗读 · 疑难句 ' + (index + 1) }]);
+  });
+});
+speed.addEventListener('change', () => { if (session) speakCurrent(); });
+document.getElementById('stop').addEventListener('click', () => reset('已停止朗读'));
+if (supported) {
+  loadVoices();
+  synth.addEventListener('voiceschanged', loadVoices);
+  window.addEventListener('pagehide', () => reset('已停止朗读'));
+} else {
+  const notice = document.getElementById('speech-notice');
+  notice.hidden = false;
+  notice.textContent = '当前浏览器不支持语音朗读，请使用支持朗读的浏览器继续学习。';
+  status.textContent = '当前浏览器不支持朗读';
+  document.querySelectorAll('.sound, #read-all, #stop, #speed').forEach(control => { control.disabled = true; });
+}
+</script>
+</body>
+</html>
