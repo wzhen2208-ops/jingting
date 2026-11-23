@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>逐句精听 · How to read CursorBench</title>
+<style>#yt iframe{width:100%;height:100%;display:block}.item .tx,.item .x,.item .z,.sub-box .en,.sub-box .zh{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important;max-height:none!important;overflow-wrap:anywhere}
+.pts{margin-top:12px;border:1px solid #d1fae5;border-radius:16px;background:#f0fdfa;padding:0 12px}
+.pts>summary{list-style:none;padding:10px 0;font-weight:800;color:#0f766e;cursor:pointer;font-size:14px;display:flex;justify-content:space-between}
+.pts>summary::-webkit-details-marker{display:none}
+.pt{padding:9px 0;border-top:1px dashed #a7f3d0;font-size:14px;line-height:1.6}
+.pt .pk{display:inline-block;font-size:11px;font-weight:800;border-radius:6px;padding:0 6px;margin-right:6px;background:#e0e7ff;color:#3730a3;vertical-align:1px}
+.pt .pk.k1{background:#fef3c7;color:#92400e}.pt .pk.k2{background:#e0e7ff;color:#3730a3}.pt .pk.k3{background:#fce7f3;color:#9d174d}.pt .pk.k4{background:#dcfce7;color:#166534}.pt .pk.k5{background:#f1f5f9;color:#334155}
+.pt .ph{font-weight:800;color:#111827}
+.pt .px{color:#334155;margin-top:2px}
+.pt .pe{margin-top:4px;background:#fff;border-radius:10px;padding:6px 9px;color:#1f2937;font-size:13.5px}
+.pt .pe i{font-style:normal;color:#0f766e;display:block;font-size:12.5px}
+
+:root{--bg1:#1e1b4b;--bg2:#0f766e;--card:#ffffff;--ink:#1f2937;--muted:#6b7280;--acc:#6366f1;--acc2:#14b8a6;--star:#f59e0b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{touch-action:manipulation}
+button,.chip,.btn{touch-action:manipulation;user-select:none;-webkit-user-select:none}
+html,body{margin:0;min-height:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei","Segoe UI",sans-serif;background:linear-gradient(160deg,var(--bg1),#4338ca 45%,var(--bg2));background-attachment:fixed;color:var(--ink);padding:env(safe-area-inset-top) 0 env(safe-area-inset-bottom)}
+.wrap{max-width:640px;margin:0 auto;padding:14px 14px 40px}
+header{color:#fff;margin:6px 4px 12px}
+header h1{font-size:15px;font-weight:600;margin:0;opacity:.85;line-height:1.35}
+header .sub{font-size:12px;opacity:.6;margin-top:3px}
+.card{background:var(--card);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.25);padding:18px}
+.toprow{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.num{font-size:28px;font-weight:800;color:var(--acc);letter-spacing:-.5px}
+.num small{font-size:15px;color:var(--muted);font-weight:600}
+.time{font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.star{display:flex;flex-direction:column;align-items:center;min-width:64px;min-height:56px;background:#f8fafc;border:2px solid #e2e8f0;border-radius:16px;cursor:pointer;line-height:1;padding:6px 8px;color:#94a3b8;transition:.15s}
+.star b{font-size:28px;font-weight:400}.star span{font-size:11px;font-weight:700;margin-top:3px}
+.star.on{background:#fef3c7;border-color:var(--star);color:#b45309}
+#toast{position:fixed;left:50%;top:calc(14px + env(safe-area-inset-top));transform:translateX(-50%);z-index:60;background:rgba(15,23,42,.92);color:#fff;border-radius:99px;padding:9px 16px;font-size:14px;font-weight:600;opacity:0;transition:opacity .2s;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1}
+#toast.long{white-space:normal;width:max-content;max-width:88vw;border-radius:14px;text-align:center;line-height:1.45}
+.qbox .qh .qtools{display:flex;align-items:center;gap:6px}
+.qbox .qwrap{display:flex;gap:8px;align-items:stretch}
+.qbox .qwrap textarea{flex:1;min-width:0}
+.qmic{flex:none;width:56px;min-height:58px;border:2px solid #c7d2fe;border-radius:14px;background:#eef2ff;font-size:24px;line-height:1;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px;color:#4338ca}
+.qmic span{font-size:10px;font-weight:700}
+.qmic.rec{background:#ef4444;border-color:#dc2626;color:#fff;animation:micPulse 1.1s ease-in-out infinite}
+@keyframes micPulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,.55)}70%{box-shadow:0 0 0 12px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+.qlang{border:1px solid #c7d2fe;background:#fff;color:#4338ca;border-radius:99px;padding:3px 9px;font-size:12px;font-weight:800;cursor:pointer}
+.qbox.rec{border-color:#fca5a5;background:#fff5f5}
+.qbox .qinterim{display:none;margin-top:6px;font-size:14px;color:#b91c1c;background:#fef2f2;border-radius:10px;padding:5px 9px;white-space:pre-wrap}
+.qbox.rec .qinterim{display:block}
+.qbox .qmsg{display:none;margin-top:8px;font-size:16px;font-weight:600;line-height:1.5;color:#334155;background:#f1f5f9;border-radius:12px;padding:9px 12px}
+.qbox .qmsg.bad{color:#991b1b;background:#fee2e2;border:2px solid #f87171}
+.qbox .qinterim{font-size:17px!important;font-weight:700}
+#micAlert{display:none;position:fixed;left:0;right:0;bottom:0;z-index:80;background:#fff;border-top:5px solid #dc2626;box-shadow:0 -10px 30px rgba(0,0,0,.35);padding:16px 18px calc(16px + env(safe-area-inset-bottom));max-height:75vh;overflow:auto}
+#micAlert.show{display:block}
+#micAlert .mt{font-size:22px;font-weight:900;color:#b91c1c;line-height:1.3;margin-bottom:8px}
+#micAlert .mb{font-size:18px;line-height:1.55;color:#111827;white-space:pre-wrap}
+#micAlert .md{margin-top:10px;font-size:12px;color:#64748b;font-family:ui-monospace,monospace;word-break:break-all}
+#micAlert .mbtns{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+#micAlert .mbtns button{flex:1 1 auto;min-height:52px;font-size:17px;font-weight:800;border-radius:14px;border:2px solid #c7d2fe;background:#eef2ff;color:#3730a3;padding:8px 12px}
+#micAlert .mbtns button.pri{background:#4338ca;border-color:#4338ca;color:#fff}
+.qmic.wait{background:#fde68a;border-color:#f59e0b;color:#92400e}
+.qbox{margin-top:12px;border:1px solid #e0e7ff;border-radius:16px;padding:10px 12px;background:#fafaff}
+.qbox .qh{display:flex;justify-content:space-between;align-items:center;font-size:13px;font-weight:700;color:#4338ca;margin-bottom:6px}
+.qbox .qh small{font-weight:600;color:#94a3b8}
+.qbox textarea{width:100%;min-height:58px;font-size:15px;line-height:1.5;border:1px solid #c7d2fe;border-radius:12px;padding:8px 10px;font-family:inherit;resize:vertical;color:#1f2937;background:#fff}
+.fv{padding:10px 16px;border-bottom:1px solid #f1f5f9;font-size:14px;line-height:1.5}
+.fv .fh{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.fv .fn{color:var(--acc);font-weight:800;cursor:pointer}
+.fv .fe{color:#111827;margin-top:2px}.fv .fz{color:#0f766e;font-size:13px}.fv .fq{color:#9a3412;background:#fff7ed;border-radius:10px;padding:6px 9px;margin-top:5px;white-space:pre-wrap}
+.fv .del{border:0;background:#f1f5f9;color:#64748b;border-radius:10px;padding:5px 10px;font-size:12px}
+.pbar{display:flex;gap:8px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid #eef2ff;background:#f8fafc}
+.pbar .chip{font-size:13px}
+#copyBox{display:none;padding:10px 16px}#copyBox textarea{width:100%;min-height:160px;font-size:13px;border:1px solid #c7d2fe;border-radius:10px;padding:8px}
+.item .q{color:#ea580c;font-size:12px}
+.bar{height:8px;background:#eef2ff;border-radius:99px;margin:12px 0 4px;overflow:hidden;cursor:pointer;position:relative}
+.bar i{position:absolute;top:0;bottom:0;width:2px;background:#fff;opacity:.9}
+.bar>div{height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));border-radius:99px;transition:width .2s}
+.segbar{height:4px;background:#f1f5f9;border-radius:99px;overflow:hidden;margin-bottom:10px}
+.segbar>div{height:100%;width:0;background:var(--star)}
+.sub-box{min-height:150px;border-radius:16px;background:linear-gradient(135deg,#f5f3ff,#ecfeff);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:18px 14px;cursor:pointer;user-select:none;border:2px dashed #c7d2fe;transition:.2s}
+.sub-box.show{border-style:solid;border-color:transparent;background:#f8fafc}
+.hint{color:#818cf8;font-size:15px}
+.hint b{display:block;font-size:34px;margin-bottom:6px}
+.en{font-size:20px;line-height:1.5;color:#111827;font-weight:500}
+.zh{font-size:16px;line-height:1.6;color:#0f766e;margin-top:10px;padding-top:10px;border-top:1px solid #e5e7eb;width:100%}
+.zh .mt{font-size:11px;color:#9ca3af;margin-left:4px}
+.ctrls{display:grid;grid-template-columns:1fr 1fr 1.3fr 1fr;gap:10px;margin-top:16px}
+.sep{height:1px;background:#e5e7eb;margin:20px 0 4px}
+.chap{font-size:12px;color:#4338ca;font-weight:700;margin-top:4px;min-height:16px}
+.jump{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.jump select,.jump input{font-size:14px;border:1px solid #c7d2fe;border-radius:12px;padding:7px 8px;background:#fff;color:#1f2937}
+.jump select{max-width:100%;flex:1 1 200px}
+.jump input{width:76px}
+.jump .lb{font-size:13px;color:#64748b;font-weight:600}
+.chead{padding:9px 16px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:13px;position:sticky;top:0;z-index:1}
+.study{padding:4px 18px 16px;border-top:1px solid #eef2ff;font-size:14px;line-height:1.6;color:#1f2937}
+.study h3{font-size:14px;margin:14px 0 6px;color:#312e81}
+.study ol{margin:0;padding-left:20px}
+.study details{margin-top:12px;border:1px solid #e0e7ff;border-radius:14px;padding:4px 12px}
+.study details>summary{padding:8px 0;font-weight:700;color:#0f766e;cursor:pointer;list-style:none}
+.study details>summary::-webkit-details-marker{display:none}
+.ks{padding:8px 0;border-top:1px dashed #e5e7eb}
+.ks .go{color:var(--acc);font-weight:800;cursor:pointer;margin-right:4px}
+.ks .ke{color:#111827}
+.ks .kz{color:#0f766e;font-size:13px}
+.ks .kw{color:#6b7280;font-size:13px}
+.wd{padding:6px 0;border-top:1px dashed #e5e7eb}
+.wd b{color:#111827}
+.wd .ip{color:#6b7280;font-size:12px;margin:0 4px}
+.wd .nt{color:#6b7280;font-size:12px}
+.tag{font-size:11px;background:#fef3c7;color:#92400e;border-radius:6px;padding:0 5px;margin-left:4px}
+.btn{border:0;border-radius:18px;height:66px;font-size:28px;background:#eef2ff;color:var(--acc);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:transform .08s}
+.btn span{font-size:11px;margin-top:2px;font-weight:600;opacity:.8}
+.btn:active{transform:scale(.94)}
+.btn.play{background:linear-gradient(135deg,var(--acc),var(--acc2));color:#fff;box-shadow:0 6px 18px rgba(99,102,241,.45)}
+.opts{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-top:16px}
+.speeds{display:flex;gap:6px}
+.chip{border:0;border-radius:99px;padding:9px 13px;font-size:14px;background:#f1f5f9;color:#334155;cursor:pointer;font-weight:600}
+.chip.on{background:var(--acc);color:#fff}
+.chip.staron{background:var(--star);color:#fff}
+.reps{display:flex;gap:6px;align-items:center}
+.reps .lb{font-size:13px;color:#64748b;font-weight:600;margin-right:2px}
+.cnt{font-size:12px;font-weight:700;color:#0f766e;background:#ecfeff;border-radius:99px;padding:3px 9px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cnt.gap{opacity:.55}
+.toggle{display:flex;align-items:center;gap:6px;font-size:14px;color:#334155;cursor:pointer}
+.toggle input{width:20px;height:20px;accent-color:var(--acc)}
+.panel{margin-top:14px;background:rgba(255,255,255,.96);border-radius:22px;box-shadow:0 12px 40px rgba(0,0,0,.2);overflow:hidden}
+.panel summary{list-style:none;padding:15px 18px;font-weight:700;cursor:pointer;display:flex;justify-content:space-between;color:#312e81}
+.panel summary::-webkit-details-marker{display:none}
+.list{max-height:55vh;overflow:auto;border-top:1px solid #eef2ff}
+.item{display:flex;gap:10px;padding:11px 16px;border-bottom:1px solid #f1f5f9;cursor:pointer;font-size:14px;line-height:1.45;align-items:flex-start}
+.item:hover{background:#f8fafc}
+.item.cur{background:#eef2ff}
+.item .i{color:var(--acc);font-weight:700;min-width:30px;font-variant-numeric:tabular-nums}
+.item .t{color:#94a3b8;font-size:11px;min-width:38px;padding-top:2px}
+.item .x{flex:1;color:#334155}
+.item .tx{flex:1;min-width:0}
+.item .x{display:block;color:#334155}
+.item .z{display:block;color:#0f766e;font-size:13px;margin-top:2px}
+.list.blur[data-m=hide] .x{filter:blur(4px)}
+.list[data-m=hide] .z,.list[data-m=en] .z,.list[data-m=zh] .x{display:none}
+.subs .chip{padding:9px 11px}
+.item .s{color:var(--star)}
+.kbd{color:rgba(255,255,255,.65);font-size:12px;text-align:center;margin-top:14px}
+.empty{padding:16px;color:var(--muted);font-size:14px}
+#loading{color:#fff;text-align:center;padding:40px;font-size:15px}
+/* 指环遥控 (ring remote) */
+html.remote,html.remote body{overflow:hidden;touch-action:none;overscroll-behavior:none}
+.chip.remon{background:#0f766e;color:#fff}
+#remoteExit{display:none;position:fixed;bottom:calc(10px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:40;border:0;border-radius:99px;padding:8px 12px;font-size:13px;font-weight:700;background:rgba(15,118,110,.92);color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+html.remote #remoteExit{display:block}
+.ezone{display:none;position:fixed;top:0;bottom:0;width:15vw;z-index:30;background:transparent;pointer-events:none}   /* visual flash only: edge taps are detected by x-position so buttons/⭐ under the edge keep working */
+#ezL{left:0}#ezR{right:0}
+html.remote .ezone{display:block}
+.ezone.flash{background:rgba(15,118,110,.12)}
+.diaglink{font-size:12px;color:#94a3b8;text-decoration:underline;cursor:pointer}
+.rtip{font-size:12px;color:#0f766e;background:#ecfeff;border-radius:12px;padding:7px 10px;margin-top:10px;line-height:1.5}
+.btn.hit{box-shadow:0 0 0 4px #fbbf24;transform:scale(.94)}
+#diag{position:fixed;left:8px;right:8px;bottom:8px;z-index:50;background:rgba(15,23,42,.93);color:#a7f3d0;border-radius:14px;padding:8px 10px;font:12px/1.45 ui-monospace,Menlo,monospace;pointer-events:none;max-width:624px;margin:0 auto}
+#diag .dh{display:flex;justify-content:space-between;align-items:center;color:#fde68a;font-weight:700;margin-bottom:4px}
+#diag .dh{gap:8px}#diag .dh span:last-child{display:flex;gap:6px;flex-shrink:0}#diag button{white-space:nowrap}
+#diag button{pointer-events:auto;border:0;border-radius:10px;padding:8px 16px;background:#334155;color:#fff;font-size:12px}
+#diag pre{margin:0;white-space:pre-wrap;word-break:break-all;min-height:6em;font:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><h1>🎧 逐句精听 · How to read CursorBench</h1><div class="sub"><b style='color:#fde68a'>📅 2026-11-22</b> · Matt Palmer · 3:26 · 38 句 · 5 章 · 每句有讲解 · <a style='color:#a5f3fc' href='https://www.youtube.com/watch?v=IhyHUhPrsJk'>原视频</a></div></header><!--PV--><style id="pvcss">
+.pv{margin:0 0 14px}.pv>summary{flex-wrap:wrap;gap:4px}.pv>summary small{font-weight:500;color:#6366f1;font-size:12px}
+.pvin{padding:0 12px 14px}.pvtip{font-size:13px;color:#64748b;margin:0 4px 10px;line-height:1.55}
+.pvs{border:1px solid #e0e7ff;border-radius:16px;margin:0 0 10px;background:#f8faff;overflow:hidden}
+.pvs>summary{list-style:none;cursor:pointer;padding:12px 14px;font-weight:700;color:#3730a3;font-size:15px;display:flex;justify-content:space-between;gap:8px}
+.pvs>summary::-webkit-details-marker{display:none}.pvs>summary:after{content:"▾";color:#818cf8}.pvs[open]>summary:after{content:"▴"}
+.pvl{padding:0 10px 10px;display:flex;flex-direction:column;gap:8px}
+.pvc{background:#fff;border-radius:12px;padding:10px 12px;box-shadow:0 1px 3px rgba(49,46,129,.08);font-size:14px;line-height:1.6;color:#1e293b;overflow-wrap:anywhere}
+.pvc .t{font-weight:700;color:#1e1b4b;font-size:15px}.pvc .t span{font-weight:500;color:#0f766e;margin-left:6px}
+.pvc .o{margin-top:6px;padding:6px 8px;border-left:3px solid #a5b4fc;background:#eef2ff;border-radius:6px;font-size:13.5px;color:#334155;cursor:pointer}
+.pvc .o mark{background:#fde68a;color:inherit;padding:0 2px;border-radius:3px}.pvc .o i{font-style:normal;color:#6366f1;font-size:12px;white-space:nowrap}
+.pvc .eg{margin-top:6px;font-size:13.5px;color:#334155}.pvc .eg span{display:block;color:#0f766e;font-size:13px}
+.pvc .en{font-size:15px;color:#111827}.pvc .zh{color:#0f766e;font-size:14px;margin-top:4px}
+.pvc .why{margin-top:6px;font-size:13.5px;color:#475569;background:#fff7ed;border-radius:8px;padding:6px 8px}
+.pvc .jb{margin-top:8px;border:0;border-radius:999px;background:#4f46e5;color:#fff;padding:7px 14px;font-size:13px}
+.pvh{font-weight:800;color:#4338ca;font-size:13px;margin:6px 2px 0;padding:4px 10px;background:#e0e7ff;border-radius:999px;align-self:flex-start}
+.pvmap{margin:0 2px 12px;padding:10px;border-radius:14px;background:#fff;border:1px solid #e0e7ff}.pvmap .mt{font-weight:800;color:#3730a3;font-size:13px;margin-bottom:8px}
+.pvflow{display:flex;flex-wrap:wrap;align-items:center;gap:6px}.pvflow .b{background:#eef2ff;border-radius:10px;padding:6px 9px;font-size:13px;color:#1e1b4b;line-height:1.35;text-align:center}.pvflow .b small{display:block;color:#6366f1;font-size:11px}.pvflow .a{color:#a5b4fc;font-weight:800}
+.pvframe{margin-top:8px;font-size:12.5px;color:#92400e;background:#fffbeb;border-radius:8px;padding:5px 8px}
+.pvc .n{display:inline-block;background:#e0e7ff;color:#3730a3;border-radius:999px;padding:0 8px;font-size:12px;margin-right:6px}
+</style><details class="panel pv" id="pvPanel" open><summary><span>📖 预习（听之前先看）</span><small>背景 9 · 生词 30 · 难句 12 · 展开 / 收起</small></summary><div class="pvin"><div class="pvmap"><h3>本课路线：先学会读图，再学会选模型</h3><ol><li>读图：<a href="#" onclick="pvJump(1);return false">怎么读这张图｜1–8</a> → <a href="#" onclick="pvJump(9);return false">多花一美元能换来什么｜9–15</a></li><li>比较：<a href="#" onclick="pvJump(16);return false">Opus 5.5 对比 Sonnet 5.5｜16–23</a></li><li>选择：<a href="#" onclick="pvJump(24);return false">成本只是难度的替代指标｜24–32</a> → <a href="#" onclick="pvJump(33);return false">Cursor 的模型路由｜33–38</a></li></ol><div class="pvflow"><div class="b">纵轴 = 得分<small>越高越好</small></div><span class="a">＋</span><div class="b">横轴 = 每任务成本（反向）<small>越右越便宜</small></div><span class="a">→</span><div class="b">斜率 = 每美元多几分<small>拐点后变平</small></div><span class="a">→</span><div class="b">按难度选“达标又最便宜”的点<small>最靠右</small></div><span class="a">→</span><div class="b">谁来判断难度？<small>Cursor Router（Auto）</small></div></div><div class="pvframe"><strong>精听提示：</strong>全片只有 3 分半，但数字很密：5.1 分/美元、0 分/美元、1.5 美元、4.1 分、4 美元、45%、55%、37 美分、1.17 美元。版本号 5.5 读作 five five。先听方向词（higher / further right / cross / closes），再记数字。</div><div class="pvframe"><strong>Lily 的迁移练习：</strong>用第 9、13 句的说法讲加班：“What does an extra hour of overtime get us? After ten hours, the curve flattens — that&#39;s the knee.” 再用第 36 句讲选供应商：“We pick the cheapest supplier likely to meet our quality standard.”</div></div><div class="pvtip">先看背景、过一遍生词，再去听。疑难句点“▶ 跳到第 N 句练”直接跳到那句反复听。</div><details class="pvs" open><summary>🔧 1. 科技背景（9）</summary><div class="pvl"><div class="pvc"><div class="t">Matt Palmer 与这期视频</div>Matt Palmer 是本站其他 Matt 精听视频的同一位讲解者。这期（2026-11-22 上传，3 分 26 秒）讲怎么看 CursorBench 的“得分—成本”图，以及怎么按任务选模型和推理强度。视频简介原文：How to read a CursorBench chart, and how to pick a model and effort level for a task。</div><div class="pvc"><div class="t">CursorBench 是什么</div>CursorBench 是 Cursor（AI 编程工具）自己的模型评测基准（benchmark）。据 Cursor 官网：题目来自工程师真实使用 Cursor 的会话，多是描述模糊、牵涉多个文件的编程任务；分数越高越好；由 AI 评分器（agentic graders）打分。因为题目来自内部真实使用、而不是公开代码库，Cursor 认为它比公开基准更贴近开发者的实际需求。</div><div class="pvc"><div class="t">图上的两条轴</div>纵轴（y-axis）= CursorBench 得分（%），越高越好。横轴（x-axis）= 平均每个任务的成本（美元），但方向是反的（inverted）：越往右越便宜。所以“好又便宜”的点在右上角。这一点最容易看反。</div><div class="pvc"><div class="t">每个点、每条线代表什么</div>每个点 = 同一个模型的一档推理强度（effort / thinking level：low、medium、high、extra high、max）。同一个模型的点用一条线连起来。档位越高，模型想得越多，一般用的 token 越多、成本越高，分数也可能更高。</div><div class="pvc"><div class="t">斜率与拐点（knee）</div>两点之间的斜率 = 多花一美元多得几分。视频里的 Opus 5.5：low → medium 约 5.1 分/美元；high → extra high 是 0 分/美元，所以 high 是“拐点”，再往上加钱不加分。这和工厂里“加班超过某个时长，产量不再增加”是一个道理。</div><div class="pvc"><div class="t">成本是怎么算的</div>据 CursorBench 官网说明：平均每任务成本 = 按各模型公开的每百万 token 价格（输入、缓存读、缓存写、输出），乘以它在每个任务上实际用掉的 token 数，是“算出来的”，不是账单上的实际费用。官网还提醒：结果有波动，分数相差很小时，不一定有统计意义。</div><div class="pvc"><div class="t">读图时别犯的错</div>① 只能在同一版本内比较：CursorBench 会定期换题（3.0、3.1、3.2、4.0，2026-11-18 起是 4.1），换版后分数会变。② 视频里的数字是录制时那张图上的。按 2026-11-23 查看的官网 4.1 版，数字已经不同，例如 Opus 5.5 Low 约 $1.43/任务，Extra High 比 High 高 2.2 分。所以学的是读图方法，不要把视频数字当成当前排名。（视频用的是哪个版本，视频里没说。）</div><div class="pvc"><div class="t">Opus、Sonnet 是什么</div>Opus 和 Sonnet 是 Anthropic 公司 Claude 系列的模型：Opus 是能力最强、价格最高的一档，Sonnet 是中档（还有更小的 Haiku）。版本号 5.5 口语读作 five five。</div><div class="pvc"><div class="t">模型路由（Cursor Router / Auto）</div>据 Cursor 文档：Cursor Router 是 Auto 模式背后的路由系统，会判断每个请求的类型和复杂度，简单请求交给快速、省钱的模型，复杂工作交给能力最强的模型，尽量选“效果相当、又最省钱”的那个。用户在模型选择里选 Auto 即可；文档写明，这项功能目前只在 Teams 和 Enterprise 版提供。</div></div></details><details class="pvs"><summary>📝 2. 生词和词组（30）</summary><div class="pvl"><div class="pvc"><div class="t">read a chart<span>看懂图表</span></div><div class="o" onclick="pvJump(1)"><span class="n">#1</span>So how do we <mark>read a chart</mark> like this? <i>▶ 跳到这句</i></div><div class="eg">🏭 Can you help the new supervisor read the control chart?<span>你能帮新来的主管看懂这张控制图吗？</span></div></div><div class="pvc"><div class="t">inverted<span>反向的、倒置的</span></div><div class="o" onclick="pvJump(2)"><span class="n">#2</span>Well, the y-axis is the score, and the x-axis, <mark>inverted</mark>, is the cost per task. <i>▶ 跳到这句</i></div><div class="eg">🏭 The scale is inverted, so the best results are on the right.<span>刻度是反着的，所以最好的结果在右边。</span></div></div><div class="pvc"><div class="t">cost per task<span>每任务成本</span></div><div class="o" onclick="pvJump(2)"><span class="n">#2</span>Well, the y-axis is the score, and the x-axis, inverted, is the <mark>cost per task</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Our cost per unit dropped to 12 baht this month.<span>这个月我们的单件成本降到了 12 泰铢。</span></div></div><div class="pvc"><div class="t">effort setting<span>推理强度档位</span></div><div class="o" onclick="pvJump(4)"><span class="n">#4</span>Each dot is an <mark>effort setting</mark> of Opus from low to max. <i>▶ 跳到这句</i></div><div class="eg">🏭 We run the dryer at a higher setting for thick parts.<span>厚件我们把烘干机开到更高档。</span></div></div><div class="pvc"><div class="t">bottom right<span>右下角</span></div><div class="o" onclick="pvJump(7)"><span class="n">#7</span>So low effort on the <mark>bottom right</mark> has the lowest score, but also the lowest cost. <i>▶ 跳到这句</i></div><div class="eg">🏭 The total is on the bottom right of the form.<span>总数在表格右下角。</span></div></div><div class="pvc"><div class="t">run (n.)<span>一次运行/一批次</span></div><div class="o" onclick="pvJump(8)"><span class="n">#8</span>A line joins <mark>each run</mark> from low effort to maximum effort. <i>▶ 跳到这句</i></div><div class="eg">🏭 This production run is 5,000 pieces.<span>这一批次生产 5000 件。</span></div></div><div class="pvc"><div class="t">slope<span>斜率</span></div><div class="o" onclick="pvJump(9)"><span class="n">#9</span>The <mark>slope</mark> of each curve describes what an extra dollar gets you in terms of performance on… <i>▶ 跳到这句</i></div><div class="eg">🏭 The slope is steep at first, then it flattens.<span>斜率一开始很陡，后面就变平了。</span></div></div><div class="pvc"><div class="t">what ... gets you<span>能换来什么</span></div><div class="o" onclick="pvJump(9)"><span class="n">#9</span>The slope of each curve describes <mark>what an extra dollar gets you</mark> in terms of performance on CursorBench. <i>▶ 跳到这句</i></div><div class="eg">🏭 Let&#x27;s see what an extra shift gets us in output.<span>看看加一个班能多出多少产量。</span></div></div><div class="pvc"><div class="t">in terms of<span>就……而言</span></div><div class="o" onclick="pvJump(9)"><span class="n">#9</span>The slope of each curve describes what an extra dollar gets you <mark>in terms of</mark> performance on CursorBench. <i>▶ 跳到这句</i></div><div class="eg">🏭 In terms of quality, the new mold is much better.<span>从质量上看，新模具好得多。</span></div></div><div class="pvc"><div class="t">per dollar spent<span>每花一美元</span></div><div class="o" onclick="pvJump(11)"><span class="n">#11</span>So from low to medium, you get about 5.1 points <mark>per dollar spent</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 We saved about 3 baht per hour spent on training.<span>培训每投入一小时，大约能省 3 泰铢。</span></div></div><div class="pvc"><div class="t">contrast that with<span>拿……对比</span></div><div class="o" onclick="pvJump(12)"><span class="n">#12</span><mark>Contrast that</mark> from high to extra high, where you actually get zero points per dollar. <i>▶ 跳到这句</i></div><div class="eg">🏭 Contrast that with last year, when we had no returns at all.<span>对比一下去年，那时我们一单退货都没有。</span></div></div><div class="pvc"><div class="t">knee<span>拐点</span></div><div class="o" onclick="pvJump(13)"><span class="n">#13</span>That makes high a <mark>knee</mark> of sorts, which is where the curve flattens. <i>▶ 跳到这句</i></div><div class="eg">🏭 Overtime past ten hours is the knee — output barely goes up.<span>加班超过十小时就是拐点，产量几乎不再增加。</span></div></div><div class="pvc"><div class="t">of sorts<span>算是某种……</span></div><div class="o" onclick="pvJump(13)"><span class="n">#13</span>That makes high a knee <mark>of sorts</mark>, which is where the curve flattens. <i>▶ 跳到这句</i></div><div class="eg">🏭 We have a backup plan of sorts.<span>我们算是有个备用方案吧。</span></div></div><div class="pvc"><div class="t">flatten<span>变平</span></div><div class="o" onclick="pvJump(13)"><span class="n">#13</span>That makes high a knee of sorts, which is where the curve <mark>flattens</mark>. <i>▶ 跳到这句</i></div><div class="eg">🏭 Sales growth flattened in the third quarter.<span>第三季度销售增长趋于平缓。</span></div></div><div class="pvc"><div class="t">trade-off<span>权衡、取舍</span></div><div class="o" onclick="pvJump(14)"><span class="n">#14</span>This is often a good place to consider the <mark>trade-off</mark> on extra cost and higher thinking levels. <i>▶ 跳到这句</i></div><div class="eg">🏭 There&#x27;s a trade-off between speed and quality on this line.<span>这条线上速度和质量之间要做取舍。</span></div></div><div class="pvc"><div class="t">no higher<span>并不更高</span></div><div class="o" onclick="pvJump(15)"><span class="n">#15</span>Extra high costs more than high and scores <mark>no higher</mark> on CursorBench. <i>▶ 跳到这句</i></div><div class="eg">🏭 The new machine costs more and runs no faster.<span>新机器更贵，可速度一点也不快。</span></div></div><div class="pvc"><div class="t">lead by<span>领先（多少）</span></div><div class="o" onclick="pvJump(18)"><span class="n">#18</span>Now under $1.50 per task, Sonnet 5.5 <mark>leads by</mark> about 4.1 points on CursorBench. <i>▶ 跳到这句</i></div><div class="eg">🏭 Line 1 leads by about 300 pieces this week.<span>这周 1 号线领先大约 300 件。</span></div></div><div class="pvc"><div class="t">the gap closes<span>差距缩小</span></div><div class="o" onclick="pvJump(20)"><span class="n">#20</span>Now notably <mark>that gap closes</mark> as we approach extra high for Opus and max for Sonnet. <i>▶ 跳到这句</i></div><div class="eg">🏭 The gap between plan and actual is closing.<span>计划和实际的差距在缩小。</span></div></div><div class="pvc"><div class="t">ultimately<span>最终</span></div><div class="o" onclick="pvJump(21)"><span class="n">#21</span><mark>Ultimately</mark>, Opus 5.5 scores higher on max versus Sonnet 5.5, though the maximum cost for Sonnet is… <i>▶ 跳到这句</i></div><div class="eg">🏭 Ultimately, the customer decides the spec.<span>归根结底，规格由客户定。</span></div></div><div class="pvc"><div class="t">indicate<span>表明</span></div><div class="o" onclick="pvJump(22)"><span class="n">#22</span>That <mark>indicates</mark> that Opus can work for longer durations and ultimately achieve more complex tasks. <i>▶ 跳到这句</i></div><div class="eg">🏭 The data indicates that the mold is wearing out.<span>数据表明模具在磨损。</span></div></div><div class="pvc"><div class="t">proxy for<span>……的替代指标</span></div><div class="o" onclick="pvJump(25)"><span class="n">#25</span>But that doesn&#x27;t really mean much, and cost per task is just a <mark>proxy for</mark> difficulty. <i>▶ 跳到这句</i></div><div class="eg">🏭 We use overtime hours as a proxy for workload.<span>我们用加班时数来间接衡量工作量。</span></div></div><div class="pvc"><div class="t">for a given<span>对于某个给定的</span></div><div class="o" onclick="pvJump(26)"><span class="n">#26</span>Basically, these curves are asking, <mark>for a given</mark> task difficulty, which model and effort level should we select? <i>▶ 跳到这句</i></div><div class="eg">🏭 For a given order size, which machine is cheapest to run?<span>对于一定的订单量，哪台机器运行成本最低？</span></div></div><div class="pvc"><div class="t">i.e.<span>也就是</span></div><div class="o" onclick="pvJump(28)"><span class="n">#28</span>We&#x27;d want the model that&#x27;s cheapest to meet that 45% score, <mark>i.e.</mark> the model furthest to the right. <i>▶ 跳到这句</i></div><div class="eg">🏭 Ship it by the fastest route, i.e. by air.<span>走最快的方式发货，也就是空运。</span></div></div><div class="pvc"><div class="t">go with<span>选定、采用</span></div><div class="o" onclick="pvJump(29)"><span class="n">#29</span>Now, if a harder task needs 55%, again, we <mark>go with</mark> the point furthest to the right that meets that score. <i>▶ 跳到这句</i></div><div class="eg">🏭 Let&#x27;s go with the second quote.<span>我们就选第二个报价吧。</span></div></div><div class="pvc"><div class="t">end up doing<span>最后落得</span></div><div class="o" onclick="pvJump(30)"><span class="n">#30</span>So, the harder task <mark>ends up costing</mark> more. <i>▶ 跳到这句</i></div><div class="eg">🏭 Cheap material often ends up costing more in rework.<span>便宜的材料返工下来往往反而更贵。</span></div></div><div class="pvc"><div class="t">judge<span>判断</span></div><div class="o" onclick="pvJump(31)"><span class="n">#31</span>But what we&#x27;re really asking is, how do we <mark>judge</mark> how hard a task is? <i>▶ 跳到这句</i></div><div class="eg">🏭 It&#x27;s hard to judge how much stock we need for Songkran.<span>很难判断泼水节要备多少库存。</span></div></div><div class="pvc"><div class="t">model router<span>模型路由器</span></div><div class="o" onclick="pvJump(33)"><span class="n">#33</span>And that&#x27;s exactly the question a <mark>model router</mark> can answer. <i>▶ 跳到这句</i></div><div class="eg">🏭 Our scheduler routes each order to the right machine.<span>我们的排产系统会把每张订单派到合适的机台。</span></div></div><div class="pvc"><div class="t">whereas<span>而（对比）</span></div><div class="o" onclick="pvJump(35)"><span class="n">#35</span>So, simple asks can go to our fastest, most efficient models, <mark>whereas</mark> everyday work might go to a mid-tier model, and hard problems can go to the most capable… <i>▶ 跳到这句</i></div><div class="eg">🏭 Line 1 runs two shifts, whereas Line 2 runs three.<span>1 号线开两班，而 2 号线开三班。</span></div></div><div class="pvc"><div class="t">mid-tier<span>中档的</span></div><div class="o" onclick="pvJump(35)"><span class="n">#35</span>…asks can go to our fastest, most efficient models, whereas everyday work might go to a <mark>mid-tier</mark> model, and hard problems can go to the most capable models. <i>▶ 跳到这句</i></div><div class="eg">🏭 We source mid-tier resin for local customers.<span>本地客户我们用中档树脂。</span></div></div><div class="pvc"><div class="t">at any given point<span>任何时候</span></div><div class="o" onclick="pvJump(36)"><span class="n">#36</span>So, <mark>at any given point</mark>, we&#x27;re selecting the cheapest model likely to perform a given task. <i>▶ 跳到这句</i></div><div class="eg">🏭 At any given point, we keep two days of stock.<span>我们任何时候都保留两天的库存。</span></div></div></div></details><details class="pvs"><summary>🧩 3. 疑难句（12）</summary><div class="pvl"><div class="pvc"><div class="en"><span class="n">#2</span>Well, the y-axis is the score, and the x-axis, inverted, is the cost per task.</div><div class="zh">嗯，纵轴是得分；横轴是每个任务的成本，而且是反过来画的。</div><div class="why">🧩 插入语 inverted 前后都有停顿：the x-axis, (inverted,) is the cost per task。意思是横轴反向：越往右越便宜。整段读图都靠这个前提。</div><button class="jb" type="button" onclick="pvJump(2)">▶ 跳到第 2 句练</button></div><div class="pvc"><div class="en"><span class="n">#9</span>The slope of each curve describes what an extra dollar gets you in terms of performance on CursorBench.</div><div class="zh">每条曲线的斜率说明：多花一美元，能在 CursorBench 上换来多少性能提升。</div><div class="why">🧩 长主语 + 宾语从句：The slope of each curve | describes | what an extra dollar gets you | in terms of performance on CursorBench。先抓 slope 和 extra dollar。</div><button class="jb" type="button" onclick="pvJump(9)">▶ 跳到第 9 句练</button></div><div class="pvc"><div class="en"><span class="n">#12</span>Contrast that from high to extra high, where you actually get zero points per dollar.</div><div class="zh">再对比从 high 到 extra high 这一段：每多花一美元，得分其实一分不涨。</div><div class="why">🧩 Contrast that (with) ...：Matt 口语说成 from high to extra high，没有 with。where 指“这一段里”。zero points per dollar = 多花钱不涨分。</div><button class="jb" type="button" onclick="pvJump(12)">▶ 跳到第 12 句练</button></div><div class="pvc"><div class="en"><span class="n">#13</span>That makes high a knee of sorts, which is where the curve flattens.</div><div class="zh">所以 high 档算是一个“拐点”，曲线从这里开始变平。</div><div class="why">🧩 makes high a knee of sorts：make + 宾语 + 名词；of sorts 让语气变弱（“算是个拐点”）；which is where ... 解释 knee 的意思。</div><button class="jb" type="button" onclick="pvJump(13)">▶ 跳到第 13 句练</button></div><div class="pvc"><div class="en"><span class="n">#18</span>Now under $1.50 per task, Sonnet 5.5 leads by about 4.1 points on CursorBench.</div><div class="zh">在每个任务 1.5 美元以下的范围里，Sonnet 5.5 在 CursorBench 上领先约 4.1 分。</div><div class="why">🧩 $1.50 口语读 a dollar fifty；leads by about 4.1 points：领先约 4.1 分。Whisper 在这一段漏听很多，以作者字幕和 YouTube 自动字幕为准（两者一致）。</div><button class="jb" type="button" onclick="pvJump(18)">▶ 跳到第 18 句练</button></div><div class="pvc"><div class="en"><span class="n">#19</span>Under $4 per task, Opus 5.5 leads Sonnet.</div><div class="zh">而在每个任务 4 美元以内（超过 1.5 美元之后）的这一段，Opus 5.5 领先 Sonnet。</div><div class="why">🧩 字面上 Under $4 和上句 under $1.50 有点冲突（1.5 美元以下也在 4 美元以下）。结合“曲线交叉”，更合理的理解是：超过约 1.5 美元以后、到 4 美元左右这一段，Opus 领先。这是根据上下文的推断，视频没有再解释。</div><button class="jb" type="button" onclick="pvJump(19)">▶ 跳到第 19 句练</button></div><div class="pvc"><div class="en"><span class="n">#21</span>Ultimately, Opus 5.5 scores higher on max versus Sonnet 5.5, though the maximum cost for Sonnet is much lower than Opus.</div><div class="zh">最终，在 max 档上，Opus 5.5 的得分比 Sonnet 5.5 高；不过 Sonnet 的最高成本比 Opus 低得多。</div><div class="why">🧩 Ultimately ... versus ..., though ...：先说 Opus 最高档得分更高，再用 though 补充 Sonnet 便宜得多。much lower than Opus 是口语省略，完整是 than Opus&#x27;s maximum cost。</div><button class="jb" type="button" onclick="pvJump(21)">▶ 跳到第 21 句练</button></div><div class="pvc"><div class="en"><span class="n">#23</span>At low thinking, Sonnet 5.5 is cheaper, about 37 cents for the lowest effort task versus $1.17 for Opus.</div><div class="zh">在低思考档，Sonnet 5.5 更便宜：最低档每个任务约 37 美分，而 Opus 要 1.17 美元。</div><div class="why">🧩 数字最密的一句：37 cents（美分）对 $1.17（美元），单位不同。低档 Sonnet 约便宜三分之二。</div><button class="jb" type="button" onclick="pvJump(23)">▶ 跳到第 23 句练</button></div><div class="pvc"><div class="en"><span class="n">#26</span>Basically, these curves are asking, for a given task difficulty, which model and effort level should we select?</div><div class="zh">说白了，这些曲线要回答的问题是：对于某个难度的任务，我们该选哪个模型、哪一档推理强度？</div><div class="why">🧩 转述问题时，口语保留了疑问语序 should we select（书面应为 which model ... we should select）。中间插入 for a given task difficulty。</div><button class="jb" type="button" onclick="pvJump(26)">▶ 跳到第 26 句练</button></div><div class="pvc"><div class="en"><span class="n">#28</span>We&#x27;d want the model that&#x27;s cheapest to meet that 45% score, i.e. the model furthest to the right.</div><div class="zh">我们要找的是能达到这个 45% 分数、又最便宜的模型，也就是图上最靠右的那个。</div><div class="why">🧩 i.e. 读作 /ˌaɪ ˈiː/，意思是“也就是”。the model that&#x27;s cheapest to meet that 45% score = 达到 45% 的模型里最便宜的那个；结合“越右越便宜”，就是最靠右的点。</div><button class="jb" type="button" onclick="pvJump(28)">▶ 跳到第 28 句练</button></div><div class="pvc"><div class="en"><span class="n">#35</span>So, simple asks can go to our fastest, most efficient models, whereas everyday work might go to a mid-tier model, and hard problems can go to the most capable models.</div><div class="zh">所以，简单的请求可以交给最快、最省的模型；日常工作可能交给中档模型；而难题则交给能力最强的模型。</div><div class="why">🧩 三段并列的长句：simple asks → fastest, most efficient；whereas everyday work → mid-tier；and hard problems → most capable。听的时候按“难度 → 模型档次”配对。</div><button class="jb" type="button" onclick="pvJump(35)">▶ 跳到第 35 句练</button></div><div class="pvc"><div class="en"><span class="n">#36</span>So, at any given point, we&#x27;re selecting the cheapest model likely to perform a given task.</div><div class="zh">所以，无论什么时候，我们选的都是有把握完成这个任务的模型里最便宜的那一个。</div><div class="why">🧩 the cheapest model (that is) likely to perform a given task：likely to 后置修饰 model。意思是“有把握完成的模型里最便宜的”，不是“最便宜的模型”。</div><button class="jb" type="button" onclick="pvJump(36)">▶ 跳到第 36 句练</button></div></div></details></div></details><script>
+function pvJump(n){try{var j=document.getElementById("jumpN");j.value=n;jumpTo();var a=document.getElementById("app");if(a&&a.style.display!=="none")a.scrollIntoView({behavior:"smooth",block:"start"});else window.scrollTo({top:0,behavior:"smooth"})}catch(e){console.log(e)}}
+(function(){var K="jt.pv."+location.pathname;document.querySelectorAll(".pv,.pv .pvs").forEach(function(d,i){try{var v=localStorage.getItem(K+i);if(v!==null)d.open=v==="1";d.addEventListener("toggle",function(){try{localStorage.setItem(K+i,d.open?"1":"0")}catch(e){}})}catch(e){}})})();
+</script><!--/PV-->
+<div id="loading" style="display:none"></div>
+<div id="ytbox" style="background:#000;border-radius:14px;overflow:hidden;margin:0 0 10px;aspect-ratio:16/9;max-height:34vh"><div id="yt" style="width:100%;height:100%"></div></div>
+<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 12px;font-size:13px;color:#e0e7ff"><button id="ccBtn" type="button" onclick="toggleCC()" style="border:0;border-radius:999px;padding:6px 12px;background:#fff;color:#3730a3;font-size:13px">🔤 视频英文字幕：关</button><span>视频由 YouTube 官方播放，按句自动跳转、重复。</span></div>
+<div class="card" id="app" style="display:none">
+  <div class="toprow">
+    <div class="num" id="num">1 <small>/ 1</small></div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><div class="time" id="tm">00:00</div><div class="cnt" id="cnt">第1遍</div></div>
+    <button class="star" id="star" title="收藏这句（S）"><b>☆</b><span>收藏</span></button>
+  </div>
+  <div class="chap" id="chap"></div>
+  <div class="bar" id="bar"><div id="barIn"></div></div>
+  <div class="segbar"><div id="segIn"></div></div>
+  <div class="sub-box" id="subbox"></div>
+  <details class="pts" id="ptsBox"><summary><span>💡 这句讲解（听懂了再看）</span><span id="ptsN"></span></summary><div id="ptsBody"></div></details>
+  <div class="qbox" id="qBox"><div class="qh"><span>❓ 这句我想问</span><span class="qtools"><small id="qState">自动保存在本机</small><button class="qlang" id="qLang" type="button" title="语音识别语言：中文 / 英文">中</button></span></div><div class="qwrap"><textarea id="qIn" rows="2" enterkeyhint="done" placeholder="哪里没听懂、哪个词不会用，写或点🎤说（自动保存）"></textarea><button class="qmic" id="qMic" type="button" title="语音提问：点一下开始说，再点一下停止">🎤<span id="qMicT">说</span></button></div><div class="qinterim" id="qInterim"></div><div class="qmsg" id="qMsg"></div></div>
+  <div class="ctrls">
+    <button class="btn" id="prev">⏮<span>上一句</span></button>
+    <button class="btn" id="rep">🔁<span>重听</span></button>
+    <button class="btn play" id="play">▶<span>播放</span></button>
+    <button class="btn" id="next">⏭<span>下一句</span></button>
+  </div>
+  <div class="sep"></div>
+  <div class="opts">
+    <div class="reps speeds" id="speeds"></div>
+  </div>
+  <div class="opts">
+    <div class="reps" id="reps"><span class="lb">每句</span></div>
+    <label class="toggle"><input type="checkbox" id="cont">连续播放</label>
+  </div>
+  <div class="opts">
+    <div class="reps subs" id="subs"><span class="lb">字幕</span></div>
+  </div>
+  <div class="opts">
+    <button class="chip" id="onlyStar">⭐ 只练收藏的 (<span id="starCnt">0</span>)</button>
+    <label class="toggle" id="blurLbl"><input type="checkbox" id="blurList" checked>列表遮住英文</label>
+  </div>
+  <div class="opts">
+    <button class="chip" id="remoteBtn">🎮 遥控模式：关</button>
+    <button class="chip" id="diagBtn">🔧 按键测试</button>
+  </div>
+  <div class="rtip" id="remoteTip" style="display:none">🎮 遥控模式（页面已锁定不滚动）：上滑 / 左滑 / 滚轮向下 / →↓ PageDown 键 / 点屏幕右边缘 = 下一句 · 下滑 / 右滑 / 滚轮向上 / ←↑ PageUp 键 / 点屏幕左边缘 = 上一句 · 点中间空白处 = 重听</div>
+  <div class="opts jump">
+    <select id="chapSel" style="display:none"></select>
+    <span class="lb">跳到第</span><input id="jumpN" type="number" inputmode="numeric" min="1" enterkeyhint="go"><span class="lb">句</span><button class="chip" id="jumpGo">跳</button>
+  </div>
+</div>
+<details class="panel" id="studyPanel" style="display:none">
+  <summary><span id="studyTitle">📘 本章学习</span><span>展开 / 收起</span></summary>
+  <div class="study" id="study"></div>
+</details>
+<details class="panel" id="favPanel">
+  <summary><span>⭐ 我的收藏</span><span id="favInfo">0 句</span></summary>
+  <div class="list" id="favList"></div>
+  <div class="pbar"><button class="chip" id="favCopy">📋 复制全部收藏</button><button class="chip" id="favPlay">▶ 只练收藏</button></div>
+</details>
+<details class="panel" id="qPanel">
+  <summary><span>❓ 我的提问</span><span id="qInfo">0 条</span></summary>
+  <div class="list" id="qList"></div>
+  <div class="pbar"><button class="chip" id="qCopy">📋 复制全部问题</button></div>
+</details>
+<div class="panel" id="copyBox"><div style="font-size:13px;color:#475569;margin-bottom:6px">自动复制没成功：长按下面的文字 → 全选 → 复制</div><textarea id="copyTxt" readonly></textarea><button class="chip" id="copyClose" style="margin-top:6px">关闭</button></div>
+<details class="panel" id="panel">
+  <summary><span>📜 句子列表</span><span id="listInfo"></span></summary>
+  <div class="list" id="list"></div>
+</details>
+<div class="kbd">每句默认 ∞ 无限重复，点 下一句 / 上一句 / 列表里的句子 才换句 · 倍速只有点“速度”按钮才会变<br>电脑快捷键：空格 = 重听 · ←/→ 或 ↑/↓ = 上/下一句 · P = 播放/暂停 · S = 收藏 · Enter = 显示字幕<br>蓝牙指环：→ ↓ PageDown / 下一曲 = 下一句 · ← ↑ PageUp / 上一曲 = 上一句 · 播放暂停键 = 播放/暂停 · 指环发的是滑动或滚轮的话，先点 🎮 遥控模式 打开 · 不确定指环发什么，点 🔧 按键测试 按一下看</div>
+</div>
+<div class="ezone" id="ezL"></div><div class="ezone" id="ezR"></div>
+<button id="remoteExit">🎮 退出遥控</button>
+<div id="toast"></div>
+<div id="micAlert" role="alertdialog"><div class="mt" id="maT"></div><div class="mb" id="maB"></div><div class="mbtns"><button class="pri" id="maKb" type="button">⌨️ 改用键盘语音输入</button><button id="maRetry" type="button">🎤 再试一次</button><button id="maX" type="button">知道了</button></div><div class="md" id="maD"></div></div>
+<div id="diag" style="display:none"><div class="dh"><span>🔧 按键测试：按一下指环，看这里显示什么</span><span><button id="diagC">清空</button><button id="diagX">关闭</button></span></div><pre id="diagLog">（等待信号…）</pre></div>
+
+<script>
+const SEGS=[{"s": 0.18, "e": 2.68, "en": "So how do we read a chart like this?", "zh": "那么，这样一张图该怎么看？", "pts": [{"k": "地道表达", "h": "So how do we", "x": "开场用 So 引出话题；用 we 而不是 you，把观众拉进来一起看，讲解时很常用。", "eg": "So how do we read this OEE report?", "egz": "那么，这份 OEE 报表我们该怎么看？"}, {"k": "词汇", "h": "read a chart", "x": "read 在这里是“看懂、解读”图表，不是朗读。read a chart / read a report 都很常用。", "eg": "Can you help the new supervisor read the control chart?", "egz": "你能帮新来的主管看懂这张控制图吗？"}, {"k": "发音", "h": "a chart like this", "x": "a 弱读成 /ə/，chart like 连在一起，this 落在句末、语调上扬成问句。", "eg": "Have you seen a chart like this before?", "egz": "你以前见过这样的图吗？"}]}, {"s": 2.68, "e": 8.58, "en": "Well, the y-axis is the score, and the x-axis, inverted, is the cost per task.", "zh": "嗯，纵轴是得分；横轴是每个任务的成本，而且是反过来画的。", "pts": [{"k": "术语", "h": "the y-axis is the score", "x": "y-axis /ˈwaɪ ˌæksɪs/ 纵轴，x-axis /ˈeks ˌæksɪs/ 横轴。讲图表先说清两条轴分别代表什么。", "eg": "On this chart, the y-axis is the scrap rate and the x-axis is the month.", "egz": "这张图上，纵轴是报废率，横轴是月份。"}, {"k": "词汇", "h": "inverted", "x": "倒置的、反向的。插在句中作补充说明：这张图的横轴越往右成本越低，和一般图表相反，读图时最容易看反。", "eg": "The scale is inverted, so the best results are on the right.", "egz": "刻度是反着的，所以最好的结果在右边。"}, {"k": "术语", "h": "cost per task", "x": "每个任务的（平均）成本，类似工厂里的 cost per unit（单件成本）。", "eg": "Our cost per unit dropped to 12 baht this month.", "egz": "这个月我们的单件成本降到了 12 泰铢。"}]}, {"s": 8.58, "e": 11.68, "en": "Let's pick one model here, Opus 5.5.", "zh": "我们先挑一个模型来看：Opus 5.5。", "pts": [{"k": "语法", "h": "Let's pick one model here", "x": "Let's + 动词原形，提议“我们来……”；here 指“在这张图上”。", "eg": "Let's pick one line here and check its downtime.", "egz": "我们挑一条产线，看看它的停机时间。"}, {"k": "听力技巧", "h": "Opus 5.5", "x": "版本号 5.5 口语里读成 five five，省掉 point，所以 YouTube 自动字幕记成 55。听到 “Opus five five” 就是 Opus 5.5。", "eg": "We're still on version two three of the ERP.", "egz": "我们的 ERP 还是 2.3 版。"}]}, {"s": 11.68, "e": 16.38, "en": "Each dot is an effort setting of Opus from low to max.", "zh": "图上每个点代表 Opus 的一档推理强度，从 low（低）一直到 max（最高）。", "pts": [{"k": "术语", "h": "effort setting", "x": "推理强度档位：同一个模型可以设成“多想一点”或“少想一点”。档位越高，一般用的 token 越多、成本越高。", "eg": "We run the dryer at a higher setting for thick parts.", "egz": "厚件我们把烘干机开到更高档。"}, {"k": "语法", "h": "from low to max", "x": "from A to B 表示范围；max 是 maximum 的口语缩写。", "eg": "Prices range from low to high depending on the order size.", "egz": "价格按订单量从低到高不等。"}, {"k": "词汇", "h": "dot", "x": "图上的点。Each dot is ... 是解释散点图的常用说法。", "eg": "Each dot is one production batch.", "egz": "每个点代表一个生产批次。"}]}, {"s": 16.38, "e": 18.88, "en": "Higher on the y-axis is better.", "zh": "在纵轴上越高越好。", "pts": [{"k": "语法", "h": "Higher on the y-axis", "x": "介词短语直接当主语，是口语的省略说法，完整意思是 Being higher on the y-axis。", "eg": "Lower on this chart is better, because it shows defects.", "egz": "这张图越低越好，因为它显示的是缺陷数。"}, {"k": "地道表达", "h": "is better", "x": "读图时说明“方向”的固定句式：Higher is better / Lower is better。", "eg": "For lead time, shorter is better.", "egz": "交期越短越好。"}]}, {"s": 18.88, "e": 21.78, "en": "Further right means lower cost.", "zh": "越往右，成本越低。", "pts": [{"k": "词汇", "h": "Further right", "x": "further 是 far 的比较级，further right = 再往右一些。", "eg": "Move the label a bit further right.", "egz": "把标签再往右挪一点。"}, {"k": "语法", "h": "means lower cost", "x": "A means B，用来解释图例或规则，非常实用。", "eg": "A red light means the machine has stopped.", "egz": "红灯表示机器停了。"}, {"k": "听力技巧", "h": "lower cost", "x": "和第 2 句的 inverted 呼应：越往右越便宜。先抓方向词 right / lower，再记结论。", "eg": "Further left means older stock.", "egz": "越往左表示库存越老。"}]}, {"s": 21.78, "e": 26.98, "en": "So low effort on the bottom right has the lowest score, but also the lowest cost.", "zh": "所以右下角的 low 档得分最低，但成本也最低。", "pts": [{"k": "词汇", "h": "on the bottom right", "x": "右下角。英语先说上下、再说左右（bottom right），和中文“右下”顺序相反。", "eg": "The total is on the bottom right of the form.", "egz": "总数在表格右下角。"}, {"k": "语法", "h": "the lowest score, but also the lowest cost", "x": "the lowest ..., but also the lowest ...：用两个最高级做对比，一句话说清得失。", "eg": "This supplier has the lowest price, but also the longest lead time.", "egz": "这家供应商价格最低，但交期也最长。"}]}, {"s": 26.98, "e": 31.08, "en": "A line joins each run from low effort to maximum effort.", "zh": "一条线把每次运行从最低档到最高档连了起来。", "pts": [{"k": "词汇", "h": "joins", "x": "join 这里是“连接”（把点连成线），不是“加入”。", "eg": "A conveyor joins the two workshops.", "egz": "一条输送带把两个车间连起来。"}, {"k": "术语", "h": "each run", "x": "run 是一次运行、一次测试跑分。工厂里 a production run 是“一批次生产”。", "eg": "This production run is 5,000 pieces.", "egz": "这一批次生产 5000 件。"}, {"k": "听力技巧", "h": "maximum effort", "x": "第 4 句说 max，这里说完整的 maximum，意思一样。", "eg": "Run the pump at maximum speed for five minutes.", "egz": "让泵以最高速运转五分钟。"}]}, {"s": 31.08, "e": 38.38, "en": "The slope of each curve describes what an extra dollar gets you in terms of performance on CursorBench.", "zh": "每条曲线的斜率说明：多花一美元，能在 CursorBench 上换来多少性能提升。", "pts": [{"k": "术语", "h": "The slope of each curve", "x": "slope 斜率、坡度。曲线越陡，说明多花的钱换来的提分越多；越平，说明钱花得越不值。", "eg": "The slope is steep at first, then it flattens.", "egz": "斜率一开始很陡，后面就变平了。"}, {"k": "地道表达", "h": "what an extra dollar gets you", "x": "get you sth. = 能给你换来什么。what ... gets you 是谈“投入产出”的常用口语。", "eg": "Let's see what an extra shift gets us in output.", "egz": "看看加一个班能多出多少产量。"}, {"k": "词汇", "h": "in terms of", "x": "就……而言、从……方面看。", "eg": "In terms of quality, the new mold is much better.", "egz": "从质量上看，新模具好得多。"}]}, {"s": 38.38, "e": 41.88, "en": "Notice the slope changes between effort levels.", "zh": "注意，不同档位之间，斜率是会变的。", "pts": [{"k": "语法", "h": "Notice the slope changes", "x": "Notice (that) + 从句，祈使句提醒听众注意，that 省略了。", "eg": "Notice the defect rate goes up on night shift.", "egz": "注意，夜班的不良率会上升。"}, {"k": "听力技巧", "h": "Notice", "x": "句首 Notice 说得很轻、很快，语音识别都容易漏掉；听到 the slope changes 前面那个轻音就是 Notice。", "eg": "Notice the price goes up after 1,000 pieces.", "egz": "注意，超过 1000 件价格就涨了。"}, {"k": "术语", "h": "effort levels", "x": "= effort settings，推理强度档位（low / medium / high / extra high / max）。", "eg": "We tested three pressure levels.", "egz": "我们测了三个压力档位。"}]}, {"s": 41.88, "e": 48.28, "en": "So from low to medium, you get about 5.1 points per dollar spent.", "zh": "比如从 low 到 medium，每多花一美元，大约能多得 5.1 分。", "pts": [{"k": "地道表达", "h": "points per dollar spent", "x": "每花一美元得多少分，就是“边际收益”。dollar spent 是过去分词后置修饰：花掉的每一美元。", "eg": "We saved about 3 baht per hour spent on training.", "egz": "培训每投入一小时，大约能省 3 泰铢。"}, {"k": "听力技巧", "h": "about 5.1", "x": "小数读作 five point one；about 提示是约数。数字要和单位 points per dollar 一起听。", "eg": "Yield improved by about 2.5 percent.", "egz": "良率提高了大约 2.5%。"}]}, {"s": 48.28, "e": 54.38, "en": "Contrast that from high to extra high, where you actually get zero points per dollar.", "zh": "再对比从 high 到 extra high 这一段：每多花一美元，得分其实一分不涨。", "pts": [{"k": "语法", "h": "Contrast that", "x": "祈使句“拿这个来对比”。标准搭配是 contrast A with B；这里 Matt 口语说成 contrast that from ...，听懂意思即可，自己说用 with。", "eg": "Contrast that with last year, when we had no returns at all.", "egz": "对比一下去年，那时我们一单退货都没有。"}, {"k": "语法", "h": "where you actually get", "x": "where 引导定语从句，指“在这一段里”，不一定指地点。", "eg": "There's a step in the process where most defects happen.", "egz": "流程里有一步是大多数缺陷发生的地方。"}, {"k": "词汇", "h": "actually", "x": "强调“出乎意料、其实”：多花钱竟然完全没涨分。", "eg": "The cheaper resin actually performed better.", "egz": "便宜的那种树脂其实表现更好。"}]}, {"s": 54.38, "e": 59.28, "en": "That makes high a knee of sorts, which is where the curve flattens.", "zh": "所以 high 档算是一个“拐点”，曲线从这里开始变平。", "pts": [{"k": "术语", "h": "a knee", "x": "knee（膝点、拐点）：曲线由陡变平的那个转折处，像膝盖弯曲的位置。过了这里，再加投入收益很小。", "eg": "Overtime past ten hours is the knee — output barely goes up.", "egz": "加班超过十小时就是拐点，产量几乎不再增加。"}, {"k": "地道表达", "h": "of sorts", "x": "放在名词后，表示“算是某种……、勉强算是”，语气不那么绝对。", "eg": "We have a backup plan of sorts.", "egz": "我们算是有个备用方案吧。"}, {"k": "语法", "h": "makes high a knee", "x": "make + 宾语 + 名词：使……成为……。", "eg": "That makes Line 2 our bottleneck.", "egz": "这就让 2 号线成了我们的瓶颈。"}, {"k": "词汇", "h": "flattens", "x": "flatten 变平；the curve flattens 曲线趋平，常用来说增长放缓。", "eg": "Sales growth flattened in the third quarter.", "egz": "第三季度销售增长趋于平缓。"}]}, {"s": 59.28, "e": 66.08, "en": "This is often a good place to consider the trade-off on extra cost and higher thinking levels.", "zh": "通常到了这里，就该权衡一下：多花的钱和更高的思考档位到底值不值。", "pts": [{"k": "词汇", "h": "trade-off", "x": "权衡、取舍：得到一样就要放弃另一样。consider the trade-off 考虑得失。", "eg": "There's a trade-off between speed and quality on this line.", "egz": "这条线上速度和质量之间要做取舍。"}, {"k": "术语", "h": "higher thinking levels", "x": "thinking level = effort level，模型“想多久、想多深”的档位。", "eg": "Higher temperature levels shorten the curing time.", "egz": "温度档位越高，固化时间越短。"}, {"k": "地道表达", "h": "a good place to consider", "x": "a good place to + 动词：一个适合做某事的节点（place 不一定是地点）。", "eg": "The month-end review is a good place to discuss the budget.", "egz": "月底复盘是讨论预算的好时机。"}]}, {"s": 66.08, "e": 71.68, "en": "Extra high costs more than high and scores no higher on CursorBench.", "zh": "extra high 比 high 贵，但在 CursorBench 上的得分一点也不比 high 高。", "pts": [{"k": "语法", "h": "costs more than high and scores no higher", "x": "一个主语带两个动词：costs ... and scores ...。no higher = 并不更高（比 not higher 更强调）。", "eg": "The new machine costs more and runs no faster.", "egz": "新机器更贵，可速度一点也不快。"}, {"k": "词汇", "h": "scores", "x": "score 作动词：得分、拿到……分。", "eg": "Our plant scored 92 in the customer audit.", "egz": "我们工厂在客户审核中得了 92 分。"}]}, {"s": 71.68, "e": 74.98, "en": "Now let's compare two models, Opus and Sonnet.", "zh": "接下来我们对比两个模型：Opus 和 Sonnet。", "pts": [{"k": "文化", "h": "Opus and Sonnet", "x": "Opus 和 Sonnet 都是 Anthropic 公司 Claude 系列的模型：Opus 是最强、最贵的“大杯”，Sonnet 是中档，还有更小的 Haiku。名字取自文学：巨著、十四行诗、俳句。", "eg": "We buy the premium grade for exports and the standard grade for local orders.", "egz": "出口单我们用高档料，本地单用标准料。"}, {"k": "语法", "h": "two models, Opus and Sonnet", "x": "逗号后面是同位语，具体说明是哪两个。", "eg": "We compared two suppliers, SCG and a local one.", "egz": "我们比较了两家供应商：SCG 和一家本地厂。"}]}, {"s": 74.98, "e": 76.98, "en": "Their curves cross.", "zh": "它们的曲线有交叉。", "pts": [{"k": "词汇", "h": "cross", "x": "交叉、相交。两条曲线交叉，说明在交点两边谁领先会对调。", "eg": "The cost lines cross at about 8,000 pieces.", "egz": "两条成本线大约在 8000 件处相交。"}, {"k": "听力技巧", "h": "Their curves cross", "x": "三个词的短句，Their 弱读，cross /krɔːs/ 是重音。这种短结论句很容易一闪而过。", "eg": "Their prices match.", "egz": "他们的价格一样。"}]}, {"s": 76.98, "e": 84.28, "en": "Now under $1.50 per task, Sonnet 5.5 leads by about 4.1 points on CursorBench.", "zh": "在每个任务 1.5 美元以下的范围里，Sonnet 5.5 在 CursorBench 上领先约 4.1 分。", "pts": [{"k": "听力技巧", "h": "$1.50", "x": "1.50 美元口语读作 a dollar fifty 或 one fifty，很少说 one point five dollars。", "eg": "The cap costs a dollar fifty each.", "egz": "瓶盖每个 1.5 美元。"}, {"k": "地道表达", "h": "leads by about 4.1 points", "x": "lead by + 差距：领先多少。也可说 is ahead by。", "eg": "Line 1 leads by about 300 pieces this week.", "egz": "这周 1 号线领先大约 300 件。"}, {"k": "词汇", "h": "under", "x": "under + 金额：低于、在……以内。", "eg": "We need a quote under 20 baht per piece.", "egz": "我们需要每件 20 泰铢以内的报价。"}]}, {"s": 84.28, "e": 88.68, "en": "Under $4 per task, Opus 5.5 leads Sonnet.", "zh": "而在每个任务 4 美元以内（超过 1.5 美元之后）的这一段，Opus 5.5 领先 Sonnet。", "pts": [{"k": "语法", "h": "leads Sonnet", "x": "lead 作及物动词：lead sb. = 领先某人，不需要介词。", "eg": "Our Thai plant now leads the Chinese plant on yield.", "egz": "我们泰国厂的良率现在领先中国厂。"}, {"k": "听力技巧", "h": "Under $4 per task", "x": "$4 读作 four dollars。注意和上一句 under $1.50 对照着听：两句结合起来，才说明曲线在 1.5 到 4 美元之间交叉。", "eg": "Under five days, we can only ship by air.", "egz": "五天以内的话，只能空运。"}]}, {"s": 88.68, "e": 95.88, "en": "Now notably that gap closes as we approach extra high for Opus and max for Sonnet.", "zh": "值得注意的是，当 Opus 接近 extra high、Sonnet 接近 max 时，这个差距会缩小。", "pts": [{"k": "词汇", "h": "notably", "x": "值得注意的是、尤其是，用来引出重点。", "eg": "Notably, returns fell after we changed the packaging.", "egz": "值得注意的是，换了包装以后退货少了。"}, {"k": "地道表达", "h": "that gap closes", "x": "the gap closes 差距缩小；反过来 the gap widens 差距拉大。", "eg": "The gap between plan and actual is closing.", "egz": "计划和实际的差距在缩小。"}, {"k": "语法", "h": "as we approach", "x": "as 表示“随着……”，approach 是及物动词，直接接宾语，不加 to。", "eg": "Costs rise as we approach peak season.", "egz": "临近旺季，成本会上升。"}]}, {"s": 95.88, "e": 106.38, "en": "Ultimately, Opus 5.5 scores higher on max versus Sonnet 5.5, though the maximum cost for Sonnet is much lower than Opus.", "zh": "最终，在 max 档上，Opus 5.5 的得分比 Sonnet 5.5 高；不过 Sonnet 的最高成本比 Opus 低得多。", "pts": [{"k": "词汇", "h": "Ultimately", "x": "最终、归根结底，用来给结论。", "eg": "Ultimately, the customer decides the spec.", "egz": "归根结底，规格由客户定。"}, {"k": "词汇", "h": "versus", "x": "对比、相对于（常缩写 vs.）。口语里 scores higher versus X = 比 X 得分高。", "eg": "Our defect rate is 0.8% versus 1.5% last year.", "egz": "我们的不良率是 0.8%，去年是 1.5%。"}, {"k": "语法", "h": "though the maximum cost", "x": "though 放在后半句，表示“不过、虽然”，补充一个相反的事实。", "eg": "The new line is faster, though it needs two more operators.", "egz": "新线更快，不过要多配两个操作工。"}, {"k": "语法", "h": "much lower than Opus", "x": "严格说应是 than Opus's (cost)，口语常省略。much 修饰比较级：低得多。", "eg": "Our price is much lower than theirs.", "egz": "我们的价格比他们低得多。"}]}, {"s": 106.38, "e": 113.88, "en": "That indicates that Opus can work for longer durations and ultimately achieve more complex tasks.", "zh": "这说明 Opus 能持续工作更长时间，最终完成更复杂的任务。", "pts": [{"k": "词汇", "h": "indicates", "x": "indicate 表明、说明，比 show 稍正式，读数据时常用。", "eg": "The data indicates that the mold is wearing out.", "egz": "数据表明模具在磨损。"}, {"k": "词汇", "h": "for longer durations", "x": "duration 持续时间；for longer durations = 更长时间（比 for longer 更书面）。", "eg": "The pump can't run for long durations without cooling.", "egz": "这台泵不冷却就没法长时间运行。"}, {"k": "地道表达", "h": "achieve more complex tasks", "x": "achieve 常接 goal / result；说任务时更常用 complete / handle tasks。Matt 口语这么说，听懂即可。", "eg": "The new robot can handle more complex tasks.", "egz": "新机器人能处理更复杂的工作。"}]}, {"s": 113.88, "e": 122.67, "en": "At low thinking, Sonnet 5.5 is cheaper, about 37 cents for the lowest effort task versus $1.17 for Opus.", "zh": "在低思考档，Sonnet 5.5 更便宜：最低档每个任务约 37 美分，而 Opus 要 1.17 美元。", "pts": [{"k": "听力技巧", "h": "37 cents", "x": "cent 美分，1 美元 = 100 美分。37 cents 和后面的 $1.17 单位不同，听数字时一定连单位一起听。", "eg": "Each label costs about 40 cents.", "egz": "每张标签大约 40 美分。"}, {"k": "听力技巧", "h": "$1.17", "x": "1.17 美元口语常说成 a dollar seventeen 或 one seventeen，不会说 one point one seven dollars。", "eg": "The unit price went up to a dollar seventeen.", "egz": "单价涨到了 1.17 美元。"}, {"k": "语法", "h": "At low thinking", "x": "At + 档位：在……档。也可说 at low effort。", "eg": "At full speed, the line makes 900 pieces an hour.", "egz": "全速运转时，这条线每小时做 900 件。"}]}, {"s": 122.67, "e": 129.77, "en": "Based on this chart, start with a budget, then pick a model according to how much we'd like to spend per task.", "zh": "按这张图，可以先定预算，再根据每个任务愿意花多少钱来选模型。", "pts": [{"k": "地道表达", "h": "Based on this chart", "x": "based on 根据、基于，放句首说明依据。", "eg": "Based on last month's data, we need two more operators.", "egz": "根据上个月的数据，我们还需要两个操作工。"}, {"k": "语法", "h": "start with a budget, then pick a model", "x": "start with ..., then ...：先……再……，讲步骤的最简单说法。", "eg": "Start with the safety check, then turn on the press.", "egz": "先做安全检查，再开冲床。"}, {"k": "词汇", "h": "according to how much", "x": "according to + 名词/疑问词从句：按照、根据。how much we'd like to spend 是陈述语序。", "eg": "We set the price according to how much the customer orders.", "egz": "我们按客户的订货量定价。"}]}, {"s": 129.77, "e": 135.27, "en": "But that doesn't really mean much, and cost per task is just a proxy for difficulty.", "zh": "但这其实说明不了太多问题；每个任务的成本，只是衡量难度的一个替代指标。", "pts": [{"k": "地道表达", "h": "doesn't really mean much", "x": "说明不了什么、意义不大。口语里用来否定前面的说法、引出真正的重点。", "eg": "One good day doesn't really mean much; look at the monthly trend.", "egz": "一天数据好说明不了什么，要看月度趋势。"}, {"k": "术语", "h": "a proxy for difficulty", "x": "proxy for sth.：……的替代指标，即没法直接测量时，拿来间接反映它的数字。这里意思是：成本高，通常因为任务难。", "eg": "We use overtime hours as a proxy for workload.", "egz": "我们用加班时数来间接衡量工作量。"}, {"k": "词汇", "h": "just", "x": "只是、仅仅，弱化前面的东西，暗示“不是本质”。", "eg": "The price is just one factor in choosing a supplier.", "egz": "价格只是选供应商的因素之一。"}]}, {"s": 135.27, "e": 143.67, "en": "Basically, these curves are asking, for a given task difficulty, which model and effort level should we select?", "zh": "说白了，这些曲线要回答的问题是：对于某个难度的任务，我们该选哪个模型、哪一档推理强度？", "pts": [{"k": "词汇", "h": "Basically", "x": "说白了、基本上，用来把复杂内容换成一句简单的话。", "eg": "Basically, we need the parts by Friday.", "egz": "说白了，周五前我们必须拿到零件。"}, {"k": "地道表达", "h": "for a given task difficulty", "x": "for a given + 名词：对于某个给定的……，常用于讲条件。", "eg": "For a given order size, which machine is cheapest to run?", "egz": "对于一定的订单量，哪台机器运行成本最低？"}, {"k": "语法", "h": "which model and effort level should we select?", "x": "转述问题时，书面应改成陈述语序（which model we should select），口语常直接保留疑问语序，像直接引语。", "eg": "The question is, which supplier should we choose?", "egz": "问题是：我们该选哪家供应商？"}]}, {"s": 143.67, "e": 147.37, "en": "Say a task needs a score of 45%.", "zh": "比如说，某个任务需要达到 45% 的分数。", "pts": [{"k": "地道表达", "h": "Say", "x": "句首的 Say = 假设、比如说，相当于 Let's say / Suppose。", "eg": "Say the order doubles — can we handle it?", "egz": "假如订单翻倍，我们接得住吗？"}, {"k": "语法", "h": "needs a score of 45%", "x": "a score of + 数字：……的分数。45% 读作 forty-five percent。", "eg": "This part needs a tolerance of 0.05 mm.", "egz": "这个零件需要 0.05 毫米的公差。"}]}, {"s": 147.37, "e": 155.17, "en": "We'd want the model that's cheapest to meet that 45% score, i.e. the model furthest to the right.", "zh": "我们要找的是能达到这个 45% 分数、又最便宜的模型，也就是图上最靠右的那个。", "pts": [{"k": "词汇", "h": "i.e.", "x": "拉丁语缩写，意思是“也就是、即”，读作 /ˌaɪ ˈiː/（两个字母）。不要和 e.g.（例如）混淆。", "eg": "Ship it by the fastest route, i.e. by air.", "egz": "走最快的方式发货，也就是空运。"}, {"k": "语法", "h": "the model that's cheapest to meet", "x": "cheapest to + 动词：做某事最便宜的。that's 引导定语从句。", "eg": "We chose the supplier that's quickest to deliver.", "egz": "我们选了交货最快的那家供应商。"}, {"k": "地道表达", "h": "furthest to the right", "x": "最靠右的。结合第 6 句：越往右越便宜，所以最右 = 最便宜。", "eg": "The newest machine is the one furthest to the left.", "egz": "最新的那台是最靠左的。"}]}, {"s": 155.17, "e": 162.57, "en": "Now, if a harder task needs 55%, again, we go with the point furthest to the right that meets that score.", "zh": "再比如，一个更难的任务需要 55%，同样，我们选达到这个分数、而且最靠右的那个点。", "pts": [{"k": "地道表达", "h": "we go with", "x": "go with sth. = 选定、采用某个方案，口语非常常用。", "eg": "Let's go with the second quote.", "egz": "我们就选第二个报价吧。"}, {"k": "语法", "h": "the point furthest to the right that meets that score", "x": "名词后面接两层修饰：furthest to the right（最靠右）+ that meets that score（达到这个分数）。", "eg": "Pick the cheapest box that fits the part.", "egz": "挑一个装得下这个零件、又最便宜的箱子。"}, {"k": "词汇", "h": "again", "x": "这里是“同样地、照样”，表示用同一个方法，不是“再来一次”。", "eg": "Again, check the drawing before you cut.", "egz": "同样，下料前先核对图纸。"}]}, {"s": 162.57, "e": 166.17, "en": "So, the harder task ends up costing more.", "zh": "所以，更难的任务最终会花更多钱。", "pts": [{"k": "语法", "h": "ends up costing more", "x": "end up + doing：最后落得……、结果是……。", "eg": "Cheap material often ends up costing more in rework.", "egz": "便宜的材料返工下来往往反而更贵。"}, {"k": "词汇", "h": "harder", "x": "hard 在这里是“难”，不是“硬”。第 32 句 That's hard 会用这个词开个小玩笑。", "eg": "This is a harder job than last week's.", "egz": "这活儿比上周那个难。"}]}, {"s": 166.17, "e": 170.47, "en": "But what we're really asking is, how do we judge how hard a task is?", "zh": "但我们真正想问的是：怎么判断一个任务有多难？", "pts": [{"k": "语法", "h": "what we're really asking is", "x": "what 引导主语从句，What we're really asking is ... 用来点出真正的问题。", "eg": "What we really need is a second supplier.", "egz": "我们真正需要的是第二家供应商。"}, {"k": "语法", "h": "how hard a task is", "x": "间接疑问句用陈述语序：how hard a task is，不是 how hard is a task。", "eg": "I don't know how long the repair will take.", "egz": "我不知道维修要多久。"}, {"k": "词汇", "h": "judge", "x": "判断、评估，judge how ... 判断有多……。", "eg": "It's hard to judge how much stock we need for Songkran.", "egz": "很难判断泼水节要备多少库存。"}]}, {"s": 170.47, "e": 171.97, "en": "That's hard.", "zh": "这可就难了。", "pts": [{"k": "地道表达", "h": "That's hard", "x": "一语双关：上一句在问 how hard a task is（任务有多难），这里说“判断这个本身就很难”，带点幽默。", "eg": "Predicting next year's orders? That's hard.", "egz": "预测明年的订单？这可难了。"}, {"k": "听力技巧", "h": "That's hard", "x": "短句停顿后单独说出，hard 重读。抓住这种短评，后面通常就是答案。", "eg": "That's tricky.", "egz": "这事有点棘手。"}]}, {"s": 171.97, "e": 176.57, "en": "And that's exactly the question a model router can answer.", "zh": "而这正是模型路由器能回答的问题。", "pts": [{"k": "术语", "h": "a model router", "x": "模型路由器：按每个请求的难度，自动决定交给哪个模型处理的系统，就像车间调度把订单派给合适的机台。", "eg": "Our scheduler routes each order to the right machine.", "egz": "我们的排产系统会把每张订单派到合适的机台。"}, {"k": "词汇", "h": "exactly", "x": "正是、恰好，强调“刚好对上”。", "eg": "That's exactly the problem we had last year.", "egz": "这正是我们去年遇到的问题。"}, {"k": "语法", "h": "the question a model router can answer", "x": "the question (that) a model router can answer：省略了 that 的定语从句。", "eg": "This is the report the customer asked for.", "egz": "这就是客户要的那份报告。"}]}, {"s": 176.57, "e": 179.57, "en": "A model router estimates how hard each request is.", "zh": "模型路由器会估计每个请求有多难。", "pts": [{"k": "词汇", "h": "estimates", "x": "estimate 估计、估算（动词读 /ˈestɪmeɪt/，名词读 /ˈestɪmət/）。", "eg": "We estimate the repair will take two days.", "egz": "我们估计维修要两天。"}, {"k": "术语", "h": "each request", "x": "request 请求：用户每次发给 AI 的一个任务或一句指令。", "eg": "Each purchase request needs the manager's approval.", "egz": "每张采购申请都要经理批准。"}]}, {"s": 179.57, "e": 192.07, "en": "So, simple asks can go to our fastest, most efficient models, whereas everyday work might go to a mid-tier model, and hard problems can go to the most capable models.", "zh": "所以，简单的请求可以交给最快、最省的模型；日常工作可能交给中档模型；而难题则交给能力最强的模型。", "pts": [{"k": "词汇", "h": "simple asks", "x": "ask 在这里是名词：请求、要求（口语，常见于职场）。", "eg": "That's a big ask for a two-day deadline.", "egz": "两天交货，这个要求可不小。"}, {"k": "语法", "h": "whereas", "x": "而、然而，用来对比两种情况，比 while 更正式。", "eg": "Line 1 runs two shifts, whereas Line 2 runs three.", "egz": "1 号线开两班，而 2 号线开三班。"}, {"k": "词汇", "h": "a mid-tier model", "x": "mid-tier 中档的；tier 层级、档次。top-tier 顶级，entry-level 入门级。", "eg": "We source mid-tier resin for local customers.", "egz": "本地客户我们用中档树脂。"}, {"k": "词汇", "h": "the most capable models", "x": "capable 能力强的、能胜任的。most capable = 能力最强。", "eg": "Send the hardest repairs to our most capable technician.", "egz": "最难的维修交给我们最能干的技师。"}]}, {"s": 192.07, "e": 198.07, "en": "So, at any given point, we're selecting the cheapest model likely to perform a given task.", "zh": "所以，无论什么时候，我们选的都是有把握完成这个任务的模型里最便宜的那一个。", "pts": [{"k": "地道表达", "h": "at any given point", "x": "在任何时候、无论何时（= at any given time）。", "eg": "At any given point, we keep two days of stock.", "egz": "我们任何时候都保留两天的库存。"}, {"k": "语法", "h": "the cheapest model likely to perform", "x": "likely to + 动词作后置定语：很可能做到……的。the cheapest model (that is) likely to perform ...", "eg": "Choose the cheapest carrier likely to deliver on time.", "egz": "选一家能按时送到、又最便宜的承运商。"}, {"k": "词汇", "h": "perform a given task", "x": "perform a task 执行、完成任务，比 do 更正式。", "eg": "The robot can perform this task 24 hours a day.", "egz": "这台机器人可以 24 小时执行这项工作。"}]}, {"s": 198.07, "e": 200.07, "en": "In Cursor, you can choose Auto.", "zh": "在 Cursor 里，你可以选择 Auto（自动）模式。", "pts": [{"k": "术语", "h": "Auto", "x": "Cursor 模型选择菜单里的“自动”选项：不手动指定模型，由系统替你选。", "eg": "Set the air conditioner to Auto.", "egz": "把空调调到自动模式。"}, {"k": "语法", "h": "you can choose", "x": "you can + 动词：介绍功能时的标准说法。", "eg": "You can choose Thai or English on the screen.", "egz": "屏幕上可以选择泰语或英语。"}]}, {"s": 200.07, "e": 206.5, "en": "Cursor Router is going to pick the model for you.", "zh": "Cursor Router 会替你挑选模型。", "pts": [{"k": "术语", "h": "Cursor Router", "x": "Cursor 的模型路由系统，就是 Auto 背后的机制：按任务难度把请求分给合适的模型。", "eg": "The system is going to pick the best route for each truck.", "egz": "系统会为每辆卡车挑最合适的路线。"}, {"k": "地道表达", "h": "pick the model for you", "x": "do sth. for you = 替你做，介绍自动化功能时常用。", "eg": "The software will calculate the overtime for you.", "egz": "软件会替你算好加班费。"}, {"k": "发音", "h": "is going to", "x": "口语里 going to 常快读成 /ˈɡənə/（gonna）。", "eg": "We're going to start the trial run tomorrow.", "egz": "我们明天开始试产。"}]}];
+const KEY="jingting.Youtube_IhyHUhPrsJk.";
+
+const CHAPTERS=[{"t": "怎么读这张图", "s": 0, "outline": ["纵轴是得分，越高越好；横轴是每任务成本，而且是反向的：越往右越便宜。", "以 Opus 5.5 为例：每个点是一档推理强度（low → max），一条线把这些点连起来。", "右下角的 low 档：分最低，钱也最少。"], "key": [{"n": 2, "en": "Well, the y-axis is the score, and the x-axis, inverted, is the cost per task.", "zh": "嗯，纵轴是得分；横轴是每个任务的成本，而且是反过来画的。", "why": "the x-axis, inverted：横轴反向，读图第一关"}, {"n": 6, "en": "Further right means lower cost.", "zh": "越往右，成本越低。", "why": "Further right means lower cost"}, {"n": 7, "en": "So low effort on the bottom right has the lowest score, but also the lowest cost.", "zh": "所以右下角的 low 档得分最低，但成本也最低。", "why": "the lowest score, but also the lowest cost"}], "words": [{"w": "y-axis / x-axis", "ipa": "/ˈwaɪ ˌæksɪs/ /ˈeks ˌæksɪs/", "zh": "纵轴 / 横轴", "note": "the y-axis is the score"}, {"w": "inverted", "ipa": "/ɪnˈvɜːrtɪd/", "zh": "反向的、倒置的", "note": "the x-axis, inverted"}, {"w": "cost per task", "ipa": "/kɔːst pər tæsk/", "zh": "每任务成本", "note": "类比 cost per unit"}, {"w": "effort setting", "ipa": "/ˈefərt ˌsetɪŋ/", "zh": "推理强度档位", "note": "low / medium / high / extra high / max"}]}, {"t": "多花一美元能换来什么", "s": 8, "outline": ["曲线的斜率 = 多花一美元能多拿几分。", "Opus：low → medium 每美元约 5.1 分；high → extra high 每美元 0 分。", "所以 high 是拐点（knee），曲线从这里变平。", "extra high 更贵，分数却不更高：到拐点就该想想值不值。"], "key": [{"n": 9, "en": "The slope of each curve describes what an extra dollar gets you in terms of performance on CursorBench.", "zh": "每条曲线的斜率说明：多花一美元，能在 CursorBench 上换来多少性能提升。", "why": "what an extra dollar gets you：投入产出"}, {"n": 11, "en": "So from low to medium, you get about 5.1 points per dollar spent.", "zh": "比如从 low 到 medium，每多花一美元，大约能多得 5.1 分。", "why": "5.1 points per dollar spent"}, {"n": 13, "en": "That makes high a knee of sorts, which is where the curve flattens.", "zh": "所以 high 档算是一个“拐点”，曲线从这里开始变平。", "why": "a knee of sorts：拐点"}, {"n": 15, "en": "Extra high costs more than high and scores no higher on CursorBench.", "zh": "extra high 比 high 贵，但在 CursorBench 上的得分一点也不比 high 高。", "why": "costs more ... scores no higher"}], "words": [{"w": "slope", "ipa": "/sloʊp/", "zh": "斜率", "note": "the slope of each curve"}, {"w": "in terms of", "ipa": "/ɪn tɜːrmz əv/", "zh": "就……而言", "note": "in terms of performance"}, {"w": "knee", "ipa": "/niː/", "zh": "拐点（膝点）", "note": "a knee of sorts"}, {"w": "flatten", "ipa": "/ˈflætn/", "zh": "变平", "note": "the curve flattens"}, {"w": "trade-off", "ipa": "/ˈtreɪd ɔːf/", "zh": "权衡、取舍", "note": "consider the trade-off"}]}, {"t": "Opus 5.5 对比 Sonnet 5.5", "s": 15, "outline": ["两条曲线交叉。", "每任务 1.5 美元以下：Sonnet 领先约 4.1 分；4 美元以内（1.5 美元之后）：Opus 领先。", "越往高档，差距越小；到最高档 Opus 分更高，但 Sonnet 最高成本低得多。", "Opus 能工作更久、完成更复杂的任务；最低档 Sonnet 约 0.37 美元，Opus 约 1.17 美元。"], "key": [{"n": 17, "en": "Their curves cross.", "zh": "它们的曲线有交叉。", "why": "Their curves cross：本章关键"}, {"n": 18, "en": "Now under $1.50 per task, Sonnet 5.5 leads by about 4.1 points on CursorBench.", "zh": "在每个任务 1.5 美元以下的范围里，Sonnet 5.5 在 CursorBench 上领先约 4.1 分。", "why": "under $1.50 ... leads by about 4.1 points"}, {"n": 20, "en": "Now notably that gap closes as we approach extra high for Opus and max for Sonnet.", "zh": "值得注意的是，当 Opus 接近 extra high、Sonnet 接近 max 时，这个差距会缩小。", "why": "that gap closes"}, {"n": 23, "en": "At low thinking, Sonnet 5.5 is cheaper, about 37 cents for the lowest effort task versus $1.17 for Opus.", "zh": "在低思考档，Sonnet 5.5 更便宜：最低档每个任务约 37 美分，而 Opus 要 1.17 美元。", "why": "37 cents versus $1.17：数字题"}], "words": [{"w": "cross", "ipa": "/krɔːs/", "zh": "交叉", "note": "Their curves cross."}, {"w": "lead by", "ipa": "/liːd baɪ/", "zh": "领先（多少）", "note": "leads by about 4.1 points"}, {"w": "notably", "ipa": "/ˈnoʊtəbli/", "zh": "值得注意的是", "note": "Now notably ..."}, {"w": "duration", "ipa": "/duˈreɪʃn/", "zh": "持续时间", "note": "for longer durations"}, {"w": "versus", "ipa": "/ˈvɜːrsəs/", "zh": "对比", "note": "37 cents versus $1.17"}]}, {"t": "成本只是难度的替代指标", "s": 23, "outline": ["朴素做法：先定预算，再按每任务预算选模型。", "但成本只是“难度”的替代指标；曲线真正回答的是：某个难度的任务，该选哪个模型、哪一档。", "例子：任务需要 45% → 选达标且最靠右（最便宜）的点；需要 55% → 同理，更难的任务更贵。", "真正的问题：怎么判断任务有多难？——这很难。"], "key": [{"n": 25, "en": "But that doesn't really mean much, and cost per task is just a proxy for difficulty.", "zh": "但这其实说明不了太多问题；每个任务的成本，只是衡量难度的一个替代指标。", "why": "a proxy for difficulty：本片核心概念"}, {"n": 26, "en": "Basically, these curves are asking, for a given task difficulty, which model and effort level should we select?", "zh": "说白了，这些曲线要回答的问题是：对于某个难度的任务，我们该选哪个模型、哪一档推理强度？", "why": "for a given task difficulty, which model ...?"}, {"n": 28, "en": "We'd want the model that's cheapest to meet that 45% score, i.e. the model furthest to the right.", "zh": "我们要找的是能达到这个 45% 分数、又最便宜的模型，也就是图上最靠右的那个。", "why": "i.e. the model furthest to the right"}, {"n": 31, "en": "But what we're really asking is, how do we judge how hard a task is?", "zh": "但我们真正想问的是：怎么判断一个任务有多难？", "why": "how do we judge how hard a task is?"}], "words": [{"w": "budget", "ipa": "/ˈbʌdʒɪt/", "zh": "预算", "note": "start with a budget"}, {"w": "proxy", "ipa": "/ˈprɑːksi/", "zh": "替代指标", "note": "a proxy for difficulty"}, {"w": "i.e.", "ipa": "/ˌaɪ ˈiː/", "zh": "也就是", "note": "≠ e.g.（例如）"}, {"w": "go with", "ipa": "/ɡoʊ wɪð/", "zh": "选定、采用", "note": "we go with the point ..."}, {"w": "end up", "ipa": "/end ʌp/", "zh": "最后（落得）", "note": "ends up costing more"}]}, {"t": "Cursor 的模型路由", "s": 32, "outline": ["模型路由器（model router）负责估计每个请求有多难。", "简单请求 → 最快最省的模型；日常工作 → 中档模型；难题 → 最强模型。", "原则：随时选“有把握完成任务的最便宜模型”。", "在 Cursor 里选 Auto，Cursor Router 替你挑模型。"], "key": [{"n": 33, "en": "And that's exactly the question a model router can answer.", "zh": "而这正是模型路由器能回答的问题。", "why": "that's exactly the question a model router can answer"}, {"n": 35, "en": "So, simple asks can go to our fastest, most efficient models, whereas everyday work might go to a mid-tier model, and hard problems can go to the most capable models.", "zh": "所以，简单的请求可以交给最快、最省的模型；日常工作可能交给中档模型；而难题则交给能力最强的模型。", "why": "simple asks / everyday work / hard problems：三档分流"}, {"n": 36, "en": "So, at any given point, we're selecting the cheapest model likely to perform a given task.", "zh": "所以，无论什么时候，我们选的都是有把握完成这个任务的模型里最便宜的那一个。", "why": "the cheapest model likely to perform a given task"}, {"n": 38, "en": "Cursor Router is going to pick the model for you.", "zh": "Cursor Router 会替你挑选模型。", "why": "Cursor Router is going to pick the model for you"}], "words": [{"w": "model router", "ipa": "/ˈmɑːdl ˈraʊtər/", "zh": "模型路由器", "note": "a model router"}, {"w": "estimate", "ipa": "/ˈestɪmeɪt/", "zh": "估计", "note": "estimates how hard ..."}, {"w": "ask (n.)", "ipa": "/æsk/", "zh": "请求、要求", "note": "simple asks"}, {"w": "whereas", "ipa": "/werˈæz/", "zh": "而（对比）", "note": "whereas everyday work ..."}, {"w": "mid-tier", "ipa": "/ˌmɪd ˈtɪr/", "zh": "中档的", "note": "a mid-tier model"}, {"w": "capable", "ipa": "/ˈkeɪpəbl/", "zh": "能力强的", "note": "the most capable models"}]}];   // [{t:title, s:first sentence index, outline:[], key:[{n,en,zh,why}], words:[{w,ipa,zh,note,old}]}]
+const ZH_LABEL="人工校对";
+const $=id=>document.getElementById(id);
+
+const YTID="IhyHUhPrsJk";
+const au=(function(){
+ const L={};let P=null,ready=false,st=-1,base=0,baseAt=performance.now(),seekLock=0,lastRaw=-1,r=1,pendSeek=null,pendPlay=false,startT=0;
+ const fire=n=>(L[n]||[]).forEach(f=>{try{f()}catch(e){console.warn(e)}});
+ const now=()=>st===1?base+(performance.now()-baseAt)/1000*r:base;
+ const o={paused:true,seeking:false,ended:false,defaultPlaybackRate:1,
+  addEventListener(n,f){(L[n]=L[n]||[]).push(f)},
+  get currentTime(){return now()},
+  set currentTime(v){base=v;baseAt=performance.now();seekLock=performance.now()+2500;if(ready)P.seekTo(v,true);else pendSeek=v},
+  get playbackRate(){return r},
+  set playbackRate(v){r=v;base=now();baseAt=performance.now();if(ready)try{P.setPlaybackRate(v)}catch(e){}},
+  get duration(){return ready?P.getDuration():0},
+  play(){o.paused=false;startT=performance.now();if(ready)P.playVideo();else pendPlay=true;
+   setTimeout(()=>{if(!o.paused&&st!==1&&st!==3&&performance.now()-startT>=2900&&window.toast)toast("没开始播放？请直接点一下上面视频画面里的 ▶")},3000);return Promise.resolve()},
+  pause(){o.paused=true;pendPlay=false;base=now();baseAt=performance.now();if(ready)P.pauseVideo()},
+  get player(){return P}};
+ window.onYouTubeIframeAPIReady=function(){
+  P=new YT.Player("yt",{videoId:YTID,playerVars:{playsinline:1,rel:0,modestbranding:1,cc_load_policy:0,iv_load_policy:3,start:Math.floor(SEGS[0].s)},
+   events:{onReady(){ready=true;try{P.unloadModule("captions")}catch(e){}if(r!==1)try{P.setPlaybackRate(r)}catch(e){}
+     if(pendSeek!==null){P.seekTo(pendSeek,true);pendSeek=null}else P.cueVideoById({videoId:YTID,startSeconds:SEGS[cur].s});if(pendPlay){pendPlay=false;P.playVideo()}
+     $("loading").style.display="none"},
+    onStateChange(e){const s=e.data;base=now();baseAt=performance.now();st=s;
+     if(s===1){if(o.paused){o.paused=false;if(typeof playSeg==="function"){playSeg(cur);return}}fire("playing")}   // started from the video's own ▶: play the current sentence
+     else if(s===2){if(!o.paused&&!gapT&&playing){o.paused=true}fire("pause")}
+     else if(s===0){o.paused=true;o.ended=true;fire("ended");o.ended=false}},
+    onPlaybackRateChange(e){r=e.data;fire("ratechange")}}})};
+ setInterval(()=>{if(!ready)return;let t;try{t=P.getCurrentTime()}catch(e){return}
+  if(performance.now()<seekLock){if(Math.abs(t-now())<0.6){seekLock=0}else return}
+  if(t!==lastRaw){lastRaw=t;if(st!==1||Math.abs(t-now())>0.35){base=t;baseAt=performance.now()}}
+  if(st===1&&!o.paused)fire("timeupdate")},50);
+ const s=document.createElement("script");s.src="https://www.youtube.com/iframe_api";document.head.appendChild(s);
+ return o})();
+let ccOn=false;function toggleCC(){const P=au.player;if(!P)return;ccOn=!ccOn;
+ try{if(ccOn){P.loadModule("captions");P.setOption("captions","track",{languageCode:"en"})}else P.unloadModule("captions")}catch(e){}
+ $("ccBtn").textContent=ccOn?"🔤 视频英文字幕：开":"🔤 视频英文字幕：关"}
+
+let cur=0,subState=0,playing=false,raf=0,stopAt=null,plays=1,gapT=0,tok=0,lastCtrl=0;
+const GAP=600,REPS=[["1","1遍"],["2","2遍"],["3","3遍"],["inf","∞"]];
+function lsGet(k,d){try{const v=JSON.parse(localStorage.getItem(k));return v==null?d:v}catch(e){return d}}
+let stars=new Set((lsGet(KEY+"stars",[])||[]).map(Number).filter(i=>i>=0&&i<SEGS.length));
+let QS=lsGet(KEY+"qs",{});if(!QS||typeof QS!=="object")QS={};
+function saveStars(){try{localStorage.setItem(KEY+"stars",JSON.stringify([...stars].sort((a,b)=>a-b)))}catch(e){toast("⚠️ 浏览器不让保存（无痕模式？）")}}
+function saveQs(){try{localStorage.setItem(KEY+"qs",JSON.stringify(QS))}catch(e){toast("⚠️ 浏览器不让保存（无痕模式？）")}}
+let toastT=0;function toast(m,ms){const t=$("toast");t.textContent=m;t.classList.toggle("long",!!ms);t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),ms||1600)}
+let onlyStar=localStorage.getItem(KEY+"only")==="1";
+let rate=parseFloat(localStorage.getItem(KEY+"rate")||"1");
+const SUBS=[["hide","隐藏"],["en","英文"],["zh","中文"],["both","中英"]];
+let subMode=localStorage.getItem("jingting.submode")||"hide";if(!SUBS.some(r=>r[0]===subMode))subMode="hide";
+let rep=localStorage.getItem("jingting.repeat")||"inf";if(!REPS.some(r=>r[0]===rep))rep="inf";
+$("cont").checked=localStorage.getItem(KEY+"cont")==="1";
+const fmt=t=>{t=Math.max(0,t|0);return String(t/60|0).padStart(2,"0")+":"+String(t%60).padStart(2,"0")};
+const esc=s=>s.replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function order(){if(onlyStar&&stars.size){return SEGS.map((s,i)=>i).filter(i=>stars.has(i))}return SEGS.map((s,i)=>i)}
+function save(){localStorage.setItem(KEY+"pos",cur);saveStars();localStorage.setItem(KEY+"only",onlyStar?"1":"0");localStorage.setItem(KEY+"rate",rate);localStorage.setItem(KEY+"cont",$("cont").checked?"1":"0");localStorage.setItem("jingting.repeat",rep);localStorage.setItem("jingting.submode",subMode)}
+// subState = extra taps on this sentence; 0 = what the 字幕 mode shows by default (reset on every sentence change)
+const SUBCYCLE={hide:3,en:2,zh:2,both:1};
+function subShow(){const k=subState%SUBCYCLE[subMode];
+ if(subMode==="hide")return{en:k>=1,zh:k===2};if(subMode==="en")return{en:true,zh:k===1};if(subMode==="zh")return{en:k===1,zh:true};return{en:true,zh:true}}
+function renderSub(){const s=SEGS[cur],b=$("subbox"),v=subShow();
+ const zh='<div class="zh"'+(v.en?'':' style="border:0;margin:0;padding:0;font-size:19px"')+'>'+(s.zh?esc(s.zh)+(ZH_LABEL?'<span class="mt">'+esc(ZH_LABEL)+'</span>':''):'（无中文）')+'</div>';
+ const hint=x=>'<div class="hint" style="margin-top:10px;font-size:13px">'+x+'</div>';
+ if(!v.en&&!v.zh){b.className="sub-box";b.innerHTML='<div class="hint"><b>👀</b>点这里看英文字幕</div>';return}
+ b.className="sub-box show";
+ b.innerHTML=(v.en?'<div class="en">'+esc(s.en)+'</div>':'')+(v.zh?zh:'')+
+   (subMode==="hide"&&!v.zh?hint("再点一下看中文"):subMode==="en"&&!v.zh?hint("点一下看中文"):subMode==="zh"&&!v.en?hint("点一下看英文"):"")}
+function applySubMode(){const L=$("list");L.dataset.m=subMode;L.classList.toggle("blur",$("blurList").checked);$("blurLbl").style.display=subMode==="hide"?"":"none"}
+function buildSubs(){$("subs").innerHTML='<span class="lb">字幕</span>'+SUBS.map(r=>'<button class="chip'+(r[0]===subMode?' on':'')+'" data-m="'+r[0]+'">'+r[1]+'</button>').join("");
+ $("subs").onclick=e=>{const c=e.target.closest(".chip");if(!c)return;subMode=c.dataset.m;subState=0;buildSubs();applySubMode();renderSub();save()}}
+function chapOf(i){let k=-1;for(let j=0;j<CHAPTERS.length;j++)if(CHAPTERS[j].s<=i)k=j;return k}
+function chapEnd(k){return k+1<CHAPTERS.length?CHAPTERS[k+1].s-1:SEGS.length-1}
+let studyK=-2;
+function render(){if(rec&&recI!==cur)stopMic(true);const s=SEGS[cur],o=order(),pos=o.indexOf(cur);
+ const ck=chapOf(cur);$("chap").textContent=ck>=0?"第"+(ck+1)+"章 · "+CHAPTERS[ck].t+"（第"+(CHAPTERS[ck].s+1)+"–"+(chapEnd(ck)+1)+"句）":"";
+ if(ck>=0){$("chapSel").value=String(ck);if(ck!==studyK)renderStudy(ck)}
+ $("num").innerHTML=(cur+1)+' <small>/ '+SEGS.length+'</small>';
+ $("tm").textContent=fmt(s.s)+" – "+fmt(s.e)+(onlyStar&&stars.size?"  · ⭐ "+(pos+1)+"/"+o.length:"");
+ $("barIn").style.width=((cur+1)/SEGS.length*100)+"%";
+ const st=stars.has(cur);$("star").classList.toggle("on",st);$("star").innerHTML=st?"<b>⭐</b><span>已收藏</span>":"<b>☆</b><span>收藏</span>";
+ if(document.activeElement!==$("qIn")||+$("qIn").dataset.i!==cur){$("qIn").value=QS[cur]||"";$("qIn").dataset.i=cur}
+ renderFav();renderQs();
+ $("starCnt").textContent=stars.size;$("onlyStar").classList.toggle("staron",onlyStar);
+ renderSub();renderCnt();renderPts();
+ document.querySelectorAll(".item").forEach(e=>e.classList.toggle("cur",+e.dataset.i===cur));
+ document.querySelectorAll(".item .s").forEach(e=>{const i=+e.parentNode.dataset.i;e.textContent=(stars.has(i)?"⭐":"")+(QS[i]?"❓":"")});
+ $("listInfo").textContent=(cur+1)+"/"+SEGS.length+(stars.size?" · ⭐"+stars.size:"");
+ save()}
+
+function renderPts(){const s=SEGS[cur],P=s.pts||[],B=$("ptsBox");if(!P.length){B.style.display="none";return}B.style.display="";
+ const K={"地道表达":"k1","语法":"k2","连读弱读":"k3","发音":"k3","术语":"k4","背景":"k5"};
+ $("ptsBody").innerHTML=P.map(p=>'<div class="pt"><span class="pk '+(K[p.k]||"k5")+'">'+esc(p.k)+'</span><span class="ph">'+esc(p.h)+'</span><div class="px">'+esc(p.x)+'</div>'+(p.eg?'<div class="pe">🏭 '+esc(p.eg)+(p.egz?'<i>'+esc(p.egz)+'</i>':'')+'</div>':'')+'</div>').join("");
+ $("ptsN").textContent=P.length+" 点"}
+function setPlayUI(p){playing=p;$("play").innerHTML=p?'⏸<span>暂停</span>':'▶<span>播放</span>'}
+function repN(){const n=rep==="inf"?Infinity:+rep;return ($("cont").checked&&n===Infinity)?1:n}
+function renderCnt(){const c=$("cnt");c.textContent="🔁 第"+plays+"遍"+(rep==="inf"?" · ∞":" / "+rep);c.classList.toggle("gap",!!gapT)}
+function clearGap(){if(gapT){clearTimeout(gapT);gapT=0}}
+// Playback engine. `playing` is the user's intent; the media element is made to follow it.
+// Every play() gets a token: a late rejection/resolution of an older play() (e.g. AbortError after rapid taps) is ignored,
+// so it can no longer flip the UI to ▶ while audio keeps running (that stopped the loop and let audio run past the sentence).
+function applyRate(){if(au.defaultPlaybackRate!==rate)au.defaultPlaybackRate=rate;if(au.playbackRate!==rate)au.playbackRate=rate}
+function startPlay(){applyRate();const my=++tok;setPlayUI(true);let p;try{p=au.play()}catch(e){p=null}
+ if(p&&p.catch)p.catch(e=>{if(my!==tok||!playing)return;if(e&&e.name==="AbortError")return;setPlayUI(false);console.warn(e)});
+ loop()}
+function stopPlay(){tok++;clearGap();setPlayUI(false);if(!au.paused)au.pause();cancelAnimationFrame(raf);raf=0}
+function loop(){cancelAnimationFrame(raf);raf=requestAnimationFrame(tick)}   // exactly one frame loop at a time
+function again(){clearGap();plays++;const s=SEGS[cur];au.currentTime=s.s;stopAt=s.e;renderCnt();startPlay()}
+function segEnd(){cancelAnimationFrame(raf);raf=0;$("segIn").style.width="100%";
+ if(plays<repN()){tok++;au.pause();clearGap();gapT=setTimeout(()=>{gapT=0;if(playing)again()},GAP);renderCnt();return}
+ if($("cont").checked){const o=order(),p=o.indexOf(cur);if(p>=0&&p<o.length-1){const n=o[p+1];cur=n;subState=0;plays=1;render();
+    if(Math.abs(SEGS[n].s-au.currentTime)>0.3)au.currentTime=SEGS[n].s;stopAt=SEGS[n].e;loop();return}}
+ stopAt=null;stopPlay()}
+function check(){if(!playing||gapT||stopAt===null)return false;if(au.currentTime>=stopAt-0.02){segEnd();return true}return false}
+function tick(){raf=0;const s=SEGS[cur];const t=au.currentTime;
+ $("segIn").style.width=Math.min(100,Math.max(0,(t-s.s)/(s.e-s.s)*100))+"%";
+ if(check())return;
+ if(playing&&!gapT)raf=requestAnimationFrame(tick)}
+function playSeg(i){clearGap();cur=i;plays=1;const s=SEGS[i];render();au.currentTime=s.s;stopAt=s.e;startPlay()}
+function go(d){if(onlyStar&&!stars.has(cur)){onlyStar=false}const o=order();let p=o.indexOf(cur);if(p<0){p=0;for(let k=0;k<o.length;k++)if(o[k]>cur){p=k-(d>0?1:0);break}}
+ const n=Math.min(o.length-1,Math.max(0,p+d));subState=0;playSeg(o[n])}
+function toggle(){if(playing){stopPlay();renderCnt();return}
+ const s=SEGS[cur];if(stopAt===null||au.currentTime<s.s-0.05){playSeg(cur);return}
+ if(au.currentTime>=s.e-0.05){again();return}   // paused in the gap between repeats: carry on with the next play
+ startPlay()}
+function buildReps(){$("reps").innerHTML='<span class="lb">每句</span>'+REPS.map(r=>'<button class="chip'+(r[0]===rep?' on':'')+'" data-k="'+r[0]+'">'+r[1]+'</button>').join("");
+ $("reps").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;rep=b.dataset.k;buildReps();renderCnt();save()}}
+function buildList(){const L=$("list");L.innerHTML=SEGS.map((s,i)=>(CHAPTERS.findIndex(c=>c.s===i)>=0?'<div class="chead">第'+(CHAPTERS.findIndex(c=>c.s===i)+1)+'章 · '+esc(CHAPTERS[CHAPTERS.findIndex(c=>c.s===i)].t)+'</div>':'')+'<div class="item" data-i="'+i+'"><span class="i">'+(i+1)+'</span><span class="t">'+fmt(s.s)+'</span><span class="tx"><span class="x">'+esc(s.en)+'</span><span class="z">'+(s.zh?esc(s.zh):'')+'</span></span><span class="s"></span></div>').join("");
+ L.onclick=e=>{const it=e.target.closest(".item");if(it){subState=0;if(onlyStar&&!stars.has(+it.dataset.i))onlyStar=false;playSeg(+it.dataset.i)}}}
+const RATES=[0.75,0.9,1,1.25];if(!RATES.includes(rate))rate=1;
+function markSpeeds(){document.querySelectorAll("#speeds .chip").forEach(c=>c.classList.toggle("on",+c.dataset.r===rate))}
+function buildSpeeds(){$("speeds").innerHTML='<span class="lb">速度</span>'+RATES.map(r=>'<button class="chip" data-r="'+r+'">'+r+'×</button>').join("");markSpeeds();
+ $("speeds").onclick=e=>{const b=e.target.closest(".chip");if(!b)return;
+  if(performance.now()-lastCtrl<450)return;   // tap landed here right after a play-row tap: a slipped finger, not a speed choice
+  rate=+b.dataset.r;applyRate();markSpeeds();save()}}
+// the rate only ever changes from a speed chip: undo anything else that touches it
+au.addEventListener("ratechange",()=>{if(au.playbackRate!==rate||au.defaultPlaybackRate!==rate)applyRate()});
+document.querySelector(".ctrls").addEventListener("pointerdown",()=>{lastCtrl=performance.now()},true);
+document.querySelector(".ctrls").addEventListener("click",()=>{lastCtrl=performance.now()},true);
+function buildChapters(){if(!CHAPTERS.length)return;const S=$("chapSel");S.style.display="";
+ S.innerHTML=CHAPTERS.map((c,k)=>'<option value="'+k+'">第'+(k+1)+'章 '+esc(c.t)+'（'+(c.s+1)+'–'+(chapEnd(k)+1)+'）</option>').join("");
+ S.onchange=()=>{const k=+S.value;subState=0;if(onlyStar)onlyStar=false;playSeg(CHAPTERS[k].s);$("chapSel").blur()};
+ $("studyPanel").style.display="";
+ $("bar").insertAdjacentHTML("beforeend",CHAPTERS.slice(1).map(c=>'<i style="left:'+(c.s/SEGS.length*100)+'%"></i>').join(""))}
+function renderStudy(k){studyK=k;const c=CHAPTERS[k];$("studyTitle").textContent="📘 第"+(k+1)+"章学习 · "+c.t;
+ const ks=(c.key||[]).map(x=>'<div class="ks"><span class="go" data-n="'+x.n+'">▶ #'+x.n+'</span><span class="ke">'+esc(x.en)+'</span><div class="kz">'+esc(x.zh)+'</div><div class="kw">💡 '+esc(x.why)+'</div></div>').join("");
+ const ws=(c.words||[]).map(w=>'<div class="wd"><b>'+esc(w.w)+'</b><span class="ip">'+esc(w.ipa||"")+'</span>'+(w.old?'<span class="tag">'+esc(w.old)+'</span>':'')+' '+esc(w.zh)+(w.note?'<div class="nt">'+esc(w.note)+'</div>':'')+'</div>').join("");
+ $("study").innerHTML='<h3>🎯 听前大纲（先看这个再听）</h3><ol>'+(c.outline||[]).map(x=>'<li>'+esc(x)+'</li>').join("")+'</ol>'+
+  '<details id="kd"><summary>⭐ 听后重点句（听完再看）</summary>'+ks+'</details>'+
+  '<details id="wdd"><summary>📝 生词（'+(c.words||[]).length+'）</summary>'+ws+'</details>';
+ $("study").querySelectorAll(".go").forEach(g=>g.onclick=()=>{subState=0;if(onlyStar)onlyStar=false;playSeg(+g.dataset.n-1)})}
+function jumpTo(){const n=parseInt($("jumpN").value,10);if(!(n>=1&&n<=SEGS.length)){$("jumpN").value="";$("jumpN").placeholder="1–"+SEGS.length;return}
+ subState=0;if(onlyStar&&!stars.has(n-1))onlyStar=false;$("jumpN").blur();playSeg(n-1)}
+$("jumpGo").onclick=jumpTo;$("jumpN").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();jumpTo()}});
+$("jumpN").placeholder="1–"+SEGS.length;
+$("prev").onclick=()=>go(-1);$("next").onclick=()=>go(1);$("rep").onclick=()=>playSeg(cur);$("play").onclick=toggle;
+$("subbox").onclick=()=>{subState=(subState+1)%SUBCYCLE[subMode];renderSub()};
+function setStar(i,on){on?stars.add(i):stars.delete(i);if(!stars.size)onlyStar=false;saveStars();render();toast(on?"⭐ 已收藏第 "+(i+1)+" 句（共 "+stars.size+" 句）":"已取消收藏第 "+(i+1)+" 句")}
+$("star").onclick=e=>{e.preventDefault();e.stopPropagation();setStar(cur,!stars.has(cur))};
+// ---- 收藏夹 + 提问 ----
+const line=i=>"#"+(i+1)+" ["+fmt(SEGS[i].s)+"] "+SEGS[i].en+(SEGS[i].zh?"（"+SEGS[i].zh+"）":"");
+function renderFav(){const a=[...stars].sort((x,y)=>x-y);$("favInfo").textContent=a.length+" 句";
+ $("favList").innerHTML=a.length?a.map(i=>'<div class="fv"><div class="fh"><span class="fn" data-n="'+i+'">▶ #'+(i+1)+'</span><button class="del" data-del="'+i+'">取消收藏</button></div><div class="fe">'+esc(SEGS[i].en)+'</div><div class="fz">'+esc(SEGS[i].zh||"")+'</div>'+(QS[i]?'<div class="fq">❓ '+esc(QS[i])+'</div>':'')+'</div>').join(""):'<div class="empty">还没有收藏。听不懂或想复习的句子，点右上角 ☆ 收藏。</div>'}
+function renderQs(){const a=Object.keys(QS).map(Number).filter(i=>QS[i]&&i>=0&&i<SEGS.length).sort((x,y)=>x-y);$("qInfo").textContent=a.length+" 条";
+ $("qList").innerHTML=a.length?a.map(i=>'<div class="fv"><div class="fh"><span class="fn" data-n="'+i+'">▶ #'+(i+1)+'</span><button class="del" data-dq="'+i+'">删除</button></div><div class="fe">'+esc(SEGS[i].en)+'</div><div class="fq">❓ '+esc(QS[i])+'</div></div>').join(""):'<div class="empty">还没有提问。在句子卡片下面的“❓ 这句我想问”里写，自动保存。</div>'}
+function listClick(e){const n=e.target.closest(".fn"),d=e.target.closest("[data-del]"),q=e.target.closest("[data-dq]");
+ if(d){setStar(+d.dataset.del,false);return}
+ if(q){if(confirm("删除第 "+(+q.dataset.dq+1)+" 句的提问？")){delete QS[+q.dataset.dq];saveQs();render()}return}
+ if(n){const i=+n.dataset.n;subState=0;if(onlyStar&&!stars.has(i))onlyStar=false;playSeg(i);$("app").scrollIntoView({block:"start",behavior:"smooth"})}}
+$("favList").onclick=listClick;$("qList").onclick=listClick;
+const TITLE=document.title.replace(/^逐句精听 · /,"");
+function copyText(txt,what){const ok=()=>toast("📋 已复制"+what+"，去聊天里粘贴"),fail=()=>{$("copyTxt").value=txt;$("copyBox").style.display="block";$("copyBox").scrollIntoView({block:"center"})};
+ const legacy=()=>{try{const t=document.createElement("textarea");t.value=txt;t.setAttribute("readonly","");t.style.cssText="position:fixed;top:0;left:0;opacity:0";document.body.appendChild(t);t.select();t.setSelectionRange(0,txt.length);const r=document.execCommand("copy");t.remove();r?ok():fail()}catch(e){fail()}};
+ if(navigator.clipboard&&window.isSecureContext)navigator.clipboard.writeText(txt).then(ok,legacy);else legacy()}
+$("favCopy").onclick=()=>{const a=[...stars].sort((x,y)=>x-y);if(!a.length){toast("还没有收藏");return}
+ copyText("【逐句精听 · "+TITLE+"】我的收藏（"+a.length+" 句）\n\n"+a.map(i=>line(i)+"\n"+(SEGS[i].zh||"")+(QS[i]?"\n问："+QS[i]:"")).join("\n\n"),"收藏 "+a.length+" 句")};
+$("qCopy").onclick=()=>{const a=Object.keys(QS).map(Number).filter(i=>QS[i]).sort((x,y)=>x-y);if(!a.length){toast("还没有提问");return}
+ copyText("【逐句精听 · "+TITLE+"】我的提问（"+a.length+" 条）\n\n"+a.map(i=>line(i)+"\n问："+QS[i]).join("\n\n"),"提问 "+a.length+" 条")};
+$("favPlay").onclick=()=>{if(!stars.size){toast("还没有收藏");return}onlyStar=true;subState=0;playSeg([...stars].sort((x,y)=>x-y)[0]);$("app").scrollIntoView({block:"start",behavior:"smooth"})};
+$("copyClose").onclick=()=>{$("copyBox").style.display="none"};
+let qT=0;$("qIn").addEventListener("input",()=>{const i=+$("qIn").dataset.i,v=$("qIn").value.trim();if(v)QS[i]=$("qIn").value;else delete QS[i];
+ clearTimeout(qT);$("qState").textContent="保存中…";qT=setTimeout(()=>{saveQs();$("qState").textContent="✓ 已保存（第 "+(i+1)+" 句）";renderQs();renderFav();document.querySelectorAll('.item[data-i="'+i+'"] .s').forEach(e=>e.textContent=(stars.has(i)?"⭐":"")+(QS[i]?"❓":""))},400)});
+$("qIn").addEventListener("blur",()=>{clearTimeout(qT);saveQs();renderQs();renderFav()});
+// ---- 🎤 语音提问 (Web Speech API; Chrome on Android/desktop). Text is appended to the box and saved via the same "input" handler.
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+var rec=null,recI=-1;   // var: render() may run before this line
+let asrLang=localStorage.getItem("jingting.asrlang")==="en-US"?"en-US":"zh-CN",recBase="",recFinal="",recErr=false;
+function renderLang(){$("qLang").textContent=asrLang==="en-US"?"EN":"中";$("qLang").title="语音识别语言："+(asrLang==="en-US"?"英文（点一下换中文）":"中文（点一下换英文）")}
+renderLang();
+$("qLang").onclick=()=>{asrLang=asrLang==="en-US"?"zh-CN":"en-US";try{localStorage.setItem("jingting.asrlang",asrLang)}catch(e){}renderLang();
+ toast(asrLang==="en-US"?"🎤 语音识别：英文":"🎤 语音识别：中文（可夹英文单词）");if(rec){stopMic();setTimeout(startMic,350)}};
+// UI states: 0 idle, 1 启动中 (tapped, waiting for onstart), 2 正在听. A persistent status line (#qMsg) sits right under the box,
+// so errors are visible next to the button (the top toast is easy to miss) and Lily can screenshot the exact code.
+function micUI(st){const on=st>0;$("qMic").classList.toggle("rec",st===2);$("qMic").classList.toggle("wait",st===1);$("qBox").classList.toggle("rec",on);
+ $("qMicT").textContent=st===2?"停":st===1?"启动中":"说";
+ if(st===2){$("qState").textContent="🔴 正在听…";$("qInterim").textContent="正在听…（说完再点🎤停止）"}
+ else if(st===1){$("qState").textContent="⏳ 启动中…";$("qInterim").textContent="⏳ 语音识别启动中…"}
+ else $("qInterim").textContent=""}
+function micMsg(m,bad){const e=$("qMsg");e.textContent=m||"";e.style.display=m?"block":"none";e.classList.toggle("bad",!!bad)}
+function micJoin(a,b){b=b.trim();if(!b)return a;if(!a.trim())return b;return a+(/[\s\n]$/.test(a)?"":" ")+b}
+function micPut(interim){const q=$("qIn");if(+q.dataset.i!==recI){stopMic(true);return}
+ q.value=micJoin(recBase,recFinal);q.dispatchEvent(new Event("input"));
+ $("qInterim").textContent=interim?("…"+interim):($("qInterim").textContent||"正在听…")}
+const MICERR={"not-allowed":"麦克风权限被拒：点地址栏左边的🔒 → 权限 → 麦克风 → 允许",
+ "service-not-allowed":"手机的语音识别服务不可用（Chrome 要用“Google 语音服务”）",
+ "no-speech":"没听到声音，再点🎤说一遍","audio-capture":"麦克风被别的App占用或找不到麦克风",
+ "network":"语音识别要连 Google 服务器，网络不通","language-not-supported":"手机的语音服务不支持这个语言",
+ "bad-grammar":"识别参数出错","aborted":"识别被中断"};
+const KB="；也可以点输入框，用键盘上的🎤语音键";
+let recLog=[],recT0=0,recStarted=false,recHeard=false,recWD=0,recAlt=false,recRetried=false,micPerm="?";
+const MICVER="mic-v5";
+try{navigator.permissions&&navigator.permissions.query({name:"microphone"}).then(s=>{micPerm=s.state;s.onchange=()=>{micPerm=s.state}}).catch(()=>{})}catch(e){}
+// Big bottom sheet that stays until tapped: Lily missed the small status line and the 5 s toast.
+const KBHOW="点下面「⌨️ 改用键盘语音输入」→ 键盘弹出后，点键盘上的🎤（话筒）键说话，文字会直接进提问框，一样自动保存。";
+function micAlert(title,body){$("maT").textContent=title;$("maB").textContent=body+"\n\n"+KBHOW;
+ $("maD").textContent="诊断（截图发给老师）："+MICVER+" · 语言 "+(rec&&rec.lang||asrLang)+" · 麦克风权限 "+micPerm+" · "+recLog.join(" → ")+" · "+navigator.userAgent.replace(/^Mozilla\/5\.0 /,"").slice(0,120);
+ $("micAlert").classList.add("show")}
+function micAlertClose(){$("micAlert").classList.remove("show")}
+$("maX").addEventListener("click",e=>{e.stopPropagation();micAlertClose()});
+$("maKb").addEventListener("click",e=>{e.stopPropagation();micAlertClose();const q=$("qIn");q.focus();try{q.setSelectionRange(q.value.length,q.value.length)}catch(_){}q.scrollIntoView({block:"center"})});   // focus inside the tap = keyboard opens on Android
+$("maRetry").addEventListener("click",e=>{e.stopPropagation();micAlertClose();recRetried=false;startMic()});
+function rlog(s){recLog.push(s+"@"+((performance.now()-recT0)/1000).toFixed(1)+"s")}
+function startMic(isRetry){
+ if(!SR){micMsg("这个浏览器没有语音识别，请用 Chrome 打开"+KB,true);micAlert("❌ 这个浏览器不能语音识别","请用 Chrome 打开这个页面（OPPO 自带浏览器、微信/LINE 里打开都不行）。");return}
+ if(rec)return;micAlertClose();
+ recI=cur;$("qIn").dataset.i=cur;recBase=$("qIn").value;recFinal="";recErr="";recStarted=false;recHeard=false;if(!isRetry){recLog=[];recRetried=false}recT0=performance.now();
+ const wasPlaying=playing||!au.paused;if(wasPlaying){stopPlay();renderCnt()}   // otherwise the mic hears the video
+ let r;try{r=new SR()}catch(e){micMsg("识别出错：无法创建（"+(e&&e.name||e)+"）"+KB,true);micAlert("❌ 语音识别没法启动","无法创建识别器（"+(e&&e.name||e)+"）。");return}
+ rec=r;r.lang=recAlt&&asrLang==="zh-CN"?"cmn-Hans-CN":asrLang;r.interimResults=true;r.continuous=false;r.maxAlternatives=1;   // continuous=false: Android Chrome misbehaves with true
+ r.onstart=()=>{rlog("start");if(rec!==r)return;recStarted=true;clearTimeout(recWD);micUI(2);micMsg("")};
+ r.onaudiostart=()=>rlog("audio");r.onspeechstart=()=>{rlog("speech");recHeard=true};
+ r.onresult=e=>{let fin="",inter="";for(let i=0;i<e.results.length;i++){const t=e.results[i][0].transcript;if(e.results[i].isFinal)fin+=t;else inter+=t}
+  if(rec!==r)return;if(!recStarted){recStarted=true;micUI(2)}recHeard=true;recFinal=fin;micPut(inter)};
+ r.onerror=e=>{const c=(e&&e.error)||"unknown";rlog("error:"+c);if(rec!==r)return;recErr=c;
+  if(c==="aborted"&&recUserAbort)return;   // our own cancel: silent
+  if(c==="language-not-supported"&&!recAlt&&asrLang==="zh-CN"){recAlt=true}   // next tap retries with cmn-Hans-CN
+  const m="识别出错："+c+"（"+(MICERR[c]||"未知错误")+"）";micMsg(m+(c==="no-speech"?"":KB),true);
+  micAlert(c==="no-speech"?"🤔 没听到声音":"❌ 语音识别出错："+c,(MICERR[c]||"未知错误")+(c==="not-allowed"||c==="audio-capture"||c==="service-not-allowed"?"\n另外检查：手机 设置 → 应用 → Google → 权限 → 麦克风 → 允许（Chrome 的语音识别是借 Google App 做的）。":""))};
+ r.onend=()=>{rlog("end");if(rec!==r)return;clearTimeout(recWD);rec=null;micUI(0);
+  const q=$("qIn");if(+q.dataset.i===recI){saveQs();renderQs();renderFav();
+   const dt=(performance.now()-recT0)/1000;
+   if(recFinal.trim()){$("qState").textContent="✓ 已保存（第 "+(recI+1)+" 句）";micMsg("")}
+   else if(recErr){$("qState").textContent="自动保存在本机"}
+   else if(!recHeard&&dt<2.5&&!recRetried){recRetried=true;rlog("auto-retry");setTimeout(()=>{if(!rec)startMic(true)},500)}   // Android sometimes drops the first start right after a permission prompt / audio focus change
+   else if(!recHeard&&dt<2.5){$("qState").textContent="❌ 没启动成功";   // the "flashes once" case: ended at once with no error code
+    micMsg("❌ 识别一启动就结束了，没给原因。请改用键盘上的🎤语音键（见下方说明）",true);
+    micAlert("❌ 语音识别一启动就结束了","手机没给任何错误原因，试了两次都一样。最常见的原因：\n① 手机上没有或停用了「Google」App / Google 语音服务（国行 OPPO 常见）；\n② 「Google」App 没有麦克风权限；\n③ 别的 App 正在占用麦克风。")}
+   else{$("qState").textContent="没听清，再点🎤试试";micMsg("🤔 没听到内容，再点🎤说一遍；还不行就用键盘上的🎤语音键",true);
+    micAlert("🤔 没有识别出文字","说话前等按钮变红、出现「正在听」再开口，靠近手机说。")}}};
+ micUI(1);micMsg("");recUserAbort=false;rlog(wasPlaying?"paused-video":"tap");
+ // Android Chrome: starting the recognizer while our <audio> still holds audio focus makes it end at once,
+ // so after pausing the video give Android ~350 ms to release focus (start() needs no user gesture in Chrome).
+ const go=()=>{if(rec!==r)return;try{r.start()}catch(e){rlog("start-throw:"+(e&&e.name));rec=null;micUI(0);micMsg("识别出错：启动失败（"+(e&&e.name||e)+"）"+KB,true);micAlert("❌ 语音识别启动失败",String(e&&e.name||e));return}
+ clearTimeout(recWD);recWD=setTimeout(()=>{if(rec===r&&!recStarted){micMsg("❌ 4 秒还没启动，见下方说明",true);micAlert("⏳ 4 秒了，麦克风还没启动","可能是麦克风权限没开：点地址栏左边的🔒或⚙ → 权限 → 麦克风 → 允许，然后关掉这个标签页重新打开。")}},4000)};
+ if(wasPlaying)setTimeout(go,350);else go()}
+var recUserAbort=false;
+function stopMic(abort){const r=rec;if(!r)return;recUserAbort=!!abort;try{abort?r.abort():r.stop()}catch(e){}if(abort){rec=null;clearTimeout(recWD);micUI(0)}}
+function micTap(e){if(e){e.preventDefault();e.stopPropagation()}if(rec)stopMic(!recStarted);else startMic();setTimeout(()=>$("qBox").scrollIntoView({block:"nearest",behavior:"smooth"}),0)}
+$("qMic").addEventListener("click",micTap);
+["pointerdown","touchstart","mousedown"].forEach(t=>$("qMic").addEventListener(t,e=>e.stopPropagation(),{passive:true}));
+$("onlyStar").onclick=()=>{if(!stars.size&&!onlyStar){alert("还没有标星的句子。听不懂时点右上角 ⭐");return}onlyStar=!onlyStar;if(onlyStar&&!stars.has(cur)){cur=order()[0]}subState=0;render()};
+$("ptsBox").open=localStorage.getItem(KEY+"ptsopen")==="1";$("ptsBox").addEventListener("toggle",()=>{try{localStorage.setItem(KEY+"ptsopen",$("ptsBox").open?"1":"0")}catch(e){}});
+$("cont").onchange=save;$("blurList").onchange=applySubMode;
+$("bar").onclick=e=>{const r=e.currentTarget.getBoundingClientRect();const i=Math.min(SEGS.length-1,Math.floor((e.clientX-r.left)/r.width*SEGS.length));subState=0;if(onlyStar&&!stars.has(i))onlyStar=false;playSeg(i)};
+// ---- 指环遥控 (Bluetooth ring / clicker) + keyboard ----
+// Rings come in three flavours: keyboard/HID keys, media keys (routed to the Media Session on Android),
+// and touch/mouse emulation that injects swipes, wheel ticks or taps. All map onto act(), which debounces so one press = one action.
+let remote=localStorage.getItem("jingting.remote")==="1",diag=false,lastAct=-1e9,lastActKind="",swipeT=-1e9,wheelT=-1e9,hoverT=-1e9;   // performance.now() starts near 0 on every load
+const DEB=350,WDEB=400,INTER="button,a,input,select,textarea,label,summary,.chip,.item,.sub-box,.bar,.go,.star,.panel,.qbox,#toast,#micAlert,#diag,#remoteExit,[onclick],[role=button]";
+let wheelActT=-1e9;
+const NEXTK=new Set(["ArrowRight","ArrowDown","PageDown","MediaTrackNext","AudioVolumeDown","VolumeDown"]);
+const PREVK=new Set(["ArrowLeft","ArrowUp","PageUp","MediaTrackPrevious","AudioVolumeUp","VolumeUp"]);
+const ACTZH={next:"下一句",prev:"上一句",replay:"重听",toggle:"播放/暂停"},ACTBTN={next:"next",prev:"prev",replay:"rep",toggle:"play"};
+const dlines=[];
+function dlog(s){if(!diag)return;const d=new Date();dlines.unshift(String(d.getMinutes()).padStart(2,"0")+":"+String(d.getSeconds()).padStart(2,"0")+" "+s);dlines.length=Math.min(dlines.length,10);$("diagLog").textContent=dlines.join("\n")}
+function act(kind,src){const now=performance.now();
+ if(now-lastAct<DEB){dlog("   ↳ 忽略（防连按）"+ACTZH[kind]);return false}
+ lastAct=now;lastActKind=kind;dlog("   ↳ 动作："+ACTZH[kind]+"（"+src+"）");
+ if(kind==="next")go(1);else if(kind==="prev")go(-1);else if(kind==="replay")playSeg(cur);else if(kind==="toggle")toggle();
+ const b=$(ACTBTN[kind]);if(b){b.classList.add("hit");setTimeout(()=>b.classList.remove("hit"),220)}
+ return true}
+function blurAll(){const a=document.activeElement;if(a&&a!==document.body&&!(a.matches&&a.matches("input[type=number],input[type=text],select,textarea")))a.blur()}
+function setRemote(on,quiet){remote=on;if(!quiet)localStorage.setItem("jingting.remote",on?"1":"0");document.documentElement.classList.toggle("remote",on);
+ const b=$("remoteBtn");b.textContent="🎮 遥控模式："+(on?"开":"关");b.classList.toggle("remon",on);$("remoteTip").style.display=on?"":"none";
+ if(on){blurAll();if(!quiet||window.scrollY>0)$("app").scrollIntoView({block:"start"})}}
+function setDiag(on){diag=on;$("diag").style.display=on?"":"none";if(on){dlines.length=0;$("diagLog").textContent="（等待信号… 遥控模式："+(remote?"开":"关")+"）"}}
+$("remoteBtn").onclick=()=>setRemote(!remote);$("remoteExit").onclick=()=>setRemote(false);
+$("diagBtn").onclick=e=>{e.preventDefault();setDiag(!diag)};$("diagX").onclick=()=>setDiag(false);$("diagC").onclick=()=>{dlines.length=0;$("diagLog").textContent="（已清空，等待信号…）"};
+document.addEventListener("visibilitychange",()=>dlog("页面"+(document.hidden?"切到后台 (hidden)":"回到前台 (visible)")));
+// keys
+document.addEventListener("keydown",e=>{const t=e.target,typing=!!(t&&t.matches&&t.matches("input[type=number],input[type=text],input:not([type]),textarea,select"));
+ dlog("键 key="+JSON.stringify(e.key)+" code="+(e.code||"-")+" keyCode="+e.keyCode+(e.repeat?" (按住重复)":"")+(typing?" [在输入框里]":""));
+ if(typing||e.ctrlKey||e.metaKey||e.altKey)return;
+ const k=e.key;
+ if(k===" "||e.code==="Space"||k==="Enter"){e.preventDefault();if(e.repeat)return;
+  if(k==="Enter")$("subbox").click();else act("replay","空格");return}
+ if(NEXTK.has(k)){e.preventDefault();if(!e.repeat)act("next",k);return}
+ if(PREVK.has(k)){e.preventDefault();if(!e.repeat)act("prev",k);return}
+ if(k==="MediaPlayPause"||(k==="MediaPlay"&&!playing)||((k==="MediaPause"||k==="MediaStop")&&playing)){e.preventDefault();if(!e.repeat)act("toggle",k);return}
+ if(k==="p"||k==="P"){toggle()}else if(k==="s"||k==="S"){$("star").click()}});
+document.addEventListener("keyup",e=>{if(e.key===" "||e.key==="Enter"){const t=e.target;if(!(t&&t.matches&&t.matches("input,textarea,select")))e.preventDefault()}},true);
+// media keys (Bluetooth next/prev/play) reach Android Chrome through the Media Session, not as key events
+if("mediaSession" in navigator){const ms=navigator.mediaSession,H=(a,f)=>{try{ms.setActionHandler(a,f)}catch(e){}};
+ H("nexttrack",()=>{dlog("媒体键 nexttrack");act("next","媒体键 下一曲")});
+ H("previoustrack",()=>{dlog("媒体键 previoustrack");act("prev","媒体键 上一曲")});
+ H("play",()=>{dlog("媒体键 play");if(!playing)act("toggle","媒体键 播放");else if(au.paused)startPlay()});
+ H("pause",()=>{dlog("媒体键 pause");if(playing){lastAct=performance.now();stopPlay();renderCnt()}else if(!au.paused)au.pause()});
+ try{ms.metadata=new MediaMetadata({title:document.title,artist:"逐句精听"})}catch(e){}}
+// swipes / drags / taps injected by touch- or mouse-emulating rings
+const ptr=new Map();
+addEventListener("pointerdown",e=>{ptr.set(e.pointerId,{x:e.clientX,y:e.clientY,t:performance.now(),type:e.pointerType,field:!!(e.target.closest&&e.target.closest("textarea,input,select,.qbox,#copyBox,.list"))})},true);
+addEventListener("pointermove",e=>{if(!diag||ptr.has(e.pointerId)||e.pointerType==="touch")return;const n=performance.now();if(n-hoverT>1200){hoverT=n;dlog("指针移动(没按下) "+e.pointerType+" @"+(e.clientX|0)+","+(e.clientY|0))}},true);
+addEventListener("pointercancel",e=>{const p=ptr.get(e.pointerId);ptr.delete(e.pointerId);if(p)dlog("滑动被页面滚动吃掉 "+p.type+"（请打开 🎮 指环遥控）")},true);
+addEventListener("pointerup",e=>{const p=ptr.get(e.pointerId);ptr.delete(e.pointerId);if(!p)return;
+ const dx=e.clientX-p.x,dy=e.clientY-p.y,dt=performance.now()-p.t,ax=Math.abs(dx),ay=Math.abs(dy);
+ const dir=ax<10&&ay<10?"":ay>=ax?(dy<0?" ↑上滑":" ↓下滑"):(dx<0?" ←左滑":" →右滑");
+ dlog((dir?"滑动":"点击")+dir+" "+p.type+" dx="+(dx|0)+" dy="+(dy|0)+" "+(dt|0)+"ms 起点@"+(p.x|0)+","+(p.y|0)+" 终点@"+(e.clientX|0)+","+(e.clientY|0));
+ if(!remote||p.field||Math.max(ax,ay)<30||dt>1500)return;
+ swipeT=performance.now();
+ if(ay>=ax)act(dy<0?"next":"prev",dy<0?"上滑":"下滑");else act(dx<0?"next":"prev",dx<0?"左滑":"右滑")},true);
+addEventListener("touchmove",e=>{if(remote&&e.cancelable&&!(e.target.closest&&e.target.closest("textarea,.list")))e.preventDefault()},{passive:false,capture:true});
+addEventListener("wheel",e=>{const n=performance.now(),gap=n-wheelT;wheelT=n;const d=Math.abs(e.deltaY)>=Math.abs(e.deltaX)?e.deltaY:e.deltaX;
+ if(gap>=250)dlog("滚轮 deltaY="+Math.round(e.deltaY)+" deltaX="+Math.round(e.deltaX)+" mode="+e.deltaMode);
+ if(!remote)return;e.preventDefault();if(gap<250||!d||n-wheelActT<WDEB)return;wheelActT=n;act(d>0?"next":"prev",d>0?"滚轮向下":"滚轮向上")},{passive:false,capture:true});
+addEventListener("click",e=>{
+ if(performance.now()-swipeT<300){e.preventDefault();e.stopPropagation();return}   // the click that ends a swipe is not a tap
+ const t=e.target,inter=!!(t.closest&&t.closest(INTER));   // buttons, ⭐, chips, links, inputs, panels: always do their own action, never switch/replay
+ if(remote&&!inter&&e.isTrusted){const w=innerWidth,x=e.clientX,edge=x<w*0.15?"ezL":x>w*0.85?"ezR":"";
+  if(edge){e.preventDefault();e.stopPropagation();const nx=edge==="ezR",ez=$(edge);dlog("点"+(nx?"右":"左")+"边缘");if(act(nx?"next":"prev",nx?"点右边缘":"点左边缘")){ez.classList.add("flash");setTimeout(()=>ez.classList.remove("flash"),200)}return}}
+ if(!inter&&e.isTrusted)dlog("点空白处"+(remote?"":"（遥控没开，不动作）"));
+ if(remote&&!inter&&e.isTrusted){act("replay","点空白");return}
+ if(inter)setTimeout(blurAll,0)},true);   // never leave focus on a button: Space/Enter would press it instead of reaching the page
+$("cont").addEventListener("change",()=>setTimeout(blurAll,0));$("blurList").addEventListener("change",()=>setTimeout(blurAll,0));
+// keep the element and the intent in sync: a play() that resolves after the user already paused is undone,
+// a system pause (call, other app) shows ▶, and timeupdate backs up the frame loop
+au.addEventListener("playing",()=>{if(!playing){au.pause();return}applyRate();if(!raf)loop()});
+au.addEventListener("pause",()=>{if(playing&&!gapT&&!au.seeking&&au.currentTime<(stopAt===null?1e9:stopAt-0.05)&&!au.ended){setTimeout(()=>{if(au.paused&&playing&&!gapT)setPlayUI(false)},250)}});
+au.addEventListener("timeupdate",()=>{if(playing&&!au.paused)check()});
+au.addEventListener("ended",()=>{if(playing&&stopAt!==null&&!gapT){segEnd();return}if(!gapT){stopAt=null;stopPlay()}});
+// decode embedded audio into a Blob URL (more reliable seeking on iOS Safari than a data: URI)
+function init(){
+ const p=parseInt(localStorage.getItem(KEY+"pos")||"0",10);cur=(p>=0&&p<SEGS.length)?p:0;
+ buildChapters();buildList();buildSpeeds();buildReps();buildSubs();applySubMode();render();$("loading").style.display="none";$("app").style.display="block";setRemote(remote,true)}
+setTimeout(init,30);
+window.__jt={SEGS,au,playSeg,go,toggle,get cur(){return cur},get playing(){return playing},get plays(){return plays},get rep(){return rep},get inGap(){return !!gapT},get rate(){return rate},get raf(){return raf},CHAPTERS,get subMode(){return subMode},get subState(){return subState},get remote(){return remote},setRemote,get lastAction(){return lastActKind}};
+</script>
+</body>
+</html>
