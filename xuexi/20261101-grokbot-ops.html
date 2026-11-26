@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grok Bot 真的是运营神器</title>
+<style>
+:root {
+  color-scheme: light;
+  --ink: #192e29;
+  --muted: #506660;
+  --paper: #f4f7f3;
+  --line: #d5e1d8;
+  --accent: #176048;
+  --diagram: #edf5ee;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1rem/1.6 system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  overflow-wrap: anywhere;
+}
+main { max-width: 640px; margin: 0 auto; padding: 1rem 1rem 2rem; }
+a { color: var(--accent); text-underline-offset: .22em; }
+a:focus-visible, summary:focus-visible { outline: 3px solid #177957; outline-offset: 3px; }
+h1, h2, h3, p, ul, figure { margin: 0; }
+h1 { font-size: clamp(1.75rem, 6vw, 2.55rem); line-height: 1.23; letter-spacing: -.035em; }
+h2 { font-size: 1.19rem; line-height: 1.4; }
+h3 { font-size: 1rem; line-height: 1.4; }
+section { margin-top: 1.5rem; }
+section > h2 { margin-bottom: .65rem; }
+.back, .touch, .links a { display: inline-flex; align-items: center; min-height: 44px; }
+.back { font-weight: 650; margin-bottom: .6rem; }
+.hero { border: 1px solid var(--line); border-radius: 1.25rem; background: #fff; padding: 1.2rem; }
+.portal .hero { background: #163d31; color: #fff; padding: 1.55rem 1.25rem; border-color: #163d31; }
+.portal .hero p { color: #e1f1e8; margin-top: .6rem; }
+.meta, .card-date, footer { color: var(--muted); font-size: .875rem; }
+.meta { margin-top: .6rem; }
+.value-line { margin-top: .9rem; }
+.badge {
+  display: inline-block;
+  border-radius: 99px;
+  padding: .07rem .55rem;
+  font-size: .82rem;
+  font-weight: 750;
+  white-space: nowrap;
+  vertical-align: .08em;
+}
+.value-line .badge { margin-right: .4rem; }
+.high { background: #daeee1; color: #174d37; }
+.upper-mid { background: #e3efc8; color: #3e5419; }
+.mid { background: #faecc8; color: #6b4910; }
+.lower-mid { background: #f7e8de; color: #713e29; }
+.low { background: #e9edf0; color: #465460; }
+.missing { background: #f9ebd1; color: #70450d; }
+.notice {
+  margin-top: .8rem;
+  border: 1px solid #ead8ac;
+  border-left: 4px solid #a56b1e;
+  border-radius: .65rem;
+  padding: .65rem .8rem;
+  background: #fff7e7;
+  color: #664212;
+  font-size: .94rem;
+}
+.diagram {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #c8ddcf;
+  border-radius: 1rem;
+  background: var(--diagram);
+}
+figcaption { color: #285642; font-size: 1.03rem; font-weight: 750; margin-bottom: .8rem; }
+.flow, .branch { display: grid; gap: .35rem; align-items: stretch; }
+.branch { grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); gap: .45rem; }
+.node {
+  display: grid;
+  align-content: center;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #b9d1c2;
+  border-radius: .65rem;
+  min-height: 3.05rem;
+  padding: .45rem;
+  line-height: 1.35;
+}
+.node strong { font-size: .96rem; }
+.node small { font-size: .82rem; color: var(--muted); margin-top: .22rem; }
+.primary { background: #215d48; color: #fff; border-color: #215d48; }
+.primary small { color: #e1f3e9; }
+.arrow { color: #2b684f; line-height: 1; text-align: center; align-self: center; font-weight: 800; }
+.arrow .horizontal { display: none; }
+.diagram-note { color: #285642; font-size: .875rem; text-align: center; font-weight: 650; }
+.essentials { margin: .85rem 0 0; padding-left: 1.3rem; }
+.essentials li + li { margin-top: .2rem; }
+.essentials li::marker { color: var(--accent); }
+.stack { display: grid; gap: .55rem; }
+details, .link-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+}
+summary { min-height: 48px; padding: .72rem .9rem; cursor: pointer; font-weight: 680; }
+summary::marker { color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--line); }
+.detail-body { padding: .8rem .9rem; }
+.detail-body ul { padding-left: 1.25rem; }
+.detail-body li + li, .detail-body p + p { margin-top: .4rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0 1rem; list-style: none; padding: 0; }
+.links li { max-width: 100%; }
+.link-card { display: block; padding: .82rem .94rem; }
+a.link-card { text-decoration: none; color: var(--ink); }
+a.link-card:hover, summary:hover { background: #f5faf6; }
+a.link-card:hover h3 { color: var(--accent); text-decoration: underline; }
+.card-head { display: flex; flex-wrap: wrap; gap: .35rem .5rem; align-items: center; margin-bottom: .35rem; }
+.card-value { color: var(--muted); font-size: .9rem; margin-top: .28rem; }
+.card-title { font-weight: 680; }
+.audio-list { margin-top: .45rem; }
+.audio-list > div + div { border-top: 1px solid var(--line); padding-top: .3rem; }
+.reference { display: block; width: min(100%, 477px); height: auto; margin: 0 auto; border-radius: .35rem; }
+footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+@media (min-width: 520px) {
+  main { padding-top: 1.55rem; }
+  .diagram { padding: 1.15rem; }
+  .flow.horizontal-flow { display: flex; }
+  .horizontal-flow > .node { flex: 1; }
+  .horizontal-flow > .arrow .horizontal { display: inline; }
+  .horizontal-flow > .arrow .vertical { display: none; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<a class="back" href="index.html">← 学习拓展 · 总入口</a>
+<header class="hero">
+  <h1>Grok Bot 真的是运营神器</h1>
+  <p class="meta"><time datetime="2026-11-01">2026-11-01</time> · 江总转发 · 黄益贺 · newtype</p>
+  <p class="value-line"><span class="badge high">高</span><strong>对 Lily 的用处</strong>　把 Grok Bot 当运营中心、Codex 当开发中心，和她现在的用法高度对应，可直接借鉴任务拆法。已取到全文。</p>
+</header>
+
+<figure class="diagram"><figcaption>作者的开发与运营分工</figcaption><div class="flow"><div class="branch" style="--columns: 2"><div class="node"><strong>本地 Codex</strong><small>电脑休眠就停</small></div><div class="node primary"><strong>云端 Grok Bot</strong><small>生活继续，事情不停</small></div></div><p class="diagram-note">Grok Bot 运营中心 ↓</p><div class="branch" style="--columns: 3"><div class="node"><strong>投资监测</strong></div><div class="node"><strong>选题</strong></div><div class="node"><strong>多平台数据</strong><small>登录后用 Computer Use 取数</small></div></div></div></figure>
+<ul class="essentials"><li>投资规则由作者定，Bot 盯触发条件。</li><li>选题看 X 中文圈精选。</li><li>多平台后台数据由 Bot 汇总。</li></ul>
+<section aria-labelledby="details-heading">
+  <h2 id="details-heading">展开细节</h2>
+  <div class="stack"><details><summary>投资监测看什么</summary><div class="detail-body"><p>作者设定宏观、行业、持仓的监测规则。Bot 盯规则是否触发并给建议，作者决定是否交易。</p></div></details><details><summary>选题与多平台数据怎么做</summary><div class="detail-body"><p>每天晚上收到一份 X 中文圈精选。遇到没有接口的平台，作者先在云电脑的浏览器手动登录后台，再交给 Bot 用 Computer Use 操作浏览器并记录数据。</p></div></details><details><summary>云电脑为何有用</summary><div class="detail-body"><p>作者陪护时带走 MacBook，本地 Codex 定时任务停了。云端 Grok Bot 继续运行，在美股大跌时给出了报告。</p></div></details></div>
+</section>
+<section aria-labelledby="sources-heading">
+  <h2 id="sources-heading">来源</h2>
+  <ul class="links"><li><a href="https://www.newtype.pro/p/grok-bot-is-really-an-operations-game-changer/">黄益贺 · newtype 原文</a></li><li><a href="https://letters.newtype.pro/p/grok-bot-is-really-an-operations-game-changer">newtype 通讯版</a></li></ul>
+</section>
+<footer>归档日期 <time datetime="2026-11-26">2026-11-26</time>（Asia/Bangkok） · Codex小分队</footer>
+
+</main>
+</body>
+</html>

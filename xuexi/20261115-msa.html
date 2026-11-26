@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MSA 五性到底怎么看？</title>
+<style>
+:root {
+  color-scheme: light;
+  --ink: #192e29;
+  --muted: #506660;
+  --paper: #f4f7f3;
+  --line: #d5e1d8;
+  --accent: #176048;
+  --diagram: #edf5ee;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1rem/1.6 system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  overflow-wrap: anywhere;
+}
+main { max-width: 640px; margin: 0 auto; padding: 1rem 1rem 2rem; }
+a { color: var(--accent); text-underline-offset: .22em; }
+a:focus-visible, summary:focus-visible { outline: 3px solid #177957; outline-offset: 3px; }
+h1, h2, h3, p, ul, figure { margin: 0; }
+h1 { font-size: clamp(1.75rem, 6vw, 2.55rem); line-height: 1.23; letter-spacing: -.035em; }
+h2 { font-size: 1.19rem; line-height: 1.4; }
+h3 { font-size: 1rem; line-height: 1.4; }
+section { margin-top: 1.5rem; }
+section > h2 { margin-bottom: .65rem; }
+.back, .touch, .links a { display: inline-flex; align-items: center; min-height: 44px; }
+.back { font-weight: 650; margin-bottom: .6rem; }
+.hero { border: 1px solid var(--line); border-radius: 1.25rem; background: #fff; padding: 1.2rem; }
+.portal .hero { background: #163d31; color: #fff; padding: 1.55rem 1.25rem; border-color: #163d31; }
+.portal .hero p { color: #e1f1e8; margin-top: .6rem; }
+.meta, .card-date, footer { color: var(--muted); font-size: .875rem; }
+.meta { margin-top: .6rem; }
+.value-line { margin-top: .9rem; }
+.badge {
+  display: inline-block;
+  border-radius: 99px;
+  padding: .07rem .55rem;
+  font-size: .82rem;
+  font-weight: 750;
+  white-space: nowrap;
+  vertical-align: .08em;
+}
+.value-line .badge { margin-right: .4rem; }
+.high { background: #daeee1; color: #174d37; }
+.upper-mid { background: #e3efc8; color: #3e5419; }
+.mid { background: #faecc8; color: #6b4910; }
+.lower-mid { background: #f7e8de; color: #713e29; }
+.low { background: #e9edf0; color: #465460; }
+.missing { background: #f9ebd1; color: #70450d; }
+.notice {
+  margin-top: .8rem;
+  border: 1px solid #ead8ac;
+  border-left: 4px solid #a56b1e;
+  border-radius: .65rem;
+  padding: .65rem .8rem;
+  background: #fff7e7;
+  color: #664212;
+  font-size: .94rem;
+}
+.diagram {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #c8ddcf;
+  border-radius: 1rem;
+  background: var(--diagram);
+}
+figcaption { color: #285642; font-size: 1.03rem; font-weight: 750; margin-bottom: .8rem; }
+.flow, .branch { display: grid; gap: .35rem; align-items: stretch; }
+.branch { grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); gap: .45rem; }
+.node {
+  display: grid;
+  align-content: center;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #b9d1c2;
+  border-radius: .65rem;
+  min-height: 3.05rem;
+  padding: .45rem;
+  line-height: 1.35;
+}
+.node strong { font-size: .96rem; }
+.node small { font-size: .82rem; color: var(--muted); margin-top: .22rem; }
+.primary { background: #215d48; color: #fff; border-color: #215d48; }
+.primary small { color: #e1f3e9; }
+.arrow { color: #2b684f; line-height: 1; text-align: center; align-self: center; font-weight: 800; }
+.arrow .horizontal { display: none; }
+.diagram-note { color: #285642; font-size: .875rem; text-align: center; font-weight: 650; }
+.essentials { margin: .85rem 0 0; padding-left: 1.3rem; }
+.essentials li + li { margin-top: .2rem; }
+.essentials li::marker { color: var(--accent); }
+.stack { display: grid; gap: .55rem; }
+details, .link-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+}
+summary { min-height: 48px; padding: .72rem .9rem; cursor: pointer; font-weight: 680; }
+summary::marker { color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--line); }
+.detail-body { padding: .8rem .9rem; }
+.detail-body ul { padding-left: 1.25rem; }
+.detail-body li + li, .detail-body p + p { margin-top: .4rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0 1rem; list-style: none; padding: 0; }
+.links li { max-width: 100%; }
+.link-card { display: block; padding: .82rem .94rem; }
+a.link-card { text-decoration: none; color: var(--ink); }
+a.link-card:hover, summary:hover { background: #f5faf6; }
+a.link-card:hover h3 { color: var(--accent); text-decoration: underline; }
+.card-head { display: flex; flex-wrap: wrap; gap: .35rem .5rem; align-items: center; margin-bottom: .35rem; }
+.card-value { color: var(--muted); font-size: .9rem; margin-top: .28rem; }
+.card-title { font-weight: 680; }
+.audio-list { margin-top: .45rem; }
+.audio-list > div + div { border-top: 1px solid var(--line); padding-top: .3rem; }
+.reference { display: block; width: min(100%, 477px); height: auto; margin: 0 auto; border-radius: .35rem; }
+footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+@media (min-width: 520px) {
+  main { padding-top: 1.55rem; }
+  .diagram { padding: 1.15rem; }
+  .flow.horizontal-flow { display: flex; }
+  .horizontal-flow > .node { flex: 1; }
+  .horizontal-flow > .arrow .horizontal { display: inline; }
+  .horizontal-flow > .arrow .vertical { display: none; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<a class="back" href="index.html">← 学习拓展 · 总入口</a>
+<header class="hero">
+  <h1>MSA 五性到底怎么看？</h1>
+  <p class="meta"><time datetime="2026-11-15">2026-11-15</time> · 江总转发 · 去噪数研</p>
+  <p class="value-line"><span class="badge upper-mid">中高</span><strong>对 Lily 的用处</strong>　测量系统准不准是质量决策的前提，和制造质量工作相关；但原文未取到，只根据卡片图讲解。</p>
+</header>
+<p class="notice"><strong>原文未取到。</strong>讲解只根据微信卡片大图的可见内容。</p>
+<figure class="diagram"><figcaption>MSA 五性分析总览</figcaption><div class="flow"><div class="branch" style="--columns: 3"><div class="node"><strong>1. 偏倚</strong></div><div class="node"><strong>2. 线性</strong></div><div class="node"><strong>3. 稳定性</strong></div></div><div class="branch" style="--columns: 2"><div class="node"><strong>4. 重复性</strong></div><div class="node"><strong>5. 再现性</strong></div></div><p class="diagram-note">GRR = 重复性 + 再现性</p><span class="arrow" aria-hidden="true"><span class="vertical">↓</span><span class="horizontal">→</span></span><div class="node primary"><strong>判断测量系统能否用于过程与质量决策</strong><small>看测量是否准确、稳定</small></div></div></figure>
+<ul class="essentials"><li>偏倚看均值和参考值之差。</li><li>线性看偏倚随量程位置的变化。</li><li>稳定性看测量随时间是否一致。</li><li>重复性看同一人重复测量的波动。</li><li>再现性看不同测量人的结果波动。</li></ul>
+<section aria-labelledby="details-heading">
+  <h2 id="details-heading">展开细节</h2>
+  <div class="stack"><details><summary>五性各自看什么</summary><div class="detail-body"><ul><li>偏倚：比较平均测量值和参考值。</li><li>线性：看参考值变化时偏倚是否跟着变。</li><li>稳定性：用 X 图与 R 图看测量系统随时间是否保持一致。</li><li>重复性：同一人用同一仪器对同一零件重复测量的波动。</li><li>再现性：不同测量人之间的测量结果波动。</li></ul></div></details><details><summary>查看 MSA 五性卡片原图</summary><div class="detail-body"><img class="reference" src="assets/msa-card.png" width="477" height="620" alt="MSA 五性分析总览。卡片内容见五性各自看什么。" loading="lazy"></div></details></div>
+</section>
+<section aria-labelledby="sources-heading">
+  <h2 id="sources-heading">来源</h2>
+  <ul class="links"><li><a href="assets/msa-card.png">微信卡片 · MSA 五性分析总览</a></li></ul>
+</section>
+<footer>归档日期 <time datetime="2026-11-26">2026-11-26</time>（Asia/Bangkok） · Codex小分队</footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学习拓展 · 总入口</title>
+<style>
+:root {
+  color-scheme: light;
+  --ink: #192e29;
+  --muted: #506660;
+  --paper: #f4f7f3;
+  --line: #d5e1d8;
+  --accent: #176048;
+  --diagram: #edf5ee;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1rem/1.6 system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  overflow-wrap: anywhere;
+}
+main { max-width: 640px; margin: 0 auto; padding: 1rem 1rem 2rem; }
+a { color: var(--accent); text-underline-offset: .22em; }
+a:focus-visible, summary:focus-visible { outline: 3px solid #177957; outline-offset: 3px; }
+h1, h2, h3, p, ul, figure { margin: 0; }
+h1 { font-size: clamp(1.75rem, 6vw, 2.55rem); line-height: 1.23; letter-spacing: -.035em; }
+h2 { font-size: 1.19rem; line-height: 1.4; }
+h3 { font-size: 1rem; line-height: 1.4; }
+section { margin-top: 1.5rem; }
+section > h2 { margin-bottom: .65rem; }
+.back, .touch, .links a { display: inline-flex; align-items: center; min-height: 44px; }
+.back { font-weight: 650; margin-bottom: .6rem; }
+.hero { border: 1px solid var(--line); border-radius: 1.25rem; background: #fff; padding: 1.2rem; }
+.portal .hero { background: #163d31; color: #fff; padding: 1.55rem 1.25rem; border-color: #163d31; }
+.portal .hero p { color: #e1f1e8; margin-top: .6rem; }
+.meta, .card-date, footer { color: var(--muted); font-size: .875rem; }
+.meta { margin-top: .6rem; }
+.value-line { margin-top: .9rem; }
+.badge {
+  display: inline-block;
+  border-radius: 99px;
+  padding: .07rem .55rem;
+  font-size: .82rem;
+  font-weight: 750;
+  white-space: nowrap;
+  vertical-align: .08em;
+}
+.value-line .badge { margin-right: .4rem; }
+.high { background: #daeee1; color: #174d37; }
+.upper-mid { background: #e3efc8; color: #3e5419; }
+.mid { background: #faecc8; color: #6b4910; }
+.lower-mid { background: #f7e8de; color: #713e29; }
+.low { background: #e9edf0; color: #465460; }
+.missing { background: #f9ebd1; color: #70450d; }
+.notice {
+  margin-top: .8rem;
+  border: 1px solid #ead8ac;
+  border-left: 4px solid #a56b1e;
+  border-radius: .65rem;
+  padding: .65rem .8rem;
+  background: #fff7e7;
+  color: #664212;
+  font-size: .94rem;
+}
+.diagram {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #c8ddcf;
+  border-radius: 1rem;
+  background: var(--diagram);
+}
+figcaption { color: #285642; font-size: 1.03rem; font-weight: 750; margin-bottom: .8rem; }
+.flow, .branch { display: grid; gap: .35rem; align-items: stretch; }
+.branch { grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); gap: .45rem; }
+.node {
+  display: grid;
+  align-content: center;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #b9d1c2;
+  border-radius: .65rem;
+  min-height: 3.05rem;
+  padding: .45rem;
+  line-height: 1.35;
+}
+.node strong { font-size: .96rem; }
+.node small { font-size: .82rem; color: var(--muted); margin-top: .22rem; }
+.primary { background: #215d48; color: #fff; border-color: #215d48; }
+.primary small { color: #e1f3e9; }
+.arrow { color: #2b684f; line-height: 1; text-align: center; align-self: center; font-weight: 800; }
+.arrow .horizontal { display: none; }
+.diagram-note { color: #285642; font-size: .875rem; text-align: center; font-weight: 650; }
+.essentials { margin: .85rem 0 0; padding-left: 1.3rem; }
+.essentials li + li { margin-top: .2rem; }
+.essentials li::marker { color: var(--accent); }
+.stack { display: grid; gap: .55rem; }
+details, .link-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+}
+summary { min-height: 48px; padding: .72rem .9rem; cursor: pointer; font-weight: 680; }
+summary::marker { color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--line); }
+.detail-body { padding: .8rem .9rem; }
+.detail-body ul { padding-left: 1.25rem; }
+.detail-body li + li, .detail-body p + p { margin-top: .4rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0 1rem; list-style: none; padding: 0; }
+.links li { max-width: 100%; }
+.link-card { display: block; padding: .82rem .94rem; }
+a.link-card { text-decoration: none; color: var(--ink); }
+a.link-card:hover, summary:hover { background: #f5faf6; }
+a.link-card:hover h3 { color: var(--accent); text-decoration: underline; }
+.card-head { display: flex; flex-wrap: wrap; gap: .35rem .5rem; align-items: center; margin-bottom: .35rem; }
+.card-value { color: var(--muted); font-size: .9rem; margin-top: .28rem; }
+.card-title { font-weight: 680; }
+.audio-list { margin-top: .45rem; }
+.audio-list > div + div { border-top: 1px solid var(--line); padding-top: .3rem; }
+.reference { display: block; width: min(100%, 477px); height: auto; margin: 0 auto; border-radius: .35rem; }
+footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+@media (min-width: 520px) {
+  main { padding-top: 1.55rem; }
+  .diagram { padding: 1.15rem; }
+  .flow.horizontal-flow { display: flex; }
+  .horizontal-flow > .node { flex: 1; }
+  .horizontal-flow > .arrow .horizontal { display: inline; }
+  .horizontal-flow > .arrow .vertical { display: none; }
+}
+</style>
+</head>
+<body>
+<main class="portal">
+
+<header class="hero">
+  <h1>学习拓展 · 总入口</h1>
+  <p>结构图讲解，细节点开再看。点卡片进入。更新到 <time datetime="2026-11-26">2026-11-26</time>。</p>
+</header>
+<section aria-labelledby="archive-heading">
+  <h2 id="archive-heading">Codex小分队 · 新归档</h2>
+  <div class="stack"><a class="link-card" href="20261119-potato-automate.html">
+  <div class="card-head"><time class="card-date" datetime="2026-11-19">2026-11-19</time><span class="badge high">高</span><span class="badge missing">原文未取到</span></div>
+  <h3>土豆姐最新教程，手把手教你用 Grok Bot 搞定一切自动化</h3>
+  <p class="card-value">把土豆姐的自动化方法收成中文可执行步骤；本站已有原文精读页，可对照着做。</p>
+</a><a class="link-card" href="20261119-cs193t.html">
+  <div class="card-head"><time class="card-date" datetime="2026-11-19">2026-11-19</time><span class="badge high">高</span><span class="badge missing">原文未取到</span></div>
+  <h3>斯坦福新开了一门 AI 课：不教你模型原理，而是教你怎么用 AI</h3>
+  <p class="card-value">零基础、教怎么用 AI，讲座和作业已公开，适合系统补课。微信原文未取到，依据官方课程页。</p>
+</a><a class="link-card" href="20261115-always-on-agent.html">
+  <div class="card-head"><time class="card-date" datetime="2026-11-15">2026-11-15</time><span class="badge high">高</span></div>
+  <h3>斯坦福新课直接讲 personal agent，Grok Bot 工程师分享如何打造出 always-on agent</h3>
+  <p class="card-value">直接讲 Grok Bot 这类常驻 agent 怎么搭，能帮她理解自己每天在用的工具。已取到授权转载全文。</p>
+</a><a class="link-card" href="20261115-msa.html">
+  <div class="card-head"><time class="card-date" datetime="2026-11-15">2026-11-15</time><span class="badge upper-mid">中高</span><span class="badge missing">原文未取到</span></div>
+  <h3>MSA 五性到底怎么看？</h3>
+  <p class="card-value">测量系统准不准是质量决策的前提，和制造质量工作相关；但原文未取到，只根据卡片图讲解。</p>
+</a><a class="link-card" href="20261115-platform-rd.html">
+  <div class="card-head"><time class="card-date" datetime="2026-11-15">2026-11-15</time><span class="badge mid">中</span><span class="badge missing">原文未取到</span></div>
+  <h3>平台化研发到底是什么？</h3>
+  <p class="card-value">痛点（新品开发时各部门从零再来一遍）和制造企业相关，但原文未取到，无法讲解「到底是什么」。</p>
+</a><a class="link-card" href="20261101-itinerary-card.html">
+  <div class="card-head"><time class="card-date" datetime="2026-11-01">2026-11-01</time><span class="badge low">低</span><span class="badge missing">原文未取到</span></div>
+  <h3>#行程已更新 / 连接应用</h3>
+  <p class="card-value">不是学习材料，是李明欣发的 Grok Bot 系统卡片，无正文。</p>
+</a><a class="link-card" href="20261101-grokbot-ops.html">
+  <div class="card-head"><time class="card-date" datetime="2026-11-01">2026-11-01</time><span class="badge high">高</span></div>
+  <h3>Grok Bot 真的是运营神器</h3>
+  <p class="card-value">把 Grok Bot 当运营中心、Codex 当开发中心，和她现在的用法高度对应，可直接借鉴任务拆法。已取到全文。</p>
+</a><a class="link-card" href="20261031-xiaomi-ocr.html">
+  <div class="card-head"><time class="card-date" datetime="2026-10-31">2026-10-31</time><span class="badge lower-mid">中低</span><span class="badge missing">原文未取到</span></div>
+  <h3>小尺寸全能王：小米开源 0.8B 卷王 OCR 模型</h3>
+  <p class="card-value">轻量文档识别有参考价值，但自建模型不是她的日常优先级。公众号原文未取到，依据官方 README 与同日报道。</p>
+</a><a class="link-card" href="20261030-feishu-project.html">
+  <div class="card-head"><time class="card-date" datetime="2026-10-30">2026-10-30</time><span class="badge mid">中</span><span class="badge missing">原文未取到</span></div>
+  <h3>全新飞书项目，发布会重点看这一篇!</h3>
+  <p class="card-value">公司在用飞书，江总也在推飞书+AI；该标题原文未取到，讲解依据官网同期发布会稿，不能确认是同一篇。</p>
+</a></div>
+</section>
+<section aria-labelledby="methods-heading">
+  <h2 id="methods-heading">AI 工作法（已有）</h2>
+  <div class="stack">
+    <div class="link-card">
+      <p class="card-title"><a class="touch" href="https://cursor.com/canvas/store-b8d44d49-0725-4da5-9efb-a7aa574d8f71/f06c8d88-ac4a-4fc0-8d90-06ef04a107b6">Tammy · 16 个 Grok Bot：别拉群，走星型管道 + 独立盲审</a></p>
+      <span class="card-date">11/02</span> · <a class="touch" href="https://x.com/TammyBuilds/status/2116918291658690560">原文</a>
+    </div>
+    <a class="link-card" href="https://cursor.com/canvas/store-b8d44d49-0725-4da5-9efb-a7aa574d8f71/5cd0482c-b0d7-4a86-9dba-aeaf99a57ccc">
+      <span class="card-title">Lauren Tan 的 AI 方法 · 最干原理图谱</span> <span class="card-date">11/02</span>
+    </a>
+    <a class="link-card" href="../lauren-automate-guide.html"><span class="card-title">泛听精读：用 Grok Bot 自动化任何事</span></a>
+  </div>
+</section>
+<section aria-labelledby="audio-heading">
+  <h2 id="audio-heading">通勤音频与既有系列</h2>
+  <ul class="links"><li><a href="https://drive.google.com/drive/folders/12lHuZtM96hvKoulblYVFTvLXfivF7-nb">通勤文件夹</a></li><li><a href="https://cursor.com/canvas/store-b8d44d49-0725-4da5-9efb-a7aa574d8f71/97517b9c-45f0-4264-9bf2-2968045601a7">旧 Canvas 总入口（备查）</a></li></ul>
+  <div class="stack"><details><summary>毛选 / 思维</summary><div class="detail-body"><ul class="links"><li><a href="https://docs.google.com/document/d/1cFpVCQaeSycERi3SihGtXlLNKs6QL3pjQgd0RzaEetI/edit">毛选 12 篇文稿</a></li></ul><div class="audio-list"><div><h3>实践论通篇快过 · 10/29</h3><ul class="links"><li><a href="https://drive.google.com/file/d/1sYQllfiwKslVS6yeD-S0m4Maoll0rhxt/view">1.2×</a></li><li><a href="https://drive.google.com/file/d/1Qejge-9BjC19qj3Ecxv6i_8iZAQoN3fD/view">1.6×</a></li></ul></div><div><h3>矛盾论通篇 · 10/28</h3><ul class="links"><li><a href="https://drive.google.com/file/d/1SVPwm18LuNr3OYUmN-npOyByPD8xPw-X/view">1.2×</a></li><li><a href="https://drive.google.com/file/d/1-SpVlkPfdirESV76vDtw11JiOOfHBl56/view">1.6×</a></li></ul></div><div><h3>矛盾论 10 个方法 · 10/28</h3><ul class="links"><li><a href="https://drive.google.com/file/d/1P5KByTEGpXGZ_dnxmU-HaX_Tt4tJIsy-/view">1.2×</a></li><li><a href="https://drive.google.com/file/d/1wwkI8O0kgP-39O9q5GVGvxGSu3N0emsm/view">1.6×</a></li></ul></div><div><h3>矛盾论 01 · 10/28</h3><ul class="links"><li><a href="https://drive.google.com/file/d/1zdtJI9qcq9_Bp7j4hPzGtGjx8W5wIQqm/view">1.2×</a></li><li><a href="https://drive.google.com/file/d/1zmLhfv8CAsK-a5RgoxiE5iR5F14QRc0x/view">1.6×</a></li></ul></div><div><h3>暗时间 01 · 10/27</h3><ul class="links"><li><a href="https://drive.google.com/file/d/16tt7S2HHtUcm_HbYo-zMgB86o2IaF9-R/view">1.2×</a></li><li><a href="https://drive.google.com/file/d/1_US1E0QkbkLYLDuFPKuZnviZboJioPYR/view">1.6×</a></li></ul></div><div><h3>毛选 12 篇睡眠版</h3><ul class="links"><li><a href="https://drive.google.com/file/d/17wGLvIjGcFzqcKBhNV_7ff08JItFjO6R/view">1.2×</a></li><li><a href="https://drive.google.com/file/d/12DzKpOxHflc4X_xRW_ZLmg7gajB66scG/view">1.0×</a></li></ul></div></div></div></details><details><summary>理财 · 金钱心理学</summary><div class="detail-body"><div class="audio-list"><div><h3>第 3 集 · 10/30</h3><ul class="links"><li><a href="https://drive.google.com/file/d/1rkB-ZHhzgo6UCBgHNmnKEHuaRM0jFPpR/view">1.2×</a></li><li><a href="https://drive.google.com/file/d/1dHIqdOEi5aRimQusLZVTGE9jfVEKngbD/view">1.6×</a></li></ul></div><div><h3>第 2 集 · 10/29</h3><ul class="links"><li><a href="https://drive.google.com/file/d/1EYUhJj6kX8cf4ZOIrWujKThGYWQMo3jL/view">1.2×</a></li><li><a href="https://drive.google.com/file/d/1zjLJyPBG_8PGJGTXJxpGLs6YPT3lGJLp/view">1.6×</a></li></ul></div><div><h3>第 1 集 · 10/28</h3><ul class="links"><li><a href="https://drive.google.com/file/d/1Yy19QIlL965FxgkjO84gGPv2NF8KXeth/view">1.2×</a></li><li><a href="https://drive.google.com/file/d/1FVBdDTz0kiwt9j5jPqge3IqlLMpG7AiJ/view">1.6×</a></li></ul></div></div></div></details><details><summary>人物博弈 · 魏家逆子 118 点</summary><div class="detail-body"><ul class="links"><li><a href="https://drive.google.com/file/d/14ZpteApYVOuMjqTnTGFqjf2HTIdPF-6a/view">音频</a></li><li><a href="https://docs.google.com/document/d/1GCBIYuM67OzrBjhohhbtB72Hdd-psoPrnZhYjtyMiWo/edit">文稿</a></li><li><a href="https://fanqienovel.com/page/7612158980839722046">原著</a></li></ul></div></details><details><summary>英语 · Builders</summary><div class="detail-body"><ul class="links"><li><a href="https://docs.google.com/document/d/1oBAjxV2c6rDtruFHqWyTu-t3XOzoEBk2lVfYX87rZaU/edit">Builders 提纲</a></li><li><a href="../builders-musk-1.html">本站 Builders 听力页</a></li></ul></div></details><details><summary>泰语手稿</summary><div class="detail-body"><ul class="links"><li><a href="https://docs.google.com/document/d/1ldofmO9jtEf-uviDKzZ2DEl5BZwDubgosm38iPa9W4o/edit">手稿文档</a></li><li><a href="https://drive.google.com/drive/folders/1_NQzu8dNR0eMuTfiaZeZaja2MrtYunjy">手稿图文件夹</a></li></ul></div></details></div>
+</section>
+<footer><a class="touch" href="../index.html">← 回英语听力首页</a></footer>
+
+</main>
+</body>
+</html>

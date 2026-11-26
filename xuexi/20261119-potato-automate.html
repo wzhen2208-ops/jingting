@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>土豆姐最新教程，手把手教你用 Grok Bot 搞定一切自动化</title>
+<style>
+:root {
+  color-scheme: light;
+  --ink: #192e29;
+  --muted: #506660;
+  --paper: #f4f7f3;
+  --line: #d5e1d8;
+  --accent: #176048;
+  --diagram: #edf5ee;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 1rem/1.6 system-ui, "PingFang SC", "Microsoft YaHei", sans-serif;
+  overflow-wrap: anywhere;
+}
+main { max-width: 640px; margin: 0 auto; padding: 1rem 1rem 2rem; }
+a { color: var(--accent); text-underline-offset: .22em; }
+a:focus-visible, summary:focus-visible { outline: 3px solid #177957; outline-offset: 3px; }
+h1, h2, h3, p, ul, figure { margin: 0; }
+h1 { font-size: clamp(1.75rem, 6vw, 2.55rem); line-height: 1.23; letter-spacing: -.035em; }
+h2 { font-size: 1.19rem; line-height: 1.4; }
+h3 { font-size: 1rem; line-height: 1.4; }
+section { margin-top: 1.5rem; }
+section > h2 { margin-bottom: .65rem; }
+.back, .touch, .links a { display: inline-flex; align-items: center; min-height: 44px; }
+.back { font-weight: 650; margin-bottom: .6rem; }
+.hero { border: 1px solid var(--line); border-radius: 1.25rem; background: #fff; padding: 1.2rem; }
+.portal .hero { background: #163d31; color: #fff; padding: 1.55rem 1.25rem; border-color: #163d31; }
+.portal .hero p { color: #e1f1e8; margin-top: .6rem; }
+.meta, .card-date, footer { color: var(--muted); font-size: .875rem; }
+.meta { margin-top: .6rem; }
+.value-line { margin-top: .9rem; }
+.badge {
+  display: inline-block;
+  border-radius: 99px;
+  padding: .07rem .55rem;
+  font-size: .82rem;
+  font-weight: 750;
+  white-space: nowrap;
+  vertical-align: .08em;
+}
+.value-line .badge { margin-right: .4rem; }
+.high { background: #daeee1; color: #174d37; }
+.upper-mid { background: #e3efc8; color: #3e5419; }
+.mid { background: #faecc8; color: #6b4910; }
+.lower-mid { background: #f7e8de; color: #713e29; }
+.low { background: #e9edf0; color: #465460; }
+.missing { background: #f9ebd1; color: #70450d; }
+.notice {
+  margin-top: .8rem;
+  border: 1px solid #ead8ac;
+  border-left: 4px solid #a56b1e;
+  border-radius: .65rem;
+  padding: .65rem .8rem;
+  background: #fff7e7;
+  color: #664212;
+  font-size: .94rem;
+}
+.diagram {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #c8ddcf;
+  border-radius: 1rem;
+  background: var(--diagram);
+}
+figcaption { color: #285642; font-size: 1.03rem; font-weight: 750; margin-bottom: .8rem; }
+.flow, .branch { display: grid; gap: .35rem; align-items: stretch; }
+.branch { grid-template-columns: repeat(var(--columns), minmax(0, 1fr)); gap: .45rem; }
+.node {
+  display: grid;
+  align-content: center;
+  text-align: center;
+  background: #fff;
+  border: 1px solid #b9d1c2;
+  border-radius: .65rem;
+  min-height: 3.05rem;
+  padding: .45rem;
+  line-height: 1.35;
+}
+.node strong { font-size: .96rem; }
+.node small { font-size: .82rem; color: var(--muted); margin-top: .22rem; }
+.primary { background: #215d48; color: #fff; border-color: #215d48; }
+.primary small { color: #e1f3e9; }
+.arrow { color: #2b684f; line-height: 1; text-align: center; align-self: center; font-weight: 800; }
+.arrow .horizontal { display: none; }
+.diagram-note { color: #285642; font-size: .875rem; text-align: center; font-weight: 650; }
+.essentials { margin: .85rem 0 0; padding-left: 1.3rem; }
+.essentials li + li { margin-top: .2rem; }
+.essentials li::marker { color: var(--accent); }
+.stack { display: grid; gap: .55rem; }
+details, .link-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: .8rem;
+}
+summary { min-height: 48px; padding: .72rem .9rem; cursor: pointer; font-weight: 680; }
+summary::marker { color: var(--accent); }
+details[open] summary { border-bottom: 1px solid var(--line); }
+.detail-body { padding: .8rem .9rem; }
+.detail-body ul { padding-left: 1.25rem; }
+.detail-body li + li, .detail-body p + p { margin-top: .4rem; }
+.links { display: flex; flex-wrap: wrap; gap: 0 1rem; list-style: none; padding: 0; }
+.links li { max-width: 100%; }
+.link-card { display: block; padding: .82rem .94rem; }
+a.link-card { text-decoration: none; color: var(--ink); }
+a.link-card:hover, summary:hover { background: #f5faf6; }
+a.link-card:hover h3 { color: var(--accent); text-decoration: underline; }
+.card-head { display: flex; flex-wrap: wrap; gap: .35rem .5rem; align-items: center; margin-bottom: .35rem; }
+.card-value { color: var(--muted); font-size: .9rem; margin-top: .28rem; }
+.card-title { font-weight: 680; }
+.audio-list { margin-top: .45rem; }
+.audio-list > div + div { border-top: 1px solid var(--line); padding-top: .3rem; }
+.reference { display: block; width: min(100%, 477px); height: auto; margin: 0 auto; border-radius: .35rem; }
+footer { margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--line); }
+@media (min-width: 520px) {
+  main { padding-top: 1.55rem; }
+  .diagram { padding: 1.15rem; }
+  .flow.horizontal-flow { display: flex; }
+  .horizontal-flow > .node { flex: 1; }
+  .horizontal-flow > .arrow .horizontal { display: inline; }
+  .horizontal-flow > .arrow .vertical { display: none; }
+}
+</style>
+</head>
+<body>
+<main>
+
+<a class="back" href="index.html">← 学习拓展 · 总入口</a>
+<header class="hero">
+  <h1>土豆姐最新教程，手把手教你用 Grok Bot 搞定一切自动化</h1>
+  <p class="meta"><time datetime="2026-11-19">2026-11-19</time> · 江总转发 · Ai学习的老章</p>
+  <p class="value-line"><span class="badge high">高</span><strong>对 Lily 的用处</strong>　把土豆姐的自动化方法收成中文可执行步骤；本站已有原文精读页，可对照着做。</p>
+</header>
+<p class="notice"><strong>原文未取到。</strong>老章教程的讲解依据什么值得买的公开转载。</p>
+<figure class="diagram"><figcaption>从目标到巡检</figcaption><div class="flow"><div class="flow horizontal-flow"><div class="node primary"><strong>先讲目标</strong><small>再梳理流程</small></div><span class="arrow" aria-hidden="true"><span class="vertical">↓</span><span class="horizontal">→</span></span><div class="node"><strong>让 Bot 采访</strong><small>用语音讲做法</small></div><span class="arrow" aria-hidden="true"><span class="vertical">↓</span><span class="horizontal">→</span></span><div class="node"><strong>先复述对齐</strong><small>确认后再执行</small></div><span class="arrow" aria-hidden="true"><span class="vertical">↓</span><span class="horizontal">→</span></span><div class="node"><strong>补暗默知识</strong><small>设 Anti-Job 禁令</small></div><span class="arrow" aria-hidden="true"><span class="vertical">↓</span><span class="horizontal">→</span></span><div class="node"><strong>Dr Eggbot</strong><small>后台巡检</small></div></div></div></figure>
+<ul class="essentials"><li>填表、发邮件是流程中的动作。</li><li>用真实踩坑案例补足判断规则。</li><li>把 Bot 不能做的事写成禁令。</li></ul>
+<section aria-labelledby="details-heading">
+  <h2 id="details-heading">展开细节</h2>
+  <div class="stack"><details><summary>让 Bot 问清目标</summary><div class="detail-body"><p>先说想要的业务成果，例如多赚钱、少花钱或省时间。目标还不清楚时，让 Bot 反向采访，直到说清楚。</p></div></details><details><summary>用语音讲步骤，再确认复述</summary><div class="detail-body"><p>把步骤、踩坑、质检、数据来源和结果通知对象一次讲出来。先让 Bot 复述目标与流程，确认后再问有没有更高效的做法。讲暗默知识时，用真实案例，让 Bot 一次只问一个问题。</p></div></details><details><summary>Anti-Job 禁令与 Dr Eggbot v2</summary><div class="detail-body"><p>监控 Bot 严禁私自发帖，起草 Bot 严禁私自发送。Dr Eggbot v2 专门造 Bot。两项巡检可关闭，分别是工作日 8:44 PT 的对话日志摩擦扫描和每周一 8:49 PT 的资源浪费审计。</p></div></details></div>
+</section>
+<section aria-labelledby="sources-heading">
+  <h2 id="sources-heading">来源</h2>
+  <ul class="links"><li><a href="https://post.smzdm.com/p/al39z8qo/">老章教程 · 什么值得买公开转载</a></li><li><a href="https://x.com/poteto/status/2123159537016533493">Lauren Tan 原文</a></li><li><a href="../lauren-automate-guide.html">本站原文精读页</a></li></ul>
+</section>
+<footer>归档日期 <time datetime="2026-11-26">2026-11-26</time>（Asia/Bangkok） · Codex小分队</footer>
+
+</main>
+</body>
+</html>
